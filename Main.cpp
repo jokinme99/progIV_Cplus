@@ -31,7 +31,7 @@ void administrador();//Menu administrador(iniciar sesion/registrarse)
 void registroAdministrador();//registrarse admin
 void inicioAdministrador();//inicio sesion admin
 
-////Metodo para llamar a la base de datos
+////Metodo para utilizar la base de datos
 //static int callback(void *data, int argc, char **argv, char **azColName) {
 //	int i;
 //	fprintf(stderr, "%s: ", (const char*) data);

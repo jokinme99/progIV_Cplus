@@ -1,0 +1,144 @@
+void adminMenu1() {
+	do {
+		cout << "1. Restaurantes" << endl;
+		cout << "2. Productos" << endl;
+		cout << "3. Menus" << endl;
+		cout << "4. Trabajadores" << endl;
+		cout << "5. Que productos tiene cada menu" << endl;
+		cout << "6. Que menus tiene cada restaurante" << endl;
+		cout << "7. Que trabajadores tiene cada restaurante" << endl;
+		cout << "8. Volver atras" << endl;
+		cin >> opcionAdminMenu1;
+	} while (opcionAdminMenu1 != 1 && opcionAdminMenu1 != 2
+			&& opcionAdminMenu1 != 3 && opcionAdminMenu1 != 4
+			&& opcionAdminMenu1 != 5 && opcionAdminMenu1 != 6
+			&& opcionAdminMenu1 != 7 && opcionAdminMenu1 != 8);
+	/* ABRIMOS BASE DE DATOS */
+	rc = sqlite3_open("e-restaurants.db", &db);
+	switch (opcionAdminMenu1) {
+	case 1: {
+
+		/* Create SQL statement */
+		sql = "SELECT * from RESTAURANTE";
+
+		/* Execute SQL statement */
+		rc = sqlite3_exec(db, sql, callback, (void*) data, &zErrMsg);
+		if (rc != SQLITE_OK) {
+			fprintf(stderr, "SQL error: %s\n", zErrMsg);
+			sqlite3_free(zErrMsg);
+		} else {
+			fprintf(stdout, "Operation done successfully\n");
+		}
+		sqlite3_close(db);
+		adminMenu1();
+	}
+		break;
+	case 2: {
+		/* Create SQL statement */
+		sql = "SELECT * from PRODUCTO";
+
+		/* Execute SQL statement */
+		rc = sqlite3_exec(db, sql, callback, (void*) data, &zErrMsg);
+		if (rc != SQLITE_OK) {
+			fprintf(stderr, "SQL error: %s\n", zErrMsg);
+			sqlite3_free(zErrMsg);
+		} else {
+			fprintf(stdout, "Operation done successfully\n");
+		}
+		sqlite3_close(db);
+		adminMenu1();
+	}
+		break;
+	case 3: {
+		/* Create SQL statement */
+		sql = "SELECT * from MENU";
+
+		/* Execute SQL statement */
+		rc = sqlite3_exec(db, sql, callback, (void*) data, &zErrMsg);
+		if (rc != SQLITE_OK) {
+			fprintf(stderr, "SQL error: %s\n", zErrMsg);
+			sqlite3_free(zErrMsg);
+		} else {
+			fprintf(stdout, "Operation done successfully\n");
+		}
+		sqlite3_close(db);
+		adminMenu1();
+	}
+		break;
+	case 4: {
+		/* Create SQL statement */
+		sql = "SELECT * from TRABAJADOR";
+
+		/* Execute SQL statement */
+		rc = sqlite3_exec(db, sql, callback, (void*) data, &zErrMsg);
+		if (rc != SQLITE_OK) {
+			fprintf(stderr, "SQL error: %s\n", zErrMsg);
+			sqlite3_free(zErrMsg);
+		} else {
+			fprintf(stdout, "Operation done successfully\n");
+		}
+		sqlite3_close(db);
+		adminMenu1();
+	}
+		break;
+	case 5: {
+		/* Create SQL statement */
+		sql = "SELECT * from MENU_TIENE_PRODUCTOS";
+
+		/* Execute SQL statement */
+		rc = sqlite3_exec(db, sql, callback, (void*) data, &zErrMsg);
+		if (rc != SQLITE_OK) {
+			fprintf(stderr, "SQL error: %s\n", zErrMsg);
+			sqlite3_free(zErrMsg);
+		} else {
+			fprintf(stdout, "Operation done successfully\n");
+		}
+		sqlite3_close(db);
+		adminMenu1();
+	}
+		break;
+	case 6: {
+		/* Create SQL statement */
+		sql = "SELECT * from RESTAURANTE_TIENE_MENUS";
+
+		/* Execute SQL statement */
+		rc = sqlite3_exec(db, sql, callback, (void*) data, &zErrMsg);
+		if (rc != SQLITE_OK) {
+			fprintf(stderr, "SQL error: %s\n", zErrMsg);
+			sqlite3_free(zErrMsg);
+		} else {
+			fprintf(stdout, "Operation done successfully\n");
+		}
+		sqlite3_close(db);
+		adminMenu1();
+
+	}
+		break;
+	case 7: {
+		/* Create SQL statement */
+		sql = "SELECT * from RESTAURANTE_TIENE_TRABAJADORES";
+
+		/* Execute SQL statement */
+		rc = sqlite3_exec(db, sql, callback, (void*) data, &zErrMsg);
+		if (rc != SQLITE_OK) {
+			fprintf(stderr, "SQL error: %s\n", zErrMsg);
+			sqlite3_free(zErrMsg);
+		} else {
+			fprintf(stdout, "Operation done successfully\n");
+		}
+		sqlite3_close(db);
+		adminMenu1();
+
+	}
+		break;
+	case 8: {
+		adminMenu();
+	}
+		break;
+	default: {
+		cout << "Introduzca un valor correcto" << endl;
+		adminMenu1();
+	}
+		break;
+	}
+}

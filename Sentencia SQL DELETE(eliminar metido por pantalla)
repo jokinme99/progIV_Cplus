@@ -1,0 +1,135 @@
+void adminMenu5() {
+	string nombreEliminar;
+	int idEliminar;
+	do {
+		cout << "1. Restaurantes" << endl;
+		cout << "2. Productos" << endl;
+		cout << "3. Menus" << endl;
+		cout << "4. Trabajadores" << endl;
+		cout << "5. Volver atras" << endl;
+		cin >> opcionAdminMenu5;
+	} while (opcionAdminMenu5 != 1 && opcionAdminMenu5 != 2
+			&& opcionAdminMenu5 != 3 && opcionAdminMenu5 != 4
+			&& opcionAdminMenu5 != 5 && opcionAdminMenu5 != 6
+			&& opcionAdminMenu5 != 7 && opcionAdminMenu5 != 8);
+	/* ABRIMOS BASE DE DATOS */
+	rc = sqlite3_open("e-restaurants.db", &db);
+	switch (opcionAdminMenu5) {
+	case 1: {
+		char nom[100];
+		cout << "Ingrese el nombre del restaurante que desea eliminar: "
+				<< endl;
+		cin >> nom;
+		cout << endl;
+		/* Create SQL statement */
+		char sql[] = "DELETE from RESTAURANTE WHERE NOMBRE_RESTAURANTE = '";
+
+		strcat(sql, nom);
+
+		char fr2[] = "'";
+
+		strcat(sql, fr2);
+
+		/* Execute SQL statement */
+		rc = sqlite3_exec(db, sql, callback, (void*) data, &zErrMsg);
+		if (rc != SQLITE_OK) {
+			fprintf(stderr, "SQL error: %s\n", zErrMsg);
+			sqlite3_free(zErrMsg);
+		} else {
+			fprintf(stdout, "Operation done successfully\n");
+		}
+		sqlite3_close(db);
+		adminMenu5();
+	}
+		break;
+	case 2: {
+		char nom[100];
+		cout << "Ingrese el nombre del producto que desea eliminar: " << endl;
+		cin >> nom;
+		cout << endl;
+		/* Create SQL statement */
+		char sql[] = "DELETE from PRODUCTO WHERE NOMBRE_PRODUCTO = '";
+
+		strcat(sql, nom);
+
+		char fr2[] = "'";
+
+		strcat(sql, fr2);
+
+		/* Execute SQL statement */
+		rc = sqlite3_exec(db, sql, callback, (void*) data, &zErrMsg);
+		if (rc != SQLITE_OK) {
+			fprintf(stderr, "SQL error: %s\n", zErrMsg);
+			sqlite3_free(zErrMsg);
+		} else {
+			fprintf(stdout, "Operation done successfully\n");
+		}
+		sqlite3_close(db);
+		adminMenu5();
+	}
+		break;
+	case 3: {
+		char nom[100];
+		cout << "Ingrese el numero del menu que desea eliminar: " << endl;
+		cin >> nom;
+		cout << endl;
+		/* Create SQL statement */
+		char sql[] = "DELETE from MENU WHERE ID_MENU = ";
+
+		strcat(sql, nom);
+
+		char fr2[] = "";
+
+		strcat(sql, fr2);
+
+		/* Execute SQL statement */
+		rc = sqlite3_exec(db, sql, callback, (void*) data, &zErrMsg);
+		if (rc != SQLITE_OK) {
+			fprintf(stderr, "SQL error: %s\n", zErrMsg);
+			sqlite3_free(zErrMsg);
+		} else {
+			fprintf(stdout, "Operation done successfully\n");
+		}
+		sqlite3_close(db);
+		adminMenu5();
+
+	}
+		break;
+	case 4: {
+		char nom[100];
+		cout << "Ingrese el nombre del trabajador que desea eliminar: " << endl;
+		cin >> nom;
+		cout << endl;
+		/* Create SQL statement */
+		char sql[] = "DELETE from TRABAJADOR WHERE NOMBRE_TRABAJADOR = '";
+
+		strcat(sql, nom);
+
+		char fr2[] = "'";
+
+		strcat(sql, fr2);
+
+		/* Execute SQL statement */
+		rc = sqlite3_exec(db, sql, callback, (void*) data, &zErrMsg);
+		if (rc != SQLITE_OK) {
+			fprintf(stderr, "SQL error: %s\n", zErrMsg);
+			sqlite3_free(zErrMsg);
+		} else {
+			fprintf(stdout, "Operation done successfully\n");
+		}
+		sqlite3_close(db);
+		adminMenu5();
+	}
+		break;
+	case 5: {
+		adminMenu();
+	}
+		break;
+	default: {
+		cout << "Introduzca un valor correcto" << endl;
+		adminMenu5();
+
+	}
+		break;
+	}
+}

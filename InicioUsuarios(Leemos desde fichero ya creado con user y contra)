@@ -1,0 +1,36 @@
+void clienteCaso2() {
+	//Accedemos al usuario
+	ifstream ifs;
+	ifs.open("usuarios.txt", ios::in);
+	string nom, cont, nomAu, conAu;
+	bool en = false;
+	cout << "Ingrese el nombre del usuario: " << endl;
+	cin >> nomAu;
+	cout << "Ingrese la contra del usuario: " << endl;
+	cin >> conAu;
+	ifs >> nom;
+	while (!ifs.eof() && !en) {
+		ifs >> cont;
+		if (nom == nomAu && cont == conAu) {
+			cout << "Usuario y contraseña correctos. Bienvenido " << nomAu
+					<< endl;
+			en = true;
+			//parte del usuario
+			cout << "---MODO USUARIO---" << endl;
+			clienteMenu();
+		}
+
+		else if ((nom == nomAu && cont != conAu) || (nom != nomAu && cont == conAu)){
+			cout << "El usuario y/o la contraseña son incorrectos" << endl;
+			cliente();
+		}
+		ifs >> nom;
+	}
+	ifs.close();
+
+	if (!en) {
+		cout << "Usuario NO encontrado" << endl;
+		cliente();
+	}
+
+}

@@ -65,7 +65,7 @@ void menuInicio(){
 
 	switch(opcion){
 	case 1:{
-		system("cls");
+		//system("cls");
 		usuario();
 	}break;
 	case 2:{
@@ -84,19 +84,15 @@ void menuInicio(){
 void usuario(){
 	int opcion;
 	do{
-		cout<<"1. Registrarse"<<endl;
-		cout<<"2. Iniciar sesion"<<endl;
-		cout<<"3. Volver atras"<<endl;
+		cout<<"1. Iniciar sesion"<<endl;
+		cout<<"2. Volver atras"<<endl;
 		cin>>opcion;
-	}while(opcion != 1 && opcion != 2 && opcion != 3);
+	}while(opcion != 1 && opcion != 2);
 	switch(opcion){
 	case 1:{
-		registroUsuario();//para registrar los usuarios
-	}break;
-	case 2:{
 		inicioUsuario();//inicio usuarios
 	}break;
-	case 3:{
+	case 2:{
 		menuInicio();
 	}break;
 	default:{
@@ -105,11 +101,22 @@ void usuario(){
 	}
 	}
 }
-void registroUsuario(){//Todo registrarse usuario
-	//Despues de registrarse llevar a menu de opciones de usuario
-}
+
+
 void inicioUsuario(){//Todo inicio sesion usuario
-	//Despues de iniciar sesion llevar a menu de opciones de usuario
+
+	char nombre[10], contra[10];
+
+	fgets(nombre, 10, stdin);
+
+	cout<<"Introduce el nombre de usuario"<<endl;
+	fgets(nombre, 10, stdin);
+	//cin>>nombre;
+	cout<<"Introduce la contraseña"<<endl;
+	fgets(contra, 10, stdin);
+
+	//FALTA LA LECTURA DE USUARIOS QUE HABRA QUE LEERLA DESDE EL FICHERO
+
 }
 
 void administrador(){

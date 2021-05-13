@@ -8,23 +8,25 @@
 #ifndef DATA_USUARIO_H_
 #define DATA_USUARIO_H_
 #include "Reserva.h"
+
+namespace data{
+
 class Usuario
 {
 private:
+	static int count;
 	int idUsuario;
 	char* nombreUsuario;
 	char* correoUsuario;
 	char* contrasenyaUsuario;
 	int edadUsuario;
-	Reserva* reservaUsuario;
 public:
 	Usuario();
-	Usuario(const int, char*, char*, char*, int, Reserva*);
+	Usuario(const int, char*, char*, char*, int);
 	Usuario(const Usuario&);
 	~Usuario();
 
 	int getIdUsuario()const;
-	void setIdUsuario(const int);
 	char* getNombreUsuario()const;
 	void setNombreUsuario(char*);
 	char* getCorreoUsuario()const;
@@ -33,10 +35,9 @@ public:
 	void setContrasenyaUsuario(char*);
 	int getEdadUsuario()const;
 	void setEdadUsuario(int);
-	Reserva* getReservaUsuario()const;
-	void setReservaUsuario(Reserva*);
+	bool comprobarUsuario(char *usuario, char *contrasenya);
 
 };
 
-
+}
 #endif /* DATA_USUARIO_H_ */

@@ -20,6 +20,7 @@
 #include "data/Trabajador.h"//Para acceder a los distintos metodos y poder ver/editar/eliminar datos de la base de datos
 #include "data/Usuario.h"//Para acceder a los distintos metodos y poder ver/editar/eliminar datos de la base de datos
 using namespace std;
+using namespace data;
 void menuInicio();
 
 void usuario();//Menu usuario(iniciar sesion/registrarse)
@@ -116,6 +117,7 @@ void inicioUsuario(){//Todo inicio sesion usuario
 	fgets(contra, 10, stdin);
 
 	//FALTA LA LECTURA DE USUARIOS QUE HABRA QUE LEERLA DESDE EL FICHERO
+
 
 }
 

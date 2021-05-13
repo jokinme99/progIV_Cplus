@@ -1,0 +1,5 @@
+NombreUsuario:marcos;contrasenya:marcos;correo:marcos;Edad:12;
+NombreUsuario:juango;contrasenya:memememe;correo:memememem;Edad:42;
+NombreUsuario:julio;contrasenya:contra;correo:orreo;Edad:23;
+NombreUsuario:julian;contrasenya:maroto;correo:correo;Edad:239;
+NombreUsuario:mario;contrasenya:;correo:correo@opendeusto.es;Edad:17;

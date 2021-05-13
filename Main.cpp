@@ -135,13 +135,44 @@ void inicioUsuario(){//Todo inicio sesion usuario
 
 void menuUsuario(){
 
+	//AQUI HABRIA QUE CARGAR LA LISTA DE RESERVAS PARA VER LAS RESERVAS POSIBLES
+	int opcion;
+	do{
+//////////////////////////////////////////////////////////////////////////////////////////////////////
+
+		//CREAR UN OBJETO BASE DE DATOS QUE CARGUE LOS DATOS O UN METODO QUE CARGUE LA BASE DE DATOS? PROXIMA TAREA
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////
+	cout<<"Elije las siguientes opciones"<<endl;
+	cout<<"1. Realizar reserva"<<endl;
+	cout<<"2. Visualizar reserva"<<endl;
+	cout<<"3. Eliminar reserva"<<endl;
+	cout<<"4. Volver al menu principal"<<endl;
+	cin>>opcion;
+	}while(opcion<1||opcion>4);
+	switch(opcion){
+	case 1:{
+		//COMPRUEBA LA HABITACION INTRODUCIENDO PARAMETRO NUMERICO
+		//COMPRUEBA SI ESA HABITACION ESTA LIBRE ESE DIA
+		//METODO QUE AÑADE A LA BASE DE DATOS LA RESERVA REALIZADA
+	}break;
+	case 2:{
+
+	}break;
+	case 3:{
+
+	}break;
+	case 4:{
+
+	}break;
+	}
 }
 
 void administrador(){
 	int opcion;
 	do{
-		cout<<"1. Registrarse"<<endl;
-		cout<<"2. Iniciar sesion"<<endl;
+		cout<<"1. Registrarse"<<endl;//METODO QUE REGISTRE AL USUARIO
+		cout<<"2. Iniciar sesion"<<endl;//METODO QUE COMPRUEBE QUE EL USUARIO EXISTE
 		cout<<"3. Volver atras"<<endl;
 		cin>>opcion;
 	}while(opcion != 1 && opcion != 2 && opcion != 3);
@@ -167,6 +198,8 @@ void registroAdministrador(){//Todo registrarse admin
 }
 void inicioAdministrador(){//Todo inicio sesion admin
 	//Despues de iniciar sesion llevar a menu de opciones de admin
+
+	//OPCIONES DE ADMINISTRADOR: CREAR HABITACIÓN, ELIMINAR HABITACION, LISTAR HABITACIONES, LISTAR RESERVAS, ELIMINAR RESERVAS
 }
 
 bool comprobarUsuario(char *usuario, char *contrasenya){

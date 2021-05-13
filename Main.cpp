@@ -19,14 +19,17 @@
 #include "data/Reserva.h"//Para acceder a los distintos metodos y poder ver/editar/eliminar datos de la base de datos
 #include "data/Trabajador.h"//Para acceder a los distintos metodos y poder ver/editar/eliminar datos de la base de datos
 #include "data/Usuario.h"//Para acceder a los distintos metodos y poder ver/editar/eliminar datos de la base de datos
+
+
 using namespace std;
 using namespace data;
+
 void menuInicio();
 
 void usuario();//Menu usuario(iniciar sesion/registrarse)
-void registroUsuario();//registrarse usuario
 void inicioUsuario();//inicio sesion usuario
-
+bool comprobarUsuario(char *usuario, char *contrasenya);
+void menuUsuario();
 
 void administrador();//Menu administrador(iniciar sesion/registrarse)
 void registroAdministrador();//registrarse admin
@@ -107,17 +110,30 @@ void usuario(){
 void inicioUsuario(){//Todo inicio sesion usuario
 
 	char nombre[10], contra[10];
+	int intentos=0;
 
-	fgets(nombre, 10, stdin);
+	do{
 
 	cout<<"Introduce el nombre de usuario"<<endl;
 	fgets(nombre, 10, stdin);
 	//cin>>nombre;
 	cout<<"Introduce la contraseña"<<endl;
 	fgets(contra, 10, stdin);
-
+	Usuario u;
+	intentos++;
+	}while(!comprobarUsuario(nombre, contra)||intentos==3);
+	if(comprobarUsuario(nombre, contra)){
+		menuUsuario();
+	}else{
+		cout<<"has superado el numero de intentos"<<endl;
+		menuInicio();
+	}
 	//FALTA LA LECTURA DE USUARIOS QUE HABRA QUE LEERLA DESDE EL FICHERO
 
+
+}
+
+void menuUsuario(){
 
 }
 
@@ -153,3 +169,146 @@ void inicioAdministrador(){//Todo inicio sesion admin
 	//Despues de iniciar sesion llevar a menu de opciones de admin
 }
 
+bool comprobarUsuario(char *usuario, char *contrasenya){
+
+	FILE *f;
+
+	f = fopen("Usuarios.txt", "r");
+
+	int counter = 0;
+	char linea;
+
+	for (linea = getc(f); linea != EOF; linea = getc(f))
+		if (linea == '\n') // Increment count if this character is newline
+			counter = counter + 1;
+
+	fclose(f);
+
+	f = fopen("Usuarios.txt", "r");
+
+	char *ptr;
+	char c[256];
+
+	int c_nombres = 0;
+	char **nombres;
+
+	nombres = (char**) malloc(counter * sizeof(char*));
+
+	int q;
+	for (q = 0; q < counter; q++) {
+
+		nombres[q] = (char*) malloc(16 * sizeof(char));
+
+	}
+
+	while (fgets(c, sizeof(c), f)) {
+
+		ptr = strtok(c, ";");
+
+		ptr = strtok(ptr, ":");
+
+		//printf("%s\n", ptr);
+		while (ptr != NULL) {
+
+			ptr = strtok(NULL, ":");
+
+			//printf("%s\n", ptr);
+			if (ptr != NULL) {
+
+			//	printf("valor de i %i\n", c_nombres);
+				strcpy(nombres[c_nombres], ptr);
+
+			//	printf("Usuario guardado %s\n", nombres[c_nombres]);
+
+			}
+		}
+		c_nombres++;
+
+	}
+
+	fclose(f);
+
+	f = fopen("Usuarios.txt", "r");
+
+	char **contrasenya1;
+
+	contrasenya1 = (char**) malloc(counter * sizeof(char*));
+
+	int h;
+	for (q = 0; h < counter; h++) {
+
+		contrasenya1[h] = (char*) malloc(16 * sizeof(char));
+
+	}
+
+	char *ctr;
+
+	int c_contrasenya = 0;
+
+	while (fgets(c, sizeof(c), f)) {
+
+		//printf("Prueba %s", c);
+
+		ctr = strtok(c, ";");
+
+		//printf("Contraseña1 %s\n", ctr);
+		while (ctr != NULL) {
+
+			//	printf("Contrasña2 %s\n", ctr);
+
+			ctr = strtok(NULL, ";");
+
+			//	printf("cotraseña3 %s\n", ctr);
+
+			if (ctr != NULL) {
+
+				const char ch = ':';
+				char *ret;
+
+				ret = strchr(ctr, ch);
+
+				//  printf("String after |%c| is - |%s|\n", ch, ret + 1);
+
+				strcpy(contrasenya1[c_contrasenya], ret + 1);
+
+			}
+			ctr = NULL;
+		}
+
+		c_contrasenya++;
+
+	}
+
+	int j = 0;
+
+	while (j < counter) {
+
+	//	printf("El usuario a comporbar es %s y el de el array  %s y la contra a buscar es %s y la contrra es %s\n", usuario, nombres[j], contrasenya, contrasenya1[j]);
+
+		if (0 == strcmp(usuario, nombres[j])
+				&& 0 == strcmp(contrasenya, contrasenya1[j])) {
+
+			cout<<"El usuario y la contraseña son correctos\n"<<endl;
+
+			free(nombres[j]);
+			free(contrasenya1[j]);
+
+			fclose(f);
+
+			return true;
+
+		}
+
+		j++;
+
+	}
+
+	cout<<"El usuario y la contraseña no coinciden\n"<<endl;
+
+
+	return false;
+
+	fclose(f);
+
+
+}

@@ -11,8 +11,8 @@
 #include <stdlib.h>
 #include <cstdlib>
 #include <stdio.h>
-//#include "sqlite/sqlite3.h" //include para base de datos
-//#include <sqlite3.h> //include para base de datos
+#include "sqlite/sqlite3.h" //include para base de datos
+#include <sqlite3.h> //include para base de datos
 
 #include "data/Habitacion.h"//Para acceder a los distintos metodos y poder ver/editar/eliminar datos de la base de datos
 #include "data/Hotel.h"//Para acceder a los distintos metodos y poder ver/editar/eliminar datos de la base de datos
@@ -108,6 +108,13 @@ void usuario(){
 
 
 void inicioUsuario(){//Todo inicio sesion usuario
+
+	sqlite3 *db;
+	int res;
+
+	char palabra[] = "prueba.s3db";
+
+	res = sqlite3_open(palabra , &db);
 
 	char nombre[10], contra[10];
 	int intentos=0;

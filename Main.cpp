@@ -13,8 +13,10 @@
 #include <stdio.h>
 #include "sqlite/sqlite3.h" //include para base de datos
 #include <sqlite3.h> //include para base de datos
+
 #include <fstream>
 #include <windows.h>
+
 
 #include "Habitacion.h"//Para acceder a los distintos metodos y poder ver/editar/eliminar datos de la base de datos
 #include "Hotel.h"//Para acceder a los distintos metodos y poder ver/editar/eliminar datos de la base de datos
@@ -130,6 +132,7 @@ void registroUsuario(){
 }
 void inicioUsuario(){//Todo inicio sesion usuario
 
+
 	ifstream ifs;
 		ifs.open("usuariosGuardar.txt", ios::in);
 		string nom, cont, nomAu, conAu;
@@ -149,19 +152,30 @@ void inicioUsuario(){//Todo inicio sesion usuario
 				cout<<"---------MODO USUARIO-----"<<endl;
 				menuUsuario();
 			}
-
-			else if ((nom == nomAu && cont != conAu) || (nom != nomAu && cont == conAu)){
-				cout << "Usuario o contrasenya introducidos son incorrectos" << endl;
-				inicioUsuario();
-			}
-			ifs >> nom;
 		}
-		ifs.close();
 
-		if (!en) {
-			cout << "El usuario introducido no existe" << endl;
-			inicioUsuario();
-		}
+//	sqlite3 *db;
+//	int res;
+//
+//	char palabra[] = "prueba.s3db";
+//
+//	res = sqlite3_open(palabra , &db);
+//
+//	char nombre[10], contra[10];
+//	int intentos=0;
+//
+//			else if ((nom == nomAu && cont != conAu) || (nom != nomAu && cont == conAu)){
+//				cout << "Usuario o contrasenya introducidos son incorrectos" << endl;
+//				inicioUsuario();
+//			}
+//			ifs >> nom;
+//		}
+//		ifs.close();
+//
+//		if (!en) {
+//			cout << "El usuario introducido no existe" << endl;
+//			inicioUsuario();
+//		}
 
 //	char nombre[10], contra[10];
 //	int intentos=0;
@@ -240,7 +254,7 @@ void menuUsuario(){
 				cout << endl;
 				/* Create SQL statement */
 				char sql[] = "SELECT * FROM RESERVA JOIN USUARIO_TIENE_RESERVAS ON USUARIO_TIENE_RESERVAS.id_reserva = RESERVA.id_reserva AND JOIN USUARIO ON USUARIO.id_usuario = USUARIO_TIENE_RESERVAS.id_producto WHERE USUARIO.nombre_usuario = '";
-
+				//ARREGLAR ESTA SENTENCIA
 
 				strcat(sql, nom);
 
@@ -277,6 +291,7 @@ void menuUsuario(){
 
 	}
 }
+
 
 void administrador(){
 	int opcion;

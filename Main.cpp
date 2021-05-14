@@ -11,47 +11,54 @@
 #include <stdlib.h>
 #include <cstdlib>
 #include <stdio.h>
-//#include "sqlite/sqlite3.h" //include para base de datos
-//#include <sqlite3.h> //include para base de datos
+#include "sqlite/sqlite3.h" //include para base de datos
+#include <sqlite3.h> //include para base de datos
+#include <fstream>
+#include <windows.h>
 
-#include "data/Habitacion.h"//Para acceder a los distintos metodos y poder ver/editar/eliminar datos de la base de datos
-#include "data/Hotel.h"//Para acceder a los distintos metodos y poder ver/editar/eliminar datos de la base de datos
-#include "data/Reserva.h"//Para acceder a los distintos metodos y poder ver/editar/eliminar datos de la base de datos
-#include "data/Trabajador.h"//Para acceder a los distintos metodos y poder ver/editar/eliminar datos de la base de datos
-#include "data/Usuario.h"//Para acceder a los distintos metodos y poder ver/editar/eliminar datos de la base de datos
+#include "Habitacion.h"//Para acceder a los distintos metodos y poder ver/editar/eliminar datos de la base de datos
+#include "Hotel.h"//Para acceder a los distintos metodos y poder ver/editar/eliminar datos de la base de datos
+#include "Reserva.h"//Para acceder a los distintos metodos y poder ver/editar/eliminar datos de la base de datos
+#include "Trabajador.h"//Para acceder a los distintos metodos y poder ver/editar/eliminar datos de la base de datos
+#include "Usuario.h"//Para acceder a los distintos metodos y poder ver/editar/eliminar datos de la base de datos
 
 
 using namespace std;
-using namespace data;
+//using namespace data;
 
 void menuInicio();
 
-void usuario();//Menu usuario(iniciar sesion/registrarse)
+void usuarioPrincipio();//Menu usuario(iniciar sesion/registrarse)
 void inicioUsuario();//inicio sesion usuario
 bool comprobarUsuario(char *usuario, char *contrasenya);
+void registroUsuario();
 void menuUsuario();
 
 void administrador();//Menu administrador(iniciar sesion/registrarse)
 void registroAdministrador();//registrarse admin
 void inicioAdministrador();//inicio sesion admin
 
-////Metodo para utilizar la base de datos
-//static int callback(void *data, int argc, char **argv, char **azColName) {
-//	int i;
-//	fprintf(stderr, "%s: ", (const char*) data);
-//
-//	for (i = 0; i < argc; i++) {
-//		printf("%s = %s\n", azColName[i], argv[i] ? argv[i] : "NULL");
-//	}
-//
-//	printf("\n");
-//	return 0;
-//}
-//sqlite3 *db;//objeto base de datos
-//char *zErrMsg = 0;
-//int rc;
-//char *sql;//sentencia sql
-//const char *data = "Callback function called";
+string nombreUser;
+string contraUser;//Para iniciar/registrar usuario
+
+
+//Metodo para utilizar la base de datos
+static int callback(void *data, int argc, char **argv, char **azColName) {
+	int i;
+	fprintf(stderr, "%s: \n", (const char*) data);
+
+	for (i = 0; i < argc; i++) {
+		printf("%s = %s\n", azColName[i], argv[i] ? argv[i] : "NULL");
+	}
+
+	printf("\n");
+	return 0;
+}
+sqlite3 *db;//objeto base de datos
+char *zErrMsg = 0;
+int rc;
+char *sql;//sentencia sql
+const char *data = "LLamada a Base de datos";
 
 int main(){
 	menuInicio();
@@ -69,11 +76,9 @@ void menuInicio(){
 
 	switch(opcion){
 	case 1:{
-		//system("cls");
-		usuario();
+		usuarioPrincipio();
 	}break;
 	case 2:{
-		system("cls");
 		administrador();
 	}break;
 	case 3:{
@@ -85,86 +90,191 @@ void menuInicio(){
 	}
 }
 
-void usuario(){
+void usuarioPrincipio(){
 	int opcion;
 	do{
 		cout<<"1. Iniciar sesion"<<endl;
-		cout<<"2. Volver atras"<<endl;
+		cout<<"2. Registrarse"<<endl;
+		cout<<"3. Volver atras"<<endl;
 		cin>>opcion;
-	}while(opcion != 1 && opcion != 2);
+	}while(opcion != 1 && opcion != 2 && opcion != 3);
 	switch(opcion){
 	case 1:{
 		inicioUsuario();//inicio usuarios
 	}break;
 	case 2:{
+		registroUsuario();
+	}break;
+	case 3:{
 		menuInicio();
 	}break;
 	default:{
 		cout<<"Introduzca un valor correcto"<<endl;
-		usuario();
-	}
+		usuarioPrincipio();
+	}break;
 	}
 }
 
-
+void registroUsuario(){
+	cout << "Ingresa el nombre del usuario: ";
+	cin >> nombreUser;
+	cout << endl;
+	cout << "Ingresa la contraseña del usuario: ";
+	cin >> contraUser;
+	cout << endl;
+	ofstream ofs("usuariosGuardar.txt", ios::app);
+	ofs << nombreUser << " " << contraUser << endl;
+	ofs.close();
+	cout << "Usuario creado correctamente" << endl;
+	usuarioPrincipio();
+}
 void inicioUsuario(){//Todo inicio sesion usuario
 
-	char nombre[10], contra[10];
-	int intentos=0;
+	ifstream ifs;
+		ifs.open("usuariosGuardar.txt", ios::in);
+		string nom, cont, nomAu, conAu;
+		bool en = false;
+		cout << "Ingrese el nombre del usuario: " << endl;
+		cin >> nomAu;
+		cout << "Ingrese la contra del usuario: " << endl;
+		cin >> conAu;
+		ifs >> nom;
+		while (!ifs.eof() && !en) {
+			ifs >> cont;
+			if (nom == nomAu && cont == conAu) {
+				cout << "Bienvenido/a " << nomAu
+						<< endl;
+				en = true;
+				system("cls");
+				cout<<"---------MODO USUARIO-----"<<endl;
+				menuUsuario();
+			}
 
-	do{
+			else if ((nom == nomAu && cont != conAu) || (nom != nomAu && cont == conAu)){
+				cout << "Usuario o contrasenya introducidos son incorrectos" << endl;
+				inicioUsuario();
+			}
+			ifs >> nom;
+		}
+		ifs.close();
 
-	cout<<"Introduce el nombre de usuario"<<endl;
-	fgets(nombre, 10, stdin);
-	//cin>>nombre;
-	cout<<"Introduce la contraseña"<<endl;
-	fgets(contra, 10, stdin);
-	Usuario u;
-	intentos++;
-	}while(!comprobarUsuario(nombre, contra)||intentos==3);
-	if(comprobarUsuario(nombre, contra)){
-		menuUsuario();
-	}else{
-		cout<<"has superado el numero de intentos"<<endl;
-		menuInicio();
-	}
-	//FALTA LA LECTURA DE USUARIOS QUE HABRA QUE LEERLA DESDE EL FICHERO
+		if (!en) {
+			cout << "El usuario introducido no existe" << endl;
+			inicioUsuario();
+		}
+
+//	char nombre[10], contra[10];
+//	int intentos=0;
+//
+//	do{
+//
+//	cout<<"Introduce el nombre de usuario"<<endl;
+//	fgets(nombre, 10, stdin);
+//	//cin>>nombre;
+//	cout<<"Introduce la contraseña"<<endl;
+//	fgets(contra, 10, stdin);
+//	Usuario u;
+//	intentos++;
+//	}while(!comprobarUsuario(nombre, contra)||intentos==3);
+//	if(comprobarUsuario(nombre, contra)){
+//		menuUsuario();
+//	}else{
+//		cout<<"has superado el numero de intentos"<<endl;
+//		menuInicio();
+//	}
+//	//FALTA LA LECTURA DE USUARIOS QUE HABRA QUE LEERLA DESDE EL FICHERO
 
 
 }
 
 void menuUsuario(){
 
-	//AQUI HABRIA QUE CARGAR LA LISTA DE RESERVAS PARA VER LAS RESERVAS POSIBLES
 	int opcion;
 	do{
-//////////////////////////////////////////////////////////////////////////////////////////////////////
-
-		//CREAR UN OBJETO BASE DE DATOS QUE CARGUE LOS DATOS O UN METODO QUE CARGUE LA BASE DE DATOS? PROXIMA TAREA
-
-/////////////////////////////////////////////////////////////////////////////////////////////////////
 	cout<<"Elije las siguientes opciones"<<endl;
-	cout<<"1. Realizar reserva"<<endl;
-	cout<<"2. Visualizar reserva"<<endl;
-	cout<<"3. Eliminar reserva"<<endl;
-	cout<<"4. Volver al menu principal"<<endl;
+	cout<<"1. Ver hoteles"<<endl;
+	cout<<"2. Ver habitaciones"<<endl;
+	cout<<"3. Ver reserva"<<endl;//Si no tiene mensaje por pantalla
+	cout<<"4. Hacer reserva"<<endl;//Solo a su nombre
+	cout<<"5. Eliminar reserva"<<endl;
+	cout<<"6. Volver al menu principal"<<endl;
 	cin>>opcion;
-	}while(opcion<1||opcion>4);
+	}while(opcion!= 1 && opcion != 2 && opcion != 3 && opcion != 4 && opcion != 4 && opcion != 5 && opcion !=6);
+	/* ABRIMOS BASE DE DATOS */
+	rc = sqlite3_open("hotelandia_db.s3db", &db);
 	switch(opcion){
 	case 1:{
-		//COMPRUEBA LA HABITACION INTRODUCIENDO PARAMETRO NUMERICO
-		//COMPRUEBA SI ESA HABITACION ESTA LIBRE ESE DIA
-		//METODO QUE AÑADE A LA BASE DE DATOS LA RESERVA REALIZADA
+		/* Create SQL statement */
+			sql = "SELECT * from HOTEL";
+
+			/* Execute SQL statement */
+			rc = sqlite3_exec(db, sql, callback, (void*) data, &zErrMsg);
+			if (rc != SQLITE_OK) {
+				fprintf(stderr, "SQL error: %s\n", zErrMsg);
+				sqlite3_free(zErrMsg);
+			} else {
+				//fprintf(stdout, "Operation done successfully\n");
+			}
+			sqlite3_close(db);
+			menuUsuario();
 	}break;
 	case 2:{
+		/* Create SQL statement */
+			sql = "SELECT * from HABITACION";
 
+			/* Execute SQL statement */
+			rc = sqlite3_exec(db, sql, callback, (void*) data, &zErrMsg);
+			if (rc != SQLITE_OK) {
+				fprintf(stderr, "SQL error: %s\n", zErrMsg);
+				sqlite3_free(zErrMsg);
+			} else {
+				//fprintf(stdout, "Operation done successfully\n");
+			}
+			sqlite3_close(db);
+			menuUsuario();
 	}break;
 	case 3:{
+		char nom[100];
+				cout << "Introduzca su nombre de usuario para ver que reservas tiene" << endl;
+				cin >> nom;
+				cout << endl;
+				/* Create SQL statement */
+				char sql[] = "SELECT * FROM RESERVA JOIN USUARIO_TIENE_RESERVAS ON USUARIO_TIENE_RESERVAS.id_reserva = RESERVA.id_reserva AND JOIN USUARIO ON USUARIO.id_usuario = USUARIO_TIENE_RESERVAS.id_producto WHERE USUARIO.nombre_usuario = '";
+
+
+				strcat(sql, nom);
+
+				char fr2[] = "'";
+
+				strcat(sql, fr2);
+
+				/* Execute SQL statement */
+				rc = sqlite3_exec(db, sql, callback, (void*) data, &zErrMsg);
+				if (rc != SQLITE_OK) {
+					fprintf(stderr, "SQL error: %s\n", zErrMsg);
+					sqlite3_free(zErrMsg);
+				} else {
+					fprintf(stdout, "Operation done successfully\n");
+				}
+				sqlite3_close(db);
+				menuUsuario();
 
 	}break;
 	case 4:{
 
 	}break;
+	case 5:{
+
+	}break;
+	case 6:{
+		cout<<"Cerrando sesion..."<<endl;
+		menuInicio();
+	}break;
+	default:{
+		cout<<"Introduzca un valor correcto"<<endl;
+		menuUsuario();
+	}break;
+
 	}
 }
 

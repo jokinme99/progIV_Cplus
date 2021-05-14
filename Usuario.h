@@ -5,11 +5,10 @@
  *      Author: jokin
  */
 
-#ifndef DATA_USUARIO_H_
-#define DATA_USUARIO_H_
+#ifndef USUARIO_H_
+#define USUARIO_H_
 #include "Reserva.h"
 
-namespace data{
 
 class Usuario
 {
@@ -20,9 +19,11 @@ private:
 	char* correoUsuario;
 	char* contrasenyaUsuario;
 	int edadUsuario;
+	Reserva* reservasUsuario;
+	int nReservas;//para medir cant. de reservas
 public:
 	Usuario();
-	Usuario(const int, char*, char*, char*, int);
+	Usuario(const int, char*, char*, char*, int,Reserva*,int);
 	Usuario(const Usuario&);
 	~Usuario();
 
@@ -35,9 +36,14 @@ public:
 	void setContrasenyaUsuario(char*);
 	int getEdadUsuario()const;
 	void setEdadUsuario(int);
+	Reserva* getReservasUsuario()const;
+	void setReservasUsuario(Reserva*);
+	int getNReservas()const;
+	void setNReservas(int);
+
 	bool comprobarUsuario(char *usuario, char *contrasenya);
 
 };
 
-}
+
 #endif /* DATA_USUARIO_H_ */

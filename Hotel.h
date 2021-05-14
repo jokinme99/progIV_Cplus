@@ -20,7 +20,8 @@ private:
 	int telefonoHotel;
 	int numEstrellas;
 	Habitacion* habitacionHotel;
-	Reserva* reservaHabitacion;
+	//Reserva* reservaHabitacion; No hace falta, porque en Reserva podemos ver la habitacion que esta reservada
+	//Y cada hotel tiene unas habitaciones especificas, por lo que al hacer la reserva de la habitacion sabemos de que hotel
 	Trabajador* trabajadorHotel;
 public:
 	Hotel();

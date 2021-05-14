@@ -16,8 +16,6 @@ private:
 	int numHabitacion;
 	int plantaHabitacion;
 	char* tipoHabitacion;
-	float precioHabitacion;
-	bool reservadaHabitacion;//boolean true(reservada)
 
 public:
 	Habitacion();
@@ -35,8 +33,6 @@ public:
 	void setTipoHabitacion(char*);
 	float getPrecioHabitacion()const;
 	void setPrecioHabitacion(float);
-	bool getReservadaHabitacion()const;
-	void setReservadaHabitacion(bool);
 		
 
 };

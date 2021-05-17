@@ -13,10 +13,8 @@
 #include <stdio.h>
 #include "sqlite/sqlite3.h" //include para base de datos
 #include <sqlite3.h> //include para base de datos
-
 #include <fstream>
 #include <windows.h>
-
 
 #include "Habitacion.h"//Para acceder a los distintos metodos y poder ver/editar/eliminar datos de la base de datos
 #include "Hotel.h"//Para acceder a los distintos metodos y poder ver/editar/eliminar datos de la base de datos
@@ -26,13 +24,11 @@
 
 
 using namespace std;
-//using namespace data;
 
 void menuInicio();
 
 void usuarioPrincipio();//Menu usuario(iniciar sesion/registrarse)
 void inicioUsuario();//inicio sesion usuario
-bool comprobarUsuario(char *usuario, char *contrasenya);
 void registroUsuario();
 void menuUsuario();
 void caso1Usuario();
@@ -41,7 +37,7 @@ void caso3Usuario();
 void caso4Usuario();
 void caso5Usuario();
 
-void administrador();//Menu administrador(iniciar sesion/registrarse)
+void administradorPrincipio();//Menu administrador(iniciar sesion/registrarse)
 void registroAdministrador();//registrarse admin
 void inicioAdministrador();//inicio sesion admin
 void menuAdministrador();
@@ -49,7 +45,11 @@ void menuAdministrador();
 
 string nombreUser;
 string contraUser;//Para iniciar/registrar usuario
-
+sqlite3 *db;//objeto base de datos
+char *zErrMsg = 0;
+int rc;
+char *sql;//sentencia sql
+const char *data = "LLamada a Base de datos";
 
 //Metodo para utilizar la base de datos
 static int callback(void *data, int argc, char **argv, char **azColName) {
@@ -63,11 +63,7 @@ static int callback(void *data, int argc, char **argv, char **azColName) {
 	printf("\n");
 	return 0;
 }
-sqlite3 *db;//objeto base de datos
-char *zErrMsg = 0;
-int rc;
-char *sql;//sentencia sql
-const char *data = "LLamada a Base de datos";
+
 
 int main(){
 	menuInicio();
@@ -88,9 +84,10 @@ void menuInicio(){
 		usuarioPrincipio();
 	}break;
 	case 2:{
-		administrador();
+		administradorPrincipio();
 	}break;
 	case 3:{
+		system("exit");
 	}break;
 	default:{
 		cout<<"Introduzca un valor correcto"<<endl;
@@ -125,19 +122,35 @@ void usuarioPrincipio(){
 }
 
 void registroUsuario(){
-	cout << "Ingresa el nombre del usuario: ";
-	cin >> nombreUser;
-	cout << endl;
-	cout << "Ingresa la contraseña del usuario: ";
-	cin >> contraUser;
-	cout << endl;
-	ofstream ofs("usuariosGuardar.txt", ios::app);
-	ofs << nombreUser << " " << contraUser << endl;
-	ofs.close();
-	cout << "Usuario creado correctamente" << endl;
-	usuarioPrincipio();
+	ifstream ifs;
+	ifs.open("usuariosGuardar.txt", ios::in);
+	string nom, cont, nomAu, conAu;
+	bool en = false;
+	cout << "Ingrese el nombre del usuario: " << endl;
+	cin >> nomAu;
+	cout << "Ingrese la contrasenya del usuario: " << endl;
+	cin >> conAu;
+	ifs >> nom;
+	while (!ifs.eof() && !en) {
+		ifs >> cont;
+		if (nom == nomAu) {
+			cout << "El usuario introducido ya existe! " << nomAu<< endl;
+			en = true;
+			usuarioPrincipio();
+			ifs.close();
+
+		}if(nom != nomAu){
+			ifs.close();
+			ofstream ofs("usuariosGuardar.txt", ios::app);
+			ofs << nomAu << " " << conAu << endl;
+			ofs.close();
+			cout << "Usuario creado correctamente" << endl;
+			usuarioPrincipio();
+		}
+	}ifs.close();
 }
-void inicioUsuario(){//Todo inicio sesion usuario
+
+void inicioUsuario(){
 
 
 	ifstream ifs;
@@ -151,18 +164,32 @@ void inicioUsuario(){//Todo inicio sesion usuario
 		ifs >> nom;
 		while (!ifs.eof() && !en) {
 			ifs >> cont;
+
 			if (nom == nomAu && cont == conAu) {
-				cout << "Bienvenido/a " << nomAu
-						<< endl;
+				cout << "Usuario y contrasenya correctos. Bienvenido " << nomAu<< endl;
 				en = true;
+				//parte del usuario
 				system("cls");
-				cout<<"---------MODO USUARIO-----"<<endl;
+				cout << "---MODO USUARIO---" << endl;
 				menuUsuario();
+				ifs.close();
+			}if(nom != nomAu){
+				cout<<"El usuario no existe!"<<endl;
+				usuarioPrincipio();
+				ifs.close();
+
 			}
-		}
 
+			else if ((nom == nomAu && cont != conAu) || (nom != nomAu && cont == conAu)){
+					cout << "Contrasenya incorrecta" << endl;
+					usuarioPrincipio();
+					ifs.close();
 
+				}
+				ifs >> nom;
 
+			}
+		ifs.close();
 
 }
 
@@ -208,9 +235,10 @@ void menuUsuario(){
 
 	}
 }
+
 void caso1Usuario(){
 	/* Create SQL statement */
-				sql = "SELECT * from HOTEL";
+				char sql[] = "SELECT * from HOTEL";
 
 				/* Execute SQL statement */
 				rc = sqlite3_exec(db, sql, callback, (void*) data, &zErrMsg);
@@ -223,9 +251,10 @@ void caso1Usuario(){
 				sqlite3_close(db);
 				menuUsuario();
 }
+
 void caso2Usuario(){
 	/* Create SQL statement */
-				sql = "SELECT * from HABITACION";
+				char sql[] = "SELECT * from HABITACION";
 
 				/* Execute SQL statement */
 				rc = sqlite3_exec(db, sql, callback, (void*) data, &zErrMsg);
@@ -238,6 +267,7 @@ void caso2Usuario(){
 				sqlite3_close(db);
 				menuUsuario();
 }
+
 void caso3Usuario(){
 	char nom[100];
 					cout << "Introduzca su nombre de usuario para ver que reservas tiene" << endl;
@@ -262,12 +292,10 @@ void caso3Usuario(){
 					} else {
 						//fprintf(stdout, "Operation done successfully\n");
 					}//Desea ver que habitaciones estan reservadas??
-
-					cout<<"Las reservas tienen las siguientes habitaciones:"<<endl;
-					//char sql[] = "SELECT HABITACION.numero_habitacion,HABITACION.planta_habitacion ,HABITACION.tipo_habitacion, HABITACION.precio_habitacion FROM HABITACION JOIN RESERVA_TIENE_HABITACIONES ON RESERVA_TIENE_HABITACIONES.id_habitacion = HABITACION.id_habitacion AND JOIN  ON RESERVA ON RESERVA.id_reserva = RESERVA_TIENE_HABITACIONES.id_reserva AND JOIN USUARIO ON USUARIO.id_usuario = RESERVA.id_usuario WHERE USUARIO.nombre_usuario ='";
 					sqlite3_close(db);
 					menuUsuario();
 }
+
 void caso4Usuario(){
 	int opcion;
 	do{
@@ -1084,6 +1112,7 @@ void caso4Usuario(){
 
 	}
 }
+
 void caso5Usuario(){
 	char nom[100];
 	cout << "Introduzca su nombre de usuario para ver que reservas tiene" << endl;
@@ -1129,7 +1158,7 @@ void caso5Usuario(){
 								}
 
 									/* Create SQL statement */
-									char sql2[] = "DELETE from RESERVA_TIENE_HABITACIONES WHERE ID_RESERVA= ";
+									char sql2[] = "DELETE * from RESERVA_TIENE_HABITACIONES WHERE ID_RESERVA= ";
 
 									strcat(sql2, nom1);
 
@@ -1150,46 +1179,63 @@ void caso5Usuario(){
 								sqlite3_close(db);
 								menuUsuario();
 }
-void administrador(){
+
+void administradorPrincipio(){
 	int opcion;
 	do{
-		cout<<"1. Registrarse"<<endl;//METODO QUE REGISTRE AL USUARIO
-		cout<<"2. Iniciar sesion"<<endl;//METODO QUE COMPRUEBE QUE EL USUARIO EXISTE
+		cout<<"1. Registrarse"<<endl;
+		cout<<"2. Iniciar sesion"<<endl;
 		cout<<"3. Volver atras"<<endl;
 		cin>>opcion;
 	}while(opcion != 1 && opcion != 2 && opcion != 3);
 	switch(opcion){
 	case 1:{
-		registroAdministrador();//registro administrador
+		registroAdministrador();
 	}break;
 	case 2:{
-		inicioAdministrador();//inicio sesion administrador
+		inicioAdministrador();
 	}break;
 	case 3:{
 		menuInicio();
 	}break;
 	default:{
 		cout<<"Introduzca un valor correcto"<<endl;
-		administrador();
+		administradorPrincipio();
 	}
 	}
 }
 
-void registroAdministrador(){//Todo registrarse admin
-	cout << "Ingresa el nombre del administrador: ";
-	cin >> nombreUser;
-	cout << endl;
-	cout << "Ingresa la contraseña del administrador: ";
-	cin >> contraUser;
-	cout << endl;
-	ofstream ofs("administradorGuardar.txt", ios::app);
-	ofs << nombreUser << " " << contraUser << endl;
-	ofs.close();
-	cout << "Usuario creado correctamente" << endl;
-	administrador();
+void registroAdministrador(){
+	ifstream ifs;
+	ifs.open("administradorGuardar.txt", ios::in);
+	string nom, cont, nomAu, conAu;
+	bool en = false;
+	cout << "Ingrese el nombre del admin: " << endl;
+	cin >> nomAu;
+	cout << "Ingrese la contrasenya del admin: " << endl;
+	cin >> conAu;
+	ifs >> nom;
+	while (!ifs.eof() && !en) {
+		ifs >> cont;
+		if (nom == nomAu) {
+			cout << "El admin introducido ya existe! " << nomAu<< endl;
+			en = true;
+			administradorPrincipio();
+			ifs.close();
 
+		}if(nom != nomAu){
+			ifs.close();
+			ofstream ofs("administradorGuardar.txt", ios::app);
+			ofs << nomAu << " " << conAu << endl;
+			ofs.close();
+			cout << "Administrador creado correctamente" << endl;
+			administradorPrincipio();
+		}
+	}ifs.close();
 }
-void inicioAdministrador(){//Todo inicio sesion admin
+
+void inicioAdministrador(){
+
 	ifstream ifs;
 		ifs.open("administradorGuardar.txt", ios::in);
 		string nom, cont, nomAu, conAu;
@@ -1201,205 +1247,35 @@ void inicioAdministrador(){//Todo inicio sesion admin
 		ifs >> nom;
 		while (!ifs.eof() && !en) {
 			ifs >> cont;
+
 			if (nom == nomAu && cont == conAu) {
-				cout << "Bienvenido/a " << nomAu
-						<< endl;
+				cout << "Administrador y contrasenya correctos. Bienvenido " << nomAu<< endl;
 				en = true;
+				//parte del usuario
 				system("cls");
-				cout<<"---------MODO USUARIO-----"<<endl;
-				administrador();
-			}
-		}
+				cout << "---MODO ADMINISTRADOR---" << endl;
+				menuAdministrador();
+				ifs.close();
+			}if(nom != nomAu){
+				cout<<"El administrador no existe!"<<endl;
+				administradorPrincipio();
+				ifs.close();
 
-	//OPCIONES DE ADMINISTRADOR: CREAR HABITACIÓN, ELIMINAR HABITACION, LISTAR HABITACIONES, LISTAR RESERVAS, ELIMINAR RESERVAS
+			}
+
+			else if ((nom == nomAu && cont != conAu) || (nom != nomAu && cont == conAu)){
+					cout << "Contrasenya incorrecta" << endl;
+					administradorPrincipio();
+					ifs.close();
+
+				}
+				ifs >> nom;
+
+			}
+		ifs.close();
+
 }
+
 void menuAdministrador(){
-
+//OPCIONES DE ADMINISTRADOR: CREAR HABITACIÓN, ELIMINAR HABITACION, LISTAR HABITACIONES, LISTAR RESERVAS, ELIMINAR RESERVAS
 }
-
-bool comprobarUsuario(char *usuario, char *contrasenya){
-
-	FILE *f;
-
-	f = fopen("Usuarios.txt", "r");
-
-	int counter = 0;
-	char linea;
-
-	for (linea = getc(f); linea != EOF; linea = getc(f))
-		if (linea == '\n') // Increment count if this character is newline
-			counter = counter + 1;
-
-	fclose(f);
-
-	f = fopen("Usuarios.txt", "r");
-
-	char *ptr;
-	char c[256];
-
-	int c_nombres = 0;
-	char **nombres;
-
-	nombres = (char**) malloc(counter * sizeof(char*));
-
-	int q;
-	for (q = 0; q < counter; q++) {
-
-		nombres[q] = (char*) malloc(16 * sizeof(char));
-
-	}
-
-	while (fgets(c, sizeof(c), f)) {
-
-		ptr = strtok(c, ";");
-
-		ptr = strtok(ptr, ":");
-
-		//printf("%s\n", ptr);
-		while (ptr != NULL) {
-
-			ptr = strtok(NULL, ":");
-
-			//printf("%s\n", ptr);
-			if (ptr != NULL) {
-
-			//	printf("valor de i %i\n", c_nombres);
-				strcpy(nombres[c_nombres], ptr);
-
-			//	printf("Usuario guardado %s\n", nombres[c_nombres]);
-
-			}
-		}
-		c_nombres++;
-
-	}
-
-	fclose(f);
-
-	f = fopen("Usuarios.txt", "r");
-
-	char **contrasenya1;
-
-	contrasenya1 = (char**) malloc(counter * sizeof(char*));
-
-	int h;
-	for (q = 0; h < counter; h++) {
-
-		contrasenya1[h] = (char*) malloc(16 * sizeof(char));
-
-	}
-
-	char *ctr;
-
-	int c_contrasenya = 0;
-
-	while (fgets(c, sizeof(c), f)) {
-
-		//printf("Prueba %s", c);
-
-		ctr = strtok(c, ";");
-
-		//printf("Contraseña1 %s\n", ctr);
-		while (ctr != NULL) {
-
-			//	printf("Contrasña2 %s\n", ctr);
-
-			ctr = strtok(NULL, ";");
-
-			//	printf("cotraseña3 %s\n", ctr);
-
-			if (ctr != NULL) {
-
-				const char ch = ':';
-				char *ret;
-
-				ret = strchr(ctr, ch);
-
-				//  printf("String after |%c| is - |%s|\n", ch, ret + 1);
-
-				strcpy(contrasenya1[c_contrasenya], ret + 1);
-
-			}
-			ctr = NULL;
-		}
-
-		c_contrasenya++;
-
-	}
-
-	int j = 0;
-
-	while (j < counter) {
-
-	//	printf("El usuario a comporbar es %s y el de el array  %s y la contra a buscar es %s y la contrra es %s\n", usuario, nombres[j], contrasenya, contrasenya1[j]);
-
-		if (0 == strcmp(usuario, nombres[j])
-				&& 0 == strcmp(contrasenya, contrasenya1[j])) {
-
-			cout<<"El usuario y la contraseña son correctos\n"<<endl;
-
-			free(nombres[j]);
-			free(contrasenya1[j]);
-
-			fclose(f);
-
-			return true;
-
-		}
-
-		j++;
-
-	}
-
-	cout<<"El usuario y la contraseña no coinciden\n"<<endl;
-
-
-	return false;
-
-	fclose(f);
-
-
-}
-//	sqlite3 *db;
-//	int res;
-//
-//	char palabra[] = "prueba.s3db";
-//
-//	res = sqlite3_open(palabra , &db);
-//
-//	char nombre[10], contra[10];
-//	int intentos=0;
-//
-//			else if ((nom == nomAu && cont != conAu) || (nom != nomAu && cont == conAu)){
-//				cout << "Usuario o contrasenya introducidos son incorrectos" << endl;
-//				inicioUsuario();
-//			}
-//			ifs >> nom;
-//		}
-//		ifs.close();
-//
-//		if (!en) {
-//			cout << "El usuario introducido no existe" << endl;
-//			inicioUsuario();
-//		}
-
-//	char nombre[10], contra[10];
-//	int intentos=0;
-//
-//	do{
-//
-//	cout<<"Introduce el nombre de usuario"<<endl;
-//	fgets(nombre, 10, stdin);
-//	//cin>>nombre;
-//	cout<<"Introduce la contraseña"<<endl;
-//	fgets(contra, 10, stdin);
-//	Usuario u;
-//	intentos++;
-//	}while(!comprobarUsuario(nombre, contra)||intentos==3);
-//	if(comprobarUsuario(nombre, contra)){
-//		menuUsuario();
-//	}else{
-//		cout<<"has superado el numero de intentos"<<endl;
-//		menuInicio();
-//	}
-//	//FALTA LA LECTURA DE USUARIOS QUE HABRA QUE LEERLA DESDE EL FICHERO

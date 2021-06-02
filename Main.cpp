@@ -1318,39 +1318,31 @@ void menuAdministrador(){
 	rc = sqlite3_open("hotelandia_final.s3db", &db);
 	switch(opcion){
 	case 1:{
-		void caso1Admin();
-		void caso2Admin();
-		void caso3Admin();
-		void caso4Admin();
-		void caso5Admin();
-		void caso6Admin();
-		void caso7Admin();
-		void caso8Admin();
-		void caso9Admin();
+		caso1Admin();
 	}break;
 	case 2:{
-		void caso2Admin();
+		caso2Admin();
 	}break;
 	case 3:{
-		void caso3Admin();
+		caso3Admin();
 	}break;
 	case 4:{
-		void caso4Admin();
+		caso4Admin();
 	}break;
 	case 5:{
-		void caso5Admin();
+		caso5Admin();
 	}break;
 	case 6:{
-			void caso6Admin();
+		caso6Admin();
 	}break;
 	case 7:{
-			void caso7Admin();
+		caso7Admin();
 	}break;
 	case 8:{
-			void caso8Admin();
+		caso8Admin();
 	}break;
 	case 9:{
-			void caso9Admin();
+		caso9Admin();
 	}break;
 	case 10:{
 		cout<<"Cerrando sesion..."<<endl;
@@ -1364,4 +1356,122 @@ void menuAdministrador(){
 	}
 
 //OPCIONES DE ADMINISTRADOR: CREAR HABITACIÓN, ELIMINAR HABITACION, LISTAR HABITACIONES, LISTAR RESERVAS, ELIMINAR RESERVAS
+}
+void caso1Admin(){
+	char sql[] = "SELECT * from HABITACION";
+
+	/* Execute SQL statement */
+	rc = sqlite3_exec(db, sql, callback, (void*) data, &zErrMsg);
+	if (rc != SQLITE_OK) {
+		fprintf(stderr, "SQL error: %s\n", zErrMsg);
+		sqlite3_free(zErrMsg);
+	} else {
+		//fprintf(stdout, "Operation done successfully\n");
+	}
+	sqlite3_close(db);
+	menuAdministrador();
+}
+void caso2Admin(){
+
+	char idhab[100], nHab[100], nPlant[100], Prec[100],tipoHab[100];
+
+
+
+	cout<<"introduce el id de habitacion"<<endl;
+
+	cin >> idhab;
+
+	cout<<"introduce el numero de habitacion"<<endl;
+
+	cin >> nHab;
+
+	cout<<"introduce el numero de planta de la habitacion"<<endl;
+
+	cin >> nPlant;
+
+	cout<<"introduce el tipo de habitacion"<<endl;
+
+	cin >> tipoHab;
+
+
+	cout<<"introduce el precio de la habitacion"<<endl;
+
+	cin >> Prec;
+
+	cout<<"TIRA"<<endl;
+
+
+	char sql[200] = "INSERT INTO HABITACION VALUES (";
+
+
+	cout<<"TIRA2"<<endl;
+
+	char con1[] = ",", con2[] = ",", con3[] = "," , con4[] = "," , con8[] = ")", con9[] = "";
+
+	cout<<"TIRA3"<<endl;
+
+	strcat(sql, idhab);
+	cout<<sql<<endl;
+	strcat(sql, con1);
+	cout<<sql<<endl;
+	strcat(sql, nHab);
+	cout<<sql<<endl;
+	strcat(sql, con2);
+	cout<<sql<<endl;
+	strcat(sql, nPlant);
+	cout<<sql<<endl;
+	strcat(sql, con3);
+	cout<<sql<<endl;
+
+	strcat(sql, "'");
+
+	strcat(sql, tipoHab);
+
+	strcat(sql, "'");
+
+
+
+
+	strcat(sql, con4);
+	strcat(sql, Prec);
+	strcat(sql, con8);
+	strcat(sql, con9);
+
+
+
+	cout<<sql<<endl;
+
+	/* Execute SQL statement */
+	rc = sqlite3_exec(db, sql, callback, (void*) data, &zErrMsg);
+	if (rc != SQLITE_OK) {
+		fprintf(stderr, "SQL error: %s\n", zErrMsg);
+		sqlite3_free(zErrMsg);
+	} else {
+		//fprintf(stdout, "Operation done successfully\n");
+	}
+	sqlite3_close(db);
+	menuAdministrador();
+
+
+}
+void caso3Admin(){
+
+}
+void caso4Admin(){
+
+}
+void caso5Admin(){
+
+}
+void caso6Admin(){
+
+}
+void caso7Admin(){
+
+}
+void caso8Admin(){
+
+}
+void caso9Admin(){
+
 }

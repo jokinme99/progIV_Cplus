@@ -12,7 +12,7 @@
 #include <cstdlib>
 #include <stdio.h>
 #include "sqlite/sqlite3.h" //include para base de datos
-#include <sqlite3.h> //include para base de datos
+//#include <sqlite3.h> //include para base de datos
 #include <fstream>
 #include <windows.h>
 
@@ -124,7 +124,7 @@ void usuarioPrincipio(){
 void registroUsuario(){
 	ifstream ifs;
 	ifs.open("usuariosGuardar.txt", ios::in);
-	string nom, cont, nomAu, conAu;
+	string nom, cont, nomAu, conAu, line;
 	bool en = false;
 	cout << "Ingrese el nombre del usuario: " << endl;
 	cin >> nomAu;
@@ -133,6 +133,10 @@ void registroUsuario(){
 	ifs >> nom;
 	while (!ifs.eof() && !en) {
 		ifs >> cont;
+		getline(ifs,line);
+
+		cout << line<< '\n';
+
 		if (nom == nomAu) {
 			cout << "El usuario introducido ya existe! " << nomAu<< endl;
 			en = true;
@@ -1244,19 +1248,22 @@ void inicioAdministrador(){
 		cin >> nomAu;
 		cout << "Ingrese la contra del administrador: " << endl;
 		cin >> conAu;
-		ifs >> nom;
+
 		while (!ifs.eof() && !en) {
+			ifs >> nom;
 			ifs >> cont;
 
+			cout <<nom<<" "<<cont<<endl;
+
 			if (nom == nomAu && cont == conAu) {
-				cout << "Administrador y contrasenya correctos. Bienvenido " << nomAu<< endl;
+				cout << "Administrador y contrasenya correctos. Bienvenido " << nomAu << endl;
 				en = true;
 				//parte del usuario
 				system("cls");
 				cout << "---MODO ADMINISTRADOR---" << endl;
 				menuAdministrador();
 				ifs.close();
-			}if(nom != nomAu){
+			}if(nom != nomAu && ifs.eof()){
 				cout<<"El administrador no existe!"<<endl;
 				administradorPrincipio();
 				ifs.close();

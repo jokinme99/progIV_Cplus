@@ -37,6 +37,16 @@ void caso3Usuario();
 void caso4Usuario();
 void caso5Usuario();
 
+void caso1Admin();
+void caso2Admin();
+void caso3Admin();
+void caso4Admin();
+void caso5Admin();
+void caso6Admin();
+void caso7Admin();
+void caso8Admin();
+void caso9Admin();
+
 void administradorPrincipio();//Menu administrador(iniciar sesion/registrarse)
 void registroAdministrador();//registrarse admin
 void inicioAdministrador();//inicio sesion admin
@@ -1227,16 +1237,20 @@ void registroAdministrador(){
 			administradorPrincipio();
 			ifs.close();
 
-		}if(nom != nomAu){
+		}
+	}
+	if(en ==false){
 			ifs.close();
 			ofstream ofs("administradorGuardar.txt", ios::app);
 			ofs << nomAu << " " << conAu << endl;
 			ofs.close();
 			cout << "Administrador creado correctamente" << endl;
 			administradorPrincipio();
-		}
-	}ifs.close();
+			ifs.close();
+	}
+
 }
+
 
 void inicioAdministrador(){
 
@@ -1284,5 +1298,70 @@ void inicioAdministrador(){
 }
 
 void menuAdministrador(){
+
+	int opcion;
+	do{
+	cout<<"Elije las siguientes opciones"<<endl;
+	cout<<"1. Ver habitaciones"<<endl;
+	cout<<"2. Crear habitacion"<<endl;
+	cout<<"3. Eliminar habitaciones"<<endl;//Si no tiene mensaje por pantalla
+	cout<<"4. Ver reservas"<<endl;//Solo a su nombre
+	cout<<"5. crear reservas"<<endl;//Solo a su nombre
+	cout<<"6. Eliminar reserva"<<endl;
+	cout<<"7. Ver trabajadores"<<endl;
+	cout<<"8. Crear trabajadores"<<endl;
+	cout<<"9. Eliminar trabajadores"<<endl;
+	cout<<"10. Volver al menu principal"<<endl;
+	cin>>opcion;
+	}while(opcion!= 1 && opcion != 2 && opcion != 3 && opcion != 4 && opcion != 4 && opcion != 5 && opcion !=6);
+	/* ABRIMOS BASE DE DATOS */
+	rc = sqlite3_open("hotelandia_final.s3db", &db);
+	switch(opcion){
+	case 1:{
+		void caso1Admin();
+		void caso2Admin();
+		void caso3Admin();
+		void caso4Admin();
+		void caso5Admin();
+		void caso6Admin();
+		void caso7Admin();
+		void caso8Admin();
+		void caso9Admin();
+	}break;
+	case 2:{
+		void caso2Admin();
+	}break;
+	case 3:{
+		void caso3Admin();
+	}break;
+	case 4:{
+		void caso4Admin();
+	}break;
+	case 5:{
+		void caso5Admin();
+	}break;
+	case 6:{
+			void caso6Admin();
+	}break;
+	case 7:{
+			void caso7Admin();
+	}break;
+	case 8:{
+			void caso8Admin();
+	}break;
+	case 9:{
+			void caso9Admin();
+	}break;
+	case 10:{
+		cout<<"Cerrando sesion..."<<endl;
+		menuInicio();
+	}break;
+	default:{
+		cout<<"Introduzca un valor correcto"<<endl;
+		menuUsuario();
+	}break;
+
+	}
+
 //OPCIONES DE ADMINISTRADOR: CREAR HABITACIÓN, ELIMINAR HABITACION, LISTAR HABITACIONES, LISTAR RESERVAS, ELIMINAR RESERVAS
 }

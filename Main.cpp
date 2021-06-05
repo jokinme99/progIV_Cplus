@@ -1222,8 +1222,8 @@ void administradorPrincipio(){
 }
 void registroAdministrador(){
 	ifstream ifs;
-	ifs.open("administradorGuardar.txt", ios::in);
-	string nom, cont, nomAu, conAu;
+	ifs.open("adminsGuardar.txt", ios::in);
+	string nom, cont, nomAu, conAu, line;
 	bool en = false;
 	cout << "Ingrese el nombre del admin: " << endl;
 	cin >> nomAu;
@@ -1232,51 +1232,53 @@ void registroAdministrador(){
 	ifs >> nom;
 	while (!ifs.eof() && !en) {
 		ifs >> cont;
+		getline(ifs,line);
+
+		cout << line<< '\n';
+
 		if (nom == nomAu) {
 			cout << "El admin introducido ya existe! " << nomAu<< endl;
 			en = true;
 			administradorPrincipio();
 			ifs.close();
 
-		}
-	}
-	if(en ==false){
+		}if(nom != nomAu){
 			ifs.close();
-			ofstream ofs("administradorGuardar.txt", ios::app);
+			ofstream ofs("adminsGuardar.txt", ios::app);
 			ofs << nomAu << " " << conAu << endl;
 			ofs.close();
-			cout << "Administrador creado correctamente" << endl;
+			cout << "Admin creado correctamente" << endl;
 			administradorPrincipio();
-			ifs.close();
-	}
+		}
+	}ifs.close();
 
 }
 void inicioAdministrador(){
 
+
+
 	ifstream ifs;
-		ifs.open("administradorGuardar.txt", ios::in);
+		ifs.open("adminsGuardar.txt", ios::in);
 		string nom, cont, nomAu, conAu;
 		bool en = false;
-		cout << "Ingrese el nombre del administrador: " << endl;
+		cout << "Ingrese el nombre del admin: " << endl;
 		cin >> nomAu;
-		cout << "Ingrese la contra del administrador: " << endl;
+		cout << "Ingrese la contra del admin: " << endl;
 		cin >> conAu;
-
+		ifs >> nom;
 		while (!ifs.eof() && !en) {
-			ifs >> nom;
 			ifs >> cont;
 
-
 			if (nom == nomAu && cont == conAu) {
-				cout << "Administrador y contrasenya correctos. Bienvenido " << nomAu << endl;
+				cout << "Admin y contrasenya correctos. Bienvenido " << nomAu<< endl;
 				en = true;
 				//parte del usuario
 				system("cls");
-				cout << "---MODO ADMINISTRADOR---" << endl;
+				cout << "---MODO ADMIN---" << endl;
 				menuAdministrador();
 				ifs.close();
-			}if(nom != nomAu && ifs.eof()){
-				cout<<"El administrador no existe!"<<endl;
+			}if(nom != nomAu){
+				cout<<"El admin no existe!"<<endl;
 				administradorPrincipio();
 				ifs.close();
 
@@ -1284,7 +1286,7 @@ void inicioAdministrador(){
 
 			else if ((nom == nomAu && cont != conAu) || (nom != nomAu && cont == conAu)){
 					cout << "Contrasenya incorrecta" << endl;
-					administradorPrincipio();
+					usuarioPrincipio();
 					ifs.close();
 
 				}
@@ -1556,7 +1558,6 @@ void caso5Admin(){
 
 void caso6Admin(){
 
-	cout<<"hola ktal holakpasaktal"<<endl;
 
 
 	char sql[] = "select * from TRABAJADOR";

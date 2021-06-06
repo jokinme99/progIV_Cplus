@@ -1757,7 +1757,7 @@ void caso6Admin(){
 }
 void caso7Admin(){
 
-	cout<<"hola ktal holakpasaktal"<<endl;
+	cout<<"Visualizando trabajadores"<<endl;
 
 
 	char sql[] = "select * from TRABAJADOR";

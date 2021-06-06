@@ -319,7 +319,7 @@ void caso4Usuario(){
 	cout<<"5. Eurostar Hotel"<<endl;
 	cin>>opcion;
 	}while(opcion!=1&&opcion!=2&&opcion!=3&&opcion!=4&&opcion!=5);
-	char id_res[100],dia_res[100],hora_res[100],id_usuario[100];int opcion1;
+	char id_res[100],dia_res[100],hora_res[100],id_usuario[100];
 	switch(opcion){
 	case 1:{//Melia
 		cout << "Ingrese el id de la reserva que desea anyadir: ";
@@ -361,7 +361,7 @@ void caso4Usuario(){
 		}
 		sqlite3_close(db);
 		menuUsuario();
-//
+// Metodo: Servia para meter en la tabla reserva_tiene_habitaciones pero no conseguiamos que se guardara en la base de datos
 //		do{
 //			cout<<"1. 1 Habitacion"<<endl;
 //			cout<<"2. 2 Habitaciones"<<endl;
@@ -523,6 +523,7 @@ void caso4Usuario(){
 		}
 		sqlite3_close(db);
 		menuUsuario();
+//	Metodo
 //		do{
 //			cout<<"1. 1 Habitacion"<<endl;
 //			cout<<"2. 2 Habitaciones"<<endl;
@@ -685,6 +686,7 @@ void caso4Usuario(){
 		}sqlite3_close(db);
 		menuUsuario();
 
+//		Metodo
 //		do{
 //			cout<<"1. 1 Habitacion"<<endl;
 //			cout<<"2. 2 Habitaciones"<<endl;
@@ -846,6 +848,7 @@ void caso4Usuario(){
 		}sqlite3_close(db);
 		menuUsuario();
 
+//		Metodo
 //		do{
 //			cout<<"1. 1 Habitacion"<<endl;
 //			cout<<"2. 2 Habitaciones"<<endl;
@@ -1007,6 +1010,7 @@ void caso4Usuario(){
 		}sqlite3_close(db);
 		menuUsuario();
 
+//		Metodo
 //		do{
 //			cout<<"1. 1 Habitacion"<<endl;
 //			cout<<"2. 2 Habitaciones"<<endl;

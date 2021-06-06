@@ -328,7 +328,7 @@ void caso4Usuario(){
 		cout << "Ingrese el dia de la reserva que desea anyadir: ";
 		cin >> dia_res;
 		cout << endl;
-		cout << "Ingrese la hora de llegada als hotel que desea anyadir: ";
+		cout << "Ingrese la hora de llegada al hotel que desea anyadir: ";
 		cin >> hora_res;
 		cout << endl;
 		cout << "Ingrese el id de su usuario: ";

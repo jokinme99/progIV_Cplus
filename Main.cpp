@@ -88,10 +88,14 @@ void inicio(){
 
 		while (!ifs.eof() && !en) {
 
-			ifs >> nom;
+			//ifs >> nom;
+			char cNum[20];
+			ifs.getline(cNum, 256, ':');
+			//cout<<cNum<<endl;
+			ifs.getline(cNum, 256, ';');
 			//ifs >> cont;
 			//	cout<<nom<<"\n"<<cont<<endl;
-			cout<<nom<<endl;
+			cout<<cNum<<endl;
 
 
 

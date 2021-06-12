@@ -27,6 +27,7 @@ using namespace std;
 
 
 void inicio();//inicio sesion usuario
+void importarDatos();
 void menuUsuario();
 void caso1Usuario();
 void caso2Usuario();
@@ -67,6 +68,93 @@ static int callback(void *data, int argc, char **argv, char **azColName) {
 	printf("\n");
 	return 0;
 }
+void importarDatosUsuarios(){//IMPORTA LOS DATOS DE USUARIOS DE LOS FICHEROS A LA BASE DE DATOS
+
+	FILE *f = fopen("../progIV_Cplus/Usuarios.txt", "r");
+
+	int counter = 0;
+	char linea;
+	char cadena[20],id[20],nom[20], cont[20],correo[30], edad[5], tipo[10];
+
+
+	for (linea = getc(f); linea != EOF; linea = getc(f))
+		if (linea == '\n')
+			counter = counter + 1;
+
+	fclose(f);
+	//cout<<counter<<endl;
+
+	ifstream ifs;
+	ifs.open("../progIV_Cplus/Usuarios.txt", ios::in);
+
+	char sql[] = "DELETE FROM USUARIO";
+
+	rc = sqlite3_open("hotelandia_final.s3db", &db);
+
+	rc = sqlite3_exec(db, sql, callback, (void*) data, &zErrMsg);
+
+	if (rc != SQLITE_OK) {
+		fprintf(stderr, "SQL error: %s\n", zErrMsg);
+		sqlite3_free(zErrMsg);
+	} else {
+		//fprintf(stdout, "Operation done successfully\n");
+	}
+	sqlite3_close(db);
+
+	for (int i = 0; i < counter; ++i) {
+
+		char sql1[] = "INSERT INTO USUARIO VALUES ('";
+
+		ifs.getline(cadena, 256, ':');
+		ifs.getline(id, 256, ';');
+		ifs.getline(cadena, 256, ':');
+		ifs.getline(nom, 256, ';');
+		ifs.getline(cadena, 256, ':');
+		ifs.getline(cont, 256, ';');
+		ifs.getline(cadena, 256, ':');
+		ifs.getline(correo, 256, ';');
+		ifs.getline(cadena, 256, ':');
+		ifs.getline(edad, 256, ';');
+		ifs.getline(cadena, 256, ':');
+		ifs.getline(tipo, 256, ';');
+
+//		cout<<sql<<endl;
+
+		char* retVal = new char[strlen(sql1)+strlen(id)+strlen(nom)+strlen(cont)+strlen(correo)+strlen(edad)+strlen(tipo)+18];
+
+		*retVal = '\0';
+
+		strcat(retVal,sql1);
+		strcat(retVal,id);
+		strcat(retVal,"','");
+		strcat(retVal,nom);
+		strcat(retVal,"','");
+		strcat(retVal,cont);
+		strcat(retVal,"','");
+		strcat(retVal,correo);
+		strcat(retVal,"','");
+		strcat(retVal,edad);
+		strcat(retVal,"','");
+		strcat(retVal,tipo);
+		strcat(retVal,"')");
+
+		//cout<<retVal<<endl;
+
+		rc = sqlite3_open("hotelandia_final.s3db", &db);
+		/* Execute SQL statement */
+		rc = sqlite3_exec(db, retVal, callback, (void*) data, &zErrMsg);
+		if (rc != SQLITE_OK) {
+			fprintf(stderr, "SQL error: %s\n", zErrMsg);
+			sqlite3_free(zErrMsg);
+		} else {
+			//fprintf(stdout, "Operation done successfully\n");
+		}
+		sqlite3_close(db);
+
+	}
+
+
+}
 
 
 int main(){
@@ -76,38 +164,78 @@ int main(){
 
 void inicio(){
 
+
+
 		cout<<"----HOTELANDIA------"<<endl;
 		ifstream ifs;
+		importarDatosUsuarios();
 		ifs.open("../progIV_Cplus/Usuarios.txt", ios::in);
-		string nom, cont, nomAu, conAu;
+
+//		cout<<ifs.tellg()<<endl;
+
+
+		char nom[20], cont[20], nomAu[20], conAu[20];
+		string linea;
 		bool en = false;
 		cout << "Ingrese el nombre del usuario: " << endl;
 		cin >> nomAu;
-		cout << "Ingrese la contra del usuario: " << endl;
+		cout << "Ingrese la contrasenya del usuario: " << endl;
 		cin >> conAu;
 
 		while (!ifs.eof() && !en) {
-
+			cout<<ifs.tellg()<<endl;
 			//ifs >> nom;
 			char cNum[20];
 			ifs.getline(cNum, 256, ':');
-			//cout<<cNum<<endl;
 			ifs.getline(cNum, 256, ';');
-			//ifs >> cont;
-			//	cout<<nom<<"\n"<<cont<<endl;
-			cout<<cNum<<endl;
+			ifs.getline(cNum, 256, ':');
+			ifs.getline(cNum, 256, ';');
+			strcpy(nom, cNum);
+			ifs.getline(cNum, 256, ':');
+			ifs.getline(cNum, 256, ';');
+			strcpy(cont, cNum);
+
+			ifs.getline(cNum, 256, ':');
+			ifs.getline(cNum, 256, ';');
+			ifs.getline(cNum, 256, ':');
+			ifs.getline(cNum, 256, ';');
+			ifs.getline(cNum, 256, ':');
+			ifs.getline(cNum, 256, ';');
 
 
+//			cout<<cont<<endl;
 
+//			cout<<nom<<" "<<cont<<endl;
+//			cout<<nomAu<<" "<<conAu<<endl;
 
-			if (nom == nomAu && cont == conAu) {
+			if (strcmp(nom,nomAu)==0 && strcmp(cont,conAu)==0) {
 				cout << "Usuario y contrasenya correctos. Bienvenido " << nomAu<< endl;
 				en = true;
+
 				//parte del usuario
 				system("cls");
-				cout << "---MODO USUARIO---" << endl;
-				menuUsuario();
+				cout<<endl;
+//				cout<<cNum<<endl;
+//				ifs.getline(cNum, 256, ':');
+//				ifs.getline(cNum, 256, ';');
+//				ifs.getline(cNum, 256, ':');
+//				ifs.getline(cNum, 256, ';');
+//				ifs.getline(cNum, 256, ':');
+//				ifs.getline(cNum, 256, ';');
+				cout<<cNum<<endl;
+
 				ifs.close();
+
+				if (strcmp(cNum, "usuario")==0) {
+					cout << "---MODO USUARIO---" << endl;
+					menuUsuario();
+				}else{
+					cout << "---MODO ADMINISTRADOR---" << endl;
+					menuAdministrador();
+				}
+
+
+
 			}if(nom != nomAu&&ifs.eof()){
 				cout<<"El usuario no existe!"<<endl;
 				//usuarioPrincipio();
@@ -122,6 +250,7 @@ void inicio(){
 
 				}
 
+			getline(ifs,linea);
 
 			}
 		ifs.close();
@@ -160,7 +289,7 @@ void menuUsuario(){
 	}break;
 	case 6:{
 		cout<<"Cerrando sesion..."<<endl;
-		//menuInicio();
+		inicio();
 	}break;
 	default:{
 		cout<<"Introduzca un valor correcto"<<endl;

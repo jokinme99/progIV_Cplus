@@ -25,11 +25,8 @@
 
 using namespace std;
 
-void menuInicio();
 
-void usuarioPrincipio();//Menu usuario(iniciar sesion/registrarse)
-void inicioUsuario();//inicio sesion usuario
-void registroUsuario();
+void inicio();//inicio sesion usuario
 void menuUsuario();
 void caso1Usuario();
 void caso2Usuario();
@@ -47,9 +44,6 @@ void caso7Admin();
 void caso8Admin();
 void caso9Admin();
 
-void administradorPrincipio();//Menu administrador(iniciar sesion/registrarse)
-void registroAdministrador();//registrarse admin
-void inicioAdministrador();//inicio sesion admin
 void menuAdministrador();
 
 
@@ -76,96 +70,15 @@ static int callback(void *data, int argc, char **argv, char **azColName) {
 
 
 int main(){
-	menuInicio();
+	inicio();
+
 }
 
-void menuInicio(){
-	int opcion;
-	do{
+void inicio(){
+
 		cout<<"----HOTELANDIA------"<<endl;
-		cout<<"1. Ingresar como usuario"<<endl;
-		cout<<"2. Ingresar como administrador"<<endl;
-		cout<<"3. Salir"<<endl;
-		cin>>opcion;//Para meterlo por pantalla
-	}while (opcion != 1 && opcion != 2 && opcion!=3);
-
-	switch(opcion){
-	case 1:{
-		usuarioPrincipio();
-	}break;
-	case 2:{
-		administradorPrincipio();
-	}break;
-	case 3:{
-		system("exit");
-	}break;
-	default:{
-		cout<<"Introduzca un valor correcto"<<endl;
-		menuInicio();
-	}break;
-	}
-}
-void usuarioPrincipio(){
-	int opcion;
-	do{
-		cout<<"1. Iniciar sesion"<<endl;
-		cout<<"2. Registrarse"<<endl;
-		cout<<"3. Volver atras"<<endl;
-		cin>>opcion;
-	}while(opcion != 1 && opcion != 2 && opcion != 3);
-	switch(opcion){
-	case 1:{
-		inicioUsuario();//inicio usuarios
-	}break;
-	case 2:{
-		registroUsuario();
-	}break;
-	case 3:{
-		menuInicio();
-	}break;
-	default:{
-		cout<<"Introduzca un valor correcto"<<endl;
-		usuarioPrincipio();
-	}break;
-	}
-}
-void registroUsuario(){
-	ifstream ifs;
-	ifs.open("usuariosGuardar.txt", ios::in);
-	string nom, cont, nomAu, conAu, line;
-	bool en = false;
-	cout << "Ingrese el nombre del usuario: " << endl;
-	cin >> nomAu;
-	cout << "Ingrese la contrasenya del usuario: " << endl;
-	cin >> conAu;
-	ifs >> nom;
-	while (!ifs.eof() && !en) {
-		ifs >> cont;
-		getline(ifs,line);
-
-		cout << line<< '\n';
-
-		if (nom == nomAu) {
-			cout << "El usuario introducido ya existe! " << nomAu<< endl;
-			en = true;
-			usuarioPrincipio();
-			ifs.close();
-
-		}if(nom != nomAu){
-			ifs.close();
-			ofstream ofs("usuariosGuardar.txt", ios::app);
-			ofs << nomAu << " " << conAu << endl;
-			ofs.close();
-			cout << "Usuario creado correctamente" << endl;
-			usuarioPrincipio();
-		}
-	}ifs.close();
-}
-void inicioUsuario(){
-
-
-	ifstream ifs;
-		ifs.open("usuariosGuardar.txt", ios::in);
+		ifstream ifs;
+		ifs.open("../progIV_Cplus/Usuarios.txt", ios::in);
 		string nom, cont, nomAu, conAu;
 		bool en = false;
 		cout << "Ingrese el nombre del usuario: " << endl;
@@ -176,7 +89,12 @@ void inicioUsuario(){
 		while (!ifs.eof() && !en) {
 
 			ifs >> nom;
-			ifs >> cont;
+			//ifs >> cont;
+			//	cout<<nom<<"\n"<<cont<<endl;
+			cout<<nom<<endl;
+
+
+
 
 			if (nom == nomAu && cont == conAu) {
 				cout << "Usuario y contrasenya correctos. Bienvenido " << nomAu<< endl;
@@ -188,14 +106,14 @@ void inicioUsuario(){
 				ifs.close();
 			}if(nom != nomAu&&ifs.eof()){
 				cout<<"El usuario no existe!"<<endl;
-				usuarioPrincipio();
+				//usuarioPrincipio();
 				ifs.close();
 
 			}
 
 			else if ((nom == nomAu && cont != conAu)){
 					cout << "Contrasenya incorrecta" << endl;
-					usuarioPrincipio();
+					//usuarioPrincipio();
 					ifs.close();
 
 				}
@@ -238,7 +156,7 @@ void menuUsuario(){
 	}break;
 	case 6:{
 		cout<<"Cerrando sesion..."<<endl;
-		menuInicio();
+		//menuInicio();
 	}break;
 	default:{
 		cout<<"Introduzca un valor correcto"<<endl;
@@ -361,127 +279,6 @@ void caso4Usuario(){
 		}
 		sqlite3_close(db);
 		menuUsuario();
-//
-//		do{
-//			cout<<"1. 1 Habitacion"<<endl;
-//			cout<<"2. 2 Habitaciones"<<endl;
-//			cout<<"3. 3 Habitaciones"<<endl;
-//			cin>>opcion1;
-//		}while(opcion1!=1 && opcion1!=2&&opcion1!=3);
-//		switch(opcion1){
-//		case 1:{//1 habitacion
-//			rc = sqlite3_open("hotelandia_final.s3db", &db);
-//			char id_hab[]="1";
-//			char sql1[] = "INSERT INTO RESERVA_TIENE_HABITACIONES VALUES(";
-//			char con11[]=",", con12[]=")", con13[]="";
-//			strcat(sql1,id_res);
-//			strcat(sql1,con11);
-//			strcat(sql1,id_hab);
-//			strcat(sql1,con12);
-//			strcat(sql1,con13);
-//			/* Execute SQL statement */
-//			rc = sqlite3_exec(db, sql1, callback, (void*) data, &zErrMsg);
-//			if (rc != SQLITE_OK) {
-//				fprintf(stderr, "SQL error: %s\n", zErrMsg);
-//				sqlite3_free(zErrMsg);
-//			} else {
-//				fprintf(stdout, "Reserva de la habitacion\n");
-//			}
-//			sqlite3_close(db);
-//			menuUsuario();
-//		}break;
-//		case 2:{//2 Habitaciones
-//			rc = sqlite3_open("hotelandia_final.s3db", &db);
-//			char id_hab1[]="2", id_hab2[]="6";
-//			char sql1[] = "INSERT INTO RESERVA_TIENE_HABITACIONES VALUES(";
-//			char con11[]=",", con12[]=")", con13[]="";
-//			strcat(sql1,id_res);
-//			strcat(sql1,con11);
-//			strcat(sql1,id_hab1);
-//			strcat(sql1,con12);
-//			strcat(sql1,con13);
-//			/* Execute SQL statement */
-//			rc = sqlite3_exec(db, sql1, callback, (void*) data, &zErrMsg);
-//			if (rc != SQLITE_OK) {
-//				fprintf(stderr, "SQL error: %s\n", zErrMsg);
-//				sqlite3_free(zErrMsg);
-//			} else {
-//				fprintf(stdout, "Reserva de la 1 habitacion\n");
-//			}sqlite3_close(db);
-//			rc = sqlite3_open("hotelandia_final.s3db", &db);
-//			char sql2[] = "INSERT INTO RESERVA_TIENE_HABITACIONES VALUES(";
-//			char con14[]=",", con15[]=")", con16[]="";
-//			strcat(sql1,id_res);
-//			strcat(sql1,con14);
-//			strcat(sql1,id_hab2);
-//			strcat(sql1,con15);
-//			strcat(sql1,con16);
-//			/* Execute SQL statement */
-//			rc = sqlite3_exec(db, sql2, callback, (void*) data, &zErrMsg);
-//			if (rc != SQLITE_OK) {
-//				fprintf(stderr, "SQL error: %s\n", zErrMsg);
-//				sqlite3_free(zErrMsg);
-//			} else {
-//				fprintf(stdout, "Reserva de la 2 habitacion\n");
-//			}sqlite3_close(db);
-//
-//			menuUsuario();
-//		}break;
-//		case 3:{//3 Habitaciones
-//			rc = sqlite3_open("hotelandia_final.s3db", &db);
-//			char id_hab1[]="3", id_hab2[]="5", id_hab3[]="7";
-//			char sql1[] = "INSERT INTO RESERVA_TIENE_HABITACIONES VALUES(";
-//			char con11[]=",", con12[]=")", con13[]="";
-//			strcat(sql1,id_res);
-//			strcat(sql1,con11);
-//			strcat(sql1,id_hab1);
-//			strcat(sql1,con12);
-//			strcat(sql1,con13);
-//			/* Execute SQL statement */
-//			rc = sqlite3_exec(db, sql1, callback, (void*) data, &zErrMsg);
-//			if (rc != SQLITE_OK) {
-//				fprintf(stderr, "SQL error: %s\n", zErrMsg);
-//				sqlite3_free(zErrMsg);
-//			} else {
-//				fprintf(stdout, "Reserva de la 1 habitacion\n");
-//			}	sqlite3_close(db);
-//			rc = sqlite3_open("hotelandia_final.s3db", &db);
-//			char sql3[] = "INSERT INTO RESERVA_TIENE_HABITACIONES VALUES(";
-//			char con17[]=",", con18[]=")", con19[]="";
-//			strcat(sql1,id_res);
-//			strcat(sql1,con17);
-//			strcat(sql1,id_hab3);
-//			strcat(sql1,con18);
-//			strcat(sql1,con19);
-//			/* Execute SQL statement */
-//			rc = sqlite3_exec(db, sql3, callback, (void*) data, &zErrMsg);
-//			if (rc != SQLITE_OK) {
-//				fprintf(stderr, "SQL error: %s\n", zErrMsg);
-//				sqlite3_free(zErrMsg);
-//			} else {
-//				fprintf(stdout, "Reserva de la 2 habitacion\n");
-//			}	sqlite3_close(db);
-//			rc = sqlite3_open("hotelandia_final.s3db", &db);
-//			char sql2[] = "INSERT INTO RESERVA_TIENE_HABITACIONES VALUES(";
-//			char con14[]=",", con15[]=")", con16[]="";
-//			strcat(sql1,id_res);
-//			strcat(sql1,con14);
-//			strcat(sql1,id_hab2);
-//			strcat(sql1,con15);
-//			strcat(sql1,con16);
-//			/* Execute SQL statement */
-//			rc = sqlite3_exec(db, sql2, callback, (void*) data, &zErrMsg);
-//			if (rc != SQLITE_OK) {
-//				fprintf(stderr, "SQL error: %s\n", zErrMsg);
-//				sqlite3_free(zErrMsg);
-//			} else {
-//				fprintf(stdout, "Reserva de la 3 habitacion\n");
-//			}
-//			sqlite3_close(db);
-//			menuUsuario();
-//		}break;
-//		}
-
 	}break;
 	case 2:{//Iberosar
 		cout << "Ingrese el id de la reserva que desea anyadir: ";
@@ -523,127 +320,6 @@ void caso4Usuario(){
 		}
 		sqlite3_close(db);
 		menuUsuario();
-//		do{
-//			cout<<"1. 1 Habitacion"<<endl;
-//			cout<<"2. 2 Habitaciones"<<endl;
-//			cout<<"3. 3 Habitaciones"<<endl;
-//			cin>>opcion1;
-//		}while(opcion1!=1 && opcion1!=2&&opcion1!=3);
-//		switch(opcion1){
-//		case 1:{//1 habitacion
-//			rc = sqlite3_open("hotelandia_final.s3db", &db);
-//			char id_hab[]="13";
-//			char sql1[] = "INSERT INTO RESERVA_TIENE_HABITACIONES VALUES(";
-//			char con11[]=",", con12[]=")", con13[]="";
-//			strcat(sql1,id_res);
-//			strcat(sql1,con11);
-//			strcat(sql1,id_hab);
-//			strcat(sql1,con12);
-//			strcat(sql1,con13);
-//			/* Execute SQL statement */
-//			rc = sqlite3_exec(db, sql1, callback, (void*) data, &zErrMsg);
-//			if (rc != SQLITE_OK) {
-//				fprintf(stderr, "SQL error: %s\n", zErrMsg);
-//				sqlite3_free(zErrMsg);
-//			} else {
-//				fprintf(stdout, "Reserva de la habitacion\n");
-//			}
-//			sqlite3_close(db);
-//					menuUsuario();
-//		}break;
-//		case 2:{//2 habitaciones
-//			rc = sqlite3_open("hotelandia_final.s3db", &db);
-//			char id_hab1[]="9", id_hab2[]="10";
-//			char sql1[] = "INSERT INTO RESERVA_TIENE_HABITACIONES VALUES(";
-//			char con11[]=",", con12[]=")", con13[]="";
-//			strcat(sql1,id_res);
-//			strcat(sql1,con11);
-//			strcat(sql1,id_hab1);
-//			strcat(sql1,con12);
-//			strcat(sql1,con13);
-//			/* Execute SQL statement */
-//			rc = sqlite3_exec(db, sql1, callback, (void*) data, &zErrMsg);
-//			if (rc != SQLITE_OK) {
-//				fprintf(stderr, "SQL error: %s\n", zErrMsg);
-//				sqlite3_free(zErrMsg);
-//			} else {
-//				fprintf(stdout, "Reserva de la 1 habitacion\n");
-//			}sqlite3_close(db);
-//			rc = sqlite3_open("hotelandia_final.s3db", &db);
-//			char sql2[] = "INSERT INTO RESERVA_TIENE_HABITACIONES VALUES(";
-//			char con14[]=",", con15[]=")", con16[]="";
-//			strcat(sql1,id_res);
-//			strcat(sql1,con14);
-//			strcat(sql1,id_hab2);
-//			strcat(sql1,con15);
-//			strcat(sql1,con16);
-//			/* Execute SQL statement */
-//			rc = sqlite3_exec(db, sql2, callback, (void*) data, &zErrMsg);
-//			if (rc != SQLITE_OK) {
-//				fprintf(stderr, "SQL error: %s\n", zErrMsg);
-//				sqlite3_free(zErrMsg);
-//			} else {
-//				fprintf(stdout, "Reserva de la 2 habitacion\n");
-//			}
-//			sqlite3_close(db);
-//			menuUsuario();
-//
-//		}break;
-//		case 3:{//3 habitaciones
-//			rc = sqlite3_open("hotelandia_final.s3db", &db);
-//			char id_hab1[]="4", id_hab2[]="7", id_hab3[]="12";
-//			char sql1[] = "INSERT INTO RESERVA_TIENE_HABITACIONES VALUES(";
-//			char con11[]=",", con12[]=")", con13[]="";
-//			strcat(sql1,id_res);
-//			strcat(sql1,con11);
-//			strcat(sql1,id_hab1);
-//			strcat(sql1,con12);
-//			strcat(sql1,con13);
-//			/* Execute SQL statement */
-//			rc = sqlite3_exec(db, sql1, callback, (void*) data, &zErrMsg);
-//			if (rc != SQLITE_OK) {
-//				fprintf(stderr, "SQL error: %s\n", zErrMsg);
-//				sqlite3_free(zErrMsg);
-//			} else {
-//				fprintf(stdout, "Reserva de la 1 habitacion\n");
-//			}sqlite3_close(db);
-//			rc = sqlite3_open("hotelandia_final.s3db", &db);
-//			char sql3[] = "INSERT INTO RESERVA_TIENE_HABITACIONES VALUES(";
-//			char con17[]=",", con18[]=")", con19[]="";
-//			strcat(sql1,id_res);
-//			strcat(sql1,con17);
-//			strcat(sql1,id_hab3);
-//			strcat(sql1,con18);
-//			strcat(sql1,con19);
-//			/* Execute SQL statement */
-//			rc = sqlite3_exec(db, sql3, callback, (void*) data, &zErrMsg);
-//			if (rc != SQLITE_OK) {
-//				fprintf(stderr, "SQL error: %s\n", zErrMsg);
-//				sqlite3_free(zErrMsg);
-//			} else {
-//				fprintf(stdout, "Reserva de la 2 habitacion\n");
-//			}sqlite3_close(db);
-//			rc = sqlite3_open("hotelandia_final.s3db", &db);
-//			char sql2[] = "INSERT INTO RESERVA_TIENE_HABITACIONES VALUES(";
-//			char con14[]=",", con15[]=")", con16[]="";
-//			strcat(sql1,id_res);
-//			strcat(sql1,con14);
-//			strcat(sql1,id_hab2);
-//			strcat(sql1,con15);
-//			strcat(sql1,con16);
-//			/* Execute SQL statement */
-//			rc = sqlite3_exec(db, sql2, callback, (void*) data, &zErrMsg);
-//			if (rc != SQLITE_OK) {
-//				fprintf(stderr, "SQL error: %s\n", zErrMsg);
-//				sqlite3_free(zErrMsg);
-//			} else {
-//				fprintf(stdout, "Reserva de la 3 habitacion\n");
-//			}
-//			sqlite3_close(db);
-//			menuUsuario();
-//		}break;
-//		}
-
 	}break;
 	case 3:{//Barcelo
 		cout << "Ingrese el id de la reserva que desea anyadir: ";
@@ -685,125 +361,6 @@ void caso4Usuario(){
 		}sqlite3_close(db);
 		menuUsuario();
 
-//		do{
-//			cout<<"1. 1 Habitacion"<<endl;
-//			cout<<"2. 2 Habitaciones"<<endl;
-//			cout<<"3. 3 Habitaciones"<<endl;
-//			cin>>opcion1;
-//		}while(opcion1!=1 && opcion1!=2&&opcion1!=3);
-//		switch(opcion1){
-//		case 1:{//1 Habitacion
-//			rc = sqlite3_open("hotelandia_final.s3db", &db);
-//			char id_hab[]="20";
-//			char sql1[] = "INSERT INTO RESERVA_TIENE_HABITACIONES VALUES(";//Repetir este proceso * numero de habitas
-//			char con11[]=",", con12[]=")", con13[]="";
-//			strcat(sql1,id_res);
-//			strcat(sql1,con11);
-//			strcat(sql1,id_hab);
-//			strcat(sql1,con12);
-//			strcat(sql1,con13);
-//			/* Execute SQL statement */
-//			rc = sqlite3_exec(db, sql1, callback, (void*) data, &zErrMsg);
-//			if (rc != SQLITE_OK) {
-//				fprintf(stderr, "SQL error: %s\n", zErrMsg);
-//				sqlite3_free(zErrMsg);
-//			} else {
-//				fprintf(stdout, "Reserva de la habitacion\n");
-//			}
-//			sqlite3_close(db);
-//			menuUsuario();
-//		}break;
-//		case 2:{
-//			rc = sqlite3_open("hotelandia_final.s3db", &db);
-//			char id_hab1[]="16", id_hab2[]="17";
-//			char sql1[] = "INSERT INTO RESERVA_TIENE_HABITACIONES VALUES(";
-//			char con11[]=",", con12[]=")", con13[]="";
-//			strcat(sql1,id_res);
-//			strcat(sql1,con11);
-//			strcat(sql1,id_hab1);
-//			strcat(sql1,con12);
-//			strcat(sql1,con13);
-//			/* Execute SQL statement */
-//			rc = sqlite3_exec(db, sql1, callback, (void*) data, &zErrMsg);
-//			if (rc != SQLITE_OK) {
-//				fprintf(stderr, "SQL error: %s\n", zErrMsg);
-//				sqlite3_free(zErrMsg);
-//			} else {
-//				fprintf(stdout, "Reserva de la 1 habitacion\n");
-//			}sqlite3_close(db);
-//			rc = sqlite3_open("hotelandia_final.s3db", &db);
-//			char sql2[] = "INSERT INTO RESERVA_TIENE_HABITACIONES VALUES(";
-//			char con14[]=",", con15[]=")", con16[]="";
-//			strcat(sql1,id_res);
-//			strcat(sql1,con14);
-//			strcat(sql1,id_hab2);
-//			strcat(sql1,con15);
-//			strcat(sql1,con16);
-//			/* Execute SQL statement */
-//			rc = sqlite3_exec(db, sql2, callback, (void*) data, &zErrMsg);
-//			if (rc != SQLITE_OK) {
-//				fprintf(stderr, "SQL error: %s\n", zErrMsg);
-//				sqlite3_free(zErrMsg);
-//			} else {
-//				fprintf(stdout, "Reserva de la 2 habitacion\n");
-//			}
-//			sqlite3_close(db);
-//			menuUsuario();
-//		}break;
-//		case 3:{
-//			rc = sqlite3_open("hotelandia_final.s3db", &db);
-//			char id_hab1[]="19", id_hab2[]="17", id_hab3[]="15";
-//			char sql1[] = "INSERT INTO RESERVA_TIENE_HABITACIONES VALUES(";
-//			char con11[]=",", con12[]=")", con13[]="";
-//			strcat(sql1,id_res);
-//			strcat(sql1,con11);
-//			strcat(sql1,id_hab1);
-//			strcat(sql1,con12);
-//			strcat(sql1,con13);
-//			/* Execute SQL statement */
-//			rc = sqlite3_exec(db, sql1, callback, (void*) data, &zErrMsg);
-//			if (rc != SQLITE_OK) {
-//				fprintf(stderr, "SQL error: %s\n", zErrMsg);
-//				sqlite3_free(zErrMsg);
-//			} else {
-//				fprintf(stdout, "Reserva de la 1 habitacion\n");
-//			}sqlite3_close(db);
-//			rc = sqlite3_open("hotelandia_final.s3db", &db);
-//			char sql3[] = "INSERT INTO RESERVA_TIENE_HABITACIONES VALUES(";
-//			char con17[]=",", con18[]=")", con19[]="";
-//			strcat(sql1,id_res);
-//			strcat(sql1,con17);
-//			strcat(sql1,id_hab3);
-//			strcat(sql1,con18);
-//			strcat(sql1,con19);
-//			/* Execute SQL statement */
-//			rc = sqlite3_exec(db, sql3, callback, (void*) data, &zErrMsg);
-//			if (rc != SQLITE_OK) {
-//				fprintf(stderr, "SQL error: %s\n", zErrMsg);
-//				sqlite3_free(zErrMsg);
-//			} else {
-//				fprintf(stdout, "Reserva de la 2 habitacion\n");
-//			}sqlite3_close(db);
-//			rc = sqlite3_open("hotelandia_final.s3db", &db);
-//			char sql2[] = "INSERT INTO RESERVA_TIENE_HABITACIONES VALUES(";
-//			char con14[]=",", con15[]=")", con16[]="";
-//			strcat(sql1,id_res);
-//			strcat(sql1,con14);
-//			strcat(sql1,id_hab2);
-//			strcat(sql1,con15);
-//			strcat(sql1,con16);
-//			/* Execute SQL statement */
-//			rc = sqlite3_exec(db, sql2, callback, (void*) data, &zErrMsg);
-//			if (rc != SQLITE_OK) {
-//				fprintf(stderr, "SQL error: %s\n", zErrMsg);
-//				sqlite3_free(zErrMsg);
-//			} else {
-//				fprintf(stdout, "Reserva de la 3 habitacion\n");
-//			}
-//			sqlite3_close(db);
-//			menuUsuario();
-//		}break;
-//		}
 
 	}break;
 	case 4:{//Nh
@@ -846,125 +403,6 @@ void caso4Usuario(){
 		}sqlite3_close(db);
 		menuUsuario();
 
-//		do{
-//			cout<<"1. 1 Habitacion"<<endl;
-//			cout<<"2. 2 Habitaciones"<<endl;
-//			cout<<"3. 3 Habitaciones"<<endl;
-//			cin>>opcion1;
-//		}while(opcion1!=1 && opcion1!=2&&opcion1!=3);
-//		switch(opcion1){
-//		rc = sqlite3_open("hotelandia_final.s3db", &db);
-//		case 1:{//1 Habitacion
-//			char id_hab[]="12";
-//			char sql1[] = "INSERT INTO RESERVA_TIENE_HABITACIONES VALUES(";//Repetir este proceso * numero de habitas
-//			char con11[]=",", con12[]=")", con13[]="";
-//			strcat(sql1,id_res);
-//			strcat(sql1,con11);
-//			strcat(sql1,id_hab);
-//			strcat(sql1,con12);
-//			strcat(sql1,con13);
-//			/* Execute SQL statement */
-//			rc = sqlite3_exec(db, sql1, callback, (void*) data, &zErrMsg);
-//			if (rc != SQLITE_OK) {
-//				fprintf(stderr, "SQL error: %s\n", zErrMsg);
-//				sqlite3_free(zErrMsg);
-//			} else {
-//				fprintf(stdout, "Reserva realizada\n");
-//			}
-//			sqlite3_close(db);
-//			menuUsuario();
-//		}break;
-//		case 2:{//2 habitaciones
-//			rc = sqlite3_open("hotelandia_final.s3db", &db);
-//			char id_hab1[]="11", id_hab2[]="9";
-//			char sql1[] = "INSERT INTO RESERVA_TIENE_HABITACIONES VALUES(";
-//			char con11[]=",", con12[]=")", con13[]="";
-//			strcat(sql1,id_res);
-//			strcat(sql1,con11);
-//			strcat(sql1,id_hab1);
-//			strcat(sql1,con12);
-//			strcat(sql1,con13);
-//			/* Execute SQL statement */
-//			rc = sqlite3_exec(db, sql1, callback, (void*) data, &zErrMsg);
-//			if (rc != SQLITE_OK) {
-//				fprintf(stderr, "SQL error: %s\n", zErrMsg);
-//				sqlite3_free(zErrMsg);
-//			} else {
-//				fprintf(stdout, "Reserva de la 1 habitacion\n");
-//			}sqlite3_close(db);
-//			rc = sqlite3_open("hotelandia_final.s3db", &db);
-//			char sql2[] = "INSERT INTO RESERVA_TIENE_HABITACIONES VALUES(";
-//			char con14[]=",", con15[]=")", con16[]="";
-//			strcat(sql1,id_res);
-//			strcat(sql1,con14);
-//			strcat(sql1,id_hab2);
-//			strcat(sql1,con15);
-//			strcat(sql1,con16);
-//			/* Execute SQL statement */
-//			rc = sqlite3_exec(db, sql2, callback, (void*) data, &zErrMsg);
-//			if (rc != SQLITE_OK) {
-//				fprintf(stderr, "SQL error: %s\n", zErrMsg);
-//				sqlite3_free(zErrMsg);
-//			} else {
-//				fprintf(stdout, "Reserva de la 2 habitacion\n");
-//			}
-//			sqlite3_close(db);
-//			menuUsuario();
-//		}break;
-//		case 3:{//3 Habitaciones
-//			rc = sqlite3_open("hotelandia_final.s3db", &db);
-//			char id_hab1[]="8", id_hab2[]="6", id_hab3[]="15";
-//			char sql1[] = "INSERT INTO RESERVA_TIENE_HABITACIONES VALUES(";
-//			char con11[]=",", con12[]=")", con13[]="";
-//			strcat(sql1,id_res);
-//			strcat(sql1,con11);
-//			strcat(sql1,id_hab1);
-//			strcat(sql1,con12);
-//			strcat(sql1,con13);
-//			/* Execute SQL statement */
-//			rc = sqlite3_exec(db, sql1, callback, (void*) data, &zErrMsg);
-//			if (rc != SQLITE_OK) {
-//				fprintf(stderr, "SQL error: %s\n", zErrMsg);
-//				sqlite3_free(zErrMsg);
-//			} else {
-//				fprintf(stdout, "Reserva de la 1 habitacion\n");
-//			}sqlite3_close(db);
-//			rc = sqlite3_open("hotelandia_final.s3db", &db);
-//			char sql3[] = "INSERT INTO RESERVA_TIENE_HABITACIONES VALUES(";
-//			char con17[]=",", con18[]=")", con19[]="";
-//			strcat(sql1,id_res);
-//			strcat(sql1,con17);
-//			strcat(sql1,id_hab3);
-//			strcat(sql1,con18);
-//			strcat(sql1,con19);
-//			/* Execute SQL statement */
-//			rc = sqlite3_exec(db, sql3, callback, (void*) data, &zErrMsg);
-//			if (rc != SQLITE_OK) {
-//				fprintf(stderr, "SQL error: %s\n", zErrMsg);
-//				sqlite3_free(zErrMsg);
-//			} else {
-//				fprintf(stdout, "Reserva de la 2 habitacion\n");
-//			}sqlite3_close(db);
-//			rc = sqlite3_open("hotelandia_final.s3db", &db);
-//			char sql2[] = "INSERT INTO RESERVA_TIENE_HABITACIONES VALUES(";
-//			char con14[]=",", con15[]=")", con16[]="";
-//			strcat(sql1,id_res);
-//			strcat(sql1,con14);
-//			strcat(sql1,id_hab2);
-//			strcat(sql1,con15);
-//			strcat(sql1,con16);
-//			/* Execute SQL statement */
-//			rc = sqlite3_exec(db, sql2, callback, (void*) data, &zErrMsg);
-//			if (rc != SQLITE_OK) {
-//				fprintf(stderr, "SQL error: %s\n", zErrMsg);
-//				sqlite3_free(zErrMsg);
-//			} else {
-//				fprintf(stdout, "Reserva de la 3 habitacion\n");
-//			}
-//			sqlite3_close(db);
-//			menuUsuario();
-//		}break;
-//		}
 
 	}break;
 	case 5:{//EuroStar
@@ -1006,126 +444,6 @@ void caso4Usuario(){
 			fprintf(stdout, "Reserva realizada:\n");
 		}sqlite3_close(db);
 		menuUsuario();
-
-//		do{
-//			cout<<"1. 1 Habitacion"<<endl;
-//			cout<<"2. 2 Habitaciones"<<endl;
-//			cout<<"3. 3 Habitaciones"<<endl;
-//			cin>>opcion1;
-//		}while(opcion1!=1 && opcion1!=2&&opcion1!=3);
-//		switch(opcion1){
-//		case 1:{//1 habitacion
-//			rc = sqlite3_open("hotelandia_final.s3db", &db);
-//			char id_hab[]="10";
-//			char sql1[] = "INSERT INTO RESERVA_TIENE_HABITACIONES VALUES(";//Repetir este proceso * numero de habitas
-//			char con11[]=",", con12[]=")", con13[]="";
-//			strcat(sql1,id_res);
-//			strcat(sql1,con11);
-//			strcat(sql1,id_hab);
-//			strcat(sql1,con12);
-//			strcat(sql1,con13);
-//			/* Execute SQL statement */
-//			rc = sqlite3_exec(db, sql1, callback, (void*) data, &zErrMsg);
-//			if (rc != SQLITE_OK) {
-//				fprintf(stderr, "SQL error: %s\n", zErrMsg);
-//				sqlite3_free(zErrMsg);
-//			} else {
-//				fprintf(stdout, "Reserva realizada\n");
-//			}
-//			sqlite3_close(db);
-//			menuUsuario();
-//		}break;
-//		case 2:{//2 habitaciones
-//			char id_hab1[]="7", id_hab2[]="2";
-//			rc = sqlite3_open("hotelandia_final.s3db", &db);
-//			char sql1[] = "INSERT INTO RESERVA_TIENE_HABITACIONES VALUES(";
-//			char con11[]=",", con12[]=")", con13[]="";
-//			strcat(sql1,id_res);
-//			strcat(sql1,con11);
-//			strcat(sql1,id_hab1);
-//			strcat(sql1,con12);
-//			strcat(sql1,con13);
-//			/* Execute SQL statement */
-//			rc = sqlite3_exec(db, sql1, callback, (void*) data, &zErrMsg);
-//			if (rc != SQLITE_OK) {
-//				fprintf(stderr, "SQL error: %s\n", zErrMsg);
-//				sqlite3_free(zErrMsg);
-//			} else {
-//				fprintf(stdout, "Reserva de la 1 habitacion\n");
-//			}sqlite3_close(db);
-//			rc = sqlite3_open("hotelandia_final.s3db", &db);
-//			char sql2[] = "INSERT INTO RESERVA_TIENE_HABITACIONES VALUES(";
-//			char con14[]=",", con15[]=")", con16[]="";
-//			strcat(sql1,id_res);
-//			strcat(sql1,con14);
-//			strcat(sql1,id_hab2);
-//			strcat(sql1,con15);
-//			strcat(sql1,con16);
-//			/* Execute SQL statement */
-//			rc = sqlite3_exec(db, sql2, callback, (void*) data, &zErrMsg);
-//			if (rc != SQLITE_OK) {
-//				fprintf(stderr, "SQL error: %s\n", zErrMsg);
-//				sqlite3_free(zErrMsg);
-//			} else {
-//				fprintf(stdout, "Reserva de la 2 habitacion\n");
-//			}
-//			sqlite3_close(db);
-//			menuUsuario();
-//		}break;
-//		case 3:{//3 habitaciones
-//			rc = sqlite3_open("hotelandia_final.s3db", &db);
-//			char id_hab1[]="9", id_hab2[]="5", id_hab3[]="8";
-//			char sql1[] = "INSERT INTO RESERVA_TIENE_HABITACIONES VALUES(";
-//			char con11[]=",", con12[]=")", con13[]="";
-//			strcat(sql1,id_res);
-//			strcat(sql1,con11);
-//			strcat(sql1,id_hab1);
-//			strcat(sql1,con12);
-//			strcat(sql1,con13);
-//			/* Execute SQL statement */
-//			rc = sqlite3_exec(db, sql1, callback, (void*) data, &zErrMsg);
-//			if (rc != SQLITE_OK) {
-//				fprintf(stderr, "SQL error: %s\n", zErrMsg);
-//				sqlite3_free(zErrMsg);
-//			} else {
-//				fprintf(stdout, "Reserva de la 1 habitacion\n");
-//			}sqlite3_close(db);
-//			rc = sqlite3_open("hotelandia_final.s3db", &db);
-//			char sql3[] = "INSERT INTO RESERVA_TIENE_HABITACIONES VALUES(";
-//			char con17[]=",", con18[]=")", con19[]="";
-//			strcat(sql1,id_res);
-//			strcat(sql1,con17);
-//			strcat(sql1,id_hab3);
-//			strcat(sql1,con18);
-//			strcat(sql1,con19);
-//			/* Execute SQL statement */
-//			rc = sqlite3_exec(db, sql3, callback, (void*) data, &zErrMsg);
-//			if (rc != SQLITE_OK) {
-//				fprintf(stderr, "SQL error: %s\n", zErrMsg);
-//				sqlite3_free(zErrMsg);
-//			} else {
-//				fprintf(stdout, "Reserva de la 2 habitacion\n");
-//			}sqlite3_close(db);
-//			rc = sqlite3_open("hotelandia_final.s3db", &db);
-//			char sql2[] = "INSERT INTO RESERVA_TIENE_HABITACIONES VALUES(";
-//			char con14[]=",", con15[]=")", con16[]="";
-//			strcat(sql1,id_res);
-//			strcat(sql1,con14);
-//			strcat(sql1,id_hab2);
-//			strcat(sql1,con15);
-//			strcat(sql1,con16);
-//			/* Execute SQL statement */
-//			rc = sqlite3_exec(db, sql2, callback, (void*) data, &zErrMsg);
-//			if (rc != SQLITE_OK) {
-//				fprintf(stderr, "SQL error: %s\n", zErrMsg);
-//				sqlite3_free(zErrMsg);
-//			} else {
-//				fprintf(stdout, "Reserva de la 3 habitacion\n");
-//			}
-//			sqlite3_close(db);
-//			menuUsuario();
-//		}break;
-//		}
 
 	}break;
 
@@ -1199,108 +517,6 @@ void caso5Usuario(){
 								menuUsuario();
 }
 
-void administradorPrincipio(){
-	int opcion;
-	do{
-		cout<<"1. Registrarse"<<endl;
-		cout<<"2. Iniciar sesion"<<endl;
-		cout<<"3. Volver atras"<<endl;
-		cin>>opcion;
-	}while(opcion != 1 && opcion != 2 && opcion != 3);
-	switch(opcion){
-	case 1:{
-		registroAdministrador();
-	}break;
-	case 2:{
-		inicioAdministrador();
-	}break;
-	case 3:{
-		menuInicio();
-	}break;
-	default:{
-		cout<<"Introduzca un valor correcto"<<endl;
-		administradorPrincipio();
-	}
-	}
-}
-void registroAdministrador(){
-	ifstream ifs;
-	ifs.open("adminsGuardar.txt", ios::in);
-	string nom, cont, nomAu, conAu, line;
-	bool en = false;
-	cout << "Ingrese el nombre del admin: " << endl;
-	cin >> nomAu;
-	cout << "Ingrese la contrasenya del admin: " << endl;
-	cin >> conAu;
-	ifs >> nom;
-	while (!ifs.eof() && !en) {
-		ifs >> cont;
-		getline(ifs,line);
-
-		cout << line<< '\n';
-
-		if (nom == nomAu) {
-			cout << "El admin introducido ya existe! " << nomAu<< endl;
-			en = true;
-			administradorPrincipio();
-			ifs.close();
-
-		}if(nom != nomAu){
-			ifs.close();
-			ofstream ofs("adminsGuardar.txt", ios::app);
-			ofs << nomAu << " " << conAu << endl;
-			ofs.close();
-			cout << "Admin creado correctamente" << endl;
-			administradorPrincipio();
-		}
-	}ifs.close();
-
-}
-void inicioAdministrador(){
-
-	ifstream ifs;
-		ifs.open("adminsGuardar.txt", ios::in);
-		string nom, cont, nomAu, conAu;
-		bool en = false;
-		cout << "Ingrese el nombre del administrador: " << endl;
-		cin >> nomAu;
-		cout << "Ingrese la contra del administrador: " << endl;
-		cin >> conAu;
-
-		while (!ifs.eof() && !en) {
-			ifs >> nom;
-			ifs >> cont;
-
-			//cout << nom<<cont << endl;
-
-
-			if (nom == nomAu && cont == conAu) {
-				cout << "Administrador y contrasenya correctos. Bienvenido " << nomAu << endl;
-				en = true;
-				//parte del usuario
-				system("cls");
-				cout << "---MODO ADMINISTRADOR---" << endl;
-				menuAdministrador();
-				ifs.close();
-			}if(nom != nomAu && ifs.eof()){
-				cout<<"El administrador no existe!"<<endl;
-				administradorPrincipio();
-				ifs.close();
-
-			}
-
-			else if ((nom == nomAu && cont != conAu) || (nom != nomAu && cont == conAu)){
-					cout << "Contrasenya incorrecta" << endl;
-					administradorPrincipio();
-					ifs.close();
-
-				}
-				//ifs >> nom;
-
-			}
-		ifs.close();
-
-}
 void menuAdministrador(){
 
 	int opcion;
@@ -1350,7 +566,7 @@ void menuAdministrador(){
 	}break;
 	case 10:{
 		cout<<"Cerrando sesion..."<<endl;
-		menuInicio();
+		//menuInicio();
 	}break;
 	default:{
 		cout<<"Introduzca un valor correcto"<<endl;

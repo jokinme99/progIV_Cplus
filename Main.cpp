@@ -169,6 +169,15 @@ void inicio(){
 		cout<<"----HOTELANDIA------"<<endl;
 		ifstream ifs;
 		importarDatosUsuarios();
+		////////////////////////////////////////////
+		// GENERAR UN OBJETO USUARIOS Y RELLENARLA CON UNA FUNCION DE LA CLASE
+		// GENERAR UN OBJETO RESERVAS Y RELLENARLO CON LA BASE DE DATOS
+		// GENERAR UN OBJETO HABITACIONES Y RELLENARLO CON LA BASE DE DATOS
+		// GENERAR UN OBJETO TRABAJADORES Y RELLENARLO DE LA BASE DE DATOS(?)
+		// HOTEL(?)
+		///////////////////////////////////////////////
+
+
 		ifs.open("../progIV_Cplus/Usuarios.txt", ios::in);
 
 //		cout<<ifs.tellg()<<endl;
@@ -228,10 +237,10 @@ void inicio(){
 
 				if (strcmp(cNum, "usuario")==0) {
 					cout << "---MODO USUARIO---" << endl;
-					menuUsuario();
+					menuUsuario();//HAY QUE AÑADIR COMO PARAMETRO LA DIRECCION DEL USUARIO QUE VA A ACCEDER AL MENÚ
 				}else{
 					cout << "---MODO ADMINISTRADOR---" << endl;
-					menuAdministrador();
+					menuAdministrador();//HAY QUE AÑADIR COMO PARAMETRO LA DIRECCION DEL USUARIO QUE VA A ACCEDER AL MENÚ
 				}
 
 
@@ -263,7 +272,7 @@ void menuUsuario(){
 	cout<<"Elije las siguientes opciones"<<endl;
 	cout<<"1. Ver hoteles"<<endl;
 	cout<<"2. Ver habitaciones"<<endl;
-	cout<<"3. Ver reserva"<<endl;//Si no tiene mensaje por pantalla
+	cout<<"3. Ver reservas"<<endl;//Si no tiene mensaje por pantalla
 	cout<<"4. Hacer reserva"<<endl;//Solo a su nombre
 	cout<<"5. Eliminar reserva"<<endl;
 	cout<<"6. Volver al menu principal"<<endl;
@@ -664,7 +673,8 @@ void menuAdministrador(){
 	cout<<"7. Ver trabajadores"<<endl;
 	cout<<"8. Crear trabajadores"<<endl;
 	cout<<"9. Eliminar trabajadores"<<endl;
-	cout<<"10. Volver al menu principal"<<endl;
+	cout<<"10. Listar usuarios"<<endl;
+	cout<<"11. Volver al menu principal"<<endl;
 	cin>>opcion;
 	}while(opcion< 1 || opcion >10);
 	/* ABRIMOS BASE DE DATOS */
@@ -698,6 +708,9 @@ void menuAdministrador(){
 		caso9Admin();
 	}break;
 	case 10:{
+		caso9Admin();
+	}break;
+	case 11:{
 		cout<<"Cerrando sesion..."<<endl;
 		//menuInicio();
 	}break;

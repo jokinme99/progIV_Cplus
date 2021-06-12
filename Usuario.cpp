@@ -12,9 +12,6 @@
 #include "Usuario.h"
 using namespace std;
 
-
-	int Usuario::count = 0;
-
 	Usuario::Usuario(){
 		this->idUsuario = 0;
 		this->nombreUsuario = new char[1];
@@ -30,9 +27,9 @@ using namespace std;
 	}
 
 
-	Usuario::Usuario(int id, char* nombre, char* correo, char* contrasenya, int edad, Reserva* reservas, int nReservas){
+	Usuario::Usuario(int id, char* nombre, char* correo, char* contrasenya, int edad){
 
-		this->idUsuario = count++;
+		this->idUsuario = id;
 		this->nombreUsuario = (char*)malloc(sizeof(strlen(nombre))+1);
 		strcpy(this->nombreUsuario, nombre);
 		this->correoUsuario = (char*)malloc(sizeof(strlen(correo))+1);
@@ -40,16 +37,16 @@ using namespace std;
 		this->contrasenyaUsuario = (char*)malloc(sizeof(strlen(contrasenya))+1);
 		strcpy(this->contrasenyaUsuario,contrasenya);
 		this->edadUsuario=edad;
-		this->nReservas = nReservas;
-		for(int i = 0;i<nReservas;i++){
-			this->reservasUsuario[i] = reservas[i];
-		}
+		this->nReservas = 0;
+
+			this->reservasUsuario = NULL;
+
 
 
 	}
 	Usuario::Usuario(const Usuario& u){
 
-		this->idUsuario =count++;
+		this->idUsuario =u.idUsuario;
 		this->nombreUsuario=new char[strlen(u.nombreUsuario) +1];
 		strcpy(this->nombreUsuario, u.nombreUsuario);
 		this->correoUsuario=new char[strlen(u.correoUsuario) +1];
@@ -110,6 +107,11 @@ using namespace std;
 		this->edadUsuario = edad;
 	}
 
+	void verhoteles();
+	void listarHabitaciones();
+	void listarReservas();
+	void crearReserva();
+	void eliminarReserva();
 
 
 

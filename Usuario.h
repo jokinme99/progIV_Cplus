@@ -13,7 +13,7 @@
 class Usuario
 {
 private:
-	static int count;
+
 	int idUsuario;
 	char* nombreUsuario;
 	char* correoUsuario;
@@ -23,7 +23,7 @@ private:
 	int nReservas;//para medir cant. de reservas
 public:
 	Usuario();
-	Usuario(const int, char*, char*, char*, int,Reserva*,int);
+	Usuario(const int, char*, char*, char*, int);
 	Usuario(const Usuario&);
 	~Usuario();
 
@@ -41,7 +41,14 @@ public:
 	int getNReservas()const;
 	void setNReservas(int);
 
-	bool comprobarUsuario(char *usuario, char *contrasenya);
+	void verhoteles();
+	void listarHabitaciones();
+	void listarReservas();
+	void crearReserva();
+	void eliminarReserva();
+
+
+
 
 };
 

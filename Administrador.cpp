@@ -16,14 +16,34 @@ Administrador::Administrador():Usuario(){//METER DATOS RELEVANTES
 Administrador::Administrador(const Administrador& a):Usuario(a){
 
 }
-Administrador::~Administrador();
+Administrador::~Administrador(){
 
-void Administrador::crearHabitaciones();
-void Administrador::eliminarHabitaciones();
-void Administrador::listarReservas();//usar el objeto reservasy sobreescribir el metodo de la clase pafre
-void Administrador::crearReserva();//rellenarlo con datos de usuario
-void Administrador::eliminarReserva();//(?)
-void Administrador::listarTrabajadores();
-void Administrador::CrearTrabajadores();
-void Administrador::eliminarTrabajadores();
-void Administrador::listarUsuarios();
+}
+
+void Administrador::crearHabitaciones(){
+
+}
+void Administrador::eliminarHabitaciones(){
+
+}
+void Administrador::listarReservas(){
+	//usar el objeto reservasy sobreescribir el metodo de la clase pafre
+}
+void Administrador::crearReserva(){
+	//rellenarlo con datos de usuario
+}
+void Administrador::eliminarReserva(){
+	//(?)
+}
+void Administrador::listarTrabajadores(){
+
+}
+void Administrador::CrearTrabajadores(){
+
+}
+void Administrador::eliminarTrabajadores(){
+
+}
+void Administrador::listarUsuarios(){
+
+}

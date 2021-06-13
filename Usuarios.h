@@ -19,7 +19,7 @@ public:
 	Usuarios(const Usuarios&);
 	~Usuarios();
 
-
+	void anyadirUsuario();
 	void rellenarDeUsuarios();
 	void quitarUsuario();
 

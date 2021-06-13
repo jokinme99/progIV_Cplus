@@ -107,11 +107,26 @@ using namespace std;
 		this->edadUsuario = edad;
 	}
 
-	void verhoteles();
-	void listarHabitaciones();
-	void listarReservas();
-	void crearReserva();
-	void eliminarReserva();
+	void Usuario::verhoteles(){
+
+
+	}
+	void Usuario::listarHabitaciones(){
+
+
+	}
+	void Usuario::listarReservas(){
+
+
+	}
+	void Usuario::crearReserva(){
+
+
+	}
+	void Usuario::eliminarReserva(){
+
+
+	}
 
 
 

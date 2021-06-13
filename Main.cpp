@@ -21,13 +21,14 @@
 #include "Reserva.h"//Para acceder a los distintos metodos y poder ver/editar/eliminar datos de la base de datos
 #include "Trabajador.h"//Para acceder a los distintos metodos y poder ver/editar/eliminar datos de la base de datos
 #include "Usuario.h"//Para acceder a los distintos metodos y poder ver/editar/eliminar datos de la base de datos
-
+#include "Usuarios.h"
 
 using namespace std;
 
 
 void inicio();//inicio sesion usuario
-void importarDatos();
+void importarDatosUsuarios();
+void cargarDatosUsuarios();
 void menuUsuario();
 void caso1Usuario();
 void caso2Usuario();
@@ -47,7 +48,7 @@ void caso9Admin();
 
 void menuAdministrador();
 
-
+Usuarios *u;
 string nombreUser;
 string contraUser;//Para iniciar/registrar usuario
 sqlite3 *db;//objeto base de datos
@@ -67,6 +68,36 @@ static int callback(void *data, int argc, char **argv, char **azColName) {
 
 	printf("\n");
 	return 0;
+}
+int callbackUsuarios(void *data, int argc, char **argv, char **azColName) {
+	int i;
+	fprintf(stderr, "%s: \n", (const char*) data);
+
+	for (i = 0; i < argc; i++) {
+		printf("%s = %s\n", azColName[i], argv[i] ? argv[i] : "NULL");
+	}
+
+	printf("\n");
+	return 0;
+}
+
+
+void cargarDatosUsuarios(){
+
+	rc = sqlite3_open("hotelandia_final.s3db", &db);
+
+	char sql[] = "SELECT * from HABITACION";
+
+	/* Execute SQL statement */
+	rc = sqlite3_exec(db, sql, callbackUsuarios, (void*) data, &zErrMsg);
+	if (rc != SQLITE_OK) {
+		fprintf(stderr, "SQL error: %s\n", zErrMsg);
+		sqlite3_free(zErrMsg);
+	} else {
+		//fprintf(stdout, "Operation done successfully\n");
+	}
+	sqlite3_close(db);
+
 }
 void importarDatosUsuarios(){//IMPORTA LOS DATOS DE USUARIOS DE LOS FICHEROS A LA BASE DE DATOS
 
@@ -155,6 +186,7 @@ void importarDatosUsuarios(){//IMPORTA LOS DATOS DE USUARIOS DE LOS FICHEROS A L
 
 
 }
+
 
 
 int main(){

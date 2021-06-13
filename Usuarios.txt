@@ -5,3 +5,4 @@ Id:4;NombreUsuario:julian;contrasenya:maroto;correo:correo;Edad:239;TipoUsuario:
 Id:5;NombreUsuario:mario;contrasenya:contra;correo:correo@opendeusto.es;Edad:17;TipoUsuario:usuario;
 Id:6;NombreUsuario:f;contrasenya:f;correo:f;Edad:0;TipoUsuario:usuario;
 Id:7;NombreUsuario:se;contrasenya:d;correo:d;Edad:0;TipoUsuario:usuario;
+Id:8;NombreUsuario:suhar;contrasenya:suhar;correo:suhar;Edad:3;TipoUsuario:admin

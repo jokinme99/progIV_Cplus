@@ -8,19 +8,24 @@
 #ifndef HABITACION_H_
 #define HABITACION_H_
 
+#include "Hotel.h"
+
 class Habitacion
 {
 
 private:
+
+	Hotel* hotel;
 	int idHabitacion;
 	int numHabitacion;
 	int plantaHabitacion;
 	char* tipoHabitacion;
+	int precio;
 
 public:
 	Habitacion();
-	Habitacion(const int, int, int, char*, float, bool);
-	Habitacion(const Habitacion&);
+	Habitacion(const int, int, int, char*);
+	Habitacion(const Habitacion& h);
 	~Habitacion();//altgr+4
 
 	int getIdHabitacion()const;
@@ -31,8 +36,10 @@ public:
 	void setPlantaHabitacion(int);
 	char* getTipoHabitacion()const;
 	void setTipoHabitacion(char*);
-	float getPrecioHabitacion()const;
-	void setPrecioHabitacion(float);
+	int getPrecioHabitacion()const;
+	void setPrecioHabitacion(int);
+
+	void imprimir();
 		
 
 };

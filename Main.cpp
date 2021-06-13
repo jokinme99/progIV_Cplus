@@ -69,15 +69,14 @@ static int callback(void *data, int argc, char **argv, char **azColName) {
 	printf("\n");
 	return 0;
 }
-int callbackUsuarios(void *data, int argc, char **argv, char **azColName) {
-	int i;
-	fprintf(stderr, "%s: \n", (const char*) data);
-
-	for (i = 0; i < argc; i++) {
-		printf("%s = %s\n", azColName[i], argv[i] ? argv[i] : "NULL");
+int callbackUsuarios(void *data, int numeroColumnas, char **contadorDeFila, char **nombresColumnas) {
+	(void)data;
+//	cout<<numeroColumnas<<endl;
+//	cout<<*contadorDeFila<<endl;
+//	cout<<*nombresColumnas<<endl;
+	for (int i = 0; i < numeroColumnas; ++i) {
+		cout<<contadorDeFila[i]<<endl;
 	}
-
-	printf("\n");
 	return 0;
 }
 
@@ -86,7 +85,7 @@ void cargarDatosUsuarios(){
 
 	rc = sqlite3_open("hotelandia_final.s3db", &db);
 
-	char sql[] = "SELECT * from HABITACION";
+	char sql[] = "SELECT * from USUARIO";
 
 	/* Execute SQL statement */
 	rc = sqlite3_exec(db, sql, callbackUsuarios, (void*) data, &zErrMsg);
@@ -201,6 +200,9 @@ void inicio(){
 		cout<<"----HOTELANDIA------"<<endl;
 		ifstream ifs;
 		importarDatosUsuarios();
+
+		cargarDatosUsuarios();
+
 		////////////////////////////////////////////
 		// GENERAR UN OBJETO USUARIOS Y RELLENARLA CON UNA FUNCION DE LA CLASE
 		// GENERAR UN OBJETO RESERVAS Y RELLENARLO CON LA BASE DE DATOS
@@ -224,7 +226,7 @@ void inicio(){
 		cin >> conAu;
 
 		while (!ifs.eof() && !en) {
-			cout<<ifs.tellg()<<endl;
+			//cout<<ifs.tellg()<<endl;
 			//ifs >> nom;
 			char cNum[20];
 			ifs.getline(cNum, 256, ':');

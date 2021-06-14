@@ -9,7 +9,6 @@
 #define RESERVA_H_
 
 #include "Habitacion.h"
-#include "Usuario.h"
 
 class Reserva
 {
@@ -17,12 +16,11 @@ private:
 	int idReserva;
 	int diaReserva;
 	int horaReserva;
-	Usuario *usuarioReserva;
 	Habitacion* habitacionReservada;
 
 public:
 	Reserva();//constructor vacío
-	Reserva(const int, int, int, Usuario*, Habitacion*);//constructor valores
+	Reserva(const int, int, int, Habitacion*);//constructor valores
 	Reserva(const Reserva&);//constructor copia
 	~Reserva();//constructor para eliminar
 	int getIdReserva()const;
@@ -33,8 +31,6 @@ public:
 	void setHoraReserva(int);
 	Habitacion* getHabitacionReservada()const;
 	void setHabitacionReservada(Habitacion*);
-	Usuario* getusuarioReserva()const;
-	void setusuarioReserva(Usuario*);
 };
 
 

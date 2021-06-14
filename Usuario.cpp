@@ -11,11 +11,10 @@
 #include <stdio.h>
 #include "Usuario.h"
 #include "sqlite/sqlite3.h"
-
+#include "Reserva.h"
 #include <stdlib.h>
 #include <string.h>
 #include <windows.h>
-#include "Reserva.h"
 using namespace std;
 
 	Usuario::Usuario(){
@@ -27,7 +26,7 @@ using namespace std;
 		this->contrasenyaUsuario = new char[1];
 		this->contrasenyaUsuario[0] = '\0';
 		this->edadUsuario = 0;
-
+		this->reservasUsuario=NULL;
 
 
 	}
@@ -43,12 +42,7 @@ using namespace std;
 		this->contrasenyaUsuario =new char[sizeof(strlen(contrasenya))+1];
 		strcpy(this->contrasenyaUsuario,contrasenya);
 		this->edadUsuario=edad;
-
-
-
-
-
-
+		this->reservasUsuario = reservasUsuario;
 
 	}
 	Usuario::Usuario(const Usuario& u){
@@ -61,10 +55,10 @@ using namespace std;
 		this->contrasenyaUsuario=new char[strlen(u.contrasenyaUsuario) +1];
 		strcpy(this->contrasenyaUsuario, u.contrasenyaUsuario);
 		this->edadUsuario=u.edadUsuario;
+		this->reservasUsuario=reservasUsuario;
 
 		}
 
-	}
 	Usuario::~Usuario(){
 
 	delete &this->idUsuario;
@@ -114,7 +108,12 @@ using namespace std;
 	char* Usuario::getTipoUsuario(){
 		return "usuario";
 	}
-
+	Reserva* Usuario::getReservaUsuario()const{
+		return this->reservasUsuario;
+	}
+	void Usuario::setReservaUsuario(Reserva* reservasUsuario){
+		this->reservasUsuario=reservasUsuario;
+	}
 
 	void Usuario::verhoteles(){
 

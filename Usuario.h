@@ -23,6 +23,7 @@ private:
 	char* correoUsuario;
 	char* contrasenyaUsuario;
 	int edadUsuario;
+	Reserva* reservasUsuario;
 
 
 
@@ -41,6 +42,8 @@ public:
 	void setContrasenyaUsuario(char*);
 	int getEdadUsuario()const;
 	void setEdadUsuario(int);
+	Reserva* getReservaUsuario()const;
+	void setReservaUsuario(Reserva* reservasUsuario);
 
 	int getNReservas()const;
 	void setNReservas(int);

@@ -250,7 +250,7 @@ void importarDatosUsuarios(){//IMPORTA LOS DATOS DE USUARIOS DE LOS FICHEROS A L
 
 
 int main(){
-	inicio();
+	prueba();
 return 0;
 }
 int prueba(){

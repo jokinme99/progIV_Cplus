@@ -30,6 +30,7 @@ Habitacion::Habitacion(const int id, int numHab, int planta, char *tipoHabitacio
 	this->plantaHabitacion = planta;
 	this->tipoHabitacion= new char[strlen(tipoHabitacion)+1];
 	strcpy(this->tipoHabitacion,tipoHabitacion);
+
 	this->precio = precio;
 }
 
@@ -44,6 +45,11 @@ Habitacion::Habitacion(const Habitacion &h) {
 }
 Habitacion::~Habitacion() {
 	////altgr+4
+	delete &this->idHabitacion;
+	delete &this->numHabitacion;
+	delete &this->plantaHabitacion;
+	delete[] this->tipoHabitacion;
+	delete &this->precio;
 }
 
 int Habitacion::getIdHabitacion() const {
@@ -92,4 +98,10 @@ void Habitacion::setPrecioHabitacion(int precio) {
 
 	this->precio = precio;
 
+}
+void Habitacion::imprimir(){
+	cout<<"Habitacion "<<this->idHabitacion<<": "<<endl;
+	cout<<"Numero: "<<this->numHabitacion<<" Planta: "<<this->plantaHabitacion<<endl;
+	cout<<"Precio: "<<this->precio<<" Tipo de habitacion: "<< this->tipoHabitacion<<endl;
+	cout<<endl;
 }

@@ -23,6 +23,7 @@
 #include "Usuario.h"//Para acceder a los distintos metodos y poder ver/editar/eliminar datos de la base de datos
 #include "Usuarios.h"
 #include "Administrador.h"
+#include "Habitaciones.h"
 
 using namespace std;
 
@@ -50,6 +51,7 @@ void caso9Admin();
 void menuAdministrador();
 
 Usuarios u;
+Habitaciones h;
 string nombreUser;
 string contraUser;//Para iniciar/registrar usuario
 sqlite3 *db;//objeto base de datos
@@ -108,7 +110,13 @@ int callbackUsuarios(void *data, int numeroColumnas, char **contadorDeFila, char
 
 	return 0;
 }
-
+int callbackHabitaciones(void *data, int numeroColumnas, char **contadorDeFila, char **nombresColumnas) {
+	(void)data;
+	cout<<contadorDeFila[3]<<endl;
+	Habitacion *ha = new Habitacion(atoi(contadorDeFila[0]), atoi(contadorDeFila[1]), atoi(contadorDeFila[2]), contadorDeFila[3],atoi(contadorDeFila[2]));
+	h.anyadirhabitacion(ha);
+return 0;
+}
 
 void cargarDatosUsuarios(){
 
@@ -120,6 +128,27 @@ void cargarDatosUsuarios(){
 
 	/* Execute SQL statement */
 	rc = sqlite3_exec(db, sql, callbackUsuarios, (void*) data, &zErrMsg);
+	if (rc != SQLITE_OK) {
+
+
+		fprintf(stderr, "SQL error: %s\n", zErrMsg);
+		sqlite3_free(zErrMsg);
+	} else {
+		//fprintf(stdout, "Operation done successfully\n");
+	}
+	sqlite3_close(db);
+
+}
+void cargarDatosHabitaciones(){
+
+	rc = sqlite3_open("hotelandia_final.s3db", &db);
+
+
+	char sql[] = "SELECT * from HABITACION";
+
+
+	/* Execute SQL statement */
+	rc = sqlite3_exec(db, sql, callbackHabitaciones, (void*) data, &zErrMsg);
 	if (rc != SQLITE_OK) {
 
 
@@ -240,6 +269,13 @@ void inicio(){
 		cargarDatosUsuarios();
 
 		u.imprimirUsuarios();
+
+		cargarDatosHabitaciones();
+		cout<<"----HOTELANDIA------"<<endl;
+
+		h.imprimirHabitaciones();
+		cout<<"----HOTELANDIA------"<<endl;
+
 
 		////////////////////////////////////////////
 		// GENERAR UN OBJETO USUARIOS Y RELLENARLA CON UNA FUNCION DE LA CLASE

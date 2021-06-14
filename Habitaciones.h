@@ -1,34 +1,28 @@
 /*
- * habitaciones.h
+ * Habitaciones.H
  *
  *  Created on: 14 jun. 2021
- *      Author: 34618
+ *      Author: Suhar
  */
 
 #ifndef HABITACIONES_H_
 #define HABITACIONES_H_
-
-
 #include "Habitacion.h"
 
-
 class Habitaciones{
-
 private:
-	Habitacion *habitaciones[200];
 	int numHabitaciones;
+	Habitacion *h[200];
 public:
-
 	Habitaciones();
-	Habitaciones(const Habitaciones&);
 	~Habitaciones();
 
-	void anyadirHabitacion(Habitacion *h);
-	void rellenarDeUsuarios();
-	void quitarHabitacion();
-	int callbackHabitacion(void *data, int numeroColumnas, char **contadorDeFila, char **nombresColumnas);
-	void imprimirUsuarios();
-	int getNumUsuario();
+	void anyadirhabitacion(Habitacion  *h);
+	void quitarHabitacion(int);
+	void imprimirHabitaciones();
+	int getNumUsuarios();
 };
 
+
 #endif /* HABITACIONES_H_ */
+

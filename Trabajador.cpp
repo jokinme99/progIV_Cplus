@@ -57,6 +57,7 @@ char* Trabajador::getDNITrabajador()const{
 void Trabajador::setDNITrabajador(char* dniTrabajador){
 	this->dniTrabajador= new char[strlen(dniTrabajador)+1];
 	strcpy(this->dniTrabajador,dniTrabajador);
+
 }
 int Trabajador::getTelefonoTrabajador()const{
 	return this->telefonoTrabajador;

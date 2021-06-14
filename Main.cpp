@@ -86,7 +86,6 @@ int callbackUsuarios(void *data, int numeroColumnas, char **contadorDeFila, char
 //	}
 
 	//cout<<numeroColumnas<<endl;
-	cout<<contadorDeFila[5]<<endl;
 	if (strcmp(contadorDeFila[5],"usuario")==0){
 		//cout<<1<<endl;
 		Usuario *us = new Usuario(atoi(contadorDeFila[0]), contadorDeFila[1], contadorDeFila[3], contadorDeFila[2], atoi(contadorDeFila[4]));
@@ -112,7 +111,6 @@ int callbackUsuarios(void *data, int numeroColumnas, char **contadorDeFila, char
 }
 int callbackHabitaciones(void *data, int numeroColumnas, char **contadorDeFila, char **nombresColumnas) {
 	(void)data;
-	cout<<contadorDeFila[3]<<endl;
 	Habitacion *ha = new Habitacion(atoi(contadorDeFila[0]), atoi(contadorDeFila[1]), atoi(contadorDeFila[2]), contadorDeFila[3],atoi(contadorDeFila[2]));
 	h.anyadirhabitacion(ha);
 return 0;

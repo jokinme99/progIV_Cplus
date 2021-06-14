@@ -12,7 +12,7 @@ class Trabajador
 private:
 	int idTrabajador;
 	char* nombreTrabajador;
-	char* DNITrabajador;
+	char* dniTrabajador;
 	int telefonoTrabajador;
 	float sueldoTrabajador;
 

@@ -5,8 +5,6 @@
  *      Author: jokin
  */
 
-//NO ES NECESARIO HACER .CPP DE HABITACION, HOTEL, RESERVA, TRABAJADOR, USUARIO
-
 #ifndef RESERVA_H_
 #define RESERVA_H_
 
@@ -26,7 +24,7 @@ public:
 	Reserva(const Reserva&);//constructor copia
 	~Reserva();//constructor para eliminar
 	int getIdReserva()const;
-	void getIdReserva(const int);
+	void setIdReserva(int);
 	int getDiaReserva()const;
 	void setDiaReserva(int);
 	int getHoraReserva()const;

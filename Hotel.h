@@ -9,7 +9,6 @@
 #define HOTEL_H_
 
 #include "Habitacion.h"
-#include "Reserva.h"
 #include "Trabajador.h"
 
 class Hotel
@@ -24,25 +23,29 @@ private:
 	//Reserva* reservaHabitacion; No hace falta, porque en Reserva podemos ver la habitacion que esta reservada
 	//Y cada hotel tiene unas habitaciones especificas, por lo que al hacer la reserva de la habitacion sabemos de que hotel
 	Trabajador* trabajadorHotel;
-	Reserva* reservaHotel;
+	int numHabitacionesDisponibles;
 public:
 	Hotel();
-	Hotel(const int, char*, char*, int, int, Habitacion*, Reserva*, Trabajador*);
+	Hotel(const int, char*, char*, int, int, Habitacion*, Trabajador*, int numHabitacionesDisponibles);
 	Hotel(const Hotel&);
 	~Hotel();
 
 	int getIdHotel()const;
-	void setIdHotel(const int);
+	void setIdHotel(int);
 	char* getNombreHotel()const;
 	void setNombreHotel(char*);
 	char* getDireccionHotel()const;
 	void setDireccionHotel(char*);
+	int getTelefonoHotel()const;
+	void setTelefonoHotel(int);
+	int getnumEstrellas()const;
+	void setnumEstrellas(int);
 	Habitacion* getHabitacionHotel()const;
 	void setHabitacionHotel(Habitacion*);
-	Reserva* getReservaHotel()const;
-	void setReservaHotel(Reserva*);
 	Trabajador* getTrabajadorHotel()const;
 	void setTrabajadorHotel(Trabajador*);
+	int getNumHabitacionesDisponibles()const;
+	void setNumHabitacionesDisponibles(int );
 };
 
 

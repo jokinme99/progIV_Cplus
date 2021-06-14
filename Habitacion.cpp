@@ -8,6 +8,7 @@
 
 #include "Habitacion.h"
 #include <iostream>
+#include <string.h>
 
 using namespace std;
 
@@ -16,17 +17,19 @@ Habitacion::Habitacion() {
 	this->idHabitacion = 0;
 	this->numHabitacion = 0;
 	this->plantaHabitacion = 0;
-	this->tipoHabitacion = NULL;
+	this->tipoHabitacion = new char[1];
+	this->tipoHabitacion[0] = '\0';
 	this->precio = 0;
 
 }
 
-Habitacion::Habitacion(const int id, int numHab, int planta, char *tipo, int precio) {
+Habitacion::Habitacion(const int id, int numHab, int planta, char *tipoHabitacion, int precio) {
 
 	this->idHabitacion = id;
 	this->numHabitacion = numHab;
 	this->plantaHabitacion = planta;
-	this->tipoHabitacion = tipo;
+	this->tipoHabitacion= new char[strlen(tipoHabitacion)+1];
+	strcpy(this->tipoHabitacion,tipoHabitacion);
 	this->precio = precio;
 }
 
@@ -35,7 +38,8 @@ Habitacion::Habitacion(const Habitacion &h) {
 	this->idHabitacion = h.idHabitacion;
 	this->numHabitacion = h.numHabitacion;
 	this->plantaHabitacion = h.plantaHabitacion;
-	this->tipoHabitacion = h.tipoHabitacion;
+	this->tipoHabitacion= new char[strlen(h.tipoHabitacion)+1];
+	strcpy(this->tipoHabitacion,h.tipoHabitacion);
 	this->precio = h.precio;
 }
 Habitacion::~Habitacion() {
@@ -77,7 +81,8 @@ char* Habitacion::getTipoHabitacion() const {
 }
 void Habitacion::setTipoHabitacion(char* tipo) {
 
-	this->tipoHabitacion = tipo;
+	this->tipoHabitacion= new char[strlen(tipo)+1];
+	strcpy(this->tipoHabitacion,tipo);
 }
 int Habitacion::getPrecioHabitacion() const {
 

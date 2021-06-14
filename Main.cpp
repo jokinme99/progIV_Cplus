@@ -48,7 +48,7 @@ void caso9Admin();
 
 void menuAdministrador();
 
-Usuarios *u;
+Usuarios u;
 string nombreUser;
 string contraUser;//Para iniciar/registrar usuario
 sqlite3 *db;//objeto base de datos
@@ -74,9 +74,25 @@ int callbackUsuarios(void *data, int numeroColumnas, char **contadorDeFila, char
 //	cout<<numeroColumnas<<endl;
 //	cout<<*contadorDeFila<<endl;
 //	cout<<*nombresColumnas<<endl;
-	for (int i = 0; i < numeroColumnas; ++i) {
-		cout<<contadorDeFila[i]<<endl;
-	}
+
+//	cout<<numeroColumnas<<endl;
+
+//	for (int i = 0; i < numeroColumnas; ++i) {
+//		cout<<contadorDeFila[i]<<endl;
+//
+//	}
+
+
+
+	Usuario *us = new Usuario(atoi(contadorDeFila[0]), contadorDeFila[1], contadorDeFila[3], contadorDeFila[2], atoi(contadorDeFila[4]), contadorDeFila[5]);
+
+	//cout<<u.getNumUsuario()<<endl;
+
+
+
+	u.anyadirUsuario(us);
+
+
 	return 0;
 }
 
@@ -85,11 +101,15 @@ void cargarDatosUsuarios(){
 
 	rc = sqlite3_open("hotelandia_final.s3db", &db);
 
+
 	char sql[] = "SELECT * from USUARIO";
+
 
 	/* Execute SQL statement */
 	rc = sqlite3_exec(db, sql, callbackUsuarios, (void*) data, &zErrMsg);
 	if (rc != SQLITE_OK) {
+
+
 		fprintf(stderr, "SQL error: %s\n", zErrMsg);
 		sqlite3_free(zErrMsg);
 	} else {
@@ -198,10 +218,15 @@ void inicio(){
 
 
 		cout<<"----HOTELANDIA------"<<endl;
+
+
 		ifstream ifs;
 		importarDatosUsuarios();
 
+
 		cargarDatosUsuarios();
+
+		//u.imprimirUsuarios();
 
 		////////////////////////////////////////////
 		// GENERAR UN OBJETO USUARIOS Y RELLENARLA CON UNA FUNCION DE LA CLASE

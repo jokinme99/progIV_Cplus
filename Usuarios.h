@@ -10,8 +10,9 @@
 #include "Usuario.h"
 #include "sqlite/sqlite3.h"
 class Usuarios{
+
 private:
-	Usuario *u;
+	Usuario *u[200];
 	int numUsuarios;
 public:
 
@@ -19,11 +20,14 @@ public:
 	Usuarios(const Usuarios&);
 	~Usuarios();
 
-	void anyadirUsuario();
+	void anyadirUsuario(Usuario *u);
 	void rellenarDeUsuarios();
 	void quitarUsuario();
-
+	int callbackUsuarios(void *data, int numeroColumnas, char **contadorDeFila, char **nombresColumnas);
+	void imprimirUsuarios();
+	int getNumUsuario();
 };
+
 
 
 #endif /* USUARIOS_H_ */

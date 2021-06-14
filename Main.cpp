@@ -210,7 +210,7 @@ void importarDatosUsuarios(){//IMPORTA LOS DATOS DE USUARIOS DE LOS FICHEROS A L
 
 int main(){
 	inicio();
-
+return 0;
 }
 
 void inicio(){
@@ -226,7 +226,7 @@ void inicio(){
 
 		cargarDatosUsuarios();
 
-		//u.imprimirUsuarios();
+		u.imprimirUsuarios();
 
 		////////////////////////////////////////////
 		// GENERAR UN OBJETO USUARIOS Y RELLENARLA CON UNA FUNCION DE LA CLASE

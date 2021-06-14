@@ -8,8 +8,7 @@
 #ifndef USUARIO_H_
 #define USUARIO_H_
 #include "Reserva.h"
-#include "sqlite3.h"
-#include <sqlite3.h>
+#include "sqlite/sqlite3.h"
 #include <stdlib.h>
 #include <string.h>
 #include <windows.h>

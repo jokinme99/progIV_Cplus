@@ -10,8 +10,8 @@
 #include <cstdlib>
 #include <stdio.h>
 #include "Usuario.h"
-#include "sqlite3.h"
-#include <sqlite3.h>
+#include "sqlite/sqlite3.h"
+
 #include <stdlib.h>
 #include <string.h>
 #include <windows.h>

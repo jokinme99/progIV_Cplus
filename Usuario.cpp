@@ -23,13 +23,12 @@ using namespace std;
 		this->edadUsuario = 0;
 		this->reservasUsuario = NULL;
 		this->nReservas = 0;
-		this->tipoUsuario =  new char[1];
-		this->tipoUsuario[0] = '\0';
+
 
 	}
 
 
-	Usuario::Usuario(int id, char* nombre, char* correo, char* contrasenya, int edad, char* tipo){
+	Usuario::Usuario(int id, char* nombre, char* correo, char* contrasenya, int edad){
 
 		this->idUsuario = id;
 		this->nombreUsuario = (char*)malloc(sizeof(strlen(nombre))+1);
@@ -40,8 +39,7 @@ using namespace std;
 		strcpy(this->contrasenyaUsuario,contrasenya);
 		this->edadUsuario=edad;
 		this->nReservas = 0;
-		this->tipoUsuario= (char*)malloc(sizeof(strlen(tipo))+1);
-		strcpy(this->tipoUsuario,tipo);
+
 
 		this->reservasUsuario = NULL;
 
@@ -62,8 +60,7 @@ using namespace std;
 		for(int i=0;i<u.nReservas;i++){
 			this->reservasUsuario[i] = u.reservasUsuario[i];
 		}
-		this->tipoUsuario = new char[strlen(u.tipoUsuario) +1];
-		strcpy(this->tipoUsuario, u.tipoUsuario);
+
 	}
 	Usuario::~Usuario(){
 
@@ -112,11 +109,9 @@ using namespace std;
 		this->edadUsuario = edad;
 	}
 	char* Usuario::getTipoUsuario(){
-		return this->tipoUsuario;
+		return "usuario";
 	}
-	void Usuario::setTipoUsuario(char* tipo){
 
-	}
 
 
 	void Usuario::verhoteles(){
@@ -139,10 +134,11 @@ using namespace std;
 
 
 	}
+
 	void Usuario::imprimirUsuario(){
 		cout<<"Usuario "<<this->idUsuario<<": "<<endl;
 		cout<<"Nombre: "<<this->nombreUsuario<<" Correo: "<<this->correoUsuario<<endl;
-		cout<<"Edad: "<<this->edadUsuario<<" Tipo de usuario: "<< this->tipoUsuario<<endl;
+		cout<<"Edad: "<<this->edadUsuario<<" Tipo de usuario: "<< this->getTipoUsuario()<<endl;
 		cout<<endl;
 	}
 

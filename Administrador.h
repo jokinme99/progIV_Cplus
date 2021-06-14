@@ -17,7 +17,7 @@ public:
 	//CONSTRUCTORES
 
 
-	Administrador();
+	Administrador(Usuario*);
 	Administrador(const Administrador&);
 	virtual ~Administrador();
 
@@ -30,6 +30,8 @@ public:
 	void CrearTrabajadores();
 	void eliminarTrabajadores();
 	void listarUsuarios();
+	virtual char* getTipoUsuario();
+	virtual void imprimirUsuario();
 
 };
 

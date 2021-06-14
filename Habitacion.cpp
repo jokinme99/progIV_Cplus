@@ -43,7 +43,7 @@ Habitacion::Habitacion(const Habitacion &h) {
 	this->precio = h.precio;
 }
 Habitacion::~Habitacion() {
-	//altgr+4
+	////altgr+4
 }
 
 int Habitacion::getIdHabitacion() const {

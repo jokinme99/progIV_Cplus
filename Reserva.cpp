@@ -14,18 +14,21 @@ Reserva::Reserva(){
 	this->idReserva=0;
 	this->diaReserva=0;
 	this->horaReserva=0;
+	this->usuarioReserva=0
 	this->habitacionReservada = NULL;
 }
-Reserva::Reserva(int idReserva,int diaReserva, int horaReserva, Habitacion* habitacionReservada){
+Reserva::Reserva(int idReserva,int diaReserva, int horaReserva,Usuario usuarioReserva, Habitacion* habitacionReservada){
 	this->idReserva=idReserva;
 	this->diaReserva=diaReserva;
 	this->horaReserva=horaReserva;
+	this->usuarioReserva=usuarioReserva;
 	this->habitacionReservada=habitacionReservada;
 }
 Reserva::Reserva(const Reserva& r){
 	this->idReserva=r.idReserva;
 	this->diaReserva=r.diaReserva;
 	this->horaReserva=r.horaReserva;
+	this->usuarioReserva=r.habitacionReservada;
 	this->habitacionReservada=r.habitacionReservada;
 }
 Reserva::~Reserva(){

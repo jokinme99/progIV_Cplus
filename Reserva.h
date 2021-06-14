@@ -17,7 +17,7 @@ private:
 	int idReserva;
 	int diaReserva;
 	int horaReserva;
-	Usuario *u;
+	Usuario *usuarioReserva;
 	Habitacion* habitacionReservada;
 
 public:

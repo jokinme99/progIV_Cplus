@@ -27,8 +27,7 @@ using namespace std;
 		this->contrasenyaUsuario = new char[1];
 		this->contrasenyaUsuario[0] = '\0';
 		this->edadUsuario = 0;
-		this->reservasUsuario = NULL;
-		this->nReservas = 0;
+
 
 
 	}
@@ -44,10 +43,10 @@ using namespace std;
 		this->contrasenyaUsuario =new char[sizeof(strlen(contrasenya))+1];
 		strcpy(this->contrasenyaUsuario,contrasenya);
 		this->edadUsuario=edad;
-		this->nReservas = 0;
 
 
-		this->reservasUsuario = NULL;
+
+
 
 
 
@@ -62,9 +61,7 @@ using namespace std;
 		this->contrasenyaUsuario=new char[strlen(u.contrasenyaUsuario) +1];
 		strcpy(this->contrasenyaUsuario, u.contrasenyaUsuario);
 		this->edadUsuario=u.edadUsuario;
-		this->nReservas = u.nReservas;
-		for(int i=0;i<u.nReservas;i++){
-			this->reservasUsuario[i] = u.reservasUsuario[i];
+
 		}
 
 	}
@@ -75,7 +72,7 @@ using namespace std;
 	delete[] this->correoUsuario;
 	delete[] this->contrasenyaUsuario;
 	delete &this->edadUsuario;
-	delete &this->nReservas;
+
 	//delete[] this->reservasUsuario;
 
 

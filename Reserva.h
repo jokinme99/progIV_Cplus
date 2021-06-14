@@ -22,7 +22,7 @@ private:
 
 public:
 	Reserva();//constructor vacío
-	Reserva(const int, int, int,Usuario*, Habitacion*);//constructor valores
+	Reserva(const int, int, int, Usuario*, Habitacion*);//constructor valores
 	Reserva(const Reserva&);//constructor copia
 	~Reserva();//constructor para eliminar
 	int getIdReserva()const;

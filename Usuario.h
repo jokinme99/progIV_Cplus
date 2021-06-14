@@ -8,6 +8,7 @@
 #ifndef USUARIO_H_
 #define USUARIO_H_
 #include "Reserva.h"
+#include "Reservas.h"
 #include "sqlite/sqlite3.h"
 #include <stdlib.h>
 #include <string.h>
@@ -23,8 +24,8 @@ private:
 	char* correoUsuario;
 	char* contrasenyaUsuario;
 	int edadUsuario;
-	Reserva* reservasUsuario;
-	int nReservas;//para medir cant. de reservas
+
+
 
 public:
 	Usuario();
@@ -41,8 +42,7 @@ public:
 	void setContrasenyaUsuario(char*);
 	int getEdadUsuario()const;
 	void setEdadUsuario(int);
-	Reserva* getReservasUsuario()const;
-	void setReservasUsuario(Reserva*);
+
 	int getNReservas()const;
 	void setNReservas(int);
 	virtual char* getTipoUsuario();

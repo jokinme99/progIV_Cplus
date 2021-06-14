@@ -10,7 +10,8 @@
 #include <iostream>
 using namespace std;
 
-Administrador::Administrador():Usuario(){//METER DATOS RELEVANTES
+Administrador::Administrador(Usuario* u):Usuario(*u){//METER DATOS RELEVANTES
+
 
 }
 Administrador::Administrador(const Administrador& a):Usuario(a){
@@ -46,4 +47,17 @@ void Administrador::eliminarTrabajadores(){
 }
 void Administrador::listarUsuarios(){
 
+}
+char* Administrador::getTipoUsuario(){
+
+
+
+	return "admin";
+}
+
+void Administrador::imprimirUsuario(){
+	cout<<"Usuario "<<this->getIdUsuario()<<": "<<endl;
+	cout<<"Nombre: "<<this->getNombreUsuario()<<" Correo: "<<this->getCorreoUsuario()<<endl;
+	cout<<"Edad: "<<this->getEdadUsuario()<<" Tipo de usuario: "<< this->getTipoUsuario()<<endl;
+	cout<<endl;
 }

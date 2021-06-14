@@ -21,9 +21,10 @@ private:
 	int edadUsuario;
 	Reserva* reservasUsuario;
 	int nReservas;//para medir cant. de reservas
+	char* tipoUsuario;
 public:
 	Usuario();
-	Usuario(const int, char*, char*, char*, int);
+	Usuario(const int, char*, char*, char*, int, char*);
 	Usuario(const Usuario&);
 	~Usuario();
 
@@ -40,7 +41,10 @@ public:
 	void setReservasUsuario(Reserva*);
 	int getNReservas()const;
 	void setNReservas(int);
+	char* getTipoUsuario();
+	void setTipoUsuario(char*);
 
+	void imprimirUsuario();
 	void verhoteles();
 	void listarHabitaciones();
 	void listarReservas();

@@ -61,6 +61,12 @@ Habitacion* Reserva::getHabitacionReservada()const{
 void Reserva::setHabitacionReservada(Habitacion* habitacion){
 	this->habitacionReservada=habitacion;
 }
+Usuario* Reserva::usuarioReserva()const{
+	return this->usuarioReserva;
+}
 
+void Reserva::setusuarioReserva(Usuario* usuarioReserva){
+	this->usuarioReserva=usuarioReserva;
+}
 
 

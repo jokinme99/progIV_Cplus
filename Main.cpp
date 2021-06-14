@@ -24,10 +24,11 @@
 #include "Usuarios.h"
 #include "Administrador.h"
 #include "Habitaciones.h"
+#include "MetodoReservas.h"
 
 using namespace std;
 
-
+int prueba();
 void inicio();//inicio sesion usuario
 void importarDatosUsuarios();
 void cargarDatosUsuarios();
@@ -252,7 +253,61 @@ int main(){
 	inicio();
 return 0;
 }
+int prueba(){
+	char* nombreUsuario;
+	char elegirHotel[100];
+	char numeroHabitacion[100];
+	int dia,hora;
+		cout<<"Introduzca su usuario para realizar la reserva"<<endl;
+		cin>>nombreUsuario;
+		cout<<"Hoteles: "<<endl;
 
+		rc = sqlite3_open("hotelandia_final.s3db", &db);	//abrir base de datos
+				if (rc != SQLITE_OK) {
+					cout << "Error opening database" << endl;
+					return rc;
+				}
+		char sql5[] = "SELECT * from HOTEL";
+
+		/* Execute SQL statement */
+		rc = sqlite3_exec(db, sql5, callback, (void*) data, &zErrMsg);
+		if (rc != SQLITE_OK) {
+			fprintf(stderr, "SQL error: %s\n", zErrMsg);
+			sqlite3_free(zErrMsg);
+		}
+		cout<<"Introduzca el id del hotel en el que desea realizar una reserva"<<endl;
+		cin>>elegirHotel;
+		cout<<"Habitaciones disponibles;"<<endl;
+		char sql6[] = "SELECT H.numero_habitacion, H.tipo_Habitacion, H.precio_habitacion FROM HABITACION H, HOTEL M, HOTEL_TIENE_HABITACIONES N WHERE M.id_hotel = ";
+		strcat(sql6,elegirHotel);
+		char fr6[]=" AND M.id_hotel = N.id_hotel AND N.id_habitacion = H.id_habitacion";
+		strcat(sql6,fr6);
+
+		/* Execute SQL statement */
+		rc = sqlite3_exec(db, sql6, callback, (void*) data, &zErrMsg);
+		if (rc != SQLITE_OK) {
+			fprintf(stderr, "SQL error: %s\n", zErrMsg);
+			sqlite3_free(zErrMsg);
+		}
+		cout<<"Seleccione el numero de habitacion en el que desea realizar su reserva:"<<endl;
+		cin>>numeroHabitacion;
+		cout<<"Introduzca el dia en la que desea realizar la reserva"<<endl;
+		cin>>dia;
+		cout<<"Introduzca la hora en la que desea realizar la reserva"<<endl;
+		cin>>hora;
+		int hotel = atoi(elegirHotel);
+		int nHabitacion = atoi(numeroHabitacion);
+
+				//sale error por que clipse no reconoce la libreria sqlite3 bien, esta bien. //solucionado
+				rc = crearReserva(db, nombreUsuario, hotel, nHabitacion, dia, hora);
+				rc = sqlite3_close(db);//mejor numHabitacion que tipoHabitacion
+				    if (rc != SQLITE_OK) {
+				        printf("Error closing database\n");
+				        printf("%s\n", sqlite3_errmsg(db));
+				        return rc;
+				    }
+	return 0;
+}
 void inicio(){
 
 

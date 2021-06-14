@@ -91,7 +91,7 @@ Habitacion* Hotel::getHabitacionHotel()const{
 	return this->habitacionHotel;
 }
 void Hotel::setHabitacionHotel(Habitacion* habitacionHotel){
-	this->habitacionHotel;
+	this->habitacionHotel = habitacionHotel;
 }
 Trabajador* Hotel::getTrabajadorHotel()const{
 	return this->trabajadorHotel;

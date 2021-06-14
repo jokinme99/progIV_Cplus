@@ -13,7 +13,7 @@ class Reservas{
 private:
 	Reserva *r;
 	int numReservas;
-public:
+
 
 };
 

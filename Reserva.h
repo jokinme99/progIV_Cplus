@@ -33,6 +33,8 @@ public:
 	void setHoraReserva(int);
 	Habitacion* getHabitacionReservada()const;
 	void setHabitacionReservada(Habitacion*);
+	Usuario* getusuarioReserva()const;
+	void setusuarioReserva(Usuario*);
 };
 
 

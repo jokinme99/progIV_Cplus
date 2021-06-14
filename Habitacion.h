@@ -15,7 +15,6 @@ class Habitacion
 
 private:
 
-	Hotel* hotel;
 	int idHabitacion;
 	int numHabitacion;
 	int plantaHabitacion;
@@ -24,7 +23,7 @@ private:
 
 public:
 	Habitacion();
-	Habitacion(const int, int, int, char*);
+	Habitacion(const int, int, int, char*,int);
 	Habitacion(const Habitacion& h);
 	~Habitacion();//altgr+4
 

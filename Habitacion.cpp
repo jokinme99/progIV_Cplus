@@ -17,16 +17,17 @@ Habitacion::Habitacion() {
 	this->numHabitacion = 0;
 	this->plantaHabitacion = 0;
 	this->tipoHabitacion = NULL;
+	this->precio = 0;
 
 }
 
-Habitacion::Habitacion(const int id, int numHab, int planta, char *tipo) {
+Habitacion::Habitacion(const int id, int numHab, int planta, char *tipo, int precio) {
 
 	this->idHabitacion = id;
 	this->numHabitacion = numHab;
 	this->plantaHabitacion = planta;
 	this->tipoHabitacion = tipo;
-
+	this->precio = precio;
 }
 
 Habitacion::Habitacion(const Habitacion &h) {
@@ -35,6 +36,7 @@ Habitacion::Habitacion(const Habitacion &h) {
 	this->numHabitacion = h.numHabitacion;
 	this->plantaHabitacion = h.plantaHabitacion;
 	this->tipoHabitacion = h.tipoHabitacion;
+	this->precio = h.precio;
 }
 Habitacion::~Habitacion() {
 	//altgr+4
@@ -78,8 +80,6 @@ void Habitacion::setTipoHabitacion(char* tipo) {
 	this->tipoHabitacion = tipo;
 }
 int Habitacion::getPrecioHabitacion() const {
-
-	this->hotel->g
 
 	 return this->precio;
 }

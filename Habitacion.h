@@ -8,7 +8,6 @@
 #ifndef HABITACION_H_
 #define HABITACION_H_
 
-#include "Hotel.h"
 
 class Habitacion
 {

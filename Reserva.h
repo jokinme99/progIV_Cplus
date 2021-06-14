@@ -6,9 +6,12 @@
  */
 
 //NO ES NECESARIO HACER .CPP DE HABITACION, HOTEL, RESERVA, TRABAJADOR, USUARIO
-#include "Habitacion.h"
+
 #ifndef RESERVA_H_
 #define RESERVA_H_
+
+#include "Habitacion.h"
+
 class Reserva
 {
 private:

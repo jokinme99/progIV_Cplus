@@ -7,6 +7,7 @@
 
 #ifndef HOTEL_H_
 #define HOTEL_H_
+
 #include "Habitacion.h"
 #include "Reserva.h"
 #include "Trabajador.h"
@@ -23,6 +24,7 @@ private:
 	//Reserva* reservaHabitacion; No hace falta, porque en Reserva podemos ver la habitacion que esta reservada
 	//Y cada hotel tiene unas habitaciones especificas, por lo que al hacer la reserva de la habitacion sabemos de que hotel
 	Trabajador* trabajadorHotel;
+	Reserva* reservaHotel;
 public:
 	Hotel();
 	Hotel(const int, char*, char*, int, int, Habitacion*, Reserva*, Trabajador*);

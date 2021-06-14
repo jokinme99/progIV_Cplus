@@ -8,6 +8,7 @@
 
 #include "Habitacion.h"
 #include <iostream>
+#include <string.h>
 
 using namespace std;
 
@@ -16,7 +17,8 @@ Habitacion::Habitacion() {
 	this->idHabitacion = 0;
 	this->numHabitacion = 0;
 	this->plantaHabitacion = 0;
-	this->tipoHabitacion = NULL;
+	this->tipoHabitacion = new char[1];
+	this->tipoHabitacion[0] = '\0';
 	this->precio = 0;
 
 }
@@ -26,7 +28,8 @@ Habitacion::Habitacion(const int id, int numHab, int planta, char *tipo, int pre
 	this->idHabitacion = id;
 	this->numHabitacion = numHab;
 	this->plantaHabitacion = planta;
-	this->tipoHabitacion = tipo;
+	this->tipoHabitacion = new char[sizeof(strlen(tipo))+1];
+	strcpy(this->tipoHabitacion,tipo);
 	this->precio = precio;
 }
 
@@ -40,6 +43,11 @@ Habitacion::Habitacion(const Habitacion &h) {
 }
 Habitacion::~Habitacion() {
 	////altgr+4
+	delete &this->idHabitacion;
+	delete &this->numHabitacion;
+	delete &this->plantaHabitacion;
+	delete[] this->tipoHabitacion;
+	delete &this->precio;
 }
 
 int Habitacion::getIdHabitacion() const {
@@ -87,4 +95,10 @@ void Habitacion::setPrecioHabitacion(int precio) {
 
 	this->precio = precio;
 
+}
+void Habitacion::imprimir(){
+	cout<<"Habitacion "<<this->idHabitacion<<": "<<endl;
+	cout<<"Numero: "<<this->numHabitacion<<" Planta: "<<this->plantaHabitacion<<endl;
+	cout<<"Precio: "<<this->precio<<" Tipo de habitacion: "<< this->tipoHabitacion<<endl;
+	cout<<endl;
 }

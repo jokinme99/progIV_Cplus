@@ -31,11 +31,11 @@ using namespace std;
 	Usuario::Usuario(int id, char* nombre, char* correo, char* contrasenya, int edad){
 
 		this->idUsuario = id;
-		this->nombreUsuario = (char*)malloc(sizeof(strlen(nombre))+1);
+		this->nombreUsuario =new char[sizeof(strlen(nombre))+1];
 		strcpy(this->nombreUsuario, nombre);
-		this->correoUsuario = (char*)malloc(sizeof(strlen(correo))+1);
+		this->correoUsuario =new char[sizeof(strlen(correo))+1];
 		strcpy(this->correoUsuario, correo);
-		this->contrasenyaUsuario = (char*)malloc(sizeof(strlen(contrasenya))+1);
+		this->contrasenyaUsuario =new char[sizeof(strlen(contrasenya))+1];
 		strcpy(this->contrasenyaUsuario,contrasenya);
 		this->edadUsuario=edad;
 		this->nReservas = 0;

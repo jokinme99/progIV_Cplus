@@ -8,6 +8,11 @@
 #ifndef USUARIO_H_
 #define USUARIO_H_
 #include "Reserva.h"
+#include "sqlite3.h"
+#include <sqlite3.h>
+#include <stdlib.h>
+#include <string.h>
+#include <windows.h>
 
 
 class Usuario
@@ -42,13 +47,14 @@ public:
 	int getNReservas()const;
 	void setNReservas(int);
 	virtual char* getTipoUsuario();
+	char* intAChar(int n);
 
 
 	virtual void imprimirUsuario();//PORQUE OSTIAS NO ME RECONOCE ESTO
 	void verhoteles();
 	void listarHabitaciones();
 	void listarReservas();
-	void crearReserva();
+	void crearReserva(sqlite3* db, char* nombreUsuario, char* nombreHotel, char* tipoHabitacion, int dia, int hora);//PRUEBA DE JOKIN
 	void eliminarReserva();
 
 

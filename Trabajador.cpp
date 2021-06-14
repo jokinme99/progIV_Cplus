@@ -17,7 +17,7 @@ Trabajador::Trabajador(){
 	this->dniTrabajador = new char[1];
 	this->dniTrabajador[0] = '\0';
 	this->telefonoTrabajador=0;
-	this->sueldoTrabajador=0f;
+	this->sueldoTrabajador=0.0;
 }
 Trabajador::Trabajador(const int idTrabajador, char* nombreTrabajador, char* dniTrabajador,int telefonoTrabajador, float sueldoTrabajador){
 	this->idTrabajador=idTrabajador;

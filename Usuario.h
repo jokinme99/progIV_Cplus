@@ -53,7 +53,6 @@ public:
 	void verhoteles();
 	void listarHabitaciones();
 	void listarReservas();
-	void crearReserva(sqlite3* db, char* nombreUsuario, char* nombreHotel, char* tipoHabitacion, int dia, int hora);//PRUEBA DE JOKIN
 	void eliminarReserva();
 
 

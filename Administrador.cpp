@@ -21,10 +21,10 @@ Administrador::~Administrador(){
 
 }
 
-void Administrador::crearHabitaciones(){
+void Administrador::crearHabitacion(){
 
 }
-void Administrador::eliminarHabitaciones(){
+void Administrador::eliminarHabitacion(){
 
 }
 void Administrador::listarReservas(){
@@ -39,10 +39,10 @@ void Administrador::eliminarReserva(){
 void Administrador::listarTrabajadores(){
 
 }
-void Administrador::CrearTrabajadores(){
+void Administrador::CrearTrabajador(){
 
 }
-void Administrador::eliminarTrabajadores(){
+void Administrador::eliminarTrabajador(){
 
 }
 void Administrador::listarUsuarios(){

@@ -1090,82 +1090,68 @@ void caso9Admin() {//VER TRABAJADORES
 
 }
 void caso10Admin(){//EDITAR TRABAJADOR
+	char nombreTr[100];
+	float sueldo;
 
+	cout << "Introduce el id del trabajador que quieres modificar" << endl;
+
+	int idTra;
+
+	cin >> idTra;
+
+	cout << "Introduce el nuevo sueldo del trabajador" << endl;
+
+	int Prec;
+	cin >> Prec;
+
+	t.editarTrabajador(idTra, sueldo);
+
+	system("pause");
+
+	menuAdministrador();
 }
 void caso11Admin() {//CREAR TRABAJADOR
 
-	char idtr[100], ntr[100], dnitr[100], tfntr[100], sldtr[100], idhotel[100];
+	cout << "Crea un nuevo trabajador" << endl;
 
-	cout << "Ingrese el id del trabajador: ";
-	cin >> idtr;
+	int idTrabajador;
+	char nombreTrabajador[100];
+	char dniTrabajador[9];
+	int telefonoTrabajador;
+	float sueldoTrabajador;
+
+	cout << "Ingrese el id del trabajador que desea anyadir: ";
+	cin >> idTrabajador;
 	cout << endl;
-	cout << "Ingrese el nombre del trabajador: ";
-	cin >> ntr;
+	cout << "Ingrese el nombre del trabajador que desea anyadir: ";
+	cin >> nombreTrabajador;
 	cout << endl;
-	cout << "Ingrese el dni del trabajador: ";
-	cin >> dnitr;
+	cout << "Ingrese el DNI del trabajador que desea anyadir: ";
+	cin >> dniTrabajador;
 	cout << endl;
-	cout << "Ingrese el telefono del trabajador: ";
-	cin >> tfntr;
+	cout << "Ingrese el telefono del trabajador que desea anyadir: ";
+	cin >> telefonoTrabajador;
 	cout << endl;
-	cout << "Ingrese el salario del trabajador: ";
-	cin >> sldtr;
-	cout << endl;
-	cout << "Ingrese el hotel en el que trabaja el trabajador: ";
-	cin >> idhotel;
+	cout << "Ingrese el sueldo del trabajador que desea anyadir: ";
+	cin >> sueldoTrabajador;
 	cout << endl;
 
-	char sql[200] = "INSERT INTO TRABAJADOR VALUES(";
-	char con11[] = ",", con12[] = ")", con13[] = "";
-	strcat(sql, idtr);
-	strcat(sql, con11);
-	strcat(sql, ntr);
-	strcat(sql, con11);
-	strcat(sql, dnitr);
-	strcat(sql, con11);
-	strcat(sql, tfntr);
-	strcat(sql, con11);
-	strcat(sql, sldtr);
-	strcat(sql, con11);
-	strcat(sql, idhotel);
-	strcat(sql, con12);
-	strcat(sql, con13);
-
-	cout << sql << endl;
-	rc = sqlite3_exec(db, sql, callback, (void*) data, &zErrMsg);
-	if (rc != SQLITE_OK) {
-		fprintf(stderr, "SQL error: %s\n", zErrMsg);
-		sqlite3_free(zErrMsg);
-	} else {
-		fprintf(stdout, "Numero de habitaciones a reservar:\n");
-	}
-	sqlite3_close(db);
+	Trabajador* tr = new Trabajador(idTrabajador, nombreTrabajador, dniTrabajador, telefonoTrabajador, sueldoTrabajador);
+	t.anyadirTrabajador(tr);
 	system("pause");
 	menuAdministrador();
 
 }
 void caso12Admin() {//ELIMINAR TRABAJADOR
-
-	char idtr[100];
+	int idtr;
 
 	cout << "introduce el id del trabajador para eliminarlo" << endl;
 
 	cin >> idtr;
 
-	char sql[200] = "DELETE from TRABAJADOR WHERE id_trabajador = ";
+	t.quitarTrabajador(idtr);
 
-	strcat(sql, idtr);
-
-	rc = sqlite3_exec(db, sql, callback, (void*) data, &zErrMsg);
-	if (rc != SQLITE_OK) {
-		fprintf(stderr, "SQL error: %s\n", zErrMsg);
-		sqlite3_free(zErrMsg);
-	} else {
-		//fprintf(stdout, "Operation done successfully\n");
-
-	}
-
-	sqlite3_close(db);
+	t.getNumTrabajadores();
 	system("pause");
 	menuAdministrador();
 

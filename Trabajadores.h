@@ -22,7 +22,7 @@ public:
 	void imprimirTrabajadores();
 	int getNumTrabajadores();
 	Trabajador* getTrabajador(int idTrabajador);
-	void editarTrabajador(int, char*, char*, int, float);
+	void editarTrabajador(int, float);
 };
 
 

@@ -21,14 +21,14 @@ public:
 	Administrador(const Administrador&);
 	virtual ~Administrador();
 
-	void crearHabitacion(Habitacion  *h);
-	void eliminarHabitacion(int);
+	void crearHabitacion();
+	void eliminarHabitacion();
 	void listarReservas();//usar el objeto reservasy sobreescribir el metodo de la clase pafre
-	void crearReserva(Reserva* r);//rellenarlo con datos de usuario
-	void eliminarReserva(int);//(?)
+	void crearReserva();//rellenarlo con datos de usuario
+	void eliminarReserva();//(?)
 	void listarTrabajadores();
-	void CrearTrabajadores(Trabajador* t);
-	void eliminarTrabajadores(int);
+	void CrearTrabajador();
+	void eliminarTrabajador();
 	void listarUsuarios();
 	virtual char* getTipoUsuario();
 	//virtual

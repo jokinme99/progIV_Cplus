@@ -56,11 +56,8 @@ Trabajador* Trabajadores::getTrabajador(int idTrabajador){
 	}
 	return this->t[var];
 }
-void Trabajadores::editarTrabajador(int id, char* nombre, char* dni, int telefono, float sueldo){
+void Trabajadores::editarTrabajador(int id, float sueldo){
 	Trabajador* trabajador = getTrabajador(id);
-	trabajador->setDNITrabajador(dni);
-	trabajador->setNombreTrabajador(nombre);
-	trabajador->setTelefonoTrabajador(telefono);
 	trabajador->setSueldoTrabajador(sueldo);
 }
 

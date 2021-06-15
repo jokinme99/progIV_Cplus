@@ -8,6 +8,7 @@
 #ifndef RESERVAS_H_
 #define RESERVAS_H_
 #include "Reserva.h"
+#include "Habitacion.h"
 
 class Reservas{
 private:
@@ -15,13 +16,15 @@ private:
 	int numReservas;
 public:
 	Reservas();
-	Reservas(Reservas&);
+	Reservas(const Reservas& r);
 	~Reservas();
 
-	void anyadirReserva(Reserva*);
-	void eliminarReserva(Reserva*);
-	int getNumReservas();
+	void anyadirReserva(Reserva  *r);
+	void quitarReserva(int);
 	void imprimirReservas();
+	int getNumReservas();
+	Reserva* getReserva(int idReserva);
+	void editarReserva(int, int, int, Habitacion*);
 };
 
 

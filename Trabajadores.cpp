@@ -26,12 +26,12 @@ void Trabajadores::anyadirTrabajador(Trabajador* t){
 void Trabajadores::quitarTrabajador(int id){
 	int var;
 	cout<<"Llego"<<endl;
-	for(var=0;var<this->numTrabajadores;var++){
+	for(var=0;var<this->numTrabajadores;++var){
 		cout<<"Variable"<<var<<endl;
 		if(this->t[var]->getIdTrabajador()==id){
 			cout<< "Variable"<< var<<endl;
 			numTrabajadores--;
-			for(int j=var;j<this->numTrabajadores;j++){
+			for(int j=var;j<this->numTrabajadores;++j){
 				cout<<"Variable j"<<j<<endl;
 				cout<<"Variable j"<<this->getNumTrabajadores()<<endl;
 				this->t[j] = this->t[j+1];
@@ -40,7 +40,7 @@ void Trabajadores::quitarTrabajador(int id){
 	}
 }
 void Trabajadores::imprimirTrabajadores(){
-	for(int i=0;i<this->numTrabajadores;i++){
+	for(int i=0;i<this->numTrabajadores;++i){
 		this->t[i]->imprimir();
 	}
 }
@@ -49,7 +49,7 @@ int Trabajadores::getNumTrabajadores(){
 }
 Trabajador* Trabajadores::getTrabajador(int idTrabajador){
 	int var;
-	for(var=0;var<this->numTrabajadores;var++){
+	for(var=0;var<this->numTrabajadores;++var){
 		if(this->t[var]->getIdTrabajador() == idTrabajador){
 			break;
 		}

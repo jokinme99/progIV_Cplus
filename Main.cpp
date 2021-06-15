@@ -154,7 +154,7 @@ int callbackHabitaciones(void *data, int numeroColumnas, char **contadorDeFila,
 }
 int callbackTrabajadores(void *data, int numeroColumnas, char **contadorDeFila, char **nombresColumnas) {
 	(void)data;
-	Trabajador *tr = new Trabajador(atoi(contadorDeFila[0]), contadorDeFila[1], contadorDeFila[2], atoi(contadorDeFila[3]),atof(contadorDeFila[2]));
+	Trabajador *tr = new Trabajador(atoi(contadorDeFila[0]), contadorDeFila[1], contadorDeFila[2], atoi(contadorDeFila[3]),atoi(contadorDeFila[4]));
 	t.anyadirTrabajador(tr);
 return 0;
 }
@@ -200,10 +200,10 @@ void cargarDatosTrabajadores() {//Falta hacer callback del idHotel??!!
 
 	rc = sqlite3_open("hotelandia_final.s3db", &db);
 
-	char sql[] = "SELECT * from TRABAJADOR";
+	char sql[] = "SELECT id_trabajador, nombre_trabajador, DNI_trabajador, telefono_trabajador, sueldo_trabajador FROM TRABAJADOR";
 
 	/* Execute SQL statement */
-	rc = sqlite3_exec(db, sql, callbackHabitaciones, (void*) data, &zErrMsg);
+	rc = sqlite3_exec(db, sql, callbackTrabajadores, (void*) data, &zErrMsg);
 	if (rc != SQLITE_OK) {
 
 		fprintf(stderr, "SQL error: %s\n", zErrMsg);
@@ -326,7 +326,6 @@ int main() {
 	inicio();
 	return 0;
 }
-
 void inicio() {
 
 	cout << "---MODO ADMINISTRADOR---" << endl;
@@ -339,11 +338,13 @@ void inicio() {
 	//u.imprimirUsuarios();
 
 	cargarDatosHabitaciones();
-	h.imprimirHabitaciones();
+	//h.imprimirHabitaciones();
 
+	cargarDatosTrabajadores();
+	//t.imprimirTrabajadores();
 	//	cargarDatosReservas();
 
-	u.imprimirUsuarios();
+	//u.imprimirUsuarios();
 
 	//crear metodo devolver usuario con id de usuario, prueba id 1 y prueba a hacer print de las reservas
 
@@ -421,7 +422,7 @@ void inicio() {
 
 		}
 		if (nom != nomAu && ifs.eof()) {
-			cout << "El usuario no existe!" << endl;
+			cout << "El usuario no existe!" << endl;//AL SALIR VUELVE AQUI
 			//usuarioPrincipio();
 			ifs.close();
 
@@ -440,6 +441,7 @@ void inicio() {
 	ifs.close();
 
 }
+
 void menuUsuario() {
 
 	int opcion;
@@ -454,7 +456,7 @@ void menuUsuario() {
 		cout << "7. Volver al menu principal" << endl;
 		cin >> opcion;
 	} while (opcion != 1 && opcion != 2 && opcion != 3 && opcion != 4
-			&& opcion != 4 && opcion != 5 && opcion != 6);
+			&& opcion != 4 && opcion != 5 && opcion != 6 && opcion != 7);
 	/* ABRIMOS BASE DE DATOS */
 	rc = sqlite3_open("hotelandia_final.s3db", &db);
 	switch (opcion) {
@@ -497,8 +499,7 @@ void menuUsuario() {
 
 	}
 }
-
-void caso1Usuario() {
+void caso1Usuario() {//VER HOTELES
 	/* Create SQL statement */
 	char sql[] = "SELECT * from HOTEL";
 
@@ -514,8 +515,7 @@ void caso1Usuario() {
 	system("pause");
 	menuUsuario();
 }
-
-void caso2Usuario() {
+void caso2Usuario() {//VER HABITACIONES
 	/* Create SQL statement */
 	char sql[] = "SELECT * from HABITACION";
 
@@ -531,8 +531,7 @@ void caso2Usuario() {
 	system("pause");
 	menuUsuario();
 }
-
-int caso3Usuario() {			//Ver reserva
+int caso3Usuario() {//VER RESERVA
 	char usuarioReserva[20];
 
 	rc = sqlite3_open("hotelandia_final.s3db", &db);	//abrir base de datos
@@ -553,8 +552,7 @@ int caso3Usuario() {			//Ver reserva
 	menuUsuario();
 	return 0;
 }
-
-int caso4Usuario() {	//Hacer rserva
+int caso4Usuario() {//CREAR RESERVA
 	char nombreUsuario[20];
 	char eleccionHotel[100];
 	int eleccionNHabitacion;
@@ -611,8 +609,7 @@ int caso4Usuario() {	//Hacer rserva
 	menuUsuario();
 	return 0;
 }
-
-int caso5Usuario() {	//modificarResrva
+int caso5Usuario() {//MODIFICAR RESERVA
 	char usuarioModificar[20];
 	cout << "Introduzca el usuario en el que va a realizar la modificacion: ";
 	cin >> usuarioModificar;
@@ -633,7 +630,7 @@ int caso5Usuario() {	//modificarResrva
 	menuUsuario();
 	return 0;
 }
-int caso6Usuario() {	//eliminarReserva
+int caso6Usuario() {//ELIMINAR RESERVA
 	char usuarioEliminar[20];
 	cout << "Introduzca el usuario del que quiere eliminar una reserva: ";
 	cin >> usuarioEliminar;
@@ -654,6 +651,8 @@ int caso6Usuario() {	//eliminarReserva
 	menuUsuario();
 	return 0;
 }
+
+
 void menuAdministrador() {
 
 	int opcion;
@@ -677,7 +676,7 @@ void menuAdministrador() {
 		cout << "16. Eliminar usuario"<<endl;
 		cout << "17. Volver al menu principal" << endl;
 		cin >> opcion;
-	} while (opcion < 1 || opcion > 10);
+	} while (opcion < 1 || opcion > 17);
 	/* ABRIMOS BASE DE DATOS */
 	rc = sqlite3_open("hotelandia_final.s3db", &db);
 	switch (opcion) {
@@ -744,6 +743,7 @@ void menuAdministrador() {
 	case 17: {
 			cout << "Cerrando sesion..." << endl;
 			//menuInicio();
+			system("exit");
 	}
 		break;
 	default: {
@@ -1090,7 +1090,6 @@ void caso9Admin() {//VER TRABAJADORES
 
 }
 void caso10Admin(){//EDITAR TRABAJADOR
-	char nombreTr[100];
 	float sueldo;
 
 	cout << "Introduce el id del trabajador que quieres modificar" << endl;
@@ -1101,8 +1100,7 @@ void caso10Admin(){//EDITAR TRABAJADOR
 
 	cout << "Introduce el nuevo sueldo del trabajador" << endl;
 
-	int Prec;
-	cin >> Prec;
+	cin >> sueldo;
 
 	t.editarTrabajador(idTra, sueldo);
 

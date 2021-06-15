@@ -36,7 +36,8 @@ using namespace std;
 			this->h[i]->imprimir();
 		}
 	}
-	int Habitaciones::getNumUsuarios(){
+	int Habitaciones::getNumHabitaciones(){
 
+		return this->numHabitaciones;
 	}
 

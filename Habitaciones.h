@@ -20,7 +20,7 @@ public:
 	void anyadirhabitacion(Habitacion  *h);
 	void quitarHabitacion(int);
 	void imprimirHabitaciones();
-	int getNumUsuarios();
+	int getNumHabitaciones();
 };
 
 

@@ -298,7 +298,7 @@ void inicio() {
 	ifstream ifs;
 	importarDatosUsuarios();
 
-	cargarDatosUsuarios();
+	//cargarDatosUsuarios();
 
 	//u.imprimirUsuarios();
 
@@ -744,8 +744,11 @@ void caso4Admin() {
 
 	cout << "Crea una nueva habitacion" << endl;
 
-	char id_hab[100], num_hab[100], planta[100], tipo[100];
+	char  tipo[100];
 
+	int num_hab;
+	int planta;
+	int id_hab;
 	int precio;
 
 	cout << "Ingrese el id de la habitacoin que desea anyadir: ";
@@ -758,11 +761,13 @@ void caso4Admin() {
 	cin >> planta;
 	cout << endl;
 	cout << "Ingrese la hora de la reserva que desea anyadir: ";
-	cin >> planta;
+	cin >> tipo;
 	cout << endl;
 	cout << "Ingrese el precio de la habitacion: ";
 	cin >> precio;
 	cout << endl;
+
+	Habitacion* hab = new Habitacion(id_hab, num_hab, planta, tipo, precio);
 	menuAdministrador();
 }
 void caso5Admin() {

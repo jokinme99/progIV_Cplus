@@ -107,3 +107,12 @@ using namespace std;
 		}
 		return this->u[i];
 	}
+	Usuario* Usuarios::getUsuario(char* n){
+		int i;
+		for (i = 0; i < this->numUsuarios; ++i) {
+			if (strcmp(this->u[i]->getNombreUsuario(),n)==0) {
+				break;
+			}
+		}
+		return this->u[i];
+	}

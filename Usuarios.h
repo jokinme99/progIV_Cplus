@@ -28,6 +28,7 @@ public:
 	int getNumUsuario();
 	Reservas* getReservas(int);
 	Usuario* getUsuario(int);
+	Usuario* getUsuario(char*);
 };
 
 

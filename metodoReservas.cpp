@@ -6,7 +6,7 @@
  */
 #include "Reserva.h"
 #include <iostream>
-//#include "sqlite3.h" da error
+#include "sqlite/sqlite3.h" da error
 //#include <sqlite3.h>
 #include <stdlib.h>
 #include <string.h>

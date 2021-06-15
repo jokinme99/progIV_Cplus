@@ -50,3 +50,13 @@ using namespace std;
 		return this->h[var];
 	}
 
+
+	void Habitaciones::editarHabitacion(int id, char* tipo, int precio){
+
+
+		Habitacion* habitacion = getHabitacion(id);
+
+		habitacion->setPrecioHabitacion(precio);
+		habitacion->setTipoHabitacion(tipo);
+
+	}

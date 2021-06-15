@@ -26,7 +26,7 @@ using namespace std;
 		this->contrasenyaUsuario = new char[1];
 		this->contrasenyaUsuario[0] = '\0';
 		this->edadUsuario = 0;
-		this->reservasUsuario=NULL;
+		this->reservasUsuario=new Reservas();
 
 
 	}
@@ -42,7 +42,7 @@ using namespace std;
 		this->contrasenyaUsuario =new char[sizeof(strlen(contrasenya))+1];
 		strcpy(this->contrasenyaUsuario,contrasenya);
 		this->edadUsuario=edad;
-		this->reservasUsuario = reservasUsuario;
+		this->reservasUsuario = new Reservas();
 
 	}
 	Usuario::Usuario(const Usuario& u){
@@ -139,11 +139,11 @@ using namespace std;
 		cout<<"Edad: "<<this->edadUsuario<<" Tipo de usuario: "<< this->getTipoUsuario()<<endl;
 		cout<<"Reservas: "<<endl;
 		cout<<"----------"<<endl;
-		if (this->reservasUsuario==NULL) {
-			cout<<"(este usuario no tiene reservas)"<<endl;
-		}else{
-		this->reservasUsuario->imprimirReservas();
-		}
+//		if (this->reservasUsuario->getNumReservas()==0) {
+//			cout<<"(este usuario no tiene reservas)"<<endl;
+//		}else{
+//		this->reservasUsuario->imprimirReservas();
+//		}
 	}
 
 	char* Usuario::intAChar(int numero){

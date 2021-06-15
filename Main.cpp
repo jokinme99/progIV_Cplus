@@ -306,9 +306,9 @@ void inicio(){
 		ifstream ifs;
 		importarDatosUsuarios();
 
-		//cargarDatosUsuarios();
+		cargarDatosUsuarios();
 
-		u.imprimirUsuarios();
+		//u.imprimirUsuarios();
 
 		cargarDatosHabitaciones();
 		h.imprimirHabitaciones();

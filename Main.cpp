@@ -713,58 +713,19 @@ void caso2Admin(){
 
 }
 void caso3Admin(){
-	char idhab[100];
+	int idhab;
 
 	cout<<"introduce el id de habitacion para eliminarlo"<<endl;
 
 	cin >> idhab;
 
+	h.quitarHabitacion(idhab);
 
-	char sql[200] = "DELETE from HOTEL_TIENE_HABITACIONES WHERE id_habitacion = ";
-
-	strcat(sql, idhab);
-
-	rc = sqlite3_exec(db, sql, callback, (void*) data, &zErrMsg);
-	if (rc != SQLITE_OK) {
-		fprintf(stderr, "SQL error: %s\n", zErrMsg);
-		sqlite3_free(zErrMsg);
-	} else {
-		//fprintf(stdout, "Operation done successfully\n");
-
-	}
-	char sql2[200] = "DELETE from RESERVA_TIENE_HABITACIONES WHERE id_habitacion =";
-
-	strcat(sql2, idhab);
-
-	rc = sqlite3_exec(db, sql2, callback, (void*) data, &zErrMsg);
-	if (rc != SQLITE_OK) {
-		fprintf(stderr, "SQL error: %s\n", zErrMsg);
-		sqlite3_free(zErrMsg);
-	} else {
-		//fprintf(stdout, "Operation done successfully\n");
-
-	}
-	char sql3[200] = "DELETE from HABITACION WHERE id_habitacion =";
-
-	strcat(sql3, idhab);
-
-	cout<<sql3<<endl;
-
-
-	rc = sqlite3_exec(db, sql3, callback, (void*) data, &zErrMsg);
-	if (rc != SQLITE_OK) {
-		fprintf(stderr, "SQL error: %s\n", zErrMsg);
-		sqlite3_free(zErrMsg);
-	} else {
-		//fprintf(stdout, "Operation done successfully\n");
-	}
-
-
-	sqlite3_close(db);
-	system("pause");
+	h.getNumHabitaciones();
 	menuAdministrador();
 
 }
+
 void caso4Admin(){
 	char sql[] = "SELECT * from RESERVA";
 

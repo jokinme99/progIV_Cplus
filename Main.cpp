@@ -198,7 +198,7 @@ void cargarDatosHabitaciones() {
 	sqlite3_close(db);
 
 }
-void cargarDatosTrabajadores() {//Falta hacer callback del idHotel??!!
+void cargarDatosTrabajadores() {
 
 	rc = sqlite3_open("hotelandia_final.s3db", &db);
 
@@ -884,7 +884,6 @@ void caso7Admin() {//CREAR RESERVA
 
 	int idH;
 	int idR,diaR,horaR;
-	//Al ser admin puede hacer la reserva en cualquier habitacion
 
 	cout << "Ingrese el id de la reserva que desea anyadir: ";
 	cin >> idR;

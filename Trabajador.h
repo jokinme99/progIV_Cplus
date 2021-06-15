@@ -34,6 +34,8 @@ public:
 	float getSueldoTrabajador()const;
 	void setSueldoTrabajador(float);
 
+	void imprimir();
+
 };
 
 

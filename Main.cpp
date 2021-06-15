@@ -24,6 +24,7 @@
 #include "Administrador.h"
 #include "Habitaciones.h"
 #include "MetodoReservas.h"
+#include "Trabajadores.h"
 
 using namespace std;
 
@@ -34,11 +35,14 @@ int callbackReservas(void *data, int numeroColumnas, char **contadorDeFila,
 		char **nombresColumnas);
 int callbackHabitaciones(void *data, int numeroColumnas, char **contadorDeFila,
 		char **nombresColumnas);
+int callbackTrabajadores(void *data, int numeroColumnas, char **contadorDeFila,
+		char **nombresColumnas);
 void inicio(); //inicio sesion usuario
 void importarDatosUsuarios();
 void cargarDatosUsuarios();
 void cargarDatosHabitaciones();
 void cargarDatosReservas();
+void cargarDatosTrabajadores();
 void menuUsuario();
 void caso1Usuario();
 void caso2Usuario();
@@ -56,11 +60,19 @@ void caso6Admin();
 void caso7Admin();
 void caso8Admin();
 void caso9Admin();
+void caso10Admin();
+void caso11Admin();
+void caso12Admin();
+void caso13Admin();
+void caso14Admin();
+void caso15Admin();
+void caso16Admin();
 
 void menuAdministrador();
 
 Usuarios u;
 Habitaciones h;
+Trabajadores t;
 string nombreUser;
 string contraUser; //Para iniciar/registrar usuario
 sqlite3 *db; //objeto base de datos
@@ -140,6 +152,12 @@ int callbackHabitaciones(void *data, int numeroColumnas, char **contadorDeFila,
 	h.anyadirhabitacion(ha);
 	return 0;
 }
+int callbackTrabajadores(void *data, int numeroColumnas, char **contadorDeFila, char **nombresColumnas) {
+	(void)data;
+	Trabajador *tr = new Trabajador(atoi(contadorDeFila[0]), contadorDeFila[1], contadorDeFila[2], atoi(contadorDeFila[3]),atof(contadorDeFila[2]));
+	t.anyadirTrabajador(tr);
+return 0;
+}
 
 void cargarDatosUsuarios() {
 
@@ -165,6 +183,24 @@ void cargarDatosHabitaciones() {
 	rc = sqlite3_open("hotelandia_final.s3db", &db);
 
 	char sql[] = "SELECT * from HABITACION";
+
+	/* Execute SQL statement */
+	rc = sqlite3_exec(db, sql, callbackHabitaciones, (void*) data, &zErrMsg);
+	if (rc != SQLITE_OK) {
+
+		fprintf(stderr, "SQL error: %s\n", zErrMsg);
+		sqlite3_free(zErrMsg);
+	} else {
+		//fprintf(stdout, "Operation done successfully\n");
+	}
+	sqlite3_close(db);
+
+}
+void cargarDatosTrabajadores() {//Falta hacer callback del idHotel??!!
+
+	rc = sqlite3_open("hotelandia_final.s3db", &db);
+
+	char sql[] = "SELECT * from TRABAJADOR";
 
 	/* Execute SQL statement */
 	rc = sqlite3_exec(db, sql, callbackHabitaciones, (void*) data, &zErrMsg);
@@ -513,6 +549,7 @@ int caso3Usuario() {			//Ver reserva
 		printf("%s\n", sqlite3_errmsg(db));
 		return rc;
 	}
+	system("pause");
 	menuUsuario();
 	return 0;
 }
@@ -624,15 +661,21 @@ void menuAdministrador() {
 		cout << "Elije las siguientes opciones" << endl;
 		cout << "1. Ver habitaciones" << endl;
 		cout << "2. Editar habitacion" << endl;
-		cout << "3. Eliminar habitaciones" << endl;	//Si no tiene mensaje por pantalla
-		cout << "4. Añadir habitacion" << endl;	//Solo a su nombre
-		cout << "5. crear reservas" << endl;	//Solo a su nombre
-		cout << "6. Eliminar reserva" << endl;
-		cout << "7. Ver trabajadores" << endl;
-		cout << "8. Crear trabajadores" << endl;
-		cout << "9. Eliminar trabajadores" << endl;
-		cout << "10. Listar usuarios" << endl;
-		cout << "11. Volver al menu principal" << endl;
+		cout << "3. Anyadir habitacion" << endl;
+		cout << "4. Eliminar habitacion" << endl;
+		cout << "5. Ver reservas" << endl;
+		cout << "6. Editar reserva" << endl;
+		cout << "7. Anyadir reserva" << endl;
+		cout << "8. Eliminar reserva" << endl;
+		cout << "9. Ver trabajadores" << endl;
+		cout << "10. Editar trabajador" <<endl;
+		cout << "11. Crear trabajador" << endl;
+		cout << "12. Eliminar trabajador" << endl;
+		cout << "13. Ver usuarios" << endl;
+		cout << "14. Editar usuario"<<endl;
+		cout << "15. Crear Usuario" <<endl;
+		cout << "16. Eliminar usuario"<<endl;
+		cout << "17. Volver al menu principal" << endl;
 		cin >> opcion;
 	} while (opcion < 1 || opcion > 10);
 	/* ABRIMOS BASE DE DATOS */
@@ -675,12 +718,32 @@ void menuAdministrador() {
 	}
 		break;
 	case 10: {
-		caso9Admin();
+		caso10Admin();
 	}
 		break;
 	case 11: {
-		cout << "Cerrando sesion..." << endl;
-		//menuInicio();
+		caso11Admin();
+	}break;
+	case 12: {
+		caso12Admin();
+	}break;
+	case 13: {
+		caso13Admin();
+	}break;
+	case 14: {
+		caso14Admin();
+	}
+		break;
+	case 15: {
+		caso15Admin();
+	}
+		break;
+	case 16: {
+		caso16Admin();
+	}break;
+	case 17: {
+			cout << "Cerrando sesion..." << endl;
+			//menuInicio();
 	}
 		break;
 	default: {
@@ -691,16 +754,15 @@ void menuAdministrador() {
 
 	}
 
-//OPCIONES DE ADMINISTRADOR: CREAR HABITACIÓN, ELIMINAR HABITACION, LISTAR HABITACIONES, LISTAR RESERVAS, ELIMINAR RESERVAS
 }
-void caso1Admin() {
+void caso1Admin() {//VER HABITACION
 	cout << "--HABITACIONES--" << endl;
 
 	h.imprimirHabitaciones();
 	system("pause");
 	menuAdministrador();
 }
-void caso2Admin() {
+void caso2Admin() {//EDITAR HABITACION
 
 	char tipoHab[100];
 
@@ -726,22 +788,7 @@ void caso2Admin() {
 	menuAdministrador();
 
 }
-void caso3Admin() {
-	int idhab;
-
-	cout << "introduce el id de habitacion para eliminarlo" << endl;
-
-	cin >> idhab;
-
-	h.quitarHabitacion(idhab);
-
-	h.getNumHabitaciones();
-	menuAdministrador();
-
-}
-
-void caso4Admin() {
-
+void caso3Admin() {//CREAR HABITACION
 	cout << "Crea una nueva habitacion" << endl;
 
 	char  tipo[100];
@@ -769,9 +816,31 @@ void caso4Admin() {
 
 	Habitacion* hab = new Habitacion(id_hab, num_hab, planta, tipo, precio);
 	h.anyadirhabitacion(hab);
+	system("pause");
 	menuAdministrador();
+
 }
-void caso5Admin() {
+void caso4Admin() {//ELIMINAR HABITACION
+
+	int idhab;
+
+		cout << "introduce el id de habitacion para eliminarlo" << endl;
+
+		cin >> idhab;
+
+		h.quitarHabitacion(idhab);
+
+		h.getNumHabitaciones();
+		system("pause");
+		menuAdministrador();
+}
+void caso5Admin(){//VER RESERVAS
+
+}
+void caso6Admin(){//EDITAR RESERVA
+
+}
+void caso7Admin() {//CREAR RESERVA
 	char id_res[100], dia_res[100], hora_res[100], id_usuario[100];
 	int opcion1;
 
@@ -973,7 +1042,7 @@ void caso5Admin() {
 	menuAdministrador();
 
 }
-void caso6Admin() {
+void caso8Admin() {//ELIMINAR RESERVA
 
 	char idres[100];
 
@@ -1011,27 +1080,19 @@ void caso6Admin() {
 	menuAdministrador();
 
 }
-void caso7Admin() {
+void caso9Admin() {//VER TRABAJADORES
 
-	cout << "hola ktal holakpasaktal" << endl;
+	cout << "--TRABAJADORES--" << endl;
 
-	char sql[] = "select * from TRABAJADOR";
-
-	cout << sql << endl;
-	/* Execute SQL statement */
-	rc = sqlite3_exec(db, sql, callback, (void*) data, &zErrMsg);
-	if (rc != SQLITE_OK) {
-		fprintf(stderr, "SQL error: %s\n", zErrMsg);
-		sqlite3_free(zErrMsg);
-	} else {
-		//fprintf(stdout, "Operation done successfully\n");
-	}
-	sqlite3_close(db);
+	t.imprimirTrabajadores();
 	system("pause");
 	menuAdministrador();
 
 }
-void caso8Admin() {
+void caso10Admin(){//EDITAR TRABAJADOR
+
+}
+void caso11Admin() {//CREAR TRABAJADOR
 
 	char idtr[100], ntr[100], dnitr[100], tfntr[100], sldtr[100], idhotel[100];
 
@@ -1083,7 +1144,7 @@ void caso8Admin() {
 	menuAdministrador();
 
 }
-void caso9Admin() {
+void caso12Admin() {//ELIMINAR TRABAJADOR
 
 	char idtr[100];
 
@@ -1109,3 +1170,16 @@ void caso9Admin() {
 	menuAdministrador();
 
 }
+void caso13Admin(){//VER USUARIOS
+
+}
+void caso14Admin(){//EDITAR USUARIO
+
+}
+void caso15Admin(){//CREAR USUARIO
+
+}
+void caso16Admin(){//ELIMINAR USUARIO
+
+}
+

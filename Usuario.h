@@ -51,7 +51,8 @@ public:
 	char* intAChar(int n);
 
 
-	virtual void imprimirUsuario();//PORQUE OSTIAS NO ME RECONOCE ESTO
+	//virtual
+	void imprimirUsuario();//PORQUE OSTIAS NO ME RECONOCE ESTO
 
 	void verhoteles();
 	void listarHabitaciones();

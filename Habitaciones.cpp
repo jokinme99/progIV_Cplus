@@ -30,27 +30,9 @@ using namespace std;
 	void Habitaciones::quitarHabitacion(int id){
 
 			int var = 0;
-
-			cout << "Llego" << endl;
 					for (var = 0; var < this->numHabitaciones; ++var) {
-
-						cout << "Variable" << var << endl;
 						if(this->h[var]->getIdHabitacion()==id){
-
-							cout << "Variable" << var << endl;
-							numHabitaciones--;
-						for(int j = var;  j < this->numHabitaciones; ++j){
-
-							cout << "Variable j" << j << endl;
-							cout << "Variable j" << this->getNumHabitaciones() << endl;
-							this->h[j] = this->h[j + 1];
-
-
-						}
-
-
-
-
+							this->h[var] = NULL;
 						}
 					}
 		}

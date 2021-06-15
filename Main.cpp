@@ -306,9 +306,9 @@ void inicio(){
 		ifstream ifs;
 		importarDatosUsuarios();
 
-		//cargarDatosUsuarios();
+		cargarDatosUsuarios();
 
-		u.imprimirUsuarios();
+		//u.imprimirUsuarios();
 
 		cargarDatosHabitaciones();
 		h.imprimirHabitaciones();
@@ -678,7 +678,6 @@ void menuAdministrador(){
 void caso1Admin(){
 	cout << "--HABITACIONES--" << endl;
 
-	cout << h.getNumHabitaciones() << endl;
 	h.imprimirHabitaciones();
 	system("pause");
 	menuAdministrador();

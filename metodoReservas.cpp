@@ -160,5 +160,305 @@ int crearReserva(sqlite3* db, char* nombreUsuario, int hotel, int numHabitacion,
 
 }
 
+int modificarReserva(sqlite3 *db, char* nombreUsuario){
+	int hora, dia, idReserva;
+	int idUsuario;
+	sqlite3_stmt *stmt;//SELECT PARA CONSEGUIR EL ID
+		char sql[] = "SELECT id_usuario FROM USUARIO WHERE nombre_usuario = ?";
+		int rc = sqlite3_prepare_v2(db, sql, -1, &stmt, NULL);
+			if (rc != SQLITE_OK) {
+				cout << "Error al hacer la sentencia (SELECT)" << endl;
+				return rc;
+			}
+			rc =sqlite3_bind_text(stmt,1,nombreUsuario,strlen(nombreUsuario),SQLITE_STATIC);//lo que se mete en pantalla
+			if (rc != SQLITE_OK) {
+					cout << "Error al bindear la consulta(SELECT)" << endl;
+					cout << sqlite3_errmsg(db) << endl;
+
+					return rc;
+				}
+			do{
+					rc = sqlite3_step(stmt);
+					if(rc == SQLITE_ROW){
+						idUsuario = sqlite3_column_int(stmt,0);//lo que se recupera/devuelve
+
+					}
+			}while(rc == SQLITE_ROW);
+
+			rc=sqlite3_finalize(stmt);
+			if(rc != SQLITE_OK){
+				cout << "Error al finalizar la consulta(SELECT)" << endl;
+				return rc;
+			}
+	sqlite3_stmt *stmt1;
+	char sql1[]= "SELECT id_reserva, dia_reserva, hora_reserva FROM RESERVA WHERE id_usuario = ?";
+	 rc = sqlite3_prepare_v2(db, sql1, -1, &stmt1, NULL);
+	if (rc != SQLITE_OK) {
+		cout << "Error al hacer la sentencia (SELECT)" << endl;
+		return rc;
+	}
+	rc = sqlite3_bind_int(stmt1,1,idUsuario);
+	if (rc != SQLITE_OK) {
+			cout << "Error al bindear la consulta(SELECT)" << endl;
+			cout << sqlite3_errmsg(db) << endl;
+
+			return rc;
+		}
+	cout<<"La reserva contiene los siguientes datos: "<<endl;
+	do {
+		rc = sqlite3_step(stmt1);
+		if (rc == SQLITE_ROW) {
+			idReserva = sqlite3_column_int(stmt1, 0);
+			dia = sqlite3_column_int(stmt1, 1);
+			hora = sqlite3_column_int(stmt1, 2);
+
+			cout << "Usuario de la reserva: " << nombreUsuario << " Id Reserva: "
+					<< idReserva << " Dia: " << dia << " Hora: "
+					<< hora << endl;
+
+		}
+	} while (rc == SQLITE_ROW);
+	rc = sqlite3_finalize(stmt1);
+	if (rc != SQLITE_OK) {
+		cout << "Error al finalizar la consulta(SELECT)" << endl;
+
+		return rc;
+	}
+	int idReservaM, diaM, horaM;
+	cout<<"Id de reserva a modificar: ";cin>>idReservaM;
+	cout<<endl<<"Dia a modificar: ";cin>>diaM;
+	cout<<endl<<"Hora a modificar: ";cin>>horaM;
+	rc = sqlite3_close(db);
+	if (rc != SQLITE_OK) {
+		printf("Error closing database\n");
+		printf("%s\n", sqlite3_errmsg(db));
+		return rc;
+	}
+	sqlite3 *db2;
+	rc = sqlite3_open("hotelandia_final.s3db", &db2);	//abrir base de datos
+	if (rc != SQLITE_OK) {
+		cout << "Error opening database" << endl;
+		return rc;
+	}
+	sqlite3_stmt *stmt2;
+
+		char sql2[] = "UPDATE RESERVA SET dia_reserva = ?, hora_reserva = ? WHERE id_reserva = ?";
+
+		rc = sqlite3_prepare_v2(db2, sql2, -1, &stmt2, NULL);
+		if (rc != SQLITE_OK) {
+			cout << "Error al hacer la sentencia (SELECT)" << endl;
+			return rc;
+		}
+		rc = sqlite3_bind_int(stmt2, 1, diaM);
+		rc = sqlite3_bind_int(stmt2, 2, horaM);
+		rc = sqlite3_bind_int(stmt2, 3, idReservaM);
+		if (rc != SQLITE_OK) {
+			cout << "Error al bindear la consulta(SELECT)" << endl;
+			cout << sqlite3_errmsg(db2) << endl;
+
+			return rc;
+		}
+
+		rc = sqlite3_step(stmt2);
+		if (rc == SQLITE_DONE) {
+
+		}
+		rc = sqlite3_finalize(stmt2);
+		if (rc != SQLITE_OK) {
+			cout << "Error al hacer la modificacion" << endl;
+
+			return rc;
+		}
+
+		cout << "Reserva modificada: " << endl;
+
+		cout << "Usuario de la reserva: " << nombreUsuario << " Id Reserva: "
+				<< idReservaM << " Dia: " << diaM << " Hora: "
+				<< horaM << endl;
+
+		system("pause");
 
 
+
+		return SQLITE_OK;
+
+
+
+}
+
+int eliminarReserva(sqlite3 *db, char* nombreUsuario){
+	int idReserva, horaReserva, diaReserva, idUsuario, idHabitacion;
+	sqlite3_stmt *stmt;//SELECT PARA CONSEGUIR EL ID
+		char sql[] = "SELECT id_usuario FROM USUARIO WHERE nombre_usuario = ?";
+		int rc = sqlite3_prepare_v2(db, sql, -1, &stmt, NULL);
+			if (rc != SQLITE_OK) {
+				cout << "Error al hacer la sentencia (SELECT)" << endl;
+				return rc;
+			}
+			rc =sqlite3_bind_text(stmt,1,nombreUsuario,strlen(nombreUsuario),SQLITE_STATIC);//lo que se mete en pantalla
+			if (rc != SQLITE_OK) {
+					cout << "Error al bindear la consulta(SELECT)" << endl;
+					cout << sqlite3_errmsg(db) << endl;
+
+					return rc;
+				}
+			do{
+					rc = sqlite3_step(stmt);
+					if(rc == SQLITE_ROW){
+						idUsuario = sqlite3_column_int(stmt,0);//lo que se recupera/devuelve
+
+					}
+			}while(rc == SQLITE_ROW);
+
+			rc=sqlite3_finalize(stmt);
+			if(rc != SQLITE_OK){
+				cout << "Error al finalizar la consulta(SELECT)" << endl;
+				return rc;
+			}
+			sqlite3_stmt *stmt1;	//crear stmt
+
+			char sql1[] = "SELECT id_reserva, hora_reserva, dia_reserva, id_habitacion FROM RESERVA WHERE id_usuario = ?";
+
+			 rc = sqlite3_prepare_v2(db, sql1, -1, &stmt1, NULL);
+			if (rc != SQLITE_OK) {
+				cout << "Error al hacer la sentencia (SELECT)" << endl;
+				return rc;
+			}
+
+			rc = sqlite3_bind_int(stmt1,1,idUsuario);
+
+			if (rc != SQLITE_OK) {
+				cout << "Error al bindear la consulta(SELECT)" << endl;
+				cout << sqlite3_errmsg(db) << endl;
+
+				return rc;
+			}
+
+			cout << "Sus reservas son las siguientes:" << endl;
+			do {
+				rc = sqlite3_step(stmt1);
+				if (rc == SQLITE_ROW) {
+					idReserva = sqlite3_column_int(stmt1, 0);
+					horaReserva = sqlite3_column_int(stmt1, 1);
+					diaReserva = sqlite3_column_int(stmt1, 2);
+					idHabitacion = sqlite3_column_int(stmt1, 3);
+
+					cout << "Usuario de la reserva: " << nombreUsuario << " Id Reserva: "
+							<< idReserva << " Dia: " << diaReserva << " Hora: "
+							<< horaReserva << endl;
+
+				}
+			} while (rc == SQLITE_ROW);
+
+			rc = sqlite3_finalize(stmt1);
+			if (rc != SQLITE_OK) {
+				cout << "Error al finalizar la consulta(SELECT)" << endl;
+
+				return rc;
+			}
+		int idSeleccion;
+
+		cout << "Seleccione el id de la reserva que desea eliminar" << endl;
+		cin >> idSeleccion;
+
+		rc = sqlite3_close(db);
+		if (rc != SQLITE_OK) {
+			printf("Error closing database\n");
+			printf("%s\n", sqlite3_errmsg(db));
+			return rc;
+		}
+		sqlite3 *db2;
+			rc = sqlite3_open("hotelandia_final.s3db", &db2);	//abrir base de datos
+			if (rc != SQLITE_OK) {
+				cout << "Error opening database" << endl;
+				return rc;
+			}
+			sqlite3_stmt *stmt2;
+
+				char sql2[] = "DELETE FROM RESERVA WHERE id_reserva = ?";
+
+				rc = sqlite3_prepare_v2(db2, sql2, -1, &stmt2, NULL);
+				if (rc != SQLITE_OK) {
+					cout << "Error al hacer la sentencia (SELECT)" << endl;
+					return rc;
+				}
+				rc = sqlite3_bind_int(stmt2, 1, idSeleccion);
+
+				if (rc != SQLITE_OK) {
+					cout << "Error al bindear la consulta(SELECT)" << endl;
+					cout << sqlite3_errmsg(db2) << endl;
+
+					return rc;
+				}
+
+				rc = sqlite3_step(stmt2);
+				if (rc == SQLITE_DONE) {
+
+				}
+
+				rc = sqlite3_finalize(stmt2);
+				if (rc != SQLITE_OK) {
+					cout << "Error al eliminar" << endl;
+
+					return rc;
+				}
+
+				cout << "La reserva se ha eliminado correctamente " << endl;
+
+				system("pause");
+				rc = sqlite3_close(db);
+					if (rc != SQLITE_OK) {
+						printf("Error closing database\n");
+						printf("%s\n", sqlite3_errmsg(db));
+						return rc;
+					}
+					sqlite3 *db3;
+					rc = sqlite3_open("hotelandia_final.s3db", &db3);	//abrir base de datos
+					if (rc != SQLITE_OK) {
+						cout << "Error opening database" << endl;
+						return rc;
+					}
+
+
+					return SQLITE_OK;
+
+}
+
+int verReserva(sqlite3* db, char* nombreUsuario){
+	int hora;
+	int dia;
+	int idReserva;
+	int idHabitacion;
+	sqlite3_stmt *stmt;//SELECT PARA CONSEGUIR EL ID
+	char sql[] = "SELECT RESERVA.id_reserva,RESERVA.dia_reserva,RESERVA.hora_reserva, RESERVA.id_habitacion FROM RESERVA JOIN USUARIO ON USUARIO.id_usuario = RESERVA.id_usuario WHERE USUARIO.nombre_usuario = ?";
+	int rc = sqlite3_prepare_v2(db, sql, -1, &stmt, NULL);
+	if (rc != SQLITE_OK) {
+		cout << "Error al hacer la sentencia (SELECT)" << endl;
+		return rc;
+	}
+	rc =sqlite3_bind_text(stmt,1,nombreUsuario,strlen(nombreUsuario),SQLITE_STATIC);//lo que se mete en pantalla
+	if (rc != SQLITE_OK) {
+		cout << "Error al bindear la consulta(SELECT)" << endl;
+		cout << sqlite3_errmsg(db) << endl;
+		return rc;
+	}
+	do{
+		rc = sqlite3_step(stmt);
+		if(rc == SQLITE_ROW){
+			idReserva = sqlite3_column_int(stmt, 0);
+			hora = sqlite3_column_int(stmt, 1);
+			dia = sqlite3_column_int(stmt, 2);
+			idHabitacion = sqlite3_column_int(stmt,3);
+			cout << "Usuario de la reserva: " << nombreUsuario << " Id Reserva: "
+			<< idReserva << " Dia: " << dia << " Hora: "<< hora <<" Id Habitacion:"<<idHabitacion<< endl;
+		}
+	} while (rc == SQLITE_ROW);
+	rc=sqlite3_finalize(stmt);
+	if (rc != SQLITE_OK) {
+		cout << "Error al finalizar la consulta(SELECT)" << endl;
+		return rc;
+	}
+	system("pause");
+
+	return SQLITE_OK;
+}

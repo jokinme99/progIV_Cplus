@@ -29,7 +29,7 @@
 
 using namespace std;
 
-int prueba();
+
 static int callback(void *data, int argc, char **argv, char **azColName) ;
 int callbackUsuarios(void *data, int numeroColumnas, char **contadorDeFila, char **nombresColumnas);
 int callbackReservas(void *data, int numeroColumnas, char **contadorDeFila, char **nombresColumnas);
@@ -42,9 +42,10 @@ void cargarDatosReservas();
 void menuUsuario();
 void caso1Usuario();
 void caso2Usuario();
-void caso3Usuario();
-void caso4Usuario();
-void caso5Usuario();
+int caso3Usuario();
+int caso4Usuario();
+int caso5Usuario();
+int caso6Usuario();
 
 void caso1Admin();
 void caso2Admin();
@@ -291,66 +292,12 @@ void importarDatosUsuarios(){//IMPORTA LOS DATOS DE USUARIOS DE LOS FICHEROS A L
 }
 
 
-
+//aqui
 int main(){
 	inicio();
 return 0;
 }
-int prueba(){
-	char* nombreUsuario;
-		int hotel;
-		char* elegirHotel;
-		int num;
-		int dia,hora;
-			cout<<"Introduzca su usuario para realizar la reserva"<<endl;
-			cin>>nombreUsuario;
-			cout<<"Hoteles: "<<endl;
 
-			rc = sqlite3_open("hotelandia_final.s3db", &db);	//abrir base de datos
-					if (rc != SQLITE_OK) {
-						cout << "Error opening database" << endl;
-						return rc;
-					}
-			char sql5[] = "SELECT * from HOTEL";
-
-			/* Execute SQL statement */
-			rc = sqlite3_exec(db, sql5, callback, (void*) data, &zErrMsg);
-			if (rc != SQLITE_OK) {
-				fprintf(stderr, "SQL error: %s\n", zErrMsg);
-				sqlite3_free(zErrMsg);
-			}
-			cout<<"Introduzca el id del hotel en el que desea realizar una reserva"<<endl;
-			cin>>hotel;
-			cout<<"Habitaciones disponibles;"<<endl;
-			char sql6[] = "SELECT H.numero_habitacion, H.tipo_Habitacion, H.precio_habitacion FROM HABITACION H, HOTEL M, HOTEL_TIENE_HABITACIONES N WHERE M.id_hotel = ";
-			elegirHotel= intAChar(hotel);
-			strcat(sql6,elegirHotel);
-			char fr6[]=" AND M.id_hotel = N.id_hotel AND N.id_habitacion = H.id_habitacion";
-			strcat(sql6,fr6);
-
-			/* Execute SQL statement */
-			rc = sqlite3_exec(db, sql6, callback, (void*) data, &zErrMsg);
-			if (rc != SQLITE_OK) {
-				fprintf(stderr, "SQL error: %s\n", zErrMsg);
-				sqlite3_free(zErrMsg);
-			}
-			cout<<"Seleccione el numero de habitacion en el que desea realizar su reserva:"<<endl;
-			cin>>num;
-			cout<<"Introduzca el dia en la que desea realizar la reserva"<<endl;
-			cin>>dia;
-			cout<<"Introduzca la hora en la que desea realizar la reserva"<<endl;
-			cin>>hora;
-
-					//sale error por que clipse no reconoce la libreria sqlite3 bien, esta bien. //solucionado
-					rc = crearReserva(db, nombreUsuario, hotel, num, dia, hora);
-					rc = sqlite3_close(db);//mejor numHabitacion que tipoHabitacion
-					    if (rc != SQLITE_OK) {
-					        printf("Error closing database\n");
-					        printf("%s\n", sqlite3_errmsg(db));
-					        return rc;
-					    }
-		return 0;
-}
 void inicio(){
 
 	cout << "---MODO ADMINISTRADOR---" << endl;
@@ -477,8 +424,9 @@ void menuUsuario(){
 	cout<<"2. Ver habitaciones"<<endl;
 	cout<<"3. Ver reservas"<<endl;//Si no tiene mensaje por pantalla
 	cout<<"4. Hacer reserva"<<endl;//Solo a su nombre
-	cout<<"5. Eliminar reserva"<<endl;
-	cout<<"6. Volver al menu principal"<<endl;
+	cout<<"5. Modificar reserva"<<endl;
+	cout<<"6. Eliminar reserva"<<endl;
+	cout<<"7. Volver al menu principal"<<endl;
 	cin>>opcion;
 	}while(opcion!= 1 && opcion != 2 && opcion != 3 && opcion != 4 && opcion != 4 && opcion != 5 && opcion !=6);
 	/* ABRIMOS BASE DE DATOS */
@@ -500,6 +448,9 @@ void menuUsuario(){
 		caso5Usuario();
 	}break;
 	case 6:{
+		caso6Usuario();
+	}break;
+	case 7:{
 		cout<<"Cerrando sesion..."<<endl;
 		inicio();
 	}break;
@@ -543,325 +494,36 @@ void caso2Usuario(){
 				menuUsuario();
 }
 
-void caso3Usuario(){
-	char nom[100];
-					cout << "Introduzca su nombre de usuario para ver que reservas tiene" << endl;
-					cin >> nom;
-					cout << endl;
-					/* Create SQL statement */
-					//char sql[] = "SELECT USUARIO.nombre_usuario,RESERVA.id_reserva,RESERVA.dia_reserva,RESERVA.hora_reserva FROM RESERVA JOIN USUARIO ON USUARIO.id_usuario = RESERVA.id_usuario WHERE USUARIO.nombre_usuario ='";
-
-					char sql[] = "SELECT DISTINCT USUARIO.nombre_usuario, RESERVA.id_reserva, HABITACION.numero_habitacion,HABITACION.planta_habitacion ,HABITACION.tipo_habitacion, HABITACION.precio_habitacion, HOTEL.nombre_hotel FROM HABITACION JOIN RESERVA_TIENE_HABITACIONES ON RESERVA_TIENE_HABITACIONES.id_habitacion = HABITACION.id_habitacion JOIN RESERVA ON RESERVA.id_reserva = RESERVA_TIENE_HABITACIONES.id_reserva JOIN HOTEL_TIENE_HABITACIONES ON HOTEL_TIENE_HABITACIONES.id_habitacion = HABITACION.id_habitacion JOIN HOTEL ON HOTEL.id_hotel = HOTEL_TIENE_HABITACIONES.id_hotel JOIN USUARIO ON USUARIO.id_usuario = RESERVA.id_usuario WHERE USUARIO.nombre_usuario ='";
-
-					strcat(sql, nom);
-
-					char fr2[] = "'";
-
-					strcat(sql, fr2);
-
-					/* Execute SQL statement */
-					rc = sqlite3_exec(db, sql, callback, (void*) data, &zErrMsg);
-					if (rc != SQLITE_OK) {
-						fprintf(stderr, "SQL error: %s\n", zErrMsg);
-						sqlite3_free(zErrMsg);
-					} else {
-						//fprintf(stdout, "Operation done successfully\n");
-					}//Desea ver que habitaciones estan reservadas??
-					sqlite3_close(db);
-					menuUsuario();
-}
-
-void caso4Usuario(){
-	int opcion;
-	do{
-	cout<<"Hotel que quiere hacer la reserva:"<<endl;
-	cout<<"1. Hotel Melia"<<endl;
-	cout<<"2. Iberostar Hotel"<<endl;
-	cout<<"3. Barcelo Hotel"<<endl;
-	cout<<"4. Nh Hotel"<<endl;
-	cout<<"5. Eurostar Hotel"<<endl;
-	cin>>opcion;
-	}while(opcion!=1&&opcion!=2&&opcion!=3&&opcion!=4&&opcion!=5);
-	char id_res[100],dia_res[100],hora_res[100],id_usuario[100];int opcion1;
-	switch(opcion){
-	case 1:{//Melia
-		cout << "Ingrese el id de la reserva que desea anyadir: ";
-		cin >> id_res;
-		cout << endl;
-		cout << "Ingrese el dia de la reserva que desea anyadir: ";
-		cin >> dia_res;
-		cout << endl;
-		cout << "Ingrese la hora del restaurante que desea anyadir: ";
-		cin >> hora_res;
-		cout << endl;
-		cout << "Ingrese el id de su usuario: ";
-		cin >> id_usuario;//Tiene que ser el tuyo-> COMPROBAR!!!
-		cout << endl;
-
-		/* Create SQL statement */
-		char sql[] = "INSERT INTO RESERVA VALUES (";
-
-		char con1[] = ",", con2[] = ",", con3[] = ",", con8[] = ")", con9[] = "";
-
-		strcat(sql, id_res);
-		strcat(sql, con1);
-		strcat(sql, dia_res);
-		strcat(sql, con2);
-		strcat(sql, hora_res);
-		strcat(sql, con3);
-		strcat(sql, id_usuario);
-		strcat(sql, con8);
-		strcat(sql, con9);
-
-
-		/* Execute SQL statement */
-		rc = sqlite3_exec(db, sql, callback, (void*) data, &zErrMsg);
-		if (rc != SQLITE_OK) {
-			fprintf(stderr, "SQL error: %s\n", zErrMsg);
-			sqlite3_free(zErrMsg);
-		} else {
-			fprintf(stdout, "Reserva realizada:\n");
-		}
-		sqlite3_close(db);
-		menuUsuario();
-	}break;
-	case 2:{//Iberosar
-		cout << "Ingrese el id de la reserva que desea anyadir: ";
-		cin >> id_res;
-		cout << endl;
-		cout << "Ingrese el dia de la reserva que desea anyadir: ";
-		cin >> dia_res;
-		cout << endl;
-		cout << "Ingrese la hora la reserva que desea anyadir: ";
-		cin >> hora_res;
-		cout << endl;
-		cout << "Ingrese el id de su usuario: ";
-		cin >> id_usuario;//Tiene que ser el tuyo-> COMPROBAR!!!
-		cout << endl;
-
-		/* Create SQL statement */
-		char sql[] = "INSERT INTO RESERVA VALUES (";
-
-		char con1[] = ",", con2[] = ",", con3[] = ",", con8[] = ")", con9[] = "";
-
-		strcat(sql, id_res);
-		strcat(sql, con1);
-		strcat(sql, dia_res);
-		strcat(sql, con2);
-		strcat(sql, hora_res);
-		strcat(sql, con3);
-		strcat(sql, id_usuario);
-		strcat(sql, con8);
-		strcat(sql, con9);
-
-
-		/* Execute SQL statement */
-		rc = sqlite3_exec(db, sql, callback, (void*) data, &zErrMsg);
-		if (rc != SQLITE_OK) {
-			fprintf(stderr, "SQL error: %s\n", zErrMsg);
-			sqlite3_free(zErrMsg);
-		} else {
-			fprintf(stdout, "Reserva realizada:\n");
-		}
-		sqlite3_close(db);
-		menuUsuario();
-	}break;
-	case 3:{//Barcelo
-		cout << "Ingrese el id de la reserva que desea anyadir: ";
-		cin >> id_res;
-		cout << endl;
-		cout << "Ingrese el dia de la reserva que desea anyadir: ";
-		cin >> dia_res;
-		cout << endl;
-		cout << "Ingrese la hora de la reserva que desea anyadir: ";
-		cin >> hora_res;
-		cout << endl;
-		cout << "Ingrese el id de su usuario: ";
-		cin >> id_usuario;//Tiene que ser el tuyo-> COMPROBAR!!!
-		cout << endl;
-
-		/* Create SQL statement */
-		char sql[] = "INSERT INTO RESERVA VALUES (";
-
-		char con1[] = ",", con2[] = ",", con3[] = ",", con8[] = ")", con9[] = "";
-
-		strcat(sql, id_res);
-		strcat(sql, con1);
-		strcat(sql, dia_res);
-		strcat(sql, con2);
-		strcat(sql, hora_res);
-		strcat(sql, con3);
-		strcat(sql, id_usuario);
-		strcat(sql, con8);
-		strcat(sql, con9);
-
-
-		/* Execute SQL statement */
-		rc = sqlite3_exec(db, sql, callback, (void*) data, &zErrMsg);
-		if (rc != SQLITE_OK) {
-			fprintf(stderr, "SQL error: %s\n", zErrMsg);
-			sqlite3_free(zErrMsg);
-		} else {
-			fprintf(stdout, "Reserva realizada:\n");
-		}sqlite3_close(db);
-		menuUsuario();
-
-
-	}break;
-	case 4:{//Nh
-		cout << "Ingrese el id de la reserva que desea anyadir: ";
-		cin >> id_res;
-		cout << endl;
-		cout << "Ingrese el dia de la reserva que desea anyadir: ";
-		cin >> dia_res;
-		cout << endl;
-		cout << "Ingrese la hora de la reserva que desea anyadir: ";
-		cin >> hora_res;
-		cout << endl;
-		cout << "Ingrese el id de su usuario: ";
-		cin >> id_usuario;//Tiene que ser el tuyo-> COMPROBAR!!!
-		cout << endl;
-
-		/* Create SQL statement */
-		char sql[] = "INSERT INTO RESERVA VALUES (";
-
-		char con1[] = ",", con2[] = ",", con3[] = ",", con8[] = ")", con9[] = "";
-
-		strcat(sql, id_res);
-		strcat(sql, con1);
-		strcat(sql, dia_res);
-		strcat(sql, con2);
-		strcat(sql, hora_res);
-		strcat(sql, con3);
-		strcat(sql, id_usuario);
-		strcat(sql, con8);
-		strcat(sql, con9);
-
-
-		/* Execute SQL statement */
-		rc = sqlite3_exec(db, sql, callback, (void*) data, &zErrMsg);
-		if (rc != SQLITE_OK) {
-			fprintf(stderr, "SQL error: %s\n", zErrMsg);
-			sqlite3_free(zErrMsg);
-		} else {
-			fprintf(stdout, "Reserva realizada:\n");
-		}sqlite3_close(db);
-		menuUsuario();
-
-
-	}break;
-	case 5:{//EuroStar
-		cout << "Ingrese el id de la reserva que desea anyadir: ";
-		cin >> id_res;
-		cout << endl;
-		cout << "Ingrese el dia de la reserva que desea anyadir: ";
-		cin >> dia_res;
-		cout << endl;
-		cout << "Ingrese la hora de la reserva que desea anyadir: ";
-		cin >> hora_res;
-		cout << endl;
-		cout << "Ingrese el id de su usuario: ";
-		cin >> id_usuario;//Tiene que ser el tuyo-> COMPROBAR!!!
-		cout << endl;
-
-		/* Create SQL statement */
-		char sql[] = "INSERT INTO RESERVA VALUES (";
-
-		char con1[] = ",", con2[] = ",", con3[] = ",", con8[] = ")", con9[] = "";
-
-		strcat(sql, id_res);
-		strcat(sql, con1);
-		strcat(sql, dia_res);
-		strcat(sql, con2);
-		strcat(sql, hora_res);
-		strcat(sql, con3);
-		strcat(sql, id_usuario);
-		strcat(sql, con8);
-		strcat(sql, con9);
-
-
-		/* Execute SQL statement */
-		rc = sqlite3_exec(db, sql, callback, (void*) data, &zErrMsg);
-		if (rc != SQLITE_OK) {
-			fprintf(stderr, "SQL error: %s\n", zErrMsg);
-			sqlite3_free(zErrMsg);
-		} else {
-			fprintf(stdout, "Reserva realizada:\n");
-		}sqlite3_close(db);
-		menuUsuario();
-
-	}break;
-
+int caso3Usuario(){//Ver reserva
+	char* usuarioReserva;
+	cout<<"Introduzca su usuario para ver sus reservas"<<endl;
+	cin>>usuarioReserva;
+	rc = sqlite3_open("hotelandia_final.s3db", &db);	//abrir base de datos
+	if (rc != SQLITE_OK) {
+		cout << "Error opening database" << endl;
+		return rc;
 	}
+	rc=verReserva(db, usuarioReserva);
+		rc=sqlite3_close(db);
+	    if (rc != SQLITE_OK) {
+			 printf("Error closing database\n");
+			 printf("%s\n", sqlite3_errmsg(db));
+			 return rc;
+	    }
+	    menuUsuario();
+return 0;
 }
 
-void caso5Usuario(){
-	char nom[100];
-	cout << "Introduzca su nombre de usuario para ver que reservas tiene" << endl;
-						cin >> nom;
-						cout << endl;
-						/* Create SQL statement */
-						char sql[] = "SELECT USUARIO.nombre_usuario, RESERVA.id_reserva, HABITACION.numero_habitacion,HABITACION.planta_habitacion ,HABITACION.tipo_habitacion, HABITACION.precio_habitacion, HOTEL.nombre_hotel FROM HABITACION JOIN RESERVA_TIENE_HABITACIONES ON RESERVA_TIENE_HABITACIONES.id_habitacion = HABITACION.id_habitacion JOIN RESERVA ON RESERVA.id_reserva = RESERVA_TIENE_HABITACIONES.id_reserva JOIN HOTEL_TIENE_HABITACIONES ON HOTEL_TIENE_HABITACIONES.id_habitacion = HABITACION.id_habitacion JOIN HOTEL ON HOTEL.id_hotel = HOTEL_TIENE_HABITACIONES.id_hotel JOIN USUARIO ON USUARIO.id_usuario = RESERVA.id_usuario WHERE USUARIO.nombre_usuario ='";
-						//ARREGLAR ESTA SENTENCIA
-
-						strcat(sql, nom);
-
-						char fr2[] = "'";
-
-						strcat(sql, fr2);
-
-						/* Execute SQL statement */
-						rc = sqlite3_exec(db, sql, callback, (void*) data, &zErrMsg);
-						if (rc != SQLITE_OK) {
-							fprintf(stderr, "SQL error: %s\n", zErrMsg);
-							sqlite3_free(zErrMsg);
-						} else {
-							fprintf(stdout, "Estas son las reservas que contiene el usuario introducido\n");}
-							char nom1[100];
-								cout << "Ingrese el numero de la reserva que desea eliminar " << endl;
-								cin >> nom1;
-								cout << endl;
-								/* Create SQL statement */
-								char sql1[] = "DELETE from RESERVA WHERE ID_RESERVA= ";
-
-								strcat(sql1, nom1);
-
-								char fr3[] = "";
-
-								strcat(sql1, fr3);
-
-								/* Execute SQL statement */
-								rc = sqlite3_exec(db, sql1, callback, (void*) data, &zErrMsg);
-								if (rc != SQLITE_OK) {
-									fprintf(stderr, "SQL error: %s\n", zErrMsg);
-									sqlite3_free(zErrMsg);
-								} else {
-									fprintf(stdout, "Reserva eliminada\n");
-								}
-
-									/* Create SQL statement */
-									char sql2[] = "DELETE * from RESERVA_TIENE_HABITACIONES WHERE ID_RESERVA= ";
-
-									strcat(sql2, nom1);
-
-									char fr4[] = "";
-
-									strcat(sql2, fr4);
-
-									/* Execute SQL statement */
-									rc = sqlite3_exec(db, sql2, callback, (void*) data, &zErrMsg);
-									if (rc != SQLITE_OK) {
-										fprintf(stderr, "SQL error: %s\n", zErrMsg);
-										sqlite3_free(zErrMsg);
-									} else {
-										//fprintf(stdout, "Reserva eliminada\n");
-									}
-
-
-								sqlite3_close(db);
-								menuUsuario();
+int caso4Usuario(){//Hacer rserva
+	return 0;
 }
 
+int caso5Usuario(){//modificarResrva
+	return 0;
+}
+int caso6Usuario(){//eliminarReserva
+	return 0;
+}
 void menuAdministrador(){
 
 	int opcion;

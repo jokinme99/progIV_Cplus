@@ -37,6 +37,8 @@ int callbackHabitaciones(void *data, int numeroColumnas, char **contadorDeFila, 
 void inicio();//inicio sesion usuario
 void importarDatosUsuarios();
 void cargarDatosUsuarios();
+void cargarDatosHabitaciones();
+void cargarDatosReservas();
 void menuUsuario();
 void caso1Usuario();
 void caso2Usuario();
@@ -166,6 +168,28 @@ void cargarDatosHabitaciones(){
 
 	/* Execute SQL statement */
 	rc = sqlite3_exec(db, sql, callbackHabitaciones, (void*) data, &zErrMsg);
+	if (rc != SQLITE_OK) {
+
+
+		fprintf(stderr, "SQL error: %s\n", zErrMsg);
+		sqlite3_free(zErrMsg);
+	} else {
+		//fprintf(stdout, "Operation done successfully\n");
+	}
+	sqlite3_close(db);
+
+}
+
+void cargarDatosReservas(){
+
+	rc = sqlite3_open("hotelandia_final.s3db", &db);
+
+
+	char sql[] = "SELECT * from RESERVA";
+
+
+	/* Execute SQL statement */
+	rc = sqlite3_exec(db, sql, callbackReservas, (void*) data, &zErrMsg);
 	if (rc != SQLITE_OK) {
 
 
@@ -329,6 +353,7 @@ int prueba(){
 }
 void inicio(){
 
+	cout << "---MODO ADMINISTRADOR---" << endl;
 
 
 
@@ -341,6 +366,10 @@ void inicio(){
 
 		cargarDatosHabitaciones();
 		h.imprimirHabitaciones();
+
+		cargarDatosReservas();
+
+		u.imprimirUsuarios();
 
 
 		////////////////////////////////////////////

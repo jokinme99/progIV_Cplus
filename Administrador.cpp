@@ -59,7 +59,10 @@ void Administrador::imprimirUsuario(){
 	cout<<"Edad: "<<this->getEdadUsuario()<<" Tipo de usuario: "<< this->getTipoUsuario()<<endl;
 	cout<<"Reservas: "<<endl;
 	cout<<"----------"<<endl;
+	if (this->getReservaUsuario()==NULL) {
+		cout<<"(este usuario no tiene reservas)"<<endl;
+	}else{
 	this->getReservaUsuario()->imprimirReservas();
-	cout<<endl;
+	}
 
 }

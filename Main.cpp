@@ -19,6 +19,7 @@
 #include "Habitacion.h"//Para acceder a los distintos metodos y poder ver/editar/eliminar datos de la base de datos
 #include "Hotel.h"//Para acceder a los distintos metodos y poder ver/editar/eliminar datos de la base de datos
 #include "Reserva.h"//Para acceder a los distintos metodos y poder ver/editar/eliminar datos de la base de datos
+#include "Reservas.h"
 #include "Trabajador.h"//Para acceder a los distintos metodos y poder ver/editar/eliminar datos de la base de datos
 #include "Usuario.h"//Para acceder a los distintos metodos y poder ver/editar/eliminar datos de la base de datos
 #include "Usuarios.h"
@@ -117,9 +118,11 @@ int callbackUsuarios(void *data, int numeroColumnas, char **contadorDeFila, char
 
 int callbackReservas(void *data, int numeroColumnas, char **contadorDeFila, char **nombresColumnas) {
 	(void)data;
-	Habitacion *ha = new Habitacion(atoi(contadorDeFila[0]), atoi(contadorDeFila[1]), atoi(contadorDeFila[2]), contadorDeFila[3],atoi(contadorDeFila[2]));
-	h.anyadirhabitacion(ha);
-	Reserva *r = new Reserva()
+
+	Reserva *r = new Reserva(atoi(contadorDeFila[0]), atoi(contadorDeFila[1]), atoi(contadorDeFila[2]), h.getHabitacion(atoi(contadorDeFila[4])));
+
+	u.getReservas(atoi(contadorDeFila[3]))->anyadirReserva(r);
+
 
 return 0;
 
@@ -895,18 +898,9 @@ void menuAdministrador(){
 //OPCIONES DE ADMINISTRADOR: CREAR HABITACIÓN, ELIMINAR HABITACION, LISTAR HABITACIONES, LISTAR RESERVAS, ELIMINAR RESERVAS
 }
 void caso1Admin(){
-	char sql[] = "SELECT * from HABITACION";
+	cout << "--HABITACIONES--" << endl;
 
-	/* Execute SQL statement */
-	rc = sqlite3_exec(db, sql, callback, (void*) data, &zErrMsg);
-	if (rc != SQLITE_OK) {
-		fprintf(stderr, "SQL error: %s\n", zErrMsg);
-		sqlite3_free(zErrMsg);
-	} else {
-		//fprintf(stdout, "Operation done successfully\n");
-	}
-	sqlite3_close(db);
-	menuAdministrador();
+	h.imprimirHabitaciones();
 }
 void caso2Admin(){
 

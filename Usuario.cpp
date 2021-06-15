@@ -108,10 +108,10 @@ using namespace std;
 	char* Usuario::getTipoUsuario(){
 		return "usuario";
 	}
-	Reserva* Usuario::getReservaUsuario()const{
+	Reservas* Usuario::getReservaUsuario()const{
 		return this->reservasUsuario;
 	}
-	void Usuario::setReservaUsuario(Reserva* reservasUsuario){
+	void Usuario::setReservaUsuario(Reservas* reservasUsuario){
 		this->reservasUsuario=reservasUsuario;
 	}
 
@@ -137,6 +137,7 @@ using namespace std;
 		cout<<"Usuario "<<this->idUsuario<<": "<<endl;
 		cout<<"Nombre: "<<this->nombreUsuario<<" Correo: "<<this->correoUsuario<<endl;
 		cout<<"Edad: "<<this->edadUsuario<<" Tipo de usuario: "<< this->getTipoUsuario()<<endl;
+		cout<<"Reservas: "<<endl<<this->reservasUsuario->
 		cout<<endl;
 	}
 	char* Usuario::intAChar(int numero){

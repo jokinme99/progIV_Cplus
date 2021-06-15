@@ -11,9 +11,14 @@
 
 class Reservas{
 private:
-	Reserva *r;
+	Reserva *r[100];
 	int numReservas;
-
+public:
+	Reservas();
+	Reservas(Reservas&);
+	~Reservas();
+	void anyadirReserva(Reserva*);
+	void eliminarReserva(Reserva*);
 
 };
 

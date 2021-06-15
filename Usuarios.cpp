@@ -91,4 +91,13 @@ using namespace std;
 	int Usuarios::getNumUsuario(){
 		return this->numUsuarios;
 	}
+	Reservas* Usuarios::getReservas(int idUsuario){
+		int i =0;
+				for (i = 0; i < this->numUsuarios;++i) {
+					if (this->u[i]->getIdUsuario()==idUsuario) {
+						break;
+					}
+				}
+				return this->u[i]->getReservaUsuario();
+	}
 

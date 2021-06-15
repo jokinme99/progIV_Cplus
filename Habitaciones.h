@@ -21,6 +21,7 @@ public:
 	void quitarHabitacion(int);
 	void imprimirHabitaciones();
 	int getNumHabitaciones();
+	Habitacion* getHabitacion(int idHabitacion);
 };
 
 

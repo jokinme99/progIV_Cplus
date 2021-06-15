@@ -8,6 +8,7 @@
 #ifndef USUARIOS_H_
 #define USUARIOS_H_
 #include "Usuario.h"
+#include "Reservas.h"
 #include "sqlite/sqlite3.h"
 class Usuarios{
 
@@ -26,6 +27,7 @@ public:
 	int callbackUsuarios(void *data, int numeroColumnas, char **contadorDeFila, char **nombresColumnas);
 	void imprimirUsuarios();
 	int getNumUsuario();
+	Reservas* getReservas(int);
 };
 
 

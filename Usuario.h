@@ -12,7 +12,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <windows.h>
-
+#include "Reservas.h"
 
 class Usuario
 {
@@ -23,7 +23,7 @@ private:
 	char* correoUsuario;
 	char* contrasenyaUsuario;
 	int edadUsuario;
-
+	Reservas *reservasUsuario;
 
 
 
@@ -42,8 +42,8 @@ public:
 	void setContrasenyaUsuario(char*);
 	int getEdadUsuario()const;
 	void setEdadUsuario(int);
-	Reserva* getReservaUsuario()const;
-	void setReservaUsuario(Reserva* reservasUsuario);
+	Reservas* getReservaUsuario()const;
+	void setReservaUsuario(Reservas* reservasUsuario);
 
 	int getNReservas()const;
 	void setNReservas(int);

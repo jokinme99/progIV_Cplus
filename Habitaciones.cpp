@@ -40,4 +40,13 @@ using namespace std;
 
 		return this->numHabitaciones;
 	}
+	Habitacion* Habitaciones::getHabitacion(int idHabitacion){
+		int var = 0;
+		for (var = 0; var < this->numHabitaciones; ++var) {
+			if(this->h[var]->getIdHabitacion()==idHabitacion){
+				break;
+			}
+		}
+		return this->h[var];
+	}
 

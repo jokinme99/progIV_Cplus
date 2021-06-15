@@ -619,9 +619,9 @@ void menuAdministrador(){
 	do{
 	cout<<"Elije las siguientes opciones"<<endl;
 	cout<<"1. Ver habitaciones"<<endl;
-	cout<<"2. Crear habitacion"<<endl;
+	cout<<"2. Editar habitacion"<<endl;
 	cout<<"3. Eliminar habitaciones"<<endl;//Si no tiene mensaje por pantalla
-	cout<<"4. Ver reservas"<<endl;//Solo a su nombre
+	cout<<"4. Añadir habitacion"<<endl;//Solo a su nombre
 	cout<<"5. crear reservas"<<endl;//Solo a su nombre
 	cout<<"6. Eliminar reserva"<<endl;
 	cout<<"7. Ver trabajadores"<<endl;

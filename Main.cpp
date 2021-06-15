@@ -768,6 +768,7 @@ void caso4Admin() {
 	cout << endl;
 
 	Habitacion* hab = new Habitacion(id_hab, num_hab, planta, tipo, precio);
+	h.anyadirhabitacion(hab);
 	menuAdministrador();
 }
 void caso5Admin() {

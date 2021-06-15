@@ -317,6 +317,8 @@ void inicio(){
 
 		u.imprimirUsuarios();
 
+		//crear metodo devolver usuario con id de usuario, prueba id 1 y prueba a hacer print de las reservas
+
 
 		////////////////////////////////////////////
 		// GENERAR UN OBJETO USUARIOS Y RELLENARLA CON UNA FUNCION DE LA CLASE

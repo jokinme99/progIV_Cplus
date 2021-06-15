@@ -27,9 +27,16 @@ using namespace std;
 		this->h[this->numHabitaciones]= h;
 		numHabitaciones++;
 	}
-	void Habitaciones::quitarHabitacion(int){
+	void Habitaciones::quitarHabitacion(int id){
 
-	}
+			int var = 0;
+					for (var = 0; var < this->numHabitaciones; ++var) {
+						if(this->h[var]->getIdHabitacion()==id){
+							this->h[var] = NULL;
+						}
+					}
+		}
+
 	void Habitaciones::imprimirHabitaciones(){
 
 		for (int i = 0; i < this->numHabitaciones; ++i) {

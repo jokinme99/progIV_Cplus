@@ -730,18 +730,8 @@ void caso3Admin(){
 
 
 void caso4Admin(){
-	char sql[] = "SELECT * from RESERVA";
 
-	/* Execute SQL statement */
-	rc = sqlite3_exec(db, sql, callback, (void*) data, &zErrMsg);
-	if (rc != SQLITE_OK) {
-		fprintf(stderr, "SQL error: %s\n", zErrMsg);
-		sqlite3_free(zErrMsg);
-	} else {
-		//fprintf(stdout, "Operation done successfully\n");
-	}
-	sqlite3_close(db);
-	system("pause");
+	cout << "Crea una nueva habitacion"
 	menuAdministrador();
 }
 void caso5Admin(){

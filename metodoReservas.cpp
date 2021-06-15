@@ -21,7 +21,7 @@ char* intAChar(int numero){
     return (char*) c;
 }
 
-int crearReserva(sqlite3* db, char* nombreUsuario, int hotel, int numHabitacion, int dia, int hora){
+int crearReserva(sqlite3* db, char nombreUsuario[20], int hotel, int numHabitacion, int dia, int hora){
 
 	Reserva r;
 	Habitacion h;
@@ -154,13 +154,13 @@ int crearReserva(sqlite3* db, char* nombreUsuario, int hotel, int numHabitacion,
 
 				cout << "Su reserva se ha realizado con exito" << endl;
 				cout << "Los datos de la reserva son los siguientes:" << endl;
-				cout<<"Hotel: "<<nombreHotel<<", numero habitacion: "<<r.getHabitacionReservada()->getNumHabitacion()<<", planta habitacion: "<<r.getHabitacionReservada()->getPlantaHabitacion()<<", tipo habitacion: "<<r.getHabitacionReservada()->getTipoHabitacion()<<", precio: "<<r.getHabitacionReservada()->getPrecioHabitacion()<<", dia: "<<r.getDiaReserva()<<", hora de entrada: "<<r.getHoraReserva()<<"} Reserva realizada por: "<<nombreUsuario<<endl;
+				cout<<"Nombre de usuario: "<<nombreUsuario<<", dia: "<<dia<<", hora: "<<hora<< ", numero de habitacion "<<numHabitacion<<", nombre del hotel" <<nombreHotel<<endl;
 				return SQLITE_OK;
 
 
 }
 
-int modificarReserva(sqlite3 *db, char* nombreUsuario){
+int modificarReserva(sqlite3 *db, char nombreUsuario[20]){
 	int hora, dia, idReserva;
 	int idUsuario;
 	sqlite3_stmt *stmt;//SELECT PARA CONSEGUIR EL ID
@@ -226,8 +226,8 @@ int modificarReserva(sqlite3 *db, char* nombreUsuario){
 	}
 	int idReservaM, diaM, horaM;
 	cout<<"Id de reserva a modificar: ";cin>>idReservaM;
-	cout<<endl<<"Dia a modificar: ";cin>>diaM;
-	cout<<endl<<"Hora a modificar: ";cin>>horaM;
+	cout<<endl<<"Nueva fecha: ";cin>>diaM;
+	cout<<endl<<"Nueva hora de entrada: ";cin>>horaM;
 	rc = sqlite3_close(db);
 	if (rc != SQLITE_OK) {
 		printf("Error closing database\n");
@@ -275,8 +275,6 @@ int modificarReserva(sqlite3 *db, char* nombreUsuario){
 		cout << "Usuario de la reserva: " << nombreUsuario << " Id Reserva: "
 				<< idReservaM << " Dia: " << diaM << " Hora: "
 				<< horaM << endl;
-
-		system("pause");
 
 
 
@@ -458,7 +456,6 @@ int verReserva(sqlite3* db, char nombreUsuario[20]){
 		cout << "Error al finalizar la consulta(SELECT)" << endl;
 		return rc;
 	}
-	system("pause");
 
 	return SQLITE_OK;
 }

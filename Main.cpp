@@ -294,7 +294,7 @@ void importarDatosUsuarios(){//IMPORTA LOS DATOS DE USUARIOS DE LOS FICHEROS A L
 
 //aqui
 int main(){
-	caso4Usuario();
+	inicio();
 return 0;
 }
 
@@ -451,8 +451,10 @@ void menuUsuario(){
 		caso6Usuario();
 	}break;
 	case 7:{
+		system("cls");
 		cout<<"Cerrando sesion..."<<endl;
 		inicio();
+
 	}break;
 	default:{
 		cout<<"Introduzca un valor correcto"<<endl;
@@ -518,13 +520,96 @@ return 0;
 }
 
 int caso4Usuario(){//Hacer rserva
+	char nombreUsuario[20];
+	char eleccionHotel[100];
+	int eleccionNHabitacion;
+	int dia;
+	int hora;
+	cout<<"Introduzca su nombre de usuario para realizar una reserva :"<<endl;
+	cin>>nombreUsuario;
+
+	rc = sqlite3_open("hotelandia_final.s3db", &db);	//abrir base de datos
+	if (rc != SQLITE_OK) {
+		cout << "Error opening database" << endl;
+		return rc;
+	}
+
+	char sql[] = "SELECT * from HOTEL";
+
+	/* Execute SQL statement */
+	rc = sqlite3_exec(db, sql, callback, (void*) data, &zErrMsg);
+	if (rc != SQLITE_OK) {
+		fprintf(stderr, "SQL error: %s\n", zErrMsg);
+		sqlite3_free(zErrMsg);
+	}
+	cout<<"Seleccione el hotel en el que desea realizar una reserva (Su numero): ";
+	cin>>eleccionHotel;
+	char sql2[] = "SELECT H.numero_habitacion, H.planta_habitacion, H.tipo_habitacion, H.precio_habitacion from HABITACION H, HOTEL M, HOTEL_TIENE_HABITACIONES L WHERE M.id_hotel = ";
+	strcat(sql2,eleccionHotel);
+	char fr100[]=" AND M.id_hotel = L.id_hotel AND L.id_habitacion = H.id_habitacion";
+	strcat(sql2,fr100);
+	/* Execute SQL statement */
+	rc = sqlite3_exec(db, sql2, callback, (void*) data, &zErrMsg);
+	if (rc != SQLITE_OK) {
+		fprintf(stderr, "SQL error: %s\n", zErrMsg);
+		sqlite3_free(zErrMsg);
+	}
+	cout<<"Seleccione el numero de habitacion que desea reservar: ";
+	cin>>eleccionNHabitacion;
+	cout<<endl<<"Seleccione el dia en el que desea realizar la reserva";
+	cin>>dia;
+	cout<<endl<<"Seleccione la hora de entrada ";
+	cin>>hora;
+	int hotel = atoi(eleccionHotel);
+	rc = crearReserva(db,nombreUsuario,hotel,eleccionNHabitacion,dia,hora);
+	rc = sqlite3_close(db);
+	    if (rc != SQLITE_OK) {
+	        printf("Error closing database\n");
+	        printf("%s\n", sqlite3_errmsg(db));
+	        return rc;
+	    }
+	    system("pause");
+	    menuUsuario();
 	return 0;
 }
 
 int caso5Usuario(){//modificarResrva
+	char usuarioModificar[20];
+	cout<<"Introduzca el usuario en el que va a realizar la modificacion: ";
+	cin>>usuarioModificar;cout<<endl;
+	rc = sqlite3_open("hotelandia_final.s3db", &db);	//abrir base de datos
+		if (rc != SQLITE_OK) {
+			cout << "Error opening database" << endl;
+			return rc;
+		}
+	rc =modificarReserva(db, usuarioModificar);//ANYADIR MODIFICAR LA HABITACION
+	rc = sqlite3_close(db);
+	    if (rc != SQLITE_OK) {
+	        printf("Error closing database\n");
+	        printf("%s\n", sqlite3_errmsg(db));
+	        return rc;
+	    }
+	    system("pause");
+	    menuUsuario();
 	return 0;
 }
 int caso6Usuario(){//eliminarReserva
+	char usuarioEliminar[20];
+	cout<<"Introduzca el usuario del que quiere eliminar una reserva: ";cin>>usuarioEliminar;cout<<endl;
+	rc = sqlite3_open("hotelandia_final.s3db", &db);	//abrir base de datos
+		if (rc != SQLITE_OK) {
+			cout << "Error opening database" << endl;
+			return rc;
+		}
+	rc = eliminarReserva(db, usuarioEliminar);
+	rc = sqlite3_close(db);
+	if (rc != SQLITE_OK) {
+		printf("Error closing database\n");
+		printf("%s\n", sqlite3_errmsg(db));
+		return rc;
+	}
+	system("pause");
+	menuUsuario();
 	return 0;
 }
 void menuAdministrador(){
@@ -595,7 +680,7 @@ void caso1Admin(){
 	cout << "--HABITACIONES--" << endl;
 
 	h.imprimirHabitaciones();
-
+	system("pause");
 	menuAdministrador();
 }
 void caso2Admin(){
@@ -622,6 +707,7 @@ void caso2Admin(){
 
 		h.editarHabitacion(idHab,tipoHab, Prec);
 
+		system("pause");
 
 		menuAdministrador();
 
@@ -676,6 +762,7 @@ void caso3Admin(){
 
 
 	sqlite3_close(db);
+	system("pause");
 	menuAdministrador();
 
 }
@@ -691,6 +778,7 @@ void caso4Admin(){
 		//fprintf(stdout, "Operation done successfully\n");
 	}
 	sqlite3_close(db);
+	system("pause");
 	menuAdministrador();
 }
 void caso5Admin(){
@@ -885,6 +973,7 @@ void caso5Admin(){
 		menuAdministrador();
 	}break;
 	}
+	system("pause");
 	menuAdministrador();
 
 }
@@ -926,6 +1015,7 @@ void caso6Admin(){
 
 
 	sqlite3_close(db);
+	system("pause");
 	menuAdministrador();
 
 
@@ -948,10 +1038,10 @@ void caso7Admin(){
 		//fprintf(stdout, "Operation done successfully\n");
 	}
 	sqlite3_close(db);
+	system("pause");
 	menuAdministrador();
 
 }
-
 void caso8Admin(){
 
 	char idtr[100], ntr[100], dnitr[100], tfntr[100],sldtr[100], idhotel[100];
@@ -1000,6 +1090,7 @@ void caso8Admin(){
 		fprintf(stdout, "Numero de habitaciones a reservar:\n");
 	}
 	sqlite3_close(db);
+	system("pause");
 	menuAdministrador();
 
 
@@ -1028,6 +1119,7 @@ void caso9Admin(){
 	}
 
 	sqlite3_close(db);
+	system("pause");
 	menuAdministrador();
 
 }

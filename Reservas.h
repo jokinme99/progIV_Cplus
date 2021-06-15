@@ -17,9 +17,11 @@ public:
 	Reservas();
 	Reservas(Reservas&);
 	~Reservas();
+
 	void anyadirReserva(Reserva*);
 	void eliminarReserva(Reserva*);
-
+	int getNumReservas();
+	void imprimirReservas();
 };
 
 

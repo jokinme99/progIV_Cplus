@@ -32,3 +32,16 @@ this->numReservas++;
 void Reservas::eliminarReserva(Reserva* r){
 
 }
+int Reservas::getNumReservas(){
+	return this->numReservas;
+}
+void Reservas::imprimirReservas(){
+
+	if (this->getNumReservas()==0) {
+		cout<<"(este usuario no tiene reservas)"<<endl;
+	}
+
+	for (int i = 0; i < this->getNumReservas(); ++i) {
+		this->r[i]->imprimeReserva();
+	}
+}

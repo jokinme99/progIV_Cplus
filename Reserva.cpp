@@ -58,6 +58,9 @@ Habitacion* Reserva::getHabitacionReservada()const{
 void Reserva::setHabitacionReservada(Habitacion* habitacion){
 	this->habitacionReservada=habitacion;
 }
-
+void Reserva::imprimeReserva(){
+	cout<<"Id reserva: "<<this->idReserva<<" Habitacion reservada: "<<this->habitacionReservada->getIdHabitacion()<<". "<<this->habitacionReservada->getTipoHabitacion()<<endl;
+	cout<<"Hora de la reserva "<< this->horaReserva<<":00 "<<" Dia de reserva: "<<this->diaReserva<<endl;
+}
 
 

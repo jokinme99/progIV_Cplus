@@ -52,6 +52,7 @@ public:
 
 
 	virtual void imprimirUsuario();//PORQUE OSTIAS NO ME RECONOCE ESTO
+
 	void verhoteles();
 	void listarHabitaciones();
 	void listarReservas();

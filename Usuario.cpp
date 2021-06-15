@@ -137,9 +137,11 @@ using namespace std;
 		cout<<"Usuario "<<this->idUsuario<<": "<<endl;
 		cout<<"Nombre: "<<this->nombreUsuario<<" Correo: "<<this->correoUsuario<<endl;
 		cout<<"Edad: "<<this->edadUsuario<<" Tipo de usuario: "<< this->getTipoUsuario()<<endl;
-		cout<<"Reservas: "<<endl<<this->reservasUsuario->
-		cout<<endl;
+		cout<<"Reservas: "<<endl;
+		cout<<"----------"<<endl;
+		this->reservasUsuario->imprimirReservas();
 	}
+
 	char* Usuario::intAChar(int numero){
 		string s = to_string(numero);
 		const char *c = s.c_str();

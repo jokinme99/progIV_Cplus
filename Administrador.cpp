@@ -50,8 +50,6 @@ void Administrador::listarUsuarios(){
 }
 char* Administrador::getTipoUsuario(){
 
-
-
 	return "admin";
 }
 
@@ -59,5 +57,9 @@ void Administrador::imprimirUsuario(){
 	cout<<"Usuario "<<this->getIdUsuario()<<": "<<endl;
 	cout<<"Nombre: "<<this->getNombreUsuario()<<" Correo: "<<this->getCorreoUsuario()<<endl;
 	cout<<"Edad: "<<this->getEdadUsuario()<<" Tipo de usuario: "<< this->getTipoUsuario()<<endl;
+	cout<<"Reservas: "<<endl;
+	cout<<"----------"<<endl;
+	this->getReservaUsuario()->imprimirReservas();
 	cout<<endl;
+
 }

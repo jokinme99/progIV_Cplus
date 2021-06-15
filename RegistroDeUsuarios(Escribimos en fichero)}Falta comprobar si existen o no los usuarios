@@ -1,0 +1,13 @@
+void clienteCaso1() {
+	cout << "Ingresa el nombre del usuario: ";
+	cin >> nombreUsuario;
+	cout << endl;
+	cout << "Ingresa la contraseña del usuario: ";
+	cin >> contraUsuario;
+	cout << endl;
+	ofstream ofs("usuarios.txt", ios::app);
+	ofs << nombreUsuario << " " << contraUsuario << endl;
+	ofs.close();
+	cout << "Usuario creado correctamente" << endl;
+	cliente();
+}

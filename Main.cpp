@@ -26,8 +26,6 @@
 #include "MetodoReservas.h"
 #include "Trabajadores.h"
 
-#include "DatosSQL.h"
-
 using namespace std;
 
 static int callback(void *data, int argc, char **argv, char **azColName);
@@ -71,265 +69,265 @@ void caso15Admin();
 void caso16Admin();
 
 void menuAdministrador();
-Usuario *usuarioActual;
+
 Usuarios u;
 Habitaciones h;
 Trabajadores t;
 Reservas re;
 string nombreUser;
 string contraUser; //Para iniciar/registrar usuario
-//sqlite3 *db; //objeto base de datos
-//char *zErrMsg = 0;
-//int rc;
-//char *sql; //sentencia sql
-//const char *data = "LLamada a Base de datos";
+sqlite3 *db; //objeto base de datos
+char *zErrMsg = 0;
+int rc;
+char *sql; //sentencia sql
+const char *data = "LLamada a Base de datos";
 
 //Metodo para utilizar la base de datos
-//static int callback(void *data, int argc, char **argv, char **azColName) {
-//	int i;
-//	fprintf(stderr, "%s: \n", (const char*) data);
-//
-//	for (i = 0; i < argc; i++) {
-//		printf("%s = %s\n", azColName[i], argv[i] ? argv[i] : "NULL");
-//	}
-//
-//	printf("\n");
-//	return 0;
-//}
-//int callbackUsuarios(void *data, int numeroColumnas, char **contadorDeFila,
-//		char **nombresColumnas) {
-//	(void) data;
-////	cout<<numeroColumnas<<endl;
-////	cout<<*contadorDeFila<<endl;
-////	cout<<*nombresColumnas<<endl;
-//
-////	cout<<numeroColumnas<<endl;
-//
-////	for (int i = 0; i < numeroColumnas; ++i) {
-////		cout<<contadorDeFila[i]<<endl;
-////
-////	}
-//
-////cout<<numeroColumnas<<endl;
-//	if (strcmp(contadorDeFila[5], "usuario") == 0) {
-//		//cout<<1<<endl;
-//		Usuario *us = new Usuario(atoi(contadorDeFila[0]), contadorDeFila[1],
-//				contadorDeFila[3], contadorDeFila[2], atoi(contadorDeFila[4]));
-//		u.anyadirUsuario(us);
-//	} else {
-//		//cout<<2<<endl;
-//		Usuario *us = new Usuario(atoi(contadorDeFila[0]), contadorDeFila[1],
-//				contadorDeFila[3], contadorDeFila[2], atoi(contadorDeFila[4]));
-//
-//		Administrador *ad = new Administrador(us);
-//		//cout<<ad->getTipoUsuario()<<endl;
-//
-//		//cout<<u.getNumUsuario()<<endl;
-////		Usuario *us = new Usuario(atoi(contadorDeFila[0]), contadorDeFila[1], contadorDeFila[3], contadorDeFila[2], atoi(contadorDeFila[4]));
-//		u.anyadirUsuario(ad);
+static int callback(void *data, int argc, char **argv, char **azColName) {
+	int i;
+	fprintf(stderr, "%s: \n", (const char*) data);
+
+	for (i = 0; i < argc; i++) {
+		printf("%s = %s\n", azColName[i], argv[i] ? argv[i] : "NULL");
+	}
+
+	printf("\n");
+	return 0;
+}
+int callbackUsuarios(void *data, int numeroColumnas, char **contadorDeFila,
+		char **nombresColumnas) {
+	(void) data;
+//	cout<<numeroColumnas<<endl;
+//	cout<<*contadorDeFila<<endl;
+//	cout<<*nombresColumnas<<endl;
+
+//	cout<<numeroColumnas<<endl;
+
+//	for (int i = 0; i < numeroColumnas; ++i) {
+//		cout<<contadorDeFila[i]<<endl;
 //
 //	}
-//
-//	return 0;
-//}
-//
-//int callbackReservas(void *data, int numeroColumnas, char **contadorDeFila,
-//		char **nombresColumnas) {
-//	(void) data;
-//
-//	Reserva *r = new Reserva(atoi(contadorDeFila[0]), atoi(contadorDeFila[1]),
-//			atoi(contadorDeFila[2]), h.getHabitacion(atoi(contadorDeFila[4])));
-//
-//	u.getReservas(atoi(contadorDeFila[3]))->anyadirReserva(r);
-//	re.anyadirReserva(r);
-//
-//	return 0;
-//
-//}
-//
-//int callbackHabitaciones(void *data, int numeroColumnas, char **contadorDeFila,
-//		char **nombresColumnas) {
-//	(void) data;
-//	Habitacion *ha = new Habitacion(atoi(contadorDeFila[0]),
-//			atoi(contadorDeFila[1]), atoi(contadorDeFila[2]), contadorDeFila[3],
-//			atoi(contadorDeFila[2]));
-//	h.anyadirhabitacion(ha);
-//	return 0;
-//}
-//int callbackTrabajadores(void *data, int numeroColumnas, char **contadorDeFila, char **nombresColumnas) {
-//	(void)data;
-//	Trabajador *tr = new Trabajador(atoi(contadorDeFila[0]), contadorDeFila[1], contadorDeFila[2], atoi(contadorDeFila[3]),atoi(contadorDeFila[4]));
-//	t.anyadirTrabajador(tr);
-//return 0;
-//}
-//
-//void cargarDatosUsuarios() {
-//
-//	rc = sqlite3_open("hotelandia_final.s3db", &db);
-//
-//	char sql[] = "SELECT * from USUARIO";
-//
-//	/* Execute SQL statement */
-//	rc = sqlite3_exec(db, sql, callbackUsuarios, (void*) data, &zErrMsg);
-//
-//	if (rc != SQLITE_OK) {
-//
-//		fprintf(stderr, "SQL error: %s\n", zErrMsg);
-//		sqlite3_free(zErrMsg);
-//	} else {
-//		//fprintf(stdout, "Operation done successfully\n");
-//	}
-//	sqlite3_close(db);
-//
-//}
-//void cargarDatosHabitaciones() {
-//
-//	rc = sqlite3_open("hotelandia_final.s3db", &db);
-//
-//	char sql[] = "SELECT * from HABITACION";
-//
-//	/* Execute SQL statement */
-//	rc = sqlite3_exec(db, sql, callbackHabitaciones, (void*) data, &zErrMsg);
-//	if (rc != SQLITE_OK) {
-//
-//		fprintf(stderr, "SQL error: %s\n", zErrMsg);
-//		sqlite3_free(zErrMsg);
-//	} else {
-//		//fprintf(stdout, "Operation done successfully\n");
-//	}
-//	sqlite3_close(db);
-//
-//}
-//void cargarDatosTrabajadores() {
-//
-//	rc = sqlite3_open("hotelandia_final.s3db", &db);
-//
-//	char sql[] = "SELECT id_trabajador, nombre_trabajador, DNI_trabajador, telefono_trabajador, sueldo_trabajador FROM TRABAJADOR";
-//
-//	/* Execute SQL statement */
-//	rc = sqlite3_exec(db, sql, callbackTrabajadores, (void*) data, &zErrMsg);
-//	if (rc != SQLITE_OK) {
-//
-//		fprintf(stderr, "SQL error: %s\n", zErrMsg);
-//		sqlite3_free(zErrMsg);
-//	} else {
-//		//fprintf(stdout, "Operation done successfully\n");
-//	}
-//	sqlite3_close(db);
-//
-//}
-//
-//void cargarDatosReservas() {
-//
-//	rc = sqlite3_open("hotelandia_final.s3db", &db);
-//
-//	char sql[] = "SELECT * from RESERVA";
-//
-//	/* Execute SQL statement */
-//	rc = sqlite3_exec(db, sql, callbackReservas, (void*) data, &zErrMsg);
-//	if (rc != SQLITE_OK) {
-//
-//		fprintf(stderr, "SQL error: %s\n", zErrMsg);
-//		sqlite3_free(zErrMsg);
-//	} else {
-//		//fprintf(stdout, "Operation done successfully\n");
-//	}
-//	sqlite3_close(db);
-//
-//}
-//void importarDatosUsuarios() { //IMPORTA LOS DATOS DE USUARIOS DE LOS FICHEROS A LA BASE DE DATOS
-//
-//	FILE *f = fopen("../progIV_Cplus/Usuarios.txt", "r");
-//
-//	int counter = 0;
-//	char linea;
-//	char cadena[20], id[20], nom[20], cont[20], correo[30], edad[5], tipo[10];
-//
-//	for (linea = getc(f); linea != EOF; linea = getc(f))
-//		if (linea == '\n')
-//			counter = counter + 1;
-//
-//	fclose(f);
-//	//cout<<counter<<endl;
-//
-//	ifstream ifs;
-//	ifs.open("../progIV_Cplus/Usuarios.txt", ios::in);
-//
-//	char sql[] = "DELETE FROM USUARIO";
-//
-//	rc = sqlite3_open("hotelandia_final.s3db", &db);
-//
-//	rc = sqlite3_exec(db, sql, callback, (void*) data, &zErrMsg);
-//
-//	if (rc != SQLITE_OK) {
-//		fprintf(stderr, "SQL error: %s\n", zErrMsg);
-//		sqlite3_free(zErrMsg);
-//	} else {
-//		//fprintf(stdout, "Operation done successfully\n");
-//	}
-//	sqlite3_close(db);
-//
-//	for (int i = 0; i < counter; ++i) {
-//
-//		char sql1[] = "INSERT INTO USUARIO VALUES ('";
-//
-//		ifs.getline(cadena, 256, ':');
-//		ifs.getline(id, 256, ';');
-//		ifs.getline(cadena, 256, ':');
-//		ifs.getline(nom, 256, ';');
-//		ifs.getline(cadena, 256, ':');
-//		ifs.getline(cont, 256, ';');
-//		ifs.getline(cadena, 256, ':');
-//		ifs.getline(correo, 256, ';');
-//		ifs.getline(cadena, 256, ':');
-//		ifs.getline(edad, 256, ';');
-//		ifs.getline(cadena, 256, ':');
-//		ifs.getline(tipo, 256, ';');
-//
-////		cout<<sql<<endl;
-//
-//		char *retVal = new char[strlen(sql1) + strlen(id) + strlen(nom)
-//				+ strlen(cont) + strlen(correo) + strlen(edad) + strlen(tipo)
-//				+ 18];
-//
-//		*retVal = '\0';
-//
-//		strcat(retVal, sql1);
-//		strcat(retVal, id);
-//		strcat(retVal, "','");
-//		strcat(retVal, nom);
-//		strcat(retVal, "','");
-//		strcat(retVal, cont);
-//		strcat(retVal, "','");
-//		strcat(retVal, correo);
-//		strcat(retVal, "','");
-//		strcat(retVal, edad);
-//		strcat(retVal, "','");
-//		strcat(retVal, tipo);
-//		strcat(retVal, "')");
-//
-//		//cout<<retVal<<endl;
-//
-//		rc = sqlite3_open("hotelandia_final.s3db", &db);
-//		/* Execute SQL statement */
-//		rc = sqlite3_exec(db, retVal, callback, (void*) data, &zErrMsg);
-//		if (rc != SQLITE_OK) {
-//			fprintf(stderr, "SQL error: %s\n", zErrMsg);
-//			sqlite3_free(zErrMsg);
-//		} else {
-//			//fprintf(stdout, "Operation done successfully\n");
-//		}
-//		sqlite3_close(db);
-//
-//	}
-//
-//}
-//
-////aqui
-//int main() {
-//	inicio();
-//	return 0;
-//}
+
+//cout<<numeroColumnas<<endl;
+	if (strcmp(contadorDeFila[5], "usuario") == 0) {
+		//cout<<1<<endl;
+		Usuario *us = new Usuario(atoi(contadorDeFila[0]), contadorDeFila[1],
+				contadorDeFila[3], contadorDeFila[2], atoi(contadorDeFila[4]));
+		u.anyadirUsuario(us);
+	} else {
+		//cout<<2<<endl;
+		Usuario *us = new Usuario(atoi(contadorDeFila[0]), contadorDeFila[1],
+				contadorDeFila[3], contadorDeFila[2], atoi(contadorDeFila[4]));
+
+		Administrador *ad = new Administrador(us);
+		//cout<<ad->getTipoUsuario()<<endl;
+
+		//cout<<u.getNumUsuario()<<endl;
+//		Usuario *us = new Usuario(atoi(contadorDeFila[0]), contadorDeFila[1], contadorDeFila[3], contadorDeFila[2], atoi(contadorDeFila[4]));
+		u.anyadirUsuario(ad);
+
+	}
+
+	return 0;
+}
+
+int callbackReservas(void *data, int numeroColumnas, char **contadorDeFila,
+		char **nombresColumnas) {
+	(void) data;
+
+	Reserva *r = new Reserva(atoi(contadorDeFila[0]), atoi(contadorDeFila[1]),
+			atoi(contadorDeFila[2]), h.getHabitacion(atoi(contadorDeFila[4])));
+
+	u.getReservas(atoi(contadorDeFila[3]))->anyadirReserva(r);
+	re.anyadirReserva(r);
+
+	return 0;
+
+}
+
+int callbackHabitaciones(void *data, int numeroColumnas, char **contadorDeFila,
+		char **nombresColumnas) {
+	(void) data;
+	Habitacion *ha = new Habitacion(atoi(contadorDeFila[0]),
+			atoi(contadorDeFila[1]), atoi(contadorDeFila[2]), contadorDeFila[3],
+			atoi(contadorDeFila[2]));
+	h.anyadirhabitacion(ha);
+	return 0;
+}
+int callbackTrabajadores(void *data, int numeroColumnas, char **contadorDeFila, char **nombresColumnas) {
+	(void)data;
+	Trabajador *tr = new Trabajador(atoi(contadorDeFila[0]), contadorDeFila[1], contadorDeFila[2], atoi(contadorDeFila[3]),atoi(contadorDeFila[4]));
+	t.anyadirTrabajador(tr);
+return 0;
+}
+
+void cargarDatosUsuarios() {
+
+	rc = sqlite3_open("hotelandia_final.s3db", &db);
+
+	char sql[] = "SELECT * from USUARIO";
+
+	/* Execute SQL statement */
+	rc = sqlite3_exec(db, sql, callbackUsuarios, (void*) data, &zErrMsg);
+
+	if (rc != SQLITE_OK) {
+
+		fprintf(stderr, "SQL error: %s\n", zErrMsg);
+		sqlite3_free(zErrMsg);
+	} else {
+		//fprintf(stdout, "Operation done successfully\n");
+	}
+	sqlite3_close(db);
+
+}
+void cargarDatosHabitaciones() {
+
+	rc = sqlite3_open("hotelandia_final.s3db", &db);
+
+	char sql[] = "SELECT * from HABITACION";
+
+	/* Execute SQL statement */
+	rc = sqlite3_exec(db, sql, callbackHabitaciones, (void*) data, &zErrMsg);
+	if (rc != SQLITE_OK) {
+
+		fprintf(stderr, "SQL error: %s\n", zErrMsg);
+		sqlite3_free(zErrMsg);
+	} else {
+		//fprintf(stdout, "Operation done successfully\n");
+	}
+	sqlite3_close(db);
+
+}
+void cargarDatosTrabajadores() {
+
+	rc = sqlite3_open("hotelandia_final.s3db", &db);
+
+	char sql[] = "SELECT id_trabajador, nombre_trabajador, DNI_trabajador, telefono_trabajador, sueldo_trabajador FROM TRABAJADOR";
+
+	/* Execute SQL statement */
+	rc = sqlite3_exec(db, sql, callbackTrabajadores, (void*) data, &zErrMsg);
+	if (rc != SQLITE_OK) {
+
+		fprintf(stderr, "SQL error: %s\n", zErrMsg);
+		sqlite3_free(zErrMsg);
+	} else {
+		//fprintf(stdout, "Operation done successfully\n");
+	}
+	sqlite3_close(db);
+
+}
+
+void cargarDatosReservas() {
+
+	rc = sqlite3_open("hotelandia_final.s3db", &db);
+
+	char sql[] = "SELECT * from RESERVA";
+
+	/* Execute SQL statement */
+	rc = sqlite3_exec(db, sql, callbackReservas, (void*) data, &zErrMsg);
+	if (rc != SQLITE_OK) {
+
+		fprintf(stderr, "SQL error: %s\n", zErrMsg);
+		sqlite3_free(zErrMsg);
+	} else {
+		//fprintf(stdout, "Operation done successfully\n");
+	}
+	sqlite3_close(db);
+
+}
+void importarDatosUsuarios() { //IMPORTA LOS DATOS DE USUARIOS DE LOS FICHEROS A LA BASE DE DATOS
+
+	FILE *f = fopen("../progIV_Cplus/Usuarios.txt", "r");
+
+	int counter = 0;
+	char linea;
+	char cadena[20], id[20], nom[20], cont[20], correo[30], edad[5], tipo[10];
+
+	for (linea = getc(f); linea != EOF; linea = getc(f))
+		if (linea == '\n')
+			counter = counter + 1;
+
+	fclose(f);
+	//cout<<counter<<endl;
+
+	ifstream ifs;
+	ifs.open("../progIV_Cplus/Usuarios.txt", ios::in);
+
+	char sql[] = "DELETE FROM USUARIO";
+
+	rc = sqlite3_open("hotelandia_final.s3db", &db);
+
+	rc = sqlite3_exec(db, sql, callback, (void*) data, &zErrMsg);
+
+	if (rc != SQLITE_OK) {
+		fprintf(stderr, "SQL error: %s\n", zErrMsg);
+		sqlite3_free(zErrMsg);
+	} else {
+		//fprintf(stdout, "Operation done successfully\n");
+	}
+	sqlite3_close(db);
+
+	for (int i = 0; i < counter; ++i) {
+
+		char sql1[] = "INSERT INTO USUARIO VALUES ('";
+
+		ifs.getline(cadena, 256, ':');
+		ifs.getline(id, 256, ';');
+		ifs.getline(cadena, 256, ':');
+		ifs.getline(nom, 256, ';');
+		ifs.getline(cadena, 256, ':');
+		ifs.getline(cont, 256, ';');
+		ifs.getline(cadena, 256, ':');
+		ifs.getline(correo, 256, ';');
+		ifs.getline(cadena, 256, ':');
+		ifs.getline(edad, 256, ';');
+		ifs.getline(cadena, 256, ':');
+		ifs.getline(tipo, 256, ';');
+
+//		cout<<sql<<endl;
+
+		char *retVal = new char[strlen(sql1) + strlen(id) + strlen(nom)
+				+ strlen(cont) + strlen(correo) + strlen(edad) + strlen(tipo)
+				+ 18];
+
+		*retVal = '\0';
+
+		strcat(retVal, sql1);
+		strcat(retVal, id);
+		strcat(retVal, "','");
+		strcat(retVal, nom);
+		strcat(retVal, "','");
+		strcat(retVal, cont);
+		strcat(retVal, "','");
+		strcat(retVal, correo);
+		strcat(retVal, "','");
+		strcat(retVal, edad);
+		strcat(retVal, "','");
+		strcat(retVal, tipo);
+		strcat(retVal, "')");
+
+		//cout<<retVal<<endl;
+
+		rc = sqlite3_open("hotelandia_final.s3db", &db);
+		/* Execute SQL statement */
+		rc = sqlite3_exec(db, retVal, callback, (void*) data, &zErrMsg);
+		if (rc != SQLITE_OK) {
+			fprintf(stderr, "SQL error: %s\n", zErrMsg);
+			sqlite3_free(zErrMsg);
+		} else {
+			//fprintf(stdout, "Operation done successfully\n");
+		}
+		sqlite3_close(db);
+
+	}
+
+}
+
+//aqui
+int main() {
+	inicio();
+	return 0;
+}
 void inicio() {
 
 	cout << "---MODO ADMINISTRADOR---" << endl;
@@ -430,11 +428,9 @@ void inicio() {
 
 			if (strcmp(cNum, "usuario") == 0) {
 				cout << "---MODO USUARIO---" << endl;
-				usuarioActual=u.getUsuario(nomAu);
 				menuUsuario();//HAY QUE AÑADIR COMO PARAMETRO LA DIRECCION DEL USUARIO QUE VA A ACCEDER AL MENÚ
 			} else {
 				cout << "---MODO ADMINISTRADOR---" << endl;
-				usuarioActual=u.getUsuario(nomAu);
 				menuAdministrador();//HAY QUE AÑADIR COMO PARAMETRO LA DIRECCION DEL USUARIO QUE VA A ACCEDER AL MENÚ
 			}
 
@@ -476,7 +472,7 @@ void menuUsuario() {
 	} while (opcion != 1 && opcion != 2 && opcion != 3 && opcion != 4
 			&& opcion != 4 && opcion != 5 && opcion != 6 && opcion != 7);
 	/* ABRIMOS BASE DE DATOS */
-	//rc = sqlite3_open("hotelandia_final.s3db", &db);
+	rc = sqlite3_open("hotelandia_final.s3db", &db);
 	switch (opcion) {
 	case 1: {
 		caso1Usuario();
@@ -519,168 +515,153 @@ void menuUsuario() {
 }
 void caso1Usuario() {//VER HOTELES
 	/* Create SQL statement */
+	char sql[] = "SELECT * from HOTEL";
 
-	//
-
-//	char sql[] = "SELECT * from HOTEL";
-//
-//	/* Execute SQL statement */
-//	rc = sqlite3_exec(db, sql, callback, (void*) data, &zErrMsg);
-//	if (rc != SQLITE_OK) {
-//		fprintf(stderr, "SQL error: %s\n", zErrMsg);
-//		sqlite3_free(zErrMsg);
-//	} else {
-//		//fprintf(stdout, "Operation done successfully\n");
-//	}
-//	sqlite3_close(db);
-//	system("pause");
-
-
-
-	verHoteles();
+	/* Execute SQL statement */
+	rc = sqlite3_exec(db, sql, callback, (void*) data, &zErrMsg);
+	if (rc != SQLITE_OK) {
+		fprintf(stderr, "SQL error: %s\n", zErrMsg);
+		sqlite3_free(zErrMsg);
+	} else {
+		//fprintf(stdout, "Operation done successfully\n");
+	}
+	sqlite3_close(db);
+	system("pause");
 	menuUsuario();
 }
 void caso2Usuario() {//VER HABITACIONES
 	/* Create SQL statement */
-//	char sql[] = "SELECT * from HABITACION";
-//
-//	/* Execute SQL statement */
-//	rc = sqlite3_exec(db, sql, callback, (void*) data, &zErrMsg);
-//	if (rc != SQLITE_OK) {
-//		fprintf(stderr, "SQL error: %s\n", zErrMsg);
-//		sqlite3_free(zErrMsg);
-//	} else {
-//		//fprintf(stdout, "Operation done successfully\n");
-//	}
-//	sqlite3_close(db);
-//	system("pause");
+	char sql[] = "SELECT * from HABITACION";
 
-	h.imprimirHabitaciones();
-
+	/* Execute SQL statement */
+	rc = sqlite3_exec(db, sql, callback, (void*) data, &zErrMsg);
+	if (rc != SQLITE_OK) {
+		fprintf(stderr, "SQL error: %s\n", zErrMsg);
+		sqlite3_free(zErrMsg);
+	} else {
+		//fprintf(stdout, "Operation done successfully\n");
+	}
+	sqlite3_close(db);
+	system("pause");
 	menuUsuario();
 }
 int caso3Usuario() {//VER RESERVA
-//	char usuarioReserva[20];
-//
-//	rc = sqlite3_open("hotelandia_final.s3db", &db);	//abrir base de datos
-//	if (rc != SQLITE_OK) {
-//		cout << "Error opening database" << endl;
-//		return rc;
-//	}
-//	cout << "Introduzca su usuario para ver sus reservas" << endl;
-//	cin >> usuarioReserva;
-//	rc = verReserva(db, usuarioReserva);
-//	rc = sqlite3_close(db);
-//	if (rc != SQLITE_OK) {
-//		printf("Error closing database\n");
-//		printf("%s\n", sqlite3_errmsg(db));
-//		return rc;
-//	}
-//	system("pause");
+	char usuarioReserva[20];
 
-	usuarioActual->getReservaUsuario()->imprimirReservas();
+	rc = sqlite3_open("hotelandia_final.s3db", &db);	//abrir base de datos
+	if (rc != SQLITE_OK) {
+		cout << "Error opening database" << endl;
+		return rc;
+	}
+	cout << "Introduzca su usuario para ver sus reservas" << endl;
+	cin >> usuarioReserva;
+	rc = verReserva(db, usuarioReserva);
+	rc = sqlite3_close(db);
+	if (rc != SQLITE_OK) {
+		printf("Error closing database\n");
+		printf("%s\n", sqlite3_errmsg(db));
+		return rc;
+	}
+	system("pause");
 	menuUsuario();
 	return 0;
 }
 int caso4Usuario() {//CREAR RESERVA
-//	char nombreUsuario[20];
-//	char eleccionHotel[100];
-//	int eleccionNHabitacion;
-//	int dia;
-//	int hora;
-//	cout << "Introduzca su nombre de usuario para realizar una reserva :"
-//			<< endl;
-//	cin >> nombreUsuario;
-//
-//	rc = sqlite3_open("hotelandia_final.s3db", &db);	//abrir base de datos
-//	if (rc != SQLITE_OK) {
-//		cout << "Error opening database" << endl;
-//		return rc;
-//	}
-//
-//	char sql[] = "SELECT * from HOTEL";
-//
-//	/* Execute SQL statement */
-//	rc = sqlite3_exec(db, sql, callback, (void*) data, &zErrMsg);
-//	if (rc != SQLITE_OK) {
-//		fprintf(stderr, "SQL error: %s\n", zErrMsg);
-//		sqlite3_free(zErrMsg);
-//	}
-//	cout
-//			<< "Seleccione el hotel en el que desea realizar una reserva (Su numero): ";
-//	cin >> eleccionHotel;
-//	char sql2[] =
-//			"SELECT H.numero_habitacion, H.planta_habitacion, H.tipo_habitacion, H.precio_habitacion from HABITACION H, HOTEL M, HOTEL_TIENE_HABITACIONES L WHERE M.id_hotel = ";
-//	strcat(sql2, eleccionHotel);
-//	char fr100[] =
-//			" AND M.id_hotel = L.id_hotel AND L.id_habitacion = H.id_habitacion";
-//	strcat(sql2, fr100);
-//	/* Execute SQL statement */
-//	rc = sqlite3_exec(db, sql2, callback, (void*) data, &zErrMsg);
-//	if (rc != SQLITE_OK) {
-//		fprintf(stderr, "SQL error: %s\n", zErrMsg);
-//		sqlite3_free(zErrMsg);
-//	}
-//	cout << "Seleccione el numero de habitacion que desea reservar: ";
-//	cin >> eleccionNHabitacion;
-//	cout << endl << "Seleccione el dia en el que desea realizar la reserva";
-//	cin >> dia;
-//	cout << endl << "Seleccione la hora de entrada ";
-//	cin >> hora;
-//	int hotel = atoi(eleccionHotel);
-//	rc = crearReserva(db, nombreUsuario, hotel, eleccionNHabitacion, dia, hora);
-//	rc = sqlite3_close(db);
-//	if (rc != SQLITE_OK) {
-//		printf("Error closing database\n");
-//		printf("%s\n", sqlite3_errmsg(db));
-//		return rc;
-//	}
-//	system("pause");
-	crearReserva();
+	char nombreUsuario[20];
+	char eleccionHotel[100];
+	int eleccionNHabitacion;
+	int dia;
+	int hora;
+	cout << "Introduzca su nombre de usuario para realizar una reserva :"
+			<< endl;
+	cin >> nombreUsuario;
+
+	rc = sqlite3_open("hotelandia_final.s3db", &db);	//abrir base de datos
+	if (rc != SQLITE_OK) {
+		cout << "Error opening database" << endl;
+		return rc;
+	}
+
+	char sql[] = "SELECT * from HOTEL";
+
+	/* Execute SQL statement */
+	rc = sqlite3_exec(db, sql, callback, (void*) data, &zErrMsg);
+	if (rc != SQLITE_OK) {
+		fprintf(stderr, "SQL error: %s\n", zErrMsg);
+		sqlite3_free(zErrMsg);
+	}
+	cout
+			<< "Seleccione el hotel en el que desea realizar una reserva (Su numero): ";
+	cin >> eleccionHotel;
+	char sql2[] =
+			"SELECT H.numero_habitacion, H.planta_habitacion, H.tipo_habitacion, H.precio_habitacion from HABITACION H, HOTEL M, HOTEL_TIENE_HABITACIONES L WHERE M.id_hotel = ";
+	strcat(sql2, eleccionHotel);
+	char fr100[] =
+			" AND M.id_hotel = L.id_hotel AND L.id_habitacion = H.id_habitacion";
+	strcat(sql2, fr100);
+	/* Execute SQL statement */
+	rc = sqlite3_exec(db, sql2, callback, (void*) data, &zErrMsg);
+	if (rc != SQLITE_OK) {
+		fprintf(stderr, "SQL error: %s\n", zErrMsg);
+		sqlite3_free(zErrMsg);
+	}
+	cout << "Seleccione el numero de habitacion que desea reservar: ";
+	cin >> eleccionNHabitacion;
+	cout << endl << "Seleccione el dia en el que desea realizar la reserva";
+	cin >> dia;
+	cout << endl << "Seleccione la hora de entrada ";
+	cin >> hora;
+	int hotel = atoi(eleccionHotel);
+	rc = crearReserva(db, nombreUsuario, hotel, eleccionNHabitacion, dia, hora);
+	rc = sqlite3_close(db);
+	if (rc != SQLITE_OK) {
+		printf("Error closing database\n");
+		printf("%s\n", sqlite3_errmsg(db));
+		return rc;
+	}
+	system("pause");
 	menuUsuario();
 	return 0;
 }
 int caso5Usuario() {//MODIFICAR RESERVA
-//	char usuarioModificar[20];
-//	cout << "Introduzca el usuario en el que va a realizar la modificacion: ";
-//	cin >> usuarioModificar;
-//	cout << endl;
-//	rc = sqlite3_open("hotelandia_final.s3db", &db);	//abrir base de datos
-//	if (rc != SQLITE_OK) {
-//		cout << "Error opening database" << endl;
-//		return rc;
-//	}
-//	rc = modificarReserva(db, usuarioModificar);//ANYADIR MODIFICAR LA HABITACION
-//	rc = sqlite3_close(db);
-//	if (rc != SQLITE_OK) {
-//		printf("Error closing database\n");
-//		printf("%s\n", sqlite3_errmsg(db));
-//		return rc;
-//	}
-//	system("pause");
-	modificarReserva();
+	char usuarioModificar[20];
+	cout << "Introduzca el usuario en el que va a realizar la modificacion: ";
+	cin >> usuarioModificar;
+	cout << endl;
+	rc = sqlite3_open("hotelandia_final.s3db", &db);	//abrir base de datos
+	if (rc != SQLITE_OK) {
+		cout << "Error opening database" << endl;
+		return rc;
+	}
+	rc = modificarReserva(db, usuarioModificar);//ANYADIR MODIFICAR LA HABITACION
+	rc = sqlite3_close(db);
+	if (rc != SQLITE_OK) {
+		printf("Error closing database\n");
+		printf("%s\n", sqlite3_errmsg(db));
+		return rc;
+	}
+	system("pause");
 	menuUsuario();
 	return 0;
 }
 int caso6Usuario() {//ELIMINAR RESERVA
-//	char usuarioEliminar[20];
-//	cout << "Introduzca el usuario del que quiere eliminar una reserva: ";
-//	cin >> usuarioEliminar;
-//	cout << endl;
-//	rc = sqlite3_open("hotelandia_final.s3db", &db);	//abrir base de datos
-//	if (rc != SQLITE_OK) {
-//		cout << "Error opening database" << endl;
-//		return rc;
-//	}
-//	rc = eliminarReserva(db, usuarioEliminar);
-//	rc = sqlite3_close(db);
-//	if (rc != SQLITE_OK) {
-//		printf("Error closing database\n");
-//		printf("%s\n", sqlite3_errmsg(db));
-//		return rc;
-//	}
-//	system("pause");
-	eliminarReserva();
+	char usuarioEliminar[20];
+	cout << "Introduzca el usuario del que quiere eliminar una reserva: ";
+	cin >> usuarioEliminar;
+	cout << endl;
+	rc = sqlite3_open("hotelandia_final.s3db", &db);	//abrir base de datos
+	if (rc != SQLITE_OK) {
+		cout << "Error opening database" << endl;
+		return rc;
+	}
+	rc = eliminarReserva(db, usuarioEliminar);
+	rc = sqlite3_close(db);
+	if (rc != SQLITE_OK) {
+		printf("Error closing database\n");
+		printf("%s\n", sqlite3_errmsg(db));
+		return rc;
+	}
+	system("pause");
 	menuUsuario();
 	return 0;
 }
@@ -711,7 +692,7 @@ void menuAdministrador() {
 		cin >> opcion;
 	} while (opcion < 1 || opcion > 17);
 	/* ABRIMOS BASE DE DATOS */
-	//rc = sqlite3_open("hotelandia_final.s3db", &db);
+	rc = sqlite3_open("hotelandia_final.s3db", &db);
 	switch (opcion) {
 	case 1: {
 		caso1Admin();

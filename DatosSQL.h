@@ -13,26 +13,19 @@
 #include "Trabajadores.h"
 #include "sqlite/sqlite3.h"
 
-
-void cargarVariables(Usuarios *, Habitaciones *, Trabajadores *,Reservas *);
-
 static int callback(void *data, int argc, char **argv, char **azColName);
 int callbackUsuarios(void *data, int numeroColumnas, char **contadorDeFila,
-		char **nombresColumnas);
+		char **nombresColumnas, Usuarios*);
 int callbackReservas(void *data, int numeroColumnas, char **contadorDeFila,
-		char **nombresColumnas);
+		char **nombresColumnas, Reservas*);
 int callbackHabitaciones(void *data, int numeroColumnas, char **contadorDeFila,
-		char **nombresColumnas);
+		char **nombresColumnas, Habitaciones*);
 int callbackTrabajadores(void *data, int numeroColumnas, char **contadorDeFila, char **nombresColumnas, Trabajadores*);
-void cargarDatosUsuarios();
-void cargarDatosHabitaciones();
-void cargarDatosTrabajadores();
-void cargarDatosReservas();
+void cargarDatosUsuarios(Usuarios*);
+void cargarDatosHabitaciones(Habitaciones*);
+void cargarDatosTrabajadores(Trabajadores*);
+void cargarDatosReservas(Reservas*);
 void importarDatosUsuarios();
-void verHoteles();
-int crearReserva();
-int modificarReserva();
-int eliminarReserva();
 
 
 

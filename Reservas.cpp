@@ -12,7 +12,9 @@ using namespace std;
 
 
 Reservas::Reservas(){
+
 this->numReservas=0;
+
 }
 
 Reservas::Reservas(Reservas& r){

@@ -31,7 +31,8 @@ public:
 	void eliminarTrabajadores();
 	void listarUsuarios();
 	virtual char* getTipoUsuario();
-	virtual void imprimirUsuario();
+	//virtual
+	//void imprimirUsuario();
 
 };
 

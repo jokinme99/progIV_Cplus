@@ -49,20 +49,22 @@ void Administrador::listarUsuarios(){
 
 }
 char* Administrador::getTipoUsuario(){
-
+	Usuario::getTipoUsuario();
 	return "admin";
 }
 
-void Administrador::imprimirUsuario(){
-	cout<<"Usuario "<<this->getIdUsuario()<<": "<<endl;
-	cout<<"Nombre: "<<this->getNombreUsuario()<<" Correo: "<<this->getCorreoUsuario()<<endl;
-	cout<<"Edad: "<<this->getEdadUsuario()<<" Tipo de usuario: "<< this->getTipoUsuario()<<endl;
-	cout<<"Reservas: "<<endl;
-	cout<<"----------"<<endl;
-	if (this->getReservaUsuario()==NULL) {
-		cout<<"(este usuario no tiene reservas)"<<endl;
-	}else{
-	this->getReservaUsuario()->imprimirReservas();
-	}
-
-}
+//void Administrador::imprimirUsuario(){
+//
+//	Usuario::imprimirUsuario();
+//	cout<<"Usuario "<<this->getIdUsuario()<<": "<<endl;
+//	cout<<"Nombre: "<<this->getNombreUsuario()<<" Correo: "<<this->getCorreoUsuario()<<endl;
+//	cout<<"Edad: "<<this->getEdadUsuario()<<" Tipo de usuario: "<< this->getTipoUsuario()<<endl;
+//	cout<<"Reservas: "<<endl;
+//	cout<<"----------"<<endl;
+////	if (this->getReservaUsuario()==NULL) {
+////		cout<<"(este usuario no tiene reservas)"<<endl;
+////	}else{
+////	this->getReservaUsuario()->imprimirReservas();
+////	}
+//
+//}

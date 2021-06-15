@@ -7,7 +7,7 @@
 
 #ifndef USUARIO_H_
 #define USUARIO_H_
-#include "Reservas.h"
+#include "Reserva.h"
 #include "sqlite/sqlite3.h"
 #include <stdlib.h>
 #include <string.h>
@@ -23,7 +23,7 @@ private:
 	char* correoUsuario;
 	char* contrasenyaUsuario;
 	int edadUsuario;
-	Reserva* reservasUsuario;
+
 
 
 

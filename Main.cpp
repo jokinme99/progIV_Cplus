@@ -29,6 +29,10 @@
 using namespace std;
 
 int prueba();
+static int callback(void *data, int argc, char **argv, char **azColName) ;
+int callbackUsuarios(void *data, int numeroColumnas, char **contadorDeFila, char **nombresColumnas);
+int callbackReservas(void *data, int numeroColumnas, char **contadorDeFila, char **nombresColumnas);
+int callbackHabitaciones(void *data, int numeroColumnas, char **contadorDeFila, char **nombresColumnas);
 void inicio();//inicio sesion usuario
 void importarDatosUsuarios();
 void cargarDatosUsuarios();
@@ -110,6 +114,17 @@ int callbackUsuarios(void *data, int numeroColumnas, char **contadorDeFila, char
 
 	return 0;
 }
+
+int callbackReservas(void *data, int numeroColumnas, char **contadorDeFila, char **nombresColumnas) {
+	(void)data;
+	Habitacion *ha = new Habitacion(atoi(contadorDeFila[0]), atoi(contadorDeFila[1]), atoi(contadorDeFila[2]), contadorDeFila[3],atoi(contadorDeFila[2]));
+	h.anyadirhabitacion(ha);
+	Reserva *r = new Reserva()
+
+return 0;
+
+}
+
 int callbackHabitaciones(void *data, int numeroColumnas, char **contadorDeFila, char **nombresColumnas) {
 	(void)data;
 	Habitacion *ha = new Habitacion(atoi(contadorDeFila[0]), atoi(contadorDeFila[1]), atoi(contadorDeFila[2]), contadorDeFila[3],atoi(contadorDeFila[2]));
@@ -124,9 +139,9 @@ void cargarDatosUsuarios(){
 
 	char sql[] = "SELECT * from USUARIO";
 
-
 	/* Execute SQL statement */
 	rc = sqlite3_exec(db, sql, callbackUsuarios, (void*) data, &zErrMsg);
+
 	if (rc != SQLITE_OK) {
 
 
@@ -160,6 +175,7 @@ void cargarDatosHabitaciones(){
 
 }
 void importarDatosUsuarios(){//IMPORTA LOS DATOS DE USUARIOS DE LOS FICHEROS A LA BASE DE DATOS
+
 
 	FILE *f = fopen("../progIV_Cplus/Usuarios.txt", "r");
 
@@ -250,7 +266,7 @@ void importarDatosUsuarios(){//IMPORTA LOS DATOS DE USUARIOS DE LOS FICHEROS A L
 
 
 int main(){
-	prueba();
+	inicio();
 return 0;
 }
 int prueba(){
@@ -312,22 +328,16 @@ void inicio(){
 
 
 
-		cout<<"----HOTELANDIA------"<<endl;
-
 
 		ifstream ifs;
 		importarDatosUsuarios();
-
 
 		cargarDatosUsuarios();
 
 		u.imprimirUsuarios();
 
 		cargarDatosHabitaciones();
-		cout<<"----HOTELANDIA------"<<endl;
-
 		h.imprimirHabitaciones();
-		cout<<"----HOTELANDIA------"<<endl;
 
 
 		////////////////////////////////////////////

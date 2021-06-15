@@ -9,13 +9,13 @@
 #define RESERVAS_H_
 #include "Reserva.h"
 
-//class Reservas{
-//private:
-//	Reserva *r;
-//	int numReservas;
-//
-//
-//};
+class Reservas{
+private:
+	Reserva *r;
+	int numReservas;
+
+
+};
 
 
 #endif /* RESERVAS_H_ */

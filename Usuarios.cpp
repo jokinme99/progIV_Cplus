@@ -98,3 +98,12 @@ using namespace std;
 				return this->u[i]->getReservaUsuario();
 	}
 
+	Usuario* Usuarios::getUsuario(int id){
+		int i;
+		for (i = 0; i < this->numUsuarios; ++i) {
+			if (this->u[i]->getIdUsuario()==id) {
+				break;
+			}
+		}
+		return this->u[i];
+	}

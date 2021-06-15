@@ -335,8 +335,9 @@ void inicio() {
 	ifstream ifs;
 	importarDatosUsuarios();
 
-	//cargarDatosUsuarios();
+	cargarDatosUsuarios();
 
+	//u.imprimirUsuarios();
 	//u.imprimirUsuarios();
 
 	cargarDatosHabitaciones();
@@ -346,10 +347,21 @@ void inicio() {
 	//t.imprimirTrabajadores();
 	cargarDatosReservas();
 
+	t.imprimirTrabajadores();
+
+
+
 	//u.imprimirUsuarios();
 
 	//crear metodo devolver usuario con id de usuario, prueba id 1 y prueba a hacer print de las reservas
 
+
+//	u.getUsuario(8)->imprimirUsuario();
+//	cout<<u.getUsuario(1)->getReservaUsuario()->getNumReservas()<<endl;
+//	u.getUsuario(1)->getReservaUsuario()->imprimirReservas();
+
+
+	//u.imprimirUsuarios();
 	////////////////////////////////////////////
 	// GENERAR UN OBJETO USUARIOS Y RELLENARLA CON UNA FUNCION DE LA CLASE
 	// GENERAR UN OBJETO RESERVAS Y RELLENARLO CON LA BASE DE DATOS
@@ -847,7 +859,7 @@ void caso6Admin(){//EDITAR RESERVA
 	int idR,dia,hora; Habitacion* hab;
 		cout << "introduce el id de la reserva que quieres modificar" << endl;
 
-		int idR;
+		//int idR;
 
 		cin >> idR;
 

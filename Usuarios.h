@@ -27,6 +27,7 @@ public:
 	void imprimirUsuarios();
 	int getNumUsuario();
 	Reservas* getReservas(int);
+	Usuario* getUsuario(int);
 };
 
 

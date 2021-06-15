@@ -139,11 +139,11 @@ using namespace std;
 		cout<<"Edad: "<<this->edadUsuario<<" Tipo de usuario: "<< this->getTipoUsuario()<<endl;
 		cout<<"Reservas: "<<endl;
 		cout<<"----------"<<endl;
-//		if (this->reservasUsuario->getNumReservas()==0) {
-//			cout<<"(este usuario no tiene reservas)"<<endl;
-//		}else{
-//		this->reservasUsuario->imprimirReservas();
-//		}
+		if (this->reservasUsuario->getNumReservas()==0) {
+			cout<<"(este usuario no tiene reservas)"<<endl;
+		}else{
+		this->reservasUsuario->imprimirReservas();
+		}
 	}
 
 	char* Usuario::intAChar(int numero){

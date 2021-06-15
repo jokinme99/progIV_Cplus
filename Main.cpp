@@ -294,7 +294,7 @@ void importarDatosUsuarios(){//IMPORTA LOS DATOS DE USUARIOS DE LOS FICHEROS A L
 
 //aqui
 int main(){
-	inicio();
+	caso4Usuario();
 return 0;
 }
 
@@ -475,6 +475,7 @@ void caso1Usuario(){
 					//fprintf(stdout, "Operation done successfully\n");
 				}
 				sqlite3_close(db);
+				system("pause");
 				menuUsuario();
 }
 
@@ -491,18 +492,20 @@ void caso2Usuario(){
 					//fprintf(stdout, "Operation done successfully\n");
 				}
 				sqlite3_close(db);
+				system("pause");
 				menuUsuario();
 }
 
 int caso3Usuario(){//Ver reserva
-	char* usuarioReserva;
-	cout<<"Introduzca su usuario para ver sus reservas"<<endl;
-	cin>>usuarioReserva;
+	char usuarioReserva[20];
+
 	rc = sqlite3_open("hotelandia_final.s3db", &db);	//abrir base de datos
 	if (rc != SQLITE_OK) {
 		cout << "Error opening database" << endl;
 		return rc;
 	}
+	cout<<"Introduzca su usuario para ver sus reservas"<<endl;
+		cin>>usuarioReserva;
 	rc=verReserva(db, usuarioReserva);
 		rc=sqlite3_close(db);
 	    if (rc != SQLITE_OK) {

@@ -286,7 +286,7 @@ int modificarReserva(sqlite3 *db, char* nombreUsuario){
 
 }
 
-int eliminarReserva(sqlite3 *db, char* nombreUsuario){
+int eliminarReserva(sqlite3 *db, char nombreUsuario[20]){
 	int idReserva, horaReserva, diaReserva, idUsuario, idHabitacion;
 	sqlite3_stmt *stmt;//SELECT PARA CONSEGUIR EL ID
 		char sql[] = "SELECT id_usuario FROM USUARIO WHERE nombre_usuario = ?";
@@ -424,13 +424,13 @@ int eliminarReserva(sqlite3 *db, char* nombreUsuario){
 
 }
 
-int verReserva(sqlite3* db, char* nombreUsuario){
+int verReserva(sqlite3* db, char nombreUsuario[20]){
 	int hora;
 	int dia;
 	int idReserva;
 	int idHabitacion;
 	sqlite3_stmt *stmt;//SELECT PARA CONSEGUIR EL ID
-	char sql[] = "SELECT RESERVA.id_reserva,RESERVA.dia_reserva,RESERVA.hora_reserva, RESERVA.id_habitacion FROM RESERVA JOIN USUARIO ON USUARIO.id_usuario = RESERVA.id_usuario WHERE USUARIO.nombre_usuario = ?";
+	char sql[] = "SELECT R.Id_reserva, R.dia_reserva, R.hora_reserva, R.id_habitacion FROM RESERVA R, USUARIO U WHERE R.id_usuario = U.id_usuario AND U.nombre_usuario = ? ";
 	int rc = sqlite3_prepare_v2(db, sql, -1, &stmt, NULL);
 	if (rc != SQLITE_OK) {
 		cout << "Error al hacer la sentencia (SELECT)" << endl;
@@ -446,8 +446,8 @@ int verReserva(sqlite3* db, char* nombreUsuario){
 		rc = sqlite3_step(stmt);
 		if(rc == SQLITE_ROW){
 			idReserva = sqlite3_column_int(stmt, 0);
-			hora = sqlite3_column_int(stmt, 1);
-			dia = sqlite3_column_int(stmt, 2);
+			dia = sqlite3_column_int(stmt, 1);
+			hora = sqlite3_column_int(stmt, 2);
 			idHabitacion = sqlite3_column_int(stmt,3);
 			cout << "Usuario de la reserva: " << nombreUsuario << " Id Reserva: "
 			<< idReserva << " Dia: " << dia << " Hora: "<< hora <<" Id Habitacion:"<<idHabitacion<< endl;

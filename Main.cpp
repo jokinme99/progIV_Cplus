@@ -360,14 +360,14 @@ void inicio(){
 		ifstream ifs;
 		importarDatosUsuarios();
 
-		cargarDatosUsuarios();
+		//cargarDatosUsuarios();
 
 		u.imprimirUsuarios();
 
 		cargarDatosHabitaciones();
 		h.imprimirHabitaciones();
 
-		cargarDatosReservas();
+	//	cargarDatosReservas();
 
 		u.imprimirUsuarios();
 
@@ -930,80 +930,35 @@ void caso1Admin(){
 	cout << "--HABITACIONES--" << endl;
 
 	h.imprimirHabitaciones();
+
+	menuAdministrador();
 }
 void caso2Admin(){
 
-	char idhab[100], nHab[100], nPlant[100], Prec[100],tipoHab[100];
+	char tipoHab[100];
 
 
 
-	cout<<"introduce el id de habitacion"<<endl;
+	cout<<"introduce el id de la habitacion que quieres modificar"<<endl;
 
-	cin >> idhab;
+		int idHab;
 
-	cout<<"introduce el numero de habitacion"<<endl;
+		cin >> idHab;
 
-	cin >> nHab;
+		cout<<"introduce el nuevo tipo de Habitacion:"<<endl;
 
-	cout<<"introduce el numero de planta de la habitacion"<<endl;
-
-	cin >> nPlant;
-
-	cout<<"introduce el tipo de habitacion"<<endl;
-
-	cin >> tipoHab;
+		cin >> tipoHab;
 
 
-	cout<<"introduce el precio de la habitacion"<<endl;
+		cout<<"Introduce el nuevo precio de la Habitacion:"<<endl;
 
-	cin >> Prec;
+		int Prec;
+		cin >> Prec;
 
-	cout<<"TIRA"<<endl;
-
-
-	char sql[200] = "INSERT INTO HABITACION VALUES (";
+		h.editarHabitacion(idHab,tipoHab, Prec);
 
 
-	cout<<"TIRA2"<<endl;
-
-	char con1[] = ",", con2[] = ",", con3[] = "," , con4[] = "," , con8[] = ")", con9[] = "";
-
-
-	strcat(sql, idhab);
-	strcat(sql, con1);
-	strcat(sql, nHab);
-	strcat(sql, con2);
-	strcat(sql, nPlant);
-	strcat(sql, con3);
-
-	strcat(sql, "'");
-
-	strcat(sql, tipoHab);
-
-	strcat(sql, "'");
-
-
-
-
-	strcat(sql, con4);
-	strcat(sql, Prec);
-	strcat(sql, con8);
-	strcat(sql, con9);
-
-
-
-	cout<<sql<<endl;
-
-	/* Execute SQL statement */
-	rc = sqlite3_exec(db, sql, callback, (void*) data, &zErrMsg);
-	if (rc != SQLITE_OK) {
-		fprintf(stderr, "SQL error: %s\n", zErrMsg);
-		sqlite3_free(zErrMsg);
-	} else {
-		//fprintf(stdout, "Operation done successfully\n");
-	}
-	sqlite3_close(db);
-	menuAdministrador();
+		menuAdministrador();
 
 
 }

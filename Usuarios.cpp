@@ -20,12 +20,9 @@ using namespace std;
 
 
 	}
-	Usuarios::Usuarios(const Usuarios&){
-
-
-	}
 	Usuarios::~Usuarios(){
-
+		delete[] &this->numUsuarios;
+		delete[] this->u;
 
 	}
 

@@ -19,7 +19,7 @@ using namespace std;
 	}
 	Habitaciones::~Habitaciones(){
 		delete[] &this->numHabitaciones;
-		delete[] this->h;
+		delete h;
 	}
 
 	void Habitaciones::anyadirhabitacion(Habitacion *h){

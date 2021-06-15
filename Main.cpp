@@ -11,17 +11,16 @@
 #include <stdlib.h>
 #include <cstdlib>
 #include <stdio.h>
-#include "sqlite/sqlite3.h" //include para base de datos
-//#include <sqlite3.h> //include para base de datos
+#include "sqlite/sqlite3.h"
 #include <fstream>
 #include <windows.h>
 
-#include "Habitacion.h"//Para acceder a los distintos metodos y poder ver/editar/eliminar datos de la base de datos
-#include "Hotel.h"//Para acceder a los distintos metodos y poder ver/editar/eliminar datos de la base de datos
-#include "Reserva.h"//Para acceder a los distintos metodos y poder ver/editar/eliminar datos de la base de datos
+#include "Habitacion.h"
+#include "Hotel.h"
+#include "Reserva.h"
 #include "Reservas.h"
-#include "Trabajador.h"//Para acceder a los distintos metodos y poder ver/editar/eliminar datos de la base de datos
-#include "Usuario.h"//Para acceder a los distintos metodos y poder ver/editar/eliminar datos de la base de datos
+#include "Trabajador.h"
+#include "Usuario.h"
 #include "Usuarios.h"
 #include "Administrador.h"
 #include "Habitaciones.h"

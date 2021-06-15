@@ -18,7 +18,6 @@ private:
 public:
 
 	Usuarios();
-	Usuarios(const Usuarios&);
 	~Usuarios();
 
 	void anyadirUsuario(Usuario *u);

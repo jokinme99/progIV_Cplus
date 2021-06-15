@@ -726,6 +726,7 @@ void caso3Admin(){
 
 }
 
+
 void caso4Admin(){
 	char sql[] = "SELECT * from RESERVA";
 

@@ -27,6 +27,7 @@ public:
 	int getNumUsuarios();
 	Reservas* getReservas(int);
 	Usuario* getUsuario(int);
+	Usuario* getUsuario(char *nombre);
 	//Usuario* getUsuario(char*);
 	void editarUsuario(int id, char*, char*, char*, int /* ,Reservas* */);
 

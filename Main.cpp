@@ -55,7 +55,7 @@ void caso13Admin();void caso14Admin();void caso15Admin();void caso16Admin();
 
 Usuarios u;Habitaciones h;Trabajadores t;Reservas re;
 
-Usuario usuarioActual;
+Usuario* usuarioActual;
 
 string nombreUser;string contraUser;
 
@@ -381,7 +381,7 @@ void inicio() {
 			cout << "Usuario y contrasenya correctos. Bienvenido " << nomAu
 					<< endl;
 			en = true;
-			usuarioActual==u.getUsuario(nomAu);
+			usuarioActual=u.getUsuario(nomAu);
 
 			//parte del usuario
 			system("cls");

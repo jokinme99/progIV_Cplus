@@ -109,6 +109,8 @@ Reserva* Reservas::comprobarDisponibilidad(Reserva *reserva) {
 
 			int dia;
 
+
+			cout << endl;
 			cout << "Introduce un dia que no este ocupado" << endl;
 
 			cin >> dia;

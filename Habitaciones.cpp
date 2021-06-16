@@ -115,7 +115,7 @@ void Habitaciones::busquedaPersonalizada() {
 
 				for (int var = 0; var < this->numHabitaciones; ++var) {
 
-					if (this->h[var]->getPrecioHabitacion() <= precio) {
+					if (this->h[var]->getPrecioHabitacion() >= precio) {
 
 						this->h[var]->imprimir();
 					}
@@ -135,7 +135,7 @@ void Habitaciones::busquedaPersonalizada() {
 
 				for (int var = 0; var < this->numHabitaciones; ++var) {
 
-					if (this->h[var]->getPrecioHabitacion() >= precio) {
+					if (this->h[var]->getPrecioHabitacion() <= precio) {
 
 						this->h[var]->imprimir();
 					}
@@ -198,14 +198,14 @@ void Habitaciones::busquedaPersonalizada() {
 				if (opcionPrec == 1) {
 
 					if (strcmp(this->h[var]->getTipoHabitacion(), tipo) == 0
-							&& this->h[var]->getPrecioHabitacion() <= precio) {
+							&& this->h[var]->getPrecioHabitacion() >= precio) {
 
 						this->h[var]->imprimir();
 					}
 				} else {
 
 					if (strcmp(this->h[var]->getTipoHabitacion(), tipo) == 0
-							&& this->h[var]->getPrecioHabitacion() >= precio) {
+							&& this->h[var]->getPrecioHabitacion() <= precio) {
 
 						this->h[var]->imprimir();
 					}
@@ -219,3 +219,5 @@ void Habitaciones::busquedaPersonalizada() {
 		}
 
 	}
+}
+

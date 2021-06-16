@@ -297,7 +297,7 @@ void importarDatosUsuarios() {
 
 }
 
-//aqui
+
 int main() {
 	inicio();
 	return 0;
@@ -309,40 +309,15 @@ void inicio() {
 	ifstream ifs;
 	importarDatosUsuarios();
 
-	cargarDatosUsuarios();
+	cargarDatosUsuarios();cargarDatosHabitaciones();cargarDatosReservas();cargarDatosTrabajadores();
 
 	//u.imprimirUsuarios();
-	//u.imprimirUsuarios();
-
-	cargarDatosHabitaciones();
-	h.imprimirHabitaciones();
-
-	cargarDatosTrabajadores();
+	//h.imprimirHabitaciones();
 	//t.imprimirTrabajadores();
-	cargarDatosReservas();
+	//re.imprimirReservas()
 
-	t.imprimirTrabajadores();
-
-	u.imprimirUsuarios();
-
-	//crear metodo devolver usuario con id de usuario, prueba id 1 y prueba a hacer print de las reservas
-
-//	u.getUsuario(8)->imprimirUsuario();
-//	cout<<u.getUsuario(1)->getReservaUsuario()->getNumReservas()<<endl;
-//	u.getUsuario(1)->getReservaUsuario()->imprimirReservas();
-
-	//u.imprimirUsuarios();
-	////////////////////////////////////////////
-	// GENERAR UN OBJETO USUARIOS Y RELLENARLA CON UNA FUNCION DE LA CLASE
-	// GENERAR UN OBJETO RESERVAS Y RELLENARLO CON LA BASE DE DATOS
-	// GENERAR UN OBJETO HABITACIONES Y RELLENARLO CON LA BASE DE DATOS
-	// GENERAR UN OBJETO TRABAJADORES Y RELLENARLO DE LA BASE DE DATOS(?)
-	// HOTEL(?)
-	///////////////////////////////////////////////
 
 	ifs.open("../progIV_Cplus/Usuarios.txt", ios::in);
-
-//		cout<<ifs.tellg()<<endl;
 
 	char nom[20], cont[20], nomAu[20], conAu[20];
 	string linea;
@@ -372,10 +347,6 @@ void inicio() {
 		ifs.getline(cNum, 256, ':');
 		ifs.getline(cNum, 256, ';');
 
-//			cout<<cont<<endl;
-
-//			cout<<nom<<" "<<cont<<endl;
-//			cout<<nomAu<<" "<<conAu<<endl;
 
 		if (strcmp(nom, nomAu) == 0 && strcmp(cont, conAu) == 0) {
 			cout << "Usuario y contrasenya correctos. Bienvenido " << nomAu
@@ -463,8 +434,6 @@ void menuUsuario() {
 
 	} while (opcion != 1 && opcion != 2 && opcion != 3 && opcion != 4
 			&& opcion != 4 && opcion != 5 && opcion != 6 && opcion != 7);
-	/* ABRIMOS BASE DE DATOS */
-	//rc = sqlite3_open("hotelandia_final.s3db", &db);
 	switch (opcion) {
 	case 1: {
 		caso1Usuario();
@@ -505,7 +474,7 @@ void menuUsuario() {
 
 	}
 }
-void caso1Usuario() {			//VER HOTELES
+void caso1Usuario() {//VER HOTELES
 	/* Create SQL statement */
 	char sql[] = "SELECT * from HOTEL";
 
@@ -521,7 +490,7 @@ void caso1Usuario() {			//VER HOTELES
 	system("pause");
 	menuUsuario();
 }
-void caso2Usuario() {			//VER HABITACIONES
+void caso2Usuario() {//VER HABITACIONES
 	cout << "--HABITACIONES--" << endl;
 
 	h.imprimirHabitaciones();
@@ -530,8 +499,6 @@ void caso2Usuario() {			//VER HABITACIONES
 	system("pause");
 	menuUsuario();
 }
-
-
 int caso3Usuario() {//VER RESERVA
 //	char usuarioReserva[20];
 //
@@ -557,9 +524,7 @@ int caso3Usuario() {//VER RESERVA
 	menuUsuario();
 	return 0;
 }
-
-
-int caso4Usuario() {	//CREAR RESERVA
+int caso4Usuario() {//CREAR RESERVA
 
 
 //			int eleccionNHabitacion;
@@ -632,9 +597,6 @@ int caso4Usuario() {	//CREAR RESERVA
 //			}
 //			sqlite3_close(db);
 
-
-
-
 //	cout << "Introduzca su nombre de usuario para realizar una reserva :"
 //			<< endl;
 //	cin >> nombreUsuario;
@@ -692,7 +654,7 @@ int caso4Usuario() {	//CREAR RESERVA
 	menuUsuario();
 	return 0;
 }
-int caso5Usuario() {	//MODIFICAR RESERVA
+int caso5Usuario() {//MODIFICAR RESERVA
 	char usuarioModificar[20];
 	cout << "Introduzca el usuario en el que va a realizar la modificacion: ";
 	cin >> usuarioModificar;
@@ -713,12 +675,12 @@ int caso5Usuario() {	//MODIFICAR RESERVA
 	menuUsuario();
 	return 0;
 }
-int caso6Usuario() {	//ELIMINAR RESERVA
+int caso6Usuario() {//ELIMINAR RESERVA
 	char usuarioEliminar[20];
 	cout << "Introduzca el usuario del que quiere eliminar una reserva: ";
 	cin >> usuarioEliminar;
 	cout << endl;
-	rc = sqlite3_open("hotelandia_final.s3db", &db);	//abrir base de datos
+	rc = sqlite3_open("hotelandia_final.s3db", &db);
 	if (rc != SQLITE_OK) {
 		cout << "Error opening database" << endl;
 		return rc;
@@ -828,7 +790,7 @@ void menuAdministrador() {
 		break;
 	case 17: {
 		cout << "Cerrando sesion..." << endl;
-		inicio();
+		//inicio();
 		system("exit");
 	}
 		break;
@@ -848,7 +810,7 @@ void caso1Admin() {//VER HABITACION
 	system("pause");
 	menuAdministrador();
 }
-void caso2Admin() {	//EDITAR HABITACION
+void caso2Admin() {//EDITAR HABITACION
 
 	char tipoHab[100];
 
@@ -874,7 +836,7 @@ void caso2Admin() {	//EDITAR HABITACION
 	menuAdministrador();
 
 }
-void caso3Admin() {	//CREAR HABITACION
+void caso3Admin() {//CREAR HABITACION
 	cout << "Crea una nueva habitacion" << endl;
 
 	char tipo[100];
@@ -906,7 +868,7 @@ void caso3Admin() {	//CREAR HABITACION
 	menuAdministrador();
 
 }
-void caso4Admin() {	//ELIMINAR HABITACION
+void caso4Admin() {//ELIMINAR HABITACION
 	//AL ELIMINAR HABITACION SE DEBERIA QUITAR UNA FILA DE LA TABLA HOTEL_TIENE_HABITACIONES??
 	int idhab;
 	h.imprimirHabitaciones();
@@ -920,19 +882,18 @@ void caso4Admin() {	//ELIMINAR HABITACION
 	system("pause");
 	menuAdministrador();
 }
-void caso5Admin() {	//VER RESERVAS
+void caso5Admin() {//VER RESERVAS
 	cout << "--RESERVAS--" << endl;
 
 	re.imprimirReservas();
 	system("pause");
 	menuAdministrador();
 }
-void caso6Admin() {	//EDITAR RESERVA
+void caso6Admin() {//EDITAR RESERVA
 	int idR, dia, hora;
 	Habitacion *hab;
 	cout << "introduce el id de la reserva que quieres modificar" << endl;
 
-	//int idR;
 
 	cin >> idR;
 
@@ -964,7 +925,7 @@ void caso6Admin() {	//EDITAR RESERVA
 
 	menuAdministrador();
 }
-void caso7Admin() {	//CREAR RESERVA
+void caso7Admin() {//CREAR RESERVA
 	cout << "Crea una nueva reserva" << endl;
 
 	int idH;
@@ -991,7 +952,7 @@ void caso7Admin() {	//CREAR RESERVA
 	menuAdministrador();
 
 }
-void caso8Admin() {	//ELIMINAR RESERVA
+void caso8Admin() {//ELIMINAR RESERVA
 	int idR;
 	re.imprimirReservas();
 	cout << "introduce el id de la reserva a eliminar: " << endl;
@@ -1002,7 +963,7 @@ void caso8Admin() {	//ELIMINAR RESERVA
 	menuAdministrador();
 
 }
-void caso9Admin() {	//VER TRABAJADORES
+void caso9Admin() {//VER TRABAJADORES
 
 	cout << "--TRABAJADORES--" << endl;
 
@@ -1030,7 +991,7 @@ void caso10Admin() {//EDITAR TRABAJADOR
 
 	menuAdministrador();
 }
-void caso11Admin() {	//CREAR TRABAJADOR
+void caso11Admin() {//CREAR TRABAJADOR
 
 	cout << "Crea un nuevo trabajador" << endl;
 
@@ -1063,7 +1024,7 @@ void caso11Admin() {	//CREAR TRABAJADOR
 	menuAdministrador();
 
 }
-void caso12Admin() {	//ELIMINAR TRABAJADOR
+void caso12Admin() {//ELIMINAR TRABAJADOR
 	int idtr;
 	t.imprimirTrabajadores();
 	cout << "introduce el id del trabajador para eliminarlo" << endl;

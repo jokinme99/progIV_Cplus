@@ -22,13 +22,14 @@ public:
 
 	void anyadirUsuario(Usuario *u);
 	void rellenarDeUsuarios();
-	void quitarUsuario();
-//	int callbackUsuarios(void *data, int numeroColumnas, char **contadorDeFila, char **nombresColumnas);
+	void quitarUsuario(int);
 	void imprimirUsuarios();
-	int getNumUsuario();
+	int getNumUsuarios();
 	Reservas* getReservas(int);
 	Usuario* getUsuario(int);
-	Usuario* getUsuario(char*);
+	//Usuario* getUsuario(char*);
+	void editarUsuario(int id, char*, char*, char*, int /* ,Reservas* */);
+
 };
 
 

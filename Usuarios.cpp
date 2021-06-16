@@ -55,29 +55,23 @@ using namespace std;
 
 
 	}
-	void Usuarios::quitarUsuario(){
-
+	void Usuarios::quitarUsuario(int id){
+		int var;
+		cout<<"Llego"<<endl;
+		for(var=0;var<this->numUsuarios;++var){
+			cout<<"Variable"<<var<<endl;
+			if(this->u[var]->getIdUsuario()==id){
+				cout<< "Variable"<< var<<endl;
+				numUsuarios--;
+				for(int j=var;j<this->numUsuarios;++j){
+					cout<<"Variable j"<<j<<endl;
+					cout<<"Variable j"<<this->getNumUsuarios()<<endl;
+					this->u[j] = this->u[j+1];
+				}
+			}
+		}
 	}
 
-//	int Usuarios::callbackUsuarios(void *data, int numeroColumnas, char **contadorDeFila, char **nombresColumnas) {
-//		(void)data;
-//
-//		cout<<contadorDeFila[5]<<endl;
-//		if (strcmp(contadorDeFila[5],"usuario")==0){
-//
-//			Usuario *us = new Usuario(atoi(contadorDeFila[0]), contadorDeFila[1], contadorDeFila[2], contadorDeFila[3], atoi(contadorDeFila[4]));
-//			this->anyadirUsuario(us);
-//		}else{
-//
-//			Usuario *us = new Usuario(atoi(contadorDeFila[0]), contadorDeFila[1], contadorDeFila[2], contadorDeFila[3], atoi(contadorDeFila[4]));
-//
-//			Administrador *ad = new Administrador(us);
-//
-//			this->anyadirUsuario(ad);
-//
-//		}
-//		return 0;
-//	}
 
 	void Usuarios::imprimirUsuarios(){
 		for (int i = 0; i < this->numUsuarios; ++i) {
@@ -85,7 +79,7 @@ using namespace std;
 		}
 	}
 
-	int Usuarios::getNumUsuario(){
+	int Usuarios::getNumUsuarios(){
 		return this->numUsuarios;
 	}
 	Reservas* Usuarios::getReservas(int idUsuario){
@@ -108,12 +102,13 @@ using namespace std;
 		}
 		return this->u[i];
 	}
-	Usuario* Usuarios::getUsuario(char* nombreUsuario){
-		int i;
-		for (i = 0; i < this->numUsuarios; ++i) {
-			if (strcmp(this->u[i]->getNombreUsuario(),nombreUsuario)==0) {
-				break;
-			}
-		}
-		return this->u[i];
+
+	//Todo:arreglar
+	void Usuarios::editarUsuario(int id, char* nombre, char* correo, char* contrasenya, int edad /* ,Reservas* reserva */){
+		Usuario* usuario = getUsuario(id);
+		usuario->setNombreUsuario(nombre);
+		usuario->setCorreoUsuario(correo);
+		usuario->setContrasenyaUsuario(contrasenya);
+		usuario->setEdadUsuario(id);
+		//usuario->setReservaUsuario(reserva);
 	}

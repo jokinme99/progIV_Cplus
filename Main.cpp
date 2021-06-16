@@ -74,6 +74,7 @@ Usuarios u;
 Habitaciones h;
 Trabajadores t;
 Reservas re;
+Usuario usuarioActual;
 string nombreUser;
 string contraUser; //Para iniciar/registrar usuario
 sqlite3 *db; //objeto base de datos
@@ -530,7 +531,9 @@ void caso1Usuario() {//VER HOTELES
 void caso2Usuario() {//VER HABITACIONES
 	cout << "--HABITACIONES--" << endl;
 
-	h.busquedaPersonalizada();
+
+	h.imprimirHabitaciones();
+	//h.busquedaPersonalizada();
 
 		system("pause");
 	menuUsuario();

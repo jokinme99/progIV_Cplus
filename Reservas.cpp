@@ -92,7 +92,7 @@ Reserva* Reservas::comprobarDisponibilidad(Reserva *reserva) {
 		cout << r[var]->getHabitacionReservada()->getIdHabitacion() << endl;
 		if (this->r[var]->getDiaReserva() == reserva->getDiaReserva() && this->r[var]->getHabitacionReservada()->getIdHabitacion() == reserva->getHabitacionReservada()->getIdHabitacion()) {
 
-			cout << "La habitación" << this->r[var]
+			cout << "La habitación" << this->r[var]->getHabitacionReservada()->getIdHabitacion()
 					<< " está  ocupada para los siguientes días" << endl;
 
 			int contador = 0;

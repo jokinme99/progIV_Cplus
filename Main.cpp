@@ -457,10 +457,10 @@ void inicio() {
 
 void menuUsuario() {
 
-	int opcion = 0;
+	int opcion;
 	do {
 
-		while (opcion == 0) {
+
 			time_t t;
 			struct tm *tt;
 			time(&t);
@@ -488,7 +488,7 @@ void menuUsuario() {
 
 			cin >> opcion;
 
-		}
+
 
 	} while (opcion != 1 && opcion != 2 && opcion != 3 && opcion != 4
 			&& opcion != 4 && opcion != 5 && opcion != 6 && opcion != 7);

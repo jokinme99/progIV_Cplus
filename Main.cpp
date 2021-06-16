@@ -163,8 +163,8 @@ return 0;
 
 int callbackHoteles(void *data, int numeroColumnas, char **contadorDeFila, char **nombresColumnas) {
 	(void)data;
-	Hotel *tr = new Trabajador(atoi(contadorDeFila[0]), contadorDeFila[1], contadorDeFila[2], atoi(contadorDeFila[3]),atoi(contadorDeFila[4]));
-	t.anyadirTrabajador(tr);
+	Hotel *ht = new Hotel(atoi(contadorDeFila[0]), contadorDeFila[1], contadorDeFila[2], atoi(contadorDeFila[3]),atoi(contadorDeFila[4]));
+
 return 0;
 }
 

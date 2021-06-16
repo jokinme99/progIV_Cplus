@@ -26,7 +26,7 @@ private:
 	int numHabitacionesDisponibles;
 public:
 	Hotel();
-	Hotel(const int, char*, char*, int, int, Habitacion*, Trabajador*, int numHabitacionesDisponibles);
+	Hotel(const int, char*, char*, int, int, int numHabitacionesDisponibles);
 	Hotel(const Hotel&);
 	~Hotel();
 

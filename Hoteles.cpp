@@ -5,13 +5,36 @@
  *      Author: 34618
  */
 
+#include "Hotel.h"
+#include "Hoteles.h"
+#include <iostream>
 
-	Hoteles();
-	~Hoteles();
+using namespace std;
 
-	void anyadirHotel(Hotel  *h);
-	void quitarHotel(int);
-	void imprimirHoteles();
-	int getNumHoteles();
-	Hotel* getHotel(int idHotel);
-	void editarHotel(int, float);
+
+
+	Hoteles::Hoteles(){
+
+	}
+	Hoteles:~Hoteles(){
+
+	}
+
+	void Hoteles::anyadirHotel(Hotel  *h){
+
+	}
+	void Hoteles::quitarHotel(int){
+
+	}
+	void Hoteles::imprimirHoteles(){
+
+	}
+	int Hoteles::getNumHoteles(){
+
+	}
+	Hotel* Hoteles::getHotel(int idHotel){
+
+	}
+	void Hoteles::editarHotel(int, float){
+
+	}

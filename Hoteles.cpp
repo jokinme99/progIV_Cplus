@@ -16,7 +16,7 @@ using namespace std;
 	Hoteles::Hoteles(){
 
 	}
-	Hoteles:~Hoteles(){
+	Hoteles::~Hoteles(){
 
 	}
 

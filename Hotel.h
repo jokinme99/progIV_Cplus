@@ -10,6 +10,8 @@
 
 #include "Habitacion.h"
 #include "Trabajador.h"
+#include "Trabajadores.h"
+#include "Habitaciones.h"
 
 class Hotel
 {
@@ -19,10 +21,10 @@ private:
 	char* direccionHotel;
 	int telefonoHotel;
 	int numEstrellas;
-	Habitacion* habitacionHotel;
+	Habitaciones* habitaciones;
 	//Reserva* reservaHabitacion; No hace falta, porque en Reserva podemos ver la habitacion que esta reservada
 	//Y cada hotel tiene unas habitaciones especificas, por lo que al hacer la reserva de la habitacion sabemos de que hotel
-	Trabajador* trabajadorHotel;
+	Trabajadores* trabajadores;
 	int numHabitacionesDisponibles;
 public:
 	Hotel();

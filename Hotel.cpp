@@ -12,9 +12,18 @@ using namespace std;
 
 Hotel::Hotel() {
 
+	this->idHotel = 0;
+	this->nombreHotel = NULL;
+	this->direccionHotel = NULL;
+	this->telefonoHotel = 0;
+	this->numEstrellas = 0;
+
+	this->trabajadores[0] = NULL;
+	this->numHabitacionesDisponibles = 0;
 }
 
-Hotel::Hotel(const int, char*, char*, int, int, int numHabitacionesDisponibles) {
+Hotel::Hotel(const int id, char* nombre, char* direccion, int telefono, int estrellas, int numHabitacionesDisponibles) {
+
 
 }
 Hotel::Hotel(const Hotel&) {

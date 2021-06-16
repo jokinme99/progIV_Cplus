@@ -25,6 +25,7 @@ public:
 	int getNumReservas();
 	Reserva* getReserva(int idReserva);
 	void editarReserva(int, int, int, Habitacion*);
+	Reserva* comprobarDisponibilidad(Reserva * r);
 };
 
 

@@ -15,3 +15,6 @@
 #include "Habitacion.h"
 using namespace std;
 
+void verHoteles(){
+
+}

@@ -10,6 +10,14 @@
 #include <iostream>
 using namespace std;
 
+Administrador::Administrador(int idUsuario,
+	char* nombreUsuario,
+	char* correoUsuario,
+	char* contrasenyaUsuario,
+	int edadUsuario):Usuario(idUsuario, nombreUsuario, correoUsuario, contrasenyaUsuario, edadUsuario){
+
+}
+
 Administrador::Administrador(Usuario* u):Usuario(*u){//METER DATOS RELEVANTES
 
 

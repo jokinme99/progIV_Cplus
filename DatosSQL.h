@@ -27,6 +27,7 @@ void cargarDatosTrabajadores(Trabajadores*);
 void cargarDatosReservas(Reservas*);
 void importarDatosUsuarios();
 
+void verHoteles();
 
 
 #endif /* DATOSSQL_H_ */

@@ -16,6 +16,12 @@ public:
 
 	//CONSTRUCTORES
 
+	Administrador(int idUsuario,
+	char* nombreUsuario,
+	char* correoUsuario,
+	char* contrasenyaUsuario,
+	int edadUsuario);
+
 
 	Administrador(Usuario*);
 	Administrador(const Administrador&);

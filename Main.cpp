@@ -341,7 +341,7 @@ void inicio() {
 	//u.imprimirUsuarios();
 
 	cargarDatosHabitaciones();
-	//h.imprimirHabitaciones();
+	h.imprimirHabitaciones();
 
 	cargarDatosTrabajadores();
 	//t.imprimirTrabajadores();
@@ -532,7 +532,8 @@ void caso1Usuario() {//VER HOTELES
 void caso2Usuario() {//VER HABITACIONES
 	cout << "--HABITACIONES--" << endl;
 
-		h.imprimirHabitaciones();
+	h.busquedaPersonalizada();
+
 		system("pause");
 	menuUsuario();
 }

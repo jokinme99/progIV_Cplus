@@ -88,7 +88,7 @@ void Habitaciones::busquedaPersonalizada() {
 
 	int opcion;
 
-	cin << opcion;
+	cin >> opcion;
 
 	if (opcion != 1 && opcion != 2 && opcion != 3) {
 
@@ -101,7 +101,7 @@ void Habitaciones::busquedaPersonalizada() {
 
 			cout << "Precio mayor (1) precio menor (2)" << endl;
 
-			cin << opcionPrec;
+			cin >> opcionPrec;
 
 			switch (opcionPrec) {
 
@@ -111,7 +111,7 @@ void Habitaciones::busquedaPersonalizada() {
 
 				cout << "Introduce un precio" << endl;
 
-				cin << precio;
+				cin >> precio;
 
 				for (int var = 0; var < this->numHabitaciones; ++var) {
 
@@ -131,7 +131,7 @@ void Habitaciones::busquedaPersonalizada() {
 
 				cout << "Introduce un precio" << endl;
 
-				cin << precio;
+				cin >> precio;
 
 				for (int var = 0; var < this->numHabitaciones; ++var) {
 
@@ -152,16 +152,70 @@ void Habitaciones::busquedaPersonalizada() {
 			break;
 		case 2: {
 
+			char tipo[100];
+
+			cout
+					<< "Introduce un tipo -> Doble, Individual, Suite Doble o Familiar"
+					<< endl;
+
+			cin >> tipo;
+
+			for (int var = 0; var < this->numHabitaciones; ++var) {
+
+				if (strcmp(this->h[var]->getTipoHabitacion(), tipo) == 0) {
+
+					this->h[var]->imprimir();
+				}
+
+			}
+
 		}
 			break;
 
 		case 3: {
 
-		}
+			char tipo[100];
+
+			cout
+					<< "Introduce un tipo -> Doble, Individual, Suite Doble o Familiar"
+					<< endl;
+
+			cin >> tipo;
+
+			int precio;
+
+			int opcionPrec;
+
+			cout << "Precio igual mayor (1) o precio igual menor (2)" << endl;
+			cin >> opcionPrec;
+
+			cout << "Introduce un precio" << endl;
+
+			cin >> precio;
+
+			for (int var = 0; var < this->numHabitaciones; ++var) {
+
+				if (opcionPrec == 1) {
+
+					if (strcmp(this->h[var]->getTipoHabitacion(), tipo) == 0
+							&& this->h[var]->getPrecioHabitacion() <= precio) {
+
+						this->h[var]->imprimir();
+					}
+				} else {
+
+					if (strcmp(this->h[var]->getTipoHabitacion(), tipo) == 0
+							&& this->h[var]->getPrecioHabitacion() >= precio) {
+
+						this->h[var]->imprimir();
+					}
+				}
+
+			}
 			break;
 
 		}
 
-	}
+		}
 
-}
+	}

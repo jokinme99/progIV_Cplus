@@ -86,3 +86,27 @@ using namespace std;
 		habitacion->setTipoHabitacion(tipo);
 
 	}
+
+
+	void Habitaciones::busquedaPersonalizada(){
+
+		cout << "Elige una opcion de busqueda" << endl;
+
+		cout << "1. Por precio" << endl;
+		cout << "2. Por tipo de habitacion" << endl;
+		cout << "3. Ambas" << endl;
+
+		int opcion;
+
+		cin << opcion;
+
+
+		if(opcion != 1 && opcion != 2 && opcion != 3){
+
+		}else {
+
+
+		}
+
+
+	}

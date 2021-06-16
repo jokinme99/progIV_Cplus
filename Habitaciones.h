@@ -23,6 +23,7 @@ public:
 	int getNumHabitaciones();
 	Habitacion* getHabitacion(int idHabitacion);
 	void editarHabitacion(int, char*, int);
+	void busquedaPersonalizada();
 };
 
 

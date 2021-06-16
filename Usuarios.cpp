@@ -59,25 +59,25 @@ using namespace std;
 
 	}
 
-	int Usuarios::callbackUsuarios(void *data, int numeroColumnas, char **contadorDeFila, char **nombresColumnas) {
-		(void)data;
-
-		cout<<contadorDeFila[5]<<endl;
-		if (strcmp(contadorDeFila[5],"usuario")==0){
-
-			Usuario *us = new Usuario(atoi(contadorDeFila[0]), contadorDeFila[1], contadorDeFila[2], contadorDeFila[3], atoi(contadorDeFila[4]));
-			this->anyadirUsuario(us);
-		}else{
-
-			Usuario *us = new Usuario(atoi(contadorDeFila[0]), contadorDeFila[1], contadorDeFila[2], contadorDeFila[3], atoi(contadorDeFila[4]));
-
-			Administrador *ad = new Administrador(us);
-
-			this->anyadirUsuario(ad);
-
-		}
-		return 0;
-	}
+//	int Usuarios::callbackUsuarios(void *data, int numeroColumnas, char **contadorDeFila, char **nombresColumnas) {
+//		(void)data;
+//
+//		cout<<contadorDeFila[5]<<endl;
+//		if (strcmp(contadorDeFila[5],"usuario")==0){
+//
+//			Usuario *us = new Usuario(atoi(contadorDeFila[0]), contadorDeFila[1], contadorDeFila[2], contadorDeFila[3], atoi(contadorDeFila[4]));
+//			this->anyadirUsuario(us);
+//		}else{
+//
+//			Usuario *us = new Usuario(atoi(contadorDeFila[0]), contadorDeFila[1], contadorDeFila[2], contadorDeFila[3], atoi(contadorDeFila[4]));
+//
+//			Administrador *ad = new Administrador(us);
+//
+//			this->anyadirUsuario(ad);
+//
+//		}
+//		return 0;
+//	}
 
 	void Usuarios::imprimirUsuarios(){
 		for (int i = 0; i < this->numUsuarios; ++i) {

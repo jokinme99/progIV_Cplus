@@ -1,5 +1,5 @@
 Id:1;NombreUsuario:marcos;contrasenya:marcos;correo:marcos;Edad:12;TipoUsuario:usuario;
-Id:2;NombreUsuario:juango;contrasenya:memememe;correo:memememem;Edad:42;TipoUsuario:admin;
+Id:2;NombreUsuario:juango;contrasenya:HIJO;correo:OSTIA;Edad:42;TipoUsuario:admin;
 Id:3;NombreUsuario:julio;contrasenya:contra;correo:orreo;Edad:23;TipoUsuario:usuario;
 Id:4;NombreUsuario:julian;contrasenya:maroto;correo:correo;Edad:239;TipoUsuario:usuario;
 Id:5;NombreUsuario:f;contrasenya:f;correo:f;Edad:0;TipoUsuario:usuario;

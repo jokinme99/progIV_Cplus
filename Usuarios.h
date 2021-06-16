@@ -23,7 +23,7 @@ public:
 	void anyadirUsuario(Usuario *u);
 	void rellenarDeUsuarios();
 	void quitarUsuario();
-	int callbackUsuarios(void *data, int numeroColumnas, char **contadorDeFila, char **nombresColumnas);
+//	int callbackUsuarios(void *data, int numeroColumnas, char **contadorDeFila, char **nombresColumnas);
 	void imprimirUsuarios();
 	int getNumUsuario();
 	Reservas* getReservas(int);

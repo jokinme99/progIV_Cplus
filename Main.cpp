@@ -107,14 +107,17 @@ int callbackUsuarios(void *data, int numeroColumnas, char **contadorDeFila,
 				contadorDeFila[2], contadorDeFila[3], atoi(contadorDeFila[4]));
 		u.anyadirUsuario(us);
 	}
-//	else {
-//		cout<<2<<endl;
-//		Usuario *us = new Usuario(atoi(contadorDeFila[0]), contadorDeFila[1],
-//				contadorDeFila[2], contadorDeFila[3], atoi(contadorDeFila[4]));
-//		Administrador *ad = new Administrador(us);
-//		u.anyadirUsuario(ad);
-//
-//	}
+	else {
+
+		cout<<2<<endl;
+
+		cout<<atoi(contadorDeFila[0])<< contadorDeFila[1]<<
+				contadorDeFila[2]<<contadorDeFila[3]<<atoi(contadorDeFila[4])<<endl;
+		Administrador *ad = new Administrador(atoi(contadorDeFila[0]), contadorDeFila[1],
+				contadorDeFila[2], contadorDeFila[3], atoi(contadorDeFila[4]));
+		u.anyadirUsuario(ad);
+
+	}
 
 	return 0;
 }
@@ -340,7 +343,7 @@ void inicio() {
 
 	cargarDatosTrabajadores();
 	//t.imprimirTrabajadores();
-	//cargarDatosReservas();
+	cargarDatosReservas();
 
 	t.imprimirTrabajadores();
 

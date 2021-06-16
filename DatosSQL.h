@@ -14,18 +14,8 @@
 #include "sqlite/sqlite3.h"
 
 static int callback(void *data, int argc, char **argv, char **azColName);
-int callbackUsuarios(void *data, int numeroColumnas, char **contadorDeFila,
-		char **nombresColumnas, Usuarios*);
-int callbackReservas(void *data, int numeroColumnas, char **contadorDeFila,
-		char **nombresColumnas, Reservas*);
-int callbackHabitaciones(void *data, int numeroColumnas, char **contadorDeFila,
-		char **nombresColumnas, Habitaciones*);
-int callbackTrabajadores(void *data, int numeroColumnas, char **contadorDeFila, char **nombresColumnas, Trabajadores*);
-void cargarDatosUsuarios(Usuarios*);
-void cargarDatosHabitaciones(Habitaciones*);
-void cargarDatosTrabajadores(Trabajadores*);
-void cargarDatosReservas(Reservas*);
-void importarDatosUsuarios();
+
+void llamadaSQL(char* sentencia);
 
 void verHoteles();
 

@@ -15,6 +15,10 @@
 #include <stdlib.h>
 #include <string.h>
 #include <windows.h>
+#include "Habitacion.h"
+#include "Habitaciones.h"
+#include "Reservas.h"
+#include "DatosSQL.h"
 using namespace std;
 
 	Usuario::Usuario(){
@@ -150,6 +154,71 @@ using namespace std;
 		string s = to_string(numero);
 		const char *c = s.c_str();
 	    return (char*) c;
+	}
+	void Usuario::anyadirReserva(Reservas* re,Habitaciones* h){
+
+
+		int eleccionNHabitacion;
+		int dia;
+		int hora;
+
+		re->getOrdenReserva(re->getNumReservas())->getIdReserva();//AQUI TENEMOS EL ID DE LA NUEVA RESERVA
+		cout << endl;
+		cout << "Ingrese el dia de la reserva que desea anyadir: ";
+		cin >> dia;
+		while(dia<1||dia>31){
+			cout<<"por favor indique un dia adecuado"<<endl;
+			cin >> dia;
+		}
+		cout << endl;
+		cout << "Ingrese la hora de llegada al hotel que desea anyadir: "<<endl;
+		cin >> hora;
+		while(hora<0||hora>24){
+			cout<<"por favor indique una hora adecuada"<<endl;
+			cin >> hora;
+		}
+		cout << "Ingrese el id de la habitacion que desea reservar: "<<endl;
+
+		cout<<"Aqui tienes las habitaciones que tenemos disponibles"<<endl;
+
+		h->imprimirHabitaciones();
+
+
+
+		cin >> eleccionNHabitacion;
+		while(h->getHabitacion(eleccionNHabitacion)==NULL){
+
+			cout<<"por favor habitacion adecuada"<<endl;
+			cin >> eleccionNHabitacion;
+		}
+
+
+		cout << endl;
+
+		this->getReservaUsuario()->
+				anyadirReserva(new Reserva(re->getOrdenReserva(re->getNumReservas())->getIdReserva(),dia,hora,h->getHabitacion(eleccionNHabitacion)));
+		//ESTE METODO AÑADE UNA RESERVA
+
+		/* Create SQL statement */
+		char sql[] = "INSERT INTO RESERVA VALUES (";
+
+		char con1[] = ",", con2[] = ",", con3[] = ",", con8[] = ")", con9[] = "";
+
+
+
+		strcat(sql, (char*)re->getOrdenReserva(re->getNumReservas())->getIdReserva());
+		strcat(sql, con1);
+		strcat(sql, (char*)dia);
+		strcat(sql, con2);
+		strcat(sql, (char*)hora);
+		strcat(sql, con3);
+		strcat(sql, (char*)this->getIdUsuario());//CONVERTIR INT A CHAR
+		strcat(sql, con8);
+		strcat(sql, con9);
+
+		llamadaSQL(sql);
+
+
 	}
 
 

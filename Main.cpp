@@ -462,14 +462,14 @@ void menuUsuario() {
 	do {
 
 
-			time_t t;
-			struct tm *tt;
-			time(&t);
-			tt = localtime(&t);
+//			time_t t;
+//			struct tm *tt;
+//			time(&t);
+//			tt = localtime(&t);
 
-			cout << " ____________MODO USUARIO_______________________________"
-					<< endl;
-			cout << "|				" << asctime(tt);
+			cout << " ____________MODO USUARIO_______________________________"<< endl;
+
+			cout << "|				" <<endl;// asctime(tt);
 			cout << "|				                	" << usuarioActual->getNombreUsuario()
 					<< "  |" << endl;
 			cout << "|							|" << endl;
@@ -494,7 +494,7 @@ void menuUsuario() {
 	} while (opcion != 1 && opcion != 2 && opcion != 3 && opcion != 4
 			&& opcion != 4 && opcion != 5 && opcion != 6 && opcion != 7);
 	/* ABRIMOS BASE DE DATOS */
-	rc = sqlite3_open("hotelandia_final.s3db", &db);
+	//rc = sqlite3_open("hotelandia_final.s3db", &db);
 	switch (opcion) {
 	case 1: {
 		caso1Usuario();
@@ -592,69 +592,77 @@ int caso3Usuario() {//VER RESERVA
 int caso4Usuario() {	//CREAR RESERVA
 
 
-	int eleccionNHabitacion;
-	int dia;
-	int hora;
+//			int eleccionNHabitacion;
+//			int dia;
+//			int hora;
+//
+//			re.getOrdenReserva(re.getNumReservas())->getIdReserva();//AQUI TENEMOS EL ID DE LA NUEVA RESERVA
+//			cout << endl;
+//			cout << "Ingrese el dia de la reserva que desea anyadir: ";
+//			cin >> dia;
+//			while(dia<1||dia>31){
+//				cout<<"por favor indique un dia adecuado"<<endl;
+//				cin >> dia;
+//			}
+//			cout << endl;
+//			cout << "Ingrese la hora de llegada al hotel que desea anyadir: "<<endl;
+//			cin >> hora;
+//			while(hora<0||hora>24){
+//				cout<<"por favor indique una hora adecuada"<<endl;
+//				cin >> hora;
+//			}
+//			cout << "Ingrese el id de la habitacion que desea reservar: "<<endl;
+//
+//			cout<<"Aqui tienes las habitaciones que tenemos disponibles"<<endl;
+//
+//			h.imprimirHabitaciones();
+//
+//
+//
+//			cin >> eleccionNHabitacion;
+//			while(h.getHabitacion(eleccionNHabitacion)==NULL){
+//
+//				cout<<"por favor habitacion adecuada"<<endl;
+//				cin >> eleccionNHabitacion;
+//			}
+//
+//
+//			cout << endl;
+//
+//			usuarioActual->getReservaUsuario()->
+//					anyadirReserva(new Reserva(re.getOrdenReserva(re.getNumReservas())->getIdReserva(),dia,hora,h.getHabitacion(eleccionNHabitacion)));
+//			//ESTE METODO AÑADE UNA RESERVA
+//
+//			/* Create SQL statement */
+//			char sql[] = "INSERT INTO RESERVA VALUES (";
+//
+//			char con1[] = ",", con2[] = ",", con3[] = ",", con8[] = ")", con9[] = "";
+//
+//
+//
+//			strcat(sql, (char*)re.getOrdenReserva(re.getNumReservas())->getIdReserva());
+//			strcat(sql, con1);
+//			strcat(sql, (char*)dia);
+//			strcat(sql, con2);
+//			strcat(sql, (char*)hora);
+//			strcat(sql, con3);
+//			strcat(sql, (char*)usuarioActual->getIdUsuario());//CONVERTIR INT A CHAR
+//			strcat(sql, con8);
+//			strcat(sql, con9);
+//
+//
+//
+//			/* Execute SQL statement */
+//			rc = sqlite3_exec(db, sql, callback, (void*) data, &zErrMsg);
+//			if (rc != SQLITE_OK) {
+//				fprintf(stderr, "SQL error: %s\n", zErrMsg);
+//				sqlite3_free(zErrMsg);
+//			} else {
+//				fprintf(stdout, "Reserva realizada:\n");
+//			}
+//			sqlite3_close(db);
 
-			re.getOrdenReserva(re.getNumReservas())->getIdReserva();//AQUI TENEMOS EL ID DE LA NUEVA RESERVA
-			cout << endl;
-			cout << "Ingrese el dia de la reserva que desea anyadir: ";
-			cin >> dia;
-			while(dia<1||dia>31){
-				cout<<"por favor indique un dia adecuado"<<endl;
-				cin >> dia;
-			}
-			cout << endl;
-			cout << "Ingrese la hora de llegada al hotel que desea anyadir: "<<endl;
-			cin >> hora;
-			while(hora<0||hora>24){
-				cout<<"por favor indique una hora adecuada"<<endl;
-				cin >> hora;
-			}
-			cout << "Ingrese el id de la habitacion que desea reservar: "<<endl;
 
-			cout<<"Aqui tienes las habitaciones que tenemos disponibles"<<endl;
-
-			h.imprimirHabitaciones();
-
-
-
-			cin >> eleccionNHabitacion;
-			while(h.getHabitacion(eleccionNHabitacion)==NULL){
-
-				cout<<"por favor habitacion adecuada"<<endl;
-				cin >> eleccionNHabitacion;
-			}
-
-
-			cout << endl;
-
-
-			/* Create SQL statement */
-			char sql[] = "INSERT INTO RESERVA VALUES (";
-
-			char con1[] = ",", con2[] = ",", con3[] = ",", con8[] = ")", con9[] = "";
-
-			strcat(sql, re.getOrdenReserva(re.getNumReservas())->getIdReserva());
-			strcat(sql, con1);
-			strcat(sql, dia);
-			strcat(sql, con2);
-			strcat(sql, hora);
-			strcat(sql, con3);
-			strcat(sql, usuarioActual->getIdUsuario());//CONVERTIR INT A CHAR
-			strcat(sql, con8);
-			strcat(sql, con9);
-
-
-			/* Execute SQL statement */
-			rc = sqlite3_exec(db, sql, callback, (void*) data, &zErrMsg);
-			if (rc != SQLITE_OK) {
-				fprintf(stderr, "SQL error: %s\n", zErrMsg);
-				sqlite3_free(zErrMsg);
-			} else {
-				fprintf(stdout, "Reserva realizada:\n");
-			}
-			sqlite3_close(db);
 
 
 //	cout << "Introduzca su nombre de usuario para realizar una reserva :"
@@ -706,7 +714,7 @@ int caso4Usuario() {	//CREAR RESERVA
 //	}
 
 
-
+	usuarioActual->anyadirReserva(&re, &h);
 	system("pause");
 
 

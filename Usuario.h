@@ -13,6 +13,8 @@
 #include <string.h>
 #include <windows.h>
 #include "Reservas.h"
+#include "Habitacion.h"
+#include "Habitaciones.h"
 
 class Usuario
 {
@@ -51,6 +53,7 @@ public:
 	char* intAChar(int n);
 
 
+
 	//virtual
 	void imprimirUsuario();//PORQUE OSTIAS NO ME RECONOCE ESTO
 
@@ -58,6 +61,7 @@ public:
 	void listarHabitaciones();
 	void listarReservas();
 	void eliminarReserva();
+	void anyadirReserva(Reservas* re,Habitaciones* h );
 
 
 

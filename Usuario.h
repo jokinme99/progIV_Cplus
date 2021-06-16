@@ -35,6 +35,7 @@ public:
 	Usuario(const Usuario&);
 	~Usuario();
 
+	void anyadirReserva(Reservas* re,Habitaciones* h );
 	int getIdUsuario()const;
 	char* getNombreUsuario()const;
 	void setNombreUsuario(char*);
@@ -61,7 +62,7 @@ public:
 	void listarHabitaciones();
 	void listarReservas();
 	void eliminarReserva();
-	void anyadirReserva(Reservas* re,Habitaciones* h );
+
 
 
 

@@ -31,6 +31,7 @@ public:
 	//Usuario* getUsuario(char*);
 	void editarUsuario(int id, char*, char*, char*, int /* ,Reservas* */);
 
+
 };
 
 

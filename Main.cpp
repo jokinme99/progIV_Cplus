@@ -45,7 +45,7 @@ void cargarDatosTrabajadores();
 void inicio();void menuUsuario();void menuAdministrador();
 
 void caso1Usuario();void caso2Usuario();int caso3Usuario();
-int caso4Usuario();int caso5Usuario();int caso6Usuario();
+void caso4Usuario();int caso5Usuario();int caso6Usuario();
 
 void caso1Admin();void caso2Admin();void caso3Admin();void caso4Admin();
 void caso5Admin();void caso6Admin();void caso7Admin();void caso8Admin();
@@ -432,15 +432,15 @@ void menuUsuario() {
 	do {
 
 
-//			time_t t;
-//			struct tm *tt;
-//			time(&t);
-//			tt = localtime(&t);
+			time_t t;
+			struct tm *tt;
+			time(&t);
+			tt = localtime(&t);
 
 			cout << " ____________MODO USUARIO_______________________________"<< endl;
 
-			cout << "|				" <<endl;// asctime(tt);
-			cout << "|				                	" << usuarioActual->getNombreUsuario()
+			cout << "|				" <<endl; asctime(tt);
+			cout << "|				            " << usuarioActual->getNombreUsuario()
 					<< "  |" << endl;
 			cout << "|							|" << endl;
 			cout << "|	Elije las siguientes opciones                   |"
@@ -479,6 +479,8 @@ void menuUsuario() {
 	}
 		break;
 	case 4: {
+
+		cout<<"entrando en caso4usuario"<<endl;
 		caso4Usuario();
 	}
 		break;
@@ -551,6 +553,7 @@ int caso3Usuario() {//VER RESERVA
 //	}
 //	system("pause");
 	cout<<"A continuacion se le mostraran sus reservas"<<endl;
+	cout<<endl;
 	usuarioActual->getReservaUsuario()->imprimirReservas();
 
 
@@ -559,7 +562,20 @@ int caso3Usuario() {//VER RESERVA
 }
 
 
-int caso4Usuario() {	//CREAR RESERVA
+void caso4Usuario() {	//CREAR RESERVA
+
+//	cout << "Introduzca el usuario en el que va a realizar la modificacion: ";
+//
+//
+	usuarioActual->anyadirReserva(&re, &h);
+
+
+	system("pause");
+
+
+
+	menuUsuario();
+
 
 
 //			int eleccionNHabitacion;
@@ -684,14 +700,9 @@ int caso4Usuario() {	//CREAR RESERVA
 //	}
 
 
-	usuarioActual->anyadirReserva(&re, &h);
-	system("pause");
-
-
-
-	menuUsuario();
-	return 0;
+	//return 0;
 }
+
 int caso5Usuario() {	//MODIFICAR RESERVA
 	char usuarioModificar[20];
 	cout << "Introduzca el usuario en el que va a realizar la modificacion: ";

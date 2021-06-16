@@ -72,6 +72,19 @@ Habitacion* Habitaciones::getHabitacion(int idHabitacion) {
 	return this->h[var];
 }
 
+bool Habitaciones::habitacionExiste(int idHabitacion){
+	int var = 0;
+	bool verdadero= false;
+	for (var = 0; var < this->numHabitaciones; ++var) {
+		if (this->h[var]->getIdHabitacion() == idHabitacion) {
+			verdadero = true;
+			break;
+		}
+
+	}
+	return verdadero;
+}
+
 void Habitaciones::editarHabitacion(int id, char *tipo, int precio) {
 
 	Habitacion *habitacion = getHabitacion(id);

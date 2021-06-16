@@ -65,9 +65,9 @@ Reserva* Reservas::getReserva(int idReserva) {
 	}
 	return this->r[var];
 }
-Reserva* Reservas::getOrdenReserva(int ordenReserva){
+int Reservas::getOrdenReserva(){
 
-	return this->r[ordenReserva];
+	return this->r[this->numReservas-1]->getIdReserva()+1;
 }
 
 

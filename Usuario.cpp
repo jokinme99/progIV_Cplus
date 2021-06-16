@@ -157,12 +157,11 @@ using namespace std;
 	}
 	void Usuario::anyadirReserva(Reservas* re,Habitaciones* h){
 
-
 		int eleccionNHabitacion;
 		int dia;
 		int hora;
 
-		re->getOrdenReserva(re->getNumReservas())->getIdReserva();//AQUI TENEMOS EL ID DE LA NUEVA RESERVA
+		//re->getOrdenReserva(re->getNumReservas())->getIdReserva();//AQUI TENEMOS EL ID DE LA NUEVA RESERVA
 		cout << endl;
 		cout << "Ingrese el dia de la reserva que desea anyadir: ";
 		cin >> dia;
@@ -186,18 +185,32 @@ using namespace std;
 
 
 		cin >> eleccionNHabitacion;
-		while(h->getHabitacion(eleccionNHabitacion)==NULL){
+
+		//cout<<h->habitacionExiste(eleccionNHabitacion)<<endl;
+
+
+		while(h->habitacionExiste(eleccionNHabitacion)==0){
 
 			cout<<"por favor habitacion adecuada"<<endl;
+
+
 			cin >> eleccionNHabitacion;
 		}
 
 
 		cout << endl;
 
-		this->getReservaUsuario()->
-				anyadirReserva(new Reserva(re->getOrdenReserva(re->getNumReservas())->getIdReserva(),dia,hora,h->getHabitacion(eleccionNHabitacion)));
+		Reserva *r = new Reserva(re->getOrdenReserva(),dia,hora,h->getHabitacion(eleccionNHabitacion));
+		this->getReservaUsuario()->anyadirReserva(r);
+		re->anyadirReserva(r);
+
+
+
+
 		//ESTE METODO AÑADE UNA RESERVA
+
+
+
 
 		/* Create SQL statement */
 		char sql[] = "INSERT INTO RESERVA VALUES (";
@@ -205,16 +218,37 @@ using namespace std;
 		char con1[] = ",", con2[] = ",", con3[] = ",", con8[] = ")", con9[] = "";
 
 
+		string s = to_string(r->getIdReserva());
+		char const *pchar = s.c_str();  //use char const* as target type
+		char con10[5]; strcpy(con10, pchar);
+		cout<<pchar<<endl;
+		cout<<con10<<endl;
+		 s = to_string(dia);
+		char const *pchar2 = s.c_str();  //use char const* as target type
+		char con11[5]; strcpy(con11, pchar2);
+		 s = to_string(hora);
+		char const *pchar3 = s.c_str();  //use char const* as target type
+		char con12[5]; strcpy(con12, pchar3);
+		 s = to_string(this->getIdUsuario());
+		char const *pchar4 = s.c_str();  //use char const* as target type
+		char con13[5]; strcpy(con13, pchar4);
+		s = to_string(eleccionNHabitacion);
+		char const *pchar5 = s.c_str();  //use char const* as target type
+		char con14[5]; strcpy(con14, pchar4);
 
-		strcat(sql, (char*)re->getOrdenReserva(re->getNumReservas())->getIdReserva());
+		strcat(sql, con10);
 		strcat(sql, con1);
-		strcat(sql, (char*)dia);
+		strcat(sql, con11);
 		strcat(sql, con2);
-		strcat(sql, (char*)hora);
+		strcat(sql, con12);
 		strcat(sql, con3);
-		strcat(sql, (char*)this->getIdUsuario());//CONVERTIR INT A CHAR
+		strcat(sql, con13);//CONVERTIR INT A CHAR
+		strcat(sql, con3);
+		strcat(sql, con14);
 		strcat(sql, con8);
 		strcat(sql, con9);
+
+		cout<<sql<<endl;
 
 		llamadaSQL(sql);
 

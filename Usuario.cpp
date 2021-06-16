@@ -215,7 +215,7 @@ using namespace std;
 		/* Create SQL statement */
 		char sql[] = "INSERT INTO RESERVA VALUES (";
 
-		char con1[] = ",", con2[] = ",", con3[] = ",", con8[] = ")", con9[] = "";
+		char con[] = "'",con1[] = ",", con2[] = ",", con3[] = ",", con8[] = ")", con9[] = "";
 
 
 		string s = to_string(r->getIdReserva());
@@ -234,17 +234,26 @@ using namespace std;
 		char con13[5]; strcpy(con13, pchar4);
 		s = to_string(eleccionNHabitacion);
 		char const *pchar5 = s.c_str();  //use char const* as target type
-		char con14[5]; strcpy(con14, pchar4);
-
+		char con14[5]; strcpy(con14, pchar5);
+		strcat(sql, con);
 		strcat(sql, con10);
+		strcat(sql, con);
 		strcat(sql, con1);
+		strcat(sql, con);
 		strcat(sql, con11);
+		strcat(sql, con);
 		strcat(sql, con2);
+		strcat(sql, con);
 		strcat(sql, con12);
+		strcat(sql, con);
 		strcat(sql, con3);
+		strcat(sql, con);
 		strcat(sql, con13);//CONVERTIR INT A CHAR
+		strcat(sql, con);
 		strcat(sql, con3);
+		strcat(sql, con);
 		strcat(sql, con14);
+		strcat(sql, con);
 		strcat(sql, con8);
 		strcat(sql, con9);
 

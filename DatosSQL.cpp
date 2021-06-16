@@ -16,6 +16,9 @@
 using namespace std;
 
 
+
+
+
 	static int callback(void *data, int argc, char **argv, char **azColName) {
 		int i;
 		fprintf(stderr, "%s: \n", (const char*) data);
@@ -30,19 +33,28 @@ using namespace std;
 
 	void llamadaSQL(char* sentencia){
 
-		sqlite3 *db; //objeto base de datos
+		cout<<sentencia<<endl;
+
+		sqlite3 *db1=NULL; //objeto base de datos
 		char *zErrMsg = 0;
 		int rc;
-		char *sql; //sentencia sql
 		const char *data = "LLamada a Base de datos";
-		rc = sqlite3_open("hotelandia_final.s3db", &db);
-		rc = sqlite3_exec(db, sql, callback, (void*) data, &zErrMsg);
+
+		rc = sqlite3_open("hotelandia_final.s3db", &db1);
+
+		cout<<rc<<endl;
+
+		rc = sqlite3_exec(db1, sentencia, callback, (void*) data, &zErrMsg);
+		cout<<rc<<endl;
 		if (rc != SQLITE_OK) {
 			fprintf(stderr, "SQL error: %s\n", zErrMsg);
 			sqlite3_free(zErrMsg);
+
+			cout<<"Reserva no realizada:"<<endl;
 		} else {
+			cout<<"Reserva realizada:" <<endl;
 			fprintf(stdout, "Reserva realizada:\n");
 		}
-		sqlite3_close(db);
+		sqlite3_close(db1);
 
 	}

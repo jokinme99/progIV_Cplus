@@ -231,6 +231,8 @@ void importarDatosUsuarios() {
 
 	rc = sqlite3_open("hotelandia_final.s3db", &db);
 
+	cout<<rc<<endl;
+
 	rc = sqlite3_exec(db, sql, callback, (void*) data, &zErrMsg);
 
 	if (rc != SQLITE_OK) {
@@ -240,7 +242,7 @@ void importarDatosUsuarios() {
 		//fprintf(stdout, "Operation done successfully\n");
 	}
 	sqlite3_close(db);
-
+	cout<<rc<<endl;
 	for (int i = 0; i < counter; ++i) {
 
 		char sql1[] = "INSERT INTO USUARIO VALUES ('";
@@ -280,12 +282,17 @@ void importarDatosUsuarios() {
 		strcat(retVal, tipo);
 		strcat(retVal, "')");
 
-		//cout<<retVal<<endl;
+		cout<<retVal<<endl;
 
 		rc = sqlite3_open("hotelandia_final.s3db", &db);
+		cout<<rc<<endl;
 		/* Execute SQL statement */
 		rc = sqlite3_exec(db, retVal, callback, (void*) data, &zErrMsg);
+		cout<<rc<<endl;
 		if (rc != SQLITE_OK) {
+
+			//cout<<"Reserva no realizada:"<<endl;
+
 			fprintf(stderr, "SQL error: %s\n", zErrMsg);
 			sqlite3_free(zErrMsg);
 		} else {

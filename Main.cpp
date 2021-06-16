@@ -335,7 +335,7 @@ void inicio() {
 	ifstream ifs;
 	importarDatosUsuarios();
 
-	cargarDatosUsuarios();
+//	cargarDatosUsuarios();
 
 	//u.imprimirUsuarios();
 	//u.imprimirUsuarios();
@@ -345,7 +345,7 @@ void inicio() {
 
 	cargarDatosTrabajadores();
 	//t.imprimirTrabajadores();
-	cargarDatosReservas();
+//	cargarDatosReservas();
 
 	t.imprimirTrabajadores();
 
@@ -530,19 +530,10 @@ void caso1Usuario() {//VER HOTELES
 	menuUsuario();
 }
 void caso2Usuario() {//VER HABITACIONES
-	/* Create SQL statement */
-	char sql[] = "SELECT * from HABITACION";
+	cout << "--HABITACIONES--" << endl;
 
-	/* Execute SQL statement */
-	rc = sqlite3_exec(db, sql, callback, (void*) data, &zErrMsg);
-	if (rc != SQLITE_OK) {
-		fprintf(stderr, "SQL error: %s\n", zErrMsg);
-		sqlite3_free(zErrMsg);
-	} else {
-		//fprintf(stdout, "Operation done successfully\n");
-	}
-	sqlite3_close(db);
-	system("pause");
+		h.imprimirHabitaciones();
+		system("pause");
 	menuUsuario();
 }
 int caso3Usuario() {//VER RESERVA
@@ -756,7 +747,7 @@ void menuAdministrador() {
 	}break;
 	case 17: {
 			cout << "Cerrando sesion..." << endl;
-			//menuInicio();
+			inicio();
 			system("exit");
 	}
 		break;

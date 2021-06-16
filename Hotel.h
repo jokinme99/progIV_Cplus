@@ -46,6 +46,8 @@ public:
 	void setTrabajadorHotel(Trabajador*);
 	int getNumHabitacionesDisponibles()const;
 	void setNumHabitacionesDisponibles(int );
+
+	void imprimir();
 };
 
 

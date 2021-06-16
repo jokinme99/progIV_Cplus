@@ -72,4 +72,10 @@ int Hotel::getNumHabitacionesDisponibles() const {
 void Hotel::setNumHabitacionesDisponibles(int) {
 
 }
-};
+
+void Hotel::imprimir(){
+
+
+}
+
+

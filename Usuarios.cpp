@@ -65,11 +65,11 @@ using namespace std;
 		cout<<contadorDeFila[5]<<endl;
 		if (strcmp(contadorDeFila[5],"usuario")==0){
 
-			Usuario *us = new Usuario(atoi(contadorDeFila[0]), contadorDeFila[1], contadorDeFila[3], contadorDeFila[2], atoi(contadorDeFila[4]));
+			Usuario *us = new Usuario(atoi(contadorDeFila[0]), contadorDeFila[1], contadorDeFila[2], contadorDeFila[3], atoi(contadorDeFila[4]));
 			this->anyadirUsuario(us);
 		}else{
 
-			Usuario *us = new Usuario(atoi(contadorDeFila[0]), contadorDeFila[1], contadorDeFila[3], contadorDeFila[2], atoi(contadorDeFila[4]));
+			Usuario *us = new Usuario(atoi(contadorDeFila[0]), contadorDeFila[1], contadorDeFila[2], contadorDeFila[3], atoi(contadorDeFila[4]));
 
 			Administrador *ad = new Administrador(us);
 
@@ -96,6 +96,7 @@ using namespace std;
 					}
 				}
 				return this->u[i]->getReservaUsuario();
+//				return new Reservas();
 	}
 
 	Usuario* Usuarios::getUsuario(int id){

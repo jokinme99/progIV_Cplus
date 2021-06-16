@@ -26,7 +26,7 @@ using namespace std;
 		this->contrasenyaUsuario = new char[1];
 		this->contrasenyaUsuario[0] = '\0';
 		this->edadUsuario = 0;
-		this->reservasUsuario=new Reservas;
+		this->reservasUsuario=new Reservas();
 
 
 	}
@@ -42,7 +42,7 @@ using namespace std;
 		this->contrasenyaUsuario =new char[sizeof(strlen(contrasenya))+1];
 		strcpy(this->contrasenyaUsuario,contrasenya);
 		this->edadUsuario=edad;
-		this->reservasUsuario = new Reservas;
+		this->reservasUsuario = new Reservas();
 
 	}
 	Usuario::Usuario(const Usuario& u){
@@ -67,7 +67,7 @@ using namespace std;
 	delete[] this->contrasenyaUsuario;
 	delete &this->edadUsuario;
 
-	//delete[] this->reservasUsuario;
+	delete[] this->reservasUsuario;
 
 
 	}

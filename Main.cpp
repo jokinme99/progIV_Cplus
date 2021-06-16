@@ -97,36 +97,24 @@ static int callback(void *data, int argc, char **argv, char **azColName) {
 int callbackUsuarios(void *data, int numeroColumnas, char **contadorDeFila,
 		char **nombresColumnas) {
 	(void) data;
-//	cout<<numeroColumnas<<endl;
-//	cout<<*contadorDeFila<<endl;
-//	cout<<*nombresColumnas<<endl;
+	cout<<numeroColumnas<<endl;
 
-//	cout<<numeroColumnas<<endl;
 
-//	for (int i = 0; i < numeroColumnas; ++i) {
-//		cout<<contadorDeFila[i]<<endl;
+	if (strcmp(contadorDeFila[5], "usuario") == 0) {
+		cout<<1<<endl;
+		cout<< contadorDeFila[1]<< endl;
+		Usuario *us = new Usuario(atoi(contadorDeFila[0]), contadorDeFila[1],
+				contadorDeFila[2], contadorDeFila[3], atoi(contadorDeFila[4]));
+		u.anyadirUsuario(us);
+	}
+//	else {
+//		cout<<2<<endl;
+//		Usuario *us = new Usuario(atoi(contadorDeFila[0]), contadorDeFila[1],
+//				contadorDeFila[2], contadorDeFila[3], atoi(contadorDeFila[4]));
+//		Administrador *ad = new Administrador(us);
+//		u.anyadirUsuario(ad);
 //
 //	}
-
-//cout<<numeroColumnas<<endl;
-	if (strcmp(contadorDeFila[5], "usuario") == 0) {
-		//cout<<1<<endl;
-		Usuario *us = new Usuario(atoi(contadorDeFila[0]), contadorDeFila[1],
-				contadorDeFila[3], contadorDeFila[2], atoi(contadorDeFila[4]));
-		u.anyadirUsuario(us);
-	} else {
-		//cout<<2<<endl;
-		Usuario *us = new Usuario(atoi(contadorDeFila[0]), contadorDeFila[1],
-				contadorDeFila[3], contadorDeFila[2], atoi(contadorDeFila[4]));
-
-		Administrador *ad = new Administrador(us);
-		//cout<<ad->getTipoUsuario()<<endl;
-
-		//cout<<u.getNumUsuario()<<endl;
-//		Usuario *us = new Usuario(atoi(contadorDeFila[0]), contadorDeFila[1], contadorDeFila[3], contadorDeFila[2], atoi(contadorDeFila[4]));
-		u.anyadirUsuario(ad);
-
-	}
 
 	return 0;
 }
@@ -161,12 +149,12 @@ int callbackTrabajadores(void *data, int numeroColumnas, char **contadorDeFila, 
 return 0;
 }
 
-int callbackHoteles(void *data, int numeroColumnas, char **contadorDeFila, char **nombresColumnas) {
-	(void)data;
-	Hotel *ht = new Hotel(atoi(contadorDeFila[0]), contadorDeFila[1], contadorDeFila[2], atoi(contadorDeFila[3]),atoi(contadorDeFila[4]));
-
-return 0;
-}
+//int callbackHoteles(void *data, int numeroColumnas, char **contadorDeFila, char **nombresColumnas) {
+//	(void)data;
+//	Hotel *ht = new Hotel(atoi(contadorDeFila[0]), contadorDeFila[1], contadorDeFila[2], atoi(contadorDeFila[3]),atoi(contadorDeFila[4]));
+//
+//return 0;
+//}
 
 void cargarDatosUsuarios() {
 
@@ -342,7 +330,7 @@ void inicio() {
 	ifstream ifs;
 	importarDatosUsuarios();
 
-//	cargarDatosUsuarios();
+	cargarDatosUsuarios();
 
 	//u.imprimirUsuarios();
 	//u.imprimirUsuarios();
@@ -352,13 +340,13 @@ void inicio() {
 
 	cargarDatosTrabajadores();
 	//t.imprimirTrabajadores();
-//	cargarDatosReservas();
+	//cargarDatosReservas();
 
 	t.imprimirTrabajadores();
 
 
 
-	//u.imprimirUsuarios();
+	u.imprimirUsuarios();
 
 	//crear metodo devolver usuario con id de usuario, prueba id 1 y prueba a hacer print de las reservas
 

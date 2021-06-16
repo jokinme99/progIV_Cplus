@@ -65,6 +65,9 @@ Habitacion* Habitaciones::getHabitacion(int idHabitacion) {
 		if (this->h[var]->getIdHabitacion() == idHabitacion) {
 			break;
 		}
+		if(var==this->numHabitaciones){
+			return NULL;
+		}
 	}
 	return this->h[var];
 }

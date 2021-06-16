@@ -68,6 +68,11 @@ Reserva* Reservas::getReserva(int idReserva){
 	}
 	return this->r[var];
 }
+Reserva* Reservas::getOrdenReserva(int ordenReserva){
+
+	return this->r[ordenReserva];
+}
+
 
 
 void Reservas::editarReserva(int id, int dia, int hora, Habitacion* habitacion){

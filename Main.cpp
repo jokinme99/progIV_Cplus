@@ -973,6 +973,9 @@ void caso7Admin() {//CREAR RESERVA
 	cout<<"Introduzca un id de las habitaciones descritas"<<endl;
 	cin>>idH;
 	Reserva* rq = new Reserva(idR,diaR,horaR,h.getHabitacion(idH));
+
+	re.comprobarDisponibilidad(rq);
+
 	re.anyadirReserva(rq);
 	system("pause");
 	menuAdministrador();

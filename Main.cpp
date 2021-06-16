@@ -161,6 +161,13 @@ int callbackTrabajadores(void *data, int numeroColumnas, char **contadorDeFila, 
 return 0;
 }
 
+int callbackHoteles(void *data, int numeroColumnas, char **contadorDeFila, char **nombresColumnas) {
+	(void)data;
+	Hotel *tr = new Trabajador(atoi(contadorDeFila[0]), contadorDeFila[1], contadorDeFila[2], atoi(contadorDeFila[3]),atoi(contadorDeFila[4]));
+	t.anyadirTrabajador(tr);
+return 0;
+}
+
 void cargarDatosUsuarios() {
 
 	rc = sqlite3_open("hotelandia_final.s3db", &db);

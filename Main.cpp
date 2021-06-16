@@ -5,6 +5,7 @@
  *      Author: jokin
  */
 
+
 #include <iostream>
 #include <string.h>
 #include <stdlib.h>
@@ -30,61 +31,37 @@
 using namespace std;
 
 static int callback(void *data, int argc, char **argv, char **azColName);
-int callbackUsuarios(void *data, int numeroColumnas, char **contadorDeFila,
-		char **nombresColumnas);
-int callbackReservas(void *data, int numeroColumnas, char **contadorDeFila,
-		char **nombresColumnas);
-int callbackHabitaciones(void *data, int numeroColumnas, char **contadorDeFila,
-		char **nombresColumnas);
-int callbackTrabajadores(void *data, int numeroColumnas, char **contadorDeFila,
-		char **nombresColumnas);
-void inicio(); //inicio sesion usuario
+int callbackUsuarios(void *data, int numeroColumnas, char **contadorDeFila, char **nombresColumnas);
+int callbackReservas(void *data, int numeroColumnas, char **contadorDeFila, char **nombresColumnas);
+int callbackHabitaciones(void *data, int numeroColumnas, char **contadorDeFila, char **nombresColumnas);
+int callbackTrabajadores(void *data, int numeroColumnas, char **contadorDeFila, char **nombresColumnas);
+
 void importarDatosUsuarios();
 void cargarDatosUsuarios();
 void cargarDatosHabitaciones();
 void cargarDatosReservas();
 void cargarDatosTrabajadores();
-void menuUsuario();
-void caso1Usuario();
-void caso2Usuario();
-int caso3Usuario();
-int caso4Usuario();
-int caso5Usuario();
-int caso6Usuario();
 
-void caso1Admin();
-void caso2Admin();
-void caso3Admin();
-void caso4Admin();
-void caso5Admin();
-void caso6Admin();
-void caso7Admin();
-void caso8Admin();
-void caso9Admin();
-void caso10Admin();
-void caso11Admin();
-void caso12Admin();
-void caso13Admin();
-void caso14Admin();
-void caso15Admin();
-void caso16Admin();
+void inicio();void menuUsuario();void menuAdministrador();
 
-void menuAdministrador();
+void caso1Usuario();void caso2Usuario();int caso3Usuario();
+int caso4Usuario();int caso5Usuario();int caso6Usuario();
 
-Usuarios u;
-Habitaciones h;
-Trabajadores t;
-Reservas re;
-Usuario* usuarioActual;
-string nombreUser;
-string contraUser; //Para iniciar/registrar usuario
-sqlite3 *db; //objeto base de datos
-char *zErrMsg = 0;
-int rc;
-char *sql; //sentencia sql
-const char *data = "LLamada a Base de datos";
+void caso1Admin();void caso2Admin();void caso3Admin();void caso4Admin();
+void caso5Admin();void caso6Admin();void caso7Admin();void caso8Admin();
+void caso9Admin();void caso10Admin();void caso11Admin();void caso12Admin();
+void caso13Admin();void caso14Admin();void caso15Admin();void caso16Admin();
 
-//Metodo para utilizar la base de datos
+
+Usuarios u;Habitaciones h;Trabajadores t;Reservas re;
+
+Usuario usuarioActual;
+
+string nombreUser;string contraUser;
+
+sqlite3 *db;char *zErrMsg = 0;int rc;char *sql;const char *data = "LLamada a Base de datos";
+
+//METODOS PARA RESERVAR ESPACIO PARA LOS DATOS DE LA BD
 static int callback(void *data, int argc, char **argv, char **azColName) {
 	int i;
 	fprintf(stderr, "%s: \n", (const char*) data);
@@ -123,7 +100,6 @@ int callbackUsuarios(void *data, int numeroColumnas, char **contadorDeFila,
 
 	return 0;
 }
-
 int callbackReservas(void *data, int numeroColumnas, char **contadorDeFila,
 		char **nombresColumnas) {
 	(void) data;
@@ -137,7 +113,6 @@ int callbackReservas(void *data, int numeroColumnas, char **contadorDeFila,
 	return 0;
 
 }
-
 int callbackHabitaciones(void *data, int numeroColumnas, char **contadorDeFila,
 		char **nombresColumnas) {
 	(void) data;
@@ -157,13 +132,7 @@ int callbackTrabajadores(void *data, int numeroColumnas, char **contadorDeFila,
 	return 0;
 }
 
-//int callbackHoteles(void *data, int numeroColumnas, char **contadorDeFila, char **nombresColumnas) {
-//	(void)data;
-//	Hotel *ht = new Hotel(atoi(contadorDeFila[0]), contadorDeFila[1], contadorDeFila[2], atoi(contadorDeFila[3]),atoi(contadorDeFila[4]));
-//
-//return 0;
-//}
-
+//METODOS PARA SELECCIONAR LOS DATOS DE LA BD Y CARGARLOS
 void cargarDatosUsuarios() {
 
 	rc = sqlite3_open("hotelandia_final.s3db", &db);
@@ -220,7 +189,6 @@ void cargarDatosTrabajadores() {
 	sqlite3_close(db);
 
 }
-
 void cargarDatosReservas() {
 
 	rc = sqlite3_open("hotelandia_final.s3db", &db);
@@ -239,7 +207,9 @@ void cargarDatosReservas() {
 	sqlite3_close(db);
 
 }
-void importarDatosUsuarios() { //IMPORTA LOS DATOS DE USUARIOS DE LOS FICHEROS A LA BASE DE DATOS
+
+//IMPORTA LOS DATOS DE USUARIOS DE LOS FICHEROS A LA BASE DE DATOS
+void importarDatosUsuarios() {
 
 	FILE *f = fopen("../progIV_Cplus/Usuarios.txt", "r");
 
@@ -871,7 +841,7 @@ void menuAdministrador() {
 	}
 
 }
-void caso1Admin() {	//VER HABITACION
+void caso1Admin() {//VER HABITACION
 	cout << "--HABITACIONES--" << endl;
 
 	h.imprimirHabitaciones();
@@ -1041,7 +1011,7 @@ void caso9Admin() {	//VER TRABAJADORES
 	menuAdministrador();
 
 }
-void caso10Admin() {	//EDITAR TRABAJADOR
+void caso10Admin() {//EDITAR TRABAJADOR
 	float sueldo;
 
 	cout << "Introduce el id del trabajador que quieres modificar" << endl;
@@ -1107,16 +1077,78 @@ void caso12Admin() {	//ELIMINAR TRABAJADOR
 	menuAdministrador();
 
 }
-void caso13Admin() {	//VER USUARIOS
+void caso13Admin() {//VER USUARIOS
+	cout << "--USUARIOS--" << endl;
 
+	u.imprimirUsuarios();
+	system("pause");
+	menuAdministrador();
 }
-void caso14Admin() {	//EDITAR USUARIO
+void caso14Admin() {//EDITAR USUARIO
+	//Todo: hay que arreglar para poder modificar las reservas del usuario
+	char correo[100];char nombre[100];char contra[100];int edad;
 
+		cout << "introduce el id del usuario que quieres modificar" << endl;
+		int idR;
+		cin >> idR;
+
+		cout << "introduce el nombre del usuario que quieres modificar" << endl;
+		cin >> correo;
+
+		cout << "introduce el correo del usuario que quieres modificar" << endl;
+		cin >> nombre;
+
+		cout << "introduce el nombre del usuario que quieres modificar" << endl;
+		cin >> contra;
+
+		cout << "Introduce la nueva edad del usuario que quieres modificar" << endl;
+		cin >> edad;
+		system("pause");
+
+		menuAdministrador();
 }
-void caso15Admin() {	//CREAR USUARIO
+void caso15Admin() {//CREAR USUARIO
+	cout << "Crea un nuevo usuario: " << endl;
 
+	//AL crear un usuario nuevo no se le añaden reservas
+	int idUsuario;
+	char nombreUsuario[100];
+	char correoUsuario[100];
+	char contrasenyaUsuario[100];
+	int edadUsuario;
+
+	cout << "Ingrese el id del usuario : ";
+	cin >> idUsuario;
+	cout << endl;
+	cout << "Ingrese el nombre del usuario: ";
+	cin >> nombreUsuario;
+	cout << endl;
+	cout << "Ingrese el correo del usuario: ";
+	cin >> correoUsuario;
+	cout << endl;
+	cout << "Ingrese la contrasenya del usuario: ";
+	cin >> contrasenyaUsuario;
+	cout << endl;
+	cout << "Ingrese la edad del usuario: ";
+	cin >> edadUsuario;
+	cout << endl;
+
+	Usuario *us = new Usuario(idUsuario, nombreUsuario, correoUsuario, contrasenyaUsuario, edadUsuario);
+	u.anyadirUsuario(us);
+	system("pause");
+	menuAdministrador();
 }
-void caso16Admin() {	//ELIMINAR USUARIO
+void caso16Admin() {//ELIMINAR USUARIO
+	int idR;
+	u.imprimirUsuarios();
+	cout << "introduce el id del usuario para eliminarlo" << endl;
 
+	cin >> idR;
+
+	u.quitarUsuario(idR);
+
+	u.getNumUsuarios();
+	system("pause");
+	menuAdministrador();
 }
 

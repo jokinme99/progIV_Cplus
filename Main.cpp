@@ -417,7 +417,7 @@ void menuAdministrador() {
 		cout << "10. Editar trabajador" << endl;
 		cout << "11. Crear trabajador" << endl;
 		cout << "12. Eliminar trabajador" << endl;
-		cout << "13. Ver usuarios" << endl;
+		cout << "13. Ver usuarios" << endl;//QUITABA ESTA FUNCION USUARIOS PORQUE NOSOTROS FUNCIONAMOS CON FICHEROS
 		cout << "14. Editar usuario" << endl;
 		cout << "15. Crear Usuario" << endl;
 		cout << "16. Eliminar usuario" << endl;

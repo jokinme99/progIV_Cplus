@@ -96,17 +96,22 @@ void Habitaciones::editarHabitacion(int id, char *tipo, int precio) {
 
 void Habitaciones::busquedaPersonalizada() {
 
-	cout << "Elige una opcion de busqueda" << endl;
+	cout << "Elige una opcion de busqueda de habitaciones" << endl;
 
 	cout << "1. Por precio" << endl;
 	cout << "2. Por tipo de habitacion" << endl;
 	cout << "3. Ambas" << endl;
+	cout << "4. Todas" << endl;
 
 	int opcion;
 
 	cin >> opcion;
 
-	if (opcion != 1 && opcion != 2 && opcion != 3) {
+	if (opcion != 1 && opcion != 2 && opcion != 3 && opcion != 4) {
+
+		cout << "Elige una opcion valida" << endl;
+
+		busquedaPersonalizada();
 
 	} else {
 
@@ -228,9 +233,22 @@ void Habitaciones::busquedaPersonalizada() {
 				}
 
 			}
-			break;
+
 
 		}
+
+		break;
+		case 4: {
+
+			cout << "hola" << endl;
+
+			for (int i = 0; i < this->numHabitaciones; ++i) {
+				this->h[i]->imprimir();
+			}
+
+		}
+
+			break;
 
 		}
 

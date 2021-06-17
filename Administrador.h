@@ -8,7 +8,7 @@
 #ifndef ADMINISTRADOR_H_
 #define ADMINISTRADOR_H_
 #include "Usuario.h"
-
+#include "Habitaciones.h"
 class Administrador: public Usuario{
 private:
 
@@ -37,6 +37,7 @@ public:
 	void eliminarTrabajador();
 	void listarUsuarios();
 	virtual char* getTipoUsuario();
+	virtual void editarHabitacion(Habitaciones*);
 	//virtual
 	//void imprimirUsuario();
 

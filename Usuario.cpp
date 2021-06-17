@@ -379,6 +379,7 @@ using namespace std;
 		int numReserva;
 		char afirmacion[5];
 
+
 		cout<<"Estas son las reservas que estan a su nombre: "<<endl;
 		cout<<endl;
 		this->getReservaUsuario()->imprimirReservas();
@@ -441,4 +442,6 @@ using namespace std;
 
 
 
-
+	void Usuario::editarHabitacion(Habitaciones*h){
+		cout<<"no tienes permiso para esta accion"<<endl;
+	}

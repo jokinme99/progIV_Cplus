@@ -518,25 +518,27 @@ void caso1Admin() {//VER HABITACION
 }
 void caso2Admin() {//EDITAR HABITACION
 
-	char tipoHab[100];
+//	char tipoHab[100];
+//
+//	cout << "introduce el id de la habitacion que quieres modificar" << endl;
+//
+//	int idHab;
+//
+//	cin >> idHab;
+//
+//	cout << "introduce el nuevo tipo de Habitacion:" << endl;
+//
+//	cin >> tipoHab;
+//
+//	cout << "Introduce el nuevo precio de la Habitacion:" << endl;
+//
+//	int Prec;
+//	cin >> Prec;
+//
+//	h.editarHabitacion(idHab, tipoHab, Prec);
 
-	cout << "introduce el id de la habitacion que quieres modificar" << endl;
 
-	int idHab;
-
-	cin >> idHab;
-
-	cout << "introduce el nuevo tipo de Habitacion:" << endl;
-
-	cin >> tipoHab;
-
-	cout << "Introduce el nuevo precio de la Habitacion:" << endl;
-
-	int Prec;
-	cin >> Prec;
-
-	h.editarHabitacion(idHab, tipoHab, Prec);
-
+	usuarioActual->editarHabitacion(&h);
 
 	cout << "volviendo al menu" << endl;
 
@@ -972,7 +974,7 @@ int callbackHabitaciones(void *data, int numeroColumnas, char **contadorDeFila,
 	(void) data;
 	Habitacion *ha = new Habitacion(atoi(contadorDeFila[0]),
 			atoi(contadorDeFila[1]), atoi(contadorDeFila[2]), contadorDeFila[3],
-			atoi(contadorDeFila[2]));
+			atoi(contadorDeFila[4]));
 	h.anyadirhabitacion(ha);
 	return 0;
 }

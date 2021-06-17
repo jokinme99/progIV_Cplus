@@ -530,6 +530,8 @@ int caso3Usuario() {//VER RESERVA
 	cout<<endl;
 	usuarioActual->getReservaUsuario()->imprimirReservas();
 
+	system("pause");
+
 
 	menuUsuario();
 	return 0;
@@ -696,22 +698,25 @@ usuarioActual->modificarReserva(&h);
 	return 0;
 }
 int caso6Usuario() {//ELIMINAR RESERVA
-	char usuarioEliminar[20];
-	cout << "Introduzca el usuario del que quiere eliminar una reserva: ";
-	cin >> usuarioEliminar;
-	cout << endl;
-	rc = sqlite3_open("hotelandia_final.s3db", &db);
-	if (rc != SQLITE_OK) {
-		cout << "Error opening database" << endl;
-		return rc;
-	}
-	rc = eliminarReserva(db, usuarioEliminar);
-	rc = sqlite3_close(db);
-	if (rc != SQLITE_OK) {
-		printf("Error closing database\n");
-		printf("%s\n", sqlite3_errmsg(db));
-		return rc;
-	}
+
+
+	usuarioActual->eliminarReserva(&re);
+//	char usuarioEliminar[20];
+//	cout << "Introduzca el usuario del que quiere eliminar una reserva: ";
+//	cin >> usuarioEliminar;
+//	cout << endl;
+//	rc = sqlite3_open("hotelandia_final.s3db", &db);
+//	if (rc != SQLITE_OK) {
+//		cout << "Error opening database" << endl;
+//		return rc;
+//	}
+//	rc = eliminarReserva(db, usuarioEliminar);
+//	rc = sqlite3_close(db);
+//	if (rc != SQLITE_OK) {
+//		printf("Error closing database\n");
+//		printf("%s\n", sqlite3_errmsg(db));
+//		return rc;
+//	}
 	system("pause");
 	menuUsuario();
 	return 0;

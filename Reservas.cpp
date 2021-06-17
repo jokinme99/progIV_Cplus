@@ -36,12 +36,14 @@ void Reservas::quitarReserva(int id) {
 		cout << "Variable" << var << endl;
 		if (this->r[var]->getIdReserva() == id) {
 			cout << "Variable" << var << endl;
-			numReservas--;
+			this->numReservas--;
 			for (int j = var; j < this->numReservas; ++j) {
 				cout << "Variable j" << j << endl;
 				cout << "Variable j" << this->getNumReservas() << endl;
 				this->r[j] = this->r[j + 1];
 			}
+			delete this->r[this->numReservas+1];
+			break;
 		}
 	}
 }
@@ -51,9 +53,14 @@ int Reservas::getNumReservas() {
 }
 void Reservas::imprimirReservas() {
 
-	for (int i = 0; i < this->numReservas; ++i) {
-		this->r[i]->imprimirReserva();
-		cout<<"---------------"<<endl;
+	if (this->numReservas==0) {
+		cout<<"(NO EXISTEN RESERVAS)"<<endl;
+
+	}else{
+		for (int i = 0; i < this->numReservas; ++i) {
+			this->r[i]->imprimirReserva();
+			cout<<"---------------"<<endl;
+		}
 	}
 }
 

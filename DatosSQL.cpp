@@ -33,7 +33,7 @@ using namespace std;
 
 	void llamadaSQL(char* sentencia){
 
-		cout<<sentencia<<endl;
+		//cout<<sentencia<<endl;
 
 		sqlite3 *db1=NULL; //objeto base de datos
 		char *zErrMsg = 0;
@@ -42,10 +42,10 @@ using namespace std;
 
 		rc = sqlite3_open("hotelandia_final.s3db", &db1);
 
-		cout<<rc<<endl;
+		//cout<<rc<<endl;
 
 		rc = sqlite3_exec(db1, sentencia, callback, (void*) data, &zErrMsg);
-		cout<<rc<<endl;
+		//cout<<rc<<endl;
 		if (rc != SQLITE_OK) {
 			fprintf(stderr, "SQL error: %s\n", zErrMsg);
 			sqlite3_free(zErrMsg);

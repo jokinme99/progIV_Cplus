@@ -62,7 +62,7 @@ public:
 	void verhoteles();
 	void listarHabitaciones();
 	void listarReservas();
-	void eliminarReserva();
+	int eliminarReserva(Reservas *re);
 
 
 

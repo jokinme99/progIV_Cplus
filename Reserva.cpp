@@ -30,6 +30,8 @@ Reserva::Reserva(const Reserva& r){
 }
 Reserva::~Reserva(){
 
+	delete[] this->habitacionReservada;
+
 }
 
 

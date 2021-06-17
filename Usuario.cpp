@@ -132,10 +132,7 @@ using namespace std;
 
 	}
 
-	void Usuario::eliminarReserva(){
 
-
-	}
 
 	void Usuario::imprimirUsuario(){
 		cout<<"Usuario "<<this->idUsuario<<": "<<endl;
@@ -269,7 +266,7 @@ using namespace std;
 	void Usuario::modificarReserva(Habitaciones* h){
 		int numReserva, nuevoDia,nuevaHora, nuevaHabitacion;
 
-		cout<<"Estas son las reservas que estan a nombre su nombre: "<<endl;
+		cout<<"Estas son las reservas que estan a su nombre: "<<endl;
 		cout<<endl;
 		this->getReservaUsuario()->imprimirReservas();
 		cout<<endl;
@@ -375,7 +372,70 @@ using namespace std;
 
 	}
 
+	int Usuario::eliminarReserva(Reservas *re){
 
+		int numReserva;
+		char afirmacion[5];
+
+		cout<<"Estas son las reservas que estan a su nombre: "<<endl;
+		cout<<endl;
+		this->getReservaUsuario()->imprimirReservas();
+		cout<<endl;
+		cout<<"Selecciona el numero de reserva que quierers Eliminar: ";
+		cin>>numReserva;
+
+		cout<<endl;
+
+		while(this->getReservaUsuario()->reservaExiste(numReserva)==0){
+			cout<<"por favor elija una reserva adecuada o una reserva de su propiedad"<<endl;
+			cin >> numReserva;
+		}
+		cout<<endl;
+
+		cout<<"Esta seguro que desea eliminar la siguiente trserva?(diga si o no)"<<endl;
+		cout<<endl;
+		this->getReservaUsuario()->getReserva(numReserva)->imprimirReserva();
+		cout<<endl;
+		cout<<"Respuesta(diga si o no):  ";
+		cin>>afirmacion;
+		while(strcmp(afirmacion, "si")!=0&&strcmp(afirmacion, "no")!=0){
+			cout<<"por favor, elija una respuesta valida"<<endl;
+			cout<<endl;
+			cout<<"Respuesta(diga si o no):  ";
+			cin>>afirmacion;
+		}
+		if (strcmp(afirmacion, "no")==0) {
+
+			cout<<"Entonces no cancelamos"<<endl;
+			return 0;
+		}
+
+		re->quitarReserva(numReserva);
+		this->getReservaUsuario()->quitarReserva(numReserva);
+
+		char sql[] = "DELETE FROM RESERVA WHERE id_reserva ='";
+
+		char con[] = "'";
+
+		string s = to_string(numReserva);
+		char const *pchar2 = s.c_str();  //use char const* as target type
+		char con11[5]; strcpy(con11, pchar2);
+		strcat(sql, con11);
+		strcat(sql, con);
+
+		cout<<endl;
+
+		//cout<<sql<<endl;
+
+
+
+		llamadaSQL(sql);
+
+
+
+
+		return 0;
+	}
 
 
 

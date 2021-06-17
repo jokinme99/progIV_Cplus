@@ -176,11 +176,13 @@ using namespace std;
 			cout<<"por favor indique una hora adecuada"<<endl;
 			cin >> hora;
 		}
-		cout << "Ingrese el id de la habitacion que desea reservar: "<<endl;
 
 		cout<<"Aqui tienes las habitaciones que tenemos disponibles"<<endl;
 
-		h->imprimirHabitaciones();
+		h->busquedaPersonalizada();
+
+		cout << "Ingrese el id de la habitacion que desea reservar: "<<endl;
+
 
 		cin >> eleccionNHabitacion;
 

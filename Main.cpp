@@ -76,21 +76,21 @@ static int callback(void *data, int argc, char **argv, char **azColName) {
 int callbackUsuarios(void *data, int numeroColumnas, char **contadorDeFila,
 		char **nombresColumnas) {
 	(void) data;
-	cout << numeroColumnas << endl;
+	//cout << numeroColumnas << endl;
 
 	if (strcmp(contadorDeFila[5], "usuario") == 0) {
-		cout << 1 << endl;
-		cout << contadorDeFila[1] << endl;
+		//cout << 1 << endl;
+		//cout << contadorDeFila[1] << endl;
 		Usuario *us = new Usuario(atoi(contadorDeFila[0]), contadorDeFila[1],
 				contadorDeFila[2], contadorDeFila[3], atoi(contadorDeFila[4]));
 		u.anyadirUsuario(us);
 	} else {
 
-		cout << 2 << endl;
+		//cout << 2 << endl;
 
-		cout << atoi(contadorDeFila[0]) << contadorDeFila[1]
-				<< contadorDeFila[2] << contadorDeFila[3]
-				<< atoi(contadorDeFila[4]) << endl;
+//		cout << atoi(contadorDeFila[0]) << contadorDeFila[1]
+//				<< contadorDeFila[2] << contadorDeFila[3]
+//				<< atoi(contadorDeFila[4]) << endl;
 		Administrador *ad = new Administrador(atoi(contadorDeFila[0]),
 				contadorDeFila[1], contadorDeFila[2], contadorDeFila[3],
 				atoi(contadorDeFila[4]));
@@ -231,7 +231,7 @@ void importarDatosUsuarios() {
 
 	rc = sqlite3_open("hotelandia_final.s3db", &db);
 
-	cout<<rc<<endl;
+	//cout<<rc<<endl;
 
 	rc = sqlite3_exec(db, sql, callback, (void*) data, &zErrMsg);
 
@@ -242,7 +242,7 @@ void importarDatosUsuarios() {
 		//fprintf(stdout, "Operation done successfully\n");
 	}
 	sqlite3_close(db);
-	cout<<rc<<endl;
+	//cout<<rc<<endl;
 	for (int i = 0; i < counter; ++i) {
 
 		char sql1[] = "INSERT INTO USUARIO VALUES ('";
@@ -282,13 +282,13 @@ void importarDatosUsuarios() {
 		strcat(retVal, tipo);
 		strcat(retVal, "')");
 
-		cout<<retVal<<endl;
+		//cout<<retVal<<endl;
 
 		rc = sqlite3_open("hotelandia_final.s3db", &db);
-		cout<<rc<<endl;
+		//cout<<rc<<endl;
 		/* Execute SQL statement */
 		rc = sqlite3_exec(db, retVal, callback, (void*) data, &zErrMsg);
-		cout<<rc<<endl;
+		//cout<<rc<<endl;
 		if (rc != SQLITE_OK) {
 
 			//cout<<"Reserva no realizada:"<<endl;
@@ -311,7 +311,7 @@ int main() {
 }
 void inicio() {
 
-	cout << "---MODO ADMINISTRADOR---" << endl;
+	//cout << "---MODO ADMINISTRADOR---" << endl;
 
 	ifstream ifs;
 	importarDatosUsuarios();
@@ -329,79 +329,87 @@ void inicio() {
 	char nom[20], cont[20], nomAu[20], conAu[20];
 	string linea;
 	bool en = false;
-	cout << "Ingrese el nombre del usuario: " << endl;
-	cin >> nomAu;
-	cout << "Ingrese la contrasenya del usuario: " << endl;
-	cin >> conAu;
+	while(!en){
 
-	while (!ifs.eof() && !en) {
-		//cout<<ifs.tellg()<<endl;
-		//ifs >> nom;
-		char cNum[20];
-		ifs.getline(cNum, 256, ':');
-		ifs.getline(cNum, 256, ';');
-		ifs.getline(cNum, 256, ':');
-		ifs.getline(cNum, 256, ';');
-		strcpy(nom, cNum);
-		ifs.getline(cNum, 256, ':');
-		ifs.getline(cNum, 256, ';');
-		strcpy(cont, cNum);
+		cout << "Ingrese el nombre del usuario: " << endl;
+		cin >> nomAu;
+		cout << "Ingrese la contrasenya del usuario: " << endl;
+		cin >> conAu;
 
-		ifs.getline(cNum, 256, ':');
-		ifs.getline(cNum, 256, ';');
-		ifs.getline(cNum, 256, ':');
-		ifs.getline(cNum, 256, ';');
-		ifs.getline(cNum, 256, ':');
-		ifs.getline(cNum, 256, ';');
+		while (!ifs.eof() && !en) {
+			//cout<<ifs.tellg()<<endl;
+			//ifs >> nom;
+			char cNum[20];
+			ifs.getline(cNum, 256, ':');
+			ifs.getline(cNum, 256, ';');
+			ifs.getline(cNum, 256, ':');
+			ifs.getline(cNum, 256, ';');
+			strcpy(nom, cNum);
+			ifs.getline(cNum, 256, ':');
+			ifs.getline(cNum, 256, ';');
+			strcpy(cont, cNum);
+
+			ifs.getline(cNum, 256, ':');
+			ifs.getline(cNum, 256, ';');
+			ifs.getline(cNum, 256, ':');
+			ifs.getline(cNum, 256, ';');
+			ifs.getline(cNum, 256, ':');
+			ifs.getline(cNum, 256, ';');
 
 
-		if (strcmp(nom, nomAu) == 0 && strcmp(cont, conAu) == 0) {
-			cout << "Usuario y contrasenya correctos. Bienvenido " << nomAu
-					<< endl;
-			en = true;
-			usuarioActual=u.getUsuario(nomAu);
+			if (strcmp(nom, nomAu) == 0 && strcmp(cont, conAu) == 0) {
+				cout << "Usuario y contrasenya correctos. Bienvenido " << nomAu
+						<< endl;
+				system("pause");
+				en = true;
+				usuarioActual=u.getUsuario(nomAu);
 
-			//parte del usuario
-			system("cls");
-			cout << endl;
-//				cout<<cNum<<endl;
-//				ifs.getline(cNum, 256, ':');
-//				ifs.getline(cNum, 256, ';');
-//				ifs.getline(cNum, 256, ':');
-//				ifs.getline(cNum, 256, ';');
-//				ifs.getline(cNum, 256, ':');
-//				ifs.getline(cNum, 256, ';');
-			cout << cNum << endl;
+				//parte del usuario
+				system("cls");
+				cout << endl;
+	//				cout<<cNum<<endl;
+	//				ifs.getline(cNum, 256, ':');
+	//				ifs.getline(cNum, 256, ';');
+	//				ifs.getline(cNum, 256, ':');
+	//				ifs.getline(cNum, 256, ';');
+	//				ifs.getline(cNum, 256, ':');
+	//				ifs.getline(cNum, 256, ';');
+	//			cout << cNum << endl;
 
-			ifs.close();
+				ifs.close();
 
-			if (strcmp(cNum, "usuario") == 0) {
-				menuUsuario();//HAY QUE AÑADIR COMO PARAMETRO LA DIRECCION DEL USUARIO QUE VA A ACCEDER AL MENÚ
-			} else {
-				cout << "---MODO ADMINISTRADOR---" << endl;
-				menuAdministrador();//HAY QUE AÑADIR COMO PARAMETRO LA DIRECCION DEL USUARIO QUE VA A ACCEDER AL MENÚ
+				if (strcmp(cNum, "usuario") == 0) {
+					menuUsuario();//HAY QUE AÑADIR COMO PARAMETRO LA DIRECCION DEL USUARIO QUE VA A ACCEDER AL MENÚ
+				} else {
+					//cout << "---MODO ADMINISTRADOR---" << endl;
+					menuAdministrador();//HAY QUE AÑADIR COMO PARAMETRO LA DIRECCION DEL USUARIO QUE VA A ACCEDER AL MENÚ
+				}
+
+			}
+			if (nom != nomAu && ifs.eof()) {
+				cout << "El usuario no existe!" << endl;	//AL SALIR VUELVE AQUI
+				cout << "Introduce un nombre de usuario valido" << endl;
+				cout<< endl;
+				//usuarioPrincipio();
+				ifs.close();
+
 			}
 
-		}
-		if (nom != nomAu && ifs.eof()) {
-			cout << "El usuario no existe!" << endl;	//AL SALIR VUELVE AQUI
-			//usuarioPrincipio();
-			ifs.close();
+			else if ((nom == nomAu && cont != conAu)) {
+				cout << "Contrasenya incorrecta" << endl;
+				cout << "Introduce una contraseña valida" << endl;
+				cout<< endl;
+
+				//usuarioPrincipio();
+				ifs.close();
+
+			}
+
+			getline(ifs, linea);
 
 		}
-
-		else if ((nom == nomAu && cont != conAu)) {
-			cout << "Contrasenya incorrecta" << endl;
-			//usuarioPrincipio();
-			ifs.close();
-
-		}
-
-		getline(ifs, linea);
-
+		ifs.close();
 	}
-	ifs.close();
-
 }
 
 void menuUsuario() {
@@ -417,8 +425,7 @@ void menuUsuario() {
 
 			cout << " ____________MODO USUARIO_______________________________"<< endl;
 
-			cout << "|				" <<endl; asctime(tt);
-			cout << "|				            " << usuarioActual->getNombreUsuario()
+			cout << "|				                      "
 					<< "  |" << endl;
 			cout << "|							|" << endl;
 			cout << "|	Elije las siguientes opciones                   |"

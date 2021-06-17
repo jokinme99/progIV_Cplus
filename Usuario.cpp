@@ -152,7 +152,7 @@ using namespace std;
 		const char *c = s.c_str();
 	    return (char*) c;
 	}
-	void Usuario::anyadirReserva(Reservas* re,Habitaciones* h){
+	void Usuario::anyadirReserva(Reservas* re,Habitaciones* h){/////////////////ESTABLECER EL TAMAÑO DE LOS ARRAYS DE CARACTERES A LA QUE SE LES TIENE PREDISPUESTO
 
 		int eleccionNHabitacion;
 		int dia;

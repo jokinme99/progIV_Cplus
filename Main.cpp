@@ -191,8 +191,12 @@ int caso3Usuario() {//VER RESERVA
 //		return rc;
 //	}
 //	system("pause");
+
+
 	cout<<"A continuacion se le mostraran sus reservas"<<endl;
+
 	cout<<endl;
+
 	usuarioActual->getReservaUsuario()->imprimirReservas();
 
 	system("pause");
@@ -206,9 +210,7 @@ int caso3Usuario() {//VER RESERVA
 
 void caso4Usuario() {	//CREAR RESERVA
 
-//	cout << "Introduzca el usuario en el que va a realizar la modificacion: ";
-//
-//
+
 	usuarioActual->anyadirReserva(&re, &h);
 
 
@@ -219,7 +221,9 @@ void caso4Usuario() {	//CREAR RESERVA
 	menuUsuario();
 
 
-
+//	cout << "Introduzca el usuario en el que va a realizar la modificacion: ";
+//
+//
 //			int eleccionNHabitacion;
 //			int dia;
 //			int hora;
@@ -337,15 +341,13 @@ void caso4Usuario() {	//CREAR RESERVA
 //		printf("%s\n", sqlite3_errmsg(db));
 //		return rc;
 //	}
-
-
 	//return 0;
 }
 
 int caso5Usuario() {//MODIFICAR RESERVA
 
 
-usuarioActual->modificarReserva(&h);
+
 //	rc = sqlite3_open("hotelandia_final.s3db", &db);	//abrir base de datos
 //	if (rc != SQLITE_OK) {
 //		cout << "Error opening database" << endl;
@@ -358,14 +360,19 @@ usuarioActual->modificarReserva(&h);
 //		printf("%s\n", sqlite3_errmsg(db));
 //		return rc;
 //	}
+
+	usuarioActual->modificarReserva(&h);
+
 	system("pause");
+
 	menuUsuario();
+
 	return 0;
 }
 int caso6Usuario() {//ELIMINAR RESERVA
 
 
-	usuarioActual->eliminarReserva(&re);
+
 //	char usuarioEliminar[20];
 //	cout << "Introduzca el usuario del que quiere eliminar una reserva: ";
 //	cin >> usuarioEliminar;
@@ -382,8 +389,14 @@ int caso6Usuario() {//ELIMINAR RESERVA
 //		printf("%s\n", sqlite3_errmsg(db));
 //		return rc;
 //	}
+
+
+	usuarioActual->eliminarReserva(&re);
+
 	system("pause");
+
 	menuUsuario();
+
 	return 0;
 }
 
@@ -497,8 +510,11 @@ void caso1Admin() {//VER HABITACION
 	cout << "--HABITACIONES--" << endl;
 
 	h.imprimirHabitaciones();
+
 	system("pause");
+
 	menuAdministrador();
+
 }
 void caso2Admin() {//EDITAR HABITACION
 
@@ -520,6 +536,10 @@ void caso2Admin() {//EDITAR HABITACION
 	cin >> Prec;
 
 	h.editarHabitacion(idHab, tipoHab, Prec);
+
+
+	cout << "volviendo al menu" << endl;
+
 
 	system("pause");
 

@@ -8,6 +8,7 @@
 #include "Habitacion.h"
 #include <string.h>
 #include <iostream>
+#include "DatosSQL.h"
 
 using namespace std;
 
@@ -87,10 +88,47 @@ bool Habitaciones::habitacionExiste(int idHabitacion){
 
 void Habitaciones::editarHabitacion(int id, char *tipo, int precio) {
 
-	Habitacion *habitacion = getHabitacion(id);
+
+	Habitacion *habitacion = this->getHabitacion(id);
 
 	habitacion->setPrecioHabitacion(precio);
 	habitacion->setTipoHabitacion(tipo);
+
+	char sql[] = "UPDATE HABITACION SET precio_habitacion ='";
+
+	char con[] = "'",con1[] = ",", con2[] = "tipo_habitacion='", con8[] = " WHERE id_habitacion='", con9[] = ";";
+
+
+
+	string s = to_string(precio);
+	char const *pchar2 = s.c_str();  //use char const* as target type
+	char con11[5]; strcpy(con11, pchar2);
+	 s = to_string(id);
+	char const *pchar4 = s.c_str();  //use char const* as target type
+	char con13[5]; strcpy(con13, pchar4);
+
+	strcat(sql, con11);
+	strcat(sql, con);
+	strcat(sql, con1);
+	strcat(sql, con2);
+	strcat(sql, tipo);
+	strcat(sql, con);
+
+	strcat(sql, con8);
+	strcat(sql, con13);
+	strcat(sql, con);
+	strcat(sql, con9);
+	cout<<endl;
+
+	//cout<<sql<<endl;
+
+	llamadaSQL(sql);
+
+	delete habitacion;
+
+	cout<<"esto funciona"<<endl;
+
+
 
 }
 

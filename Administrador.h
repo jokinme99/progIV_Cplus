@@ -9,6 +9,7 @@
 #define ADMINISTRADOR_H_
 #include "Usuario.h"
 #include "Habitaciones.h"
+#include "Trabajadores.h"
 class Administrador: public Usuario{
 private:
 
@@ -40,6 +41,8 @@ public:
 	virtual void editarHabitacion(Habitaciones*);
 	//virtual
 	//void imprimirUsuario();
+
+	virtual void editarTrabajador(Trabajadores*);
 
 };
 

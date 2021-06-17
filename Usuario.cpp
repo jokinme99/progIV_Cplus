@@ -19,6 +19,8 @@
 #include "Habitaciones.h"
 #include "Reservas.h"
 #include "DatosSQL.h"
+#include "Trabajadores.h"
+#include "Trabajador.h"
 using namespace std;
 
 	Usuario::Usuario(){
@@ -474,3 +476,7 @@ using namespace std;
 	void Usuario::editarHabitacion(Habitaciones*h){
 		cout<<"no tienes permiso para esta accion"<<endl;
 	}
+
+	void Usuario::editarTrabajador(Trabajadores* t){
+			cout<<"no tienes permiso para esta accion"<<endl;
+		}

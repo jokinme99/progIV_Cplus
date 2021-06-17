@@ -88,7 +88,7 @@ void menuUsuario() {
 			cout << "|				                      "
 					<< "  |" << endl;
 			cout << "|							|" << endl;
-			cout << "|	Elije las siguientes opciones                   |"
+			cout << "|	Elige las siguientes opciones                   |"
 					<< endl;
 			cout << "|	1. Ver hoteles                                  |"
 					<< endl;
@@ -602,6 +602,7 @@ void caso5Admin() {//VER RESERVAS
 	menuAdministrador();
 }
 void caso6Admin() {//EDITAR RESERVA
+
 	int idR, dia, hora;
 	Habitacion *hab;
 	cout << "introduce el id de la reserva que quieres modificar" << endl;
@@ -685,19 +686,7 @@ void caso9Admin() {//VER TRABAJADORES
 
 }
 void caso10Admin() {//EDITAR TRABAJADOR
-	float sueldo;
-
-	cout << "Introduce el id del trabajador que quieres modificar" << endl;
-
-	int idTra;
-
-	cin >> idTra;
-
-	cout << "Introduce el nuevo sueldo del trabajador" << endl;
-
-	cin >> sueldo;
-
-	t.editarTrabajador(idTra, sueldo);
+	usuarioActual->editarTrabajador(&t);
 
 	system("pause");
 

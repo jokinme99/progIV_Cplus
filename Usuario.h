@@ -15,6 +15,8 @@
 #include "Reservas.h"
 #include "Habitacion.h"
 #include "Habitaciones.h"
+#include "Trabajador.h"
+#include "Trabajadores.h"
 
 class Usuario
 {
@@ -64,6 +66,8 @@ public:
 	void listarReservas();
 	int eliminarReserva(Reservas *re);
 	virtual void editarHabitacion(Habitaciones*);
+	virtual void editarTrabajador(Trabajadores*);
+
 
 
 

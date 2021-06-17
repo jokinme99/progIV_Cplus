@@ -32,20 +32,27 @@ void Reservas::anyadirReserva(Reserva *r) {
 void Reservas::quitarReserva(int id) {
 	int var;
 	cout << "Llego" << endl;
-	for (var = 0; var < this->numReservas; ++var) {
-		cout << "Variable" << var << endl;
-		if (this->r[var]->getIdReserva() == id) {
+	if(this->numReservas!=0){
+		for (var = 0; var < this->numReservas; ++var) {
 			cout << "Variable" << var << endl;
-			this->numReservas--;
-			for (int j = var; j < this->numReservas; ++j) {
-				cout << "Variable j" << j << endl;
-				cout << "Variable j" << this->getNumReservas() << endl;
-				this->r[j] = this->r[j + 1];
+			if (this->r[var]->getIdReserva() == id) {
+				cout << "Variable" << var << endl;
+				if (this->numReservas>1) {
+					for (int j = var; j < this->numReservas; ++j) {
+						cout << "Variable j" << j << endl;
+						cout << "Variable j" << this->getNumReservas() << endl;
+						this->r[j] = this->r[j + 1];
+				}
+					delete this->r[this->numReservas];
+				}else{
+//					cout<<"peroque"<<endl;
+//					delete this->r[(this->numReservas)-1];
+//					cout<<"pasa"<<endl;
+				}
 			}
-			delete this->r[this->numReservas+1];
-			break;
 		}
 	}
+	this->numReservas--;
 }
 
 int Reservas::getNumReservas() {

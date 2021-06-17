@@ -237,31 +237,40 @@ using namespace std;
 		s = to_string(eleccionNHabitacion);
 		char const *pchar5 = s.c_str();  //use char const* as target type
 		char con14[5]; strcpy(con14, pchar5);
-		strcat(sql, con);
-		strcat(sql, con10);
-		strcat(sql, con);
-		strcat(sql, con1);
-		strcat(sql, con);
-		strcat(sql, con11);
-		strcat(sql, con);
-		strcat(sql, con2);
-		strcat(sql, con);
-		strcat(sql, con12);
-		strcat(sql, con);
-		strcat(sql, con3);
-		strcat(sql, con);
-		strcat(sql, con13);//CONVERTIR INT A CHAR
-		strcat(sql, con);
-		strcat(sql, con3);
-		strcat(sql, con);
-		strcat(sql, con14);
-		strcat(sql, con);
-		strcat(sql, con8);
-		strcat(sql, con9);
 
-		cout<<sql<<endl;
+		char *retval = new char[strlen(sql)+strlen(con)+strlen(con10)+strlen(con)+strlen(con1)+strlen(con11)+strlen(con)+strlen(con2)+strlen(con)+strlen(con12)
+								+strlen(con)+strlen(con3)+strlen(con)+strlen(con13)+strlen(con)+strlen(con3)+strlen(con)+strlen(con14)+strlen(con)
+								+strlen(con8)+strlen(con9)];
 
-		llamadaSQL(sql);
+		*retval = '\0';
+
+
+		strcat(retval, sql);
+		strcat(retval, con);
+		strcat(retval, con10);
+		strcat(retval, con);
+		strcat(retval, con1);
+		strcat(retval, con);
+		strcat(retval, con11);
+		strcat(retval, con);
+		strcat(retval, con2);
+		strcat(retval, con);
+		strcat(retval, con12);
+		strcat(retval, con);
+		strcat(retval, con3);
+		strcat(retval, con);
+		strcat(retval, con13);//CONVERTIR INT A CHAR
+		strcat(retval, con);
+		strcat(retval, con3);
+		strcat(retval, con);
+		strcat(retval, con14);
+		strcat(retval, con);
+		strcat(retval, con8);
+		strcat(retval, con9);
+
+		cout<<retval<<endl;
+
+		llamadaSQL(retval);
 
 
 	}
@@ -349,27 +358,33 @@ using namespace std;
 				s = to_string(nuevaHabitacion);
 				char const *pchar5 = s.c_str();  //use char const* as target type
 				char con14[5]; strcpy(con14, pchar5);
-				strcat(sql, con11);
-				strcat(sql, con);
-				strcat(sql, con1);
-				strcat(sql, con2);
-				strcat(sql, con12);
-				strcat(sql, con);
-				strcat(sql, con1);
-				strcat(sql, con3);
-				strcat(sql, con14);//CONVERTIR INT A CHAR
-				strcat(sql, con);
+
+				char *retval = new char[strlen(sql)+strlen(con11)+strlen(con)+strlen(con1)+strlen(con2)+strlen(con12)+strlen(con)+strlen(con1)+strlen(con3)
+										+strlen(con14)+strlen(con)+strlen(con8)+strlen(con13)+strlen(con)+strlen(con9)];
+
+				*retval = '\0';
 
 
-				strcat(sql, con8);
-				strcat(sql, con13);
-				strcat(sql, con);
-				strcat(sql, con9);
+				strcat(retval, sql);
+				strcat(retval, con11);
+				strcat(retval, con);
+				strcat(retval, con1);
+				strcat(retval, con2);
+				strcat(retval, con12);
+				strcat(retval, con);
+				strcat(retval, con1);
+				strcat(retval, con3);
+				strcat(retval, con14);//CONVERTIR INT A CHAR
+				strcat(retval, con);
+				strcat(retval, con8);
+				strcat(retval, con13);
+				strcat(retval, con);
+				strcat(retval, con9);
 				cout<<endl;
 
-				cout<<sql<<endl;
+				cout<<retval<<endl;
 
-				llamadaSQL(sql);
+				llamadaSQL(retval);
 
 
 	}
@@ -378,6 +393,12 @@ using namespace std;
 
 		int numReserva;
 		char afirmacion[5];
+
+		if(this->getReservaUsuario()->getNumReservas()==0){
+			cout<<"no tienes reservas"<<endl;
+			return 0;
+
+		}
 
 
 		cout<<"Estas son las reservas que estan a su nombre: "<<endl;
@@ -414,7 +435,10 @@ using namespace std;
 		}
 
 		re->quitarReserva(numReserva);
+
+
 		this->getReservaUsuario()->quitarReserva(numReserva);
+
 
 		char sql[] = "DELETE FROM RESERVA WHERE id_reserva ='";
 
@@ -423,8 +447,13 @@ using namespace std;
 		string s = to_string(numReserva);
 		char const *pchar2 = s.c_str();  //use char const* as target type
 		char con11[5]; strcpy(con11, pchar2);
-		strcat(sql, con11);
-		strcat(sql, con);
+
+		char *retval = new char[strlen(sql)+strlen(con11)+strlen(con)];
+
+		*retval = '\0';
+		strcat(retval, sql);
+		strcat(retval, con11);
+		strcat(retval, con);
 
 		cout<<endl;
 
@@ -432,7 +461,7 @@ using namespace std;
 
 
 
-		llamadaSQL(sql);
+		llamadaSQL(retval);
 
 
 

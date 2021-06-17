@@ -182,9 +182,9 @@ using namespace std;
 
 		h->imprimirHabitaciones();
 
-
-
 		cin >> eleccionNHabitacion;
+
+
 
 		//cout<<h->habitacionExiste(eleccionNHabitacion)<<endl;
 
@@ -202,6 +202,9 @@ using namespace std;
 
 		Reserva *r = new Reserva(re->getOrdenReserva(),dia,hora,h->getHabitacion(eleccionNHabitacion));
 		this->getReservaUsuario()->anyadirReserva(r);
+
+		re->comprobarDisponibilidad(r);
+
 		re->anyadirReserva(r);
 
 

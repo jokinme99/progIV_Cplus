@@ -87,15 +87,15 @@ Reserva* Reservas::comprobarDisponibilidad(Reserva *reserva) {
 
 	int var;
 
-	cout << "Llego" << endl;
+
 	for (var = 0; var < this->numReservas; ++var) {
 
 
-		cout << reserva->getDiaReserva() << endl;
-		cout << r[var]->getDiaReserva() << endl;
-
-		cout << reserva->getHabitacionReservada()->getIdHabitacion() << endl;
-		cout << r[var]->getHabitacionReservada()->getIdHabitacion() << endl;
+//		cout << reserva->getDiaReserva() << endl;
+//		cout << r[var]->getDiaReserva() << endl;
+//
+//		cout << reserva->getHabitacionReservada()->getIdHabitacion() << endl;
+//		cout << r[var]->getHabitacionReservada()->getIdHabitacion() << endl;
 		if (this->r[var]->getDiaReserva() == reserva->getDiaReserva() && this->r[var]->getHabitacionReservada()->getIdHabitacion() == reserva->getHabitacionReservada()->getIdHabitacion()) {
 
 			cout << "La habitación" << this->r[var]->getHabitacionReservada()->getIdHabitacion()

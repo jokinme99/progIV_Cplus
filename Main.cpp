@@ -535,7 +535,7 @@ void caso2Admin() {//EDITAR HABITACION
 //	int Prec;
 //	cin >> Prec;
 //
-//	h.editarHabitacion(idHab, tipoHab, Prec);
+	h.editarHabitacion(idHab, tipoHab, Prec);
 
 
 	usuarioActual->editarHabitacion(&h);

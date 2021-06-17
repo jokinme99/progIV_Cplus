@@ -85,8 +85,8 @@ bool Habitaciones::habitacionExiste(int idHabitacion){
 	}
 	return verdadero;
 }
-
-void Habitaciones::editarHabitacion(int id, char *tipo, int precio) {
+/////////////////////////////////////////////////////////////////////////////////////////
+void Habitaciones::editarHabitacion(int id, char *tipo, int precio) {//ELIMINAR ESTA FUNCION
 
 
 	Habitacion *habitacion = this->getHabitacion(id);
@@ -131,7 +131,7 @@ void Habitaciones::editarHabitacion(int id, char *tipo, int precio) {
 
 
 }
-
+//////////////////////////////////////////////////////////////////////////////////
 void Habitaciones::busquedaPersonalizada() {
 
 	cout << "Elige una opcion de busqueda de habitaciones" << endl;

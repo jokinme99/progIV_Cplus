@@ -676,22 +676,21 @@ void caso4Usuario() {	//CREAR RESERVA
 }
 
 int caso5Usuario() {//MODIFICAR RESERVA
-	char usuarioModificar[20];
-	cout << "Introduzca el usuario en el que va a realizar la modificacion: ";
-	cin >> usuarioModificar;
-	cout << endl;
-	rc = sqlite3_open("hotelandia_final.s3db", &db);	//abrir base de datos
-	if (rc != SQLITE_OK) {
-		cout << "Error opening database" << endl;
-		return rc;
-	}
-	rc = modificarReserva(db, usuarioModificar);//ANYADIR MODIFICAR LA HABITACION
-	rc = sqlite3_close(db);
-	if (rc != SQLITE_OK) {
-		printf("Error closing database\n");
-		printf("%s\n", sqlite3_errmsg(db));
-		return rc;
-	}
+
+
+usuarioActual->modificarReserva(&h);
+//	rc = sqlite3_open("hotelandia_final.s3db", &db);	//abrir base de datos
+//	if (rc != SQLITE_OK) {
+//		cout << "Error opening database" << endl;
+//		return rc;
+//	}
+//	rc = modificarReserva(db, usuarioActual->getNombreUsuario());//ANYADIR MODIFICAR LA HABITACION
+//	rc = sqlite3_close(db);
+//	if (rc != SQLITE_OK) {
+//		printf("Error closing database\n");
+//		printf("%s\n", sqlite3_errmsg(db));
+//		return rc;
+//	}
 	system("pause");
 	menuUsuario();
 	return 0;

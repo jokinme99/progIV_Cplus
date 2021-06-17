@@ -161,6 +161,8 @@ int crearReserva(sqlite3* db, char nombreUsuario[20], int hotel, int numHabitaci
 }
 
 int modificarReserva(sqlite3 *db, char nombreUsuario[20]){
+
+
 	int hora, dia, idReserva;
 	int idUsuario;
 	sqlite3_stmt *stmt;//SELECT PARA CONSEGUIR EL ID

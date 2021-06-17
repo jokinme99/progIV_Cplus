@@ -36,6 +36,7 @@ public:
 	~Usuario();
 
 	void anyadirReserva(Reservas* re,Habitaciones* h );
+	void modificarReserva(Habitaciones* h);
 	int getIdUsuario()const;
 	char* getNombreUsuario()const;
 	void setNombreUsuario(char*);

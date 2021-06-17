@@ -53,6 +53,7 @@ void Reservas::imprimirReservas() {
 
 	for (int i = 0; i < this->numReservas; ++i) {
 		this->r[i]->imprimirReserva();
+		cout<<"---------------"<<endl;
 	}
 }
 
@@ -129,4 +130,16 @@ Reserva* Reservas::comprobarDisponibilidad(Reserva *reserva) {
 	return reserva;
 
 }
+bool Reservas::reservaExiste(int numReserva){
 
+	int var = 0;
+	bool verdadero= false;
+	for (var = 0; var < this->numReservas; ++var) {
+		if (this->r[var]->getIdReserva() == numReserva) {
+			verdadero = true;
+			break;
+		}
+
+	}
+	return verdadero;
+}

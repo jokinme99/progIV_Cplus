@@ -27,6 +27,7 @@ public:
 	int getOrdenReserva();
 	void editarReserva(int, int, int, Habitacion*);
 	Reserva* comprobarDisponibilidad(Reserva * r);
+	bool reservaExiste(int numReserva);
 };
 
 

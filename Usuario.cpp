@@ -263,7 +263,114 @@ using namespace std;
 
 
 	}
+	void Usuario::modificarReserva(Habitaciones* h){
+		int numReserva, nuevoDia,nuevaHora, nuevaHabitacion;
 
+		cout<<"Estas son las reservas que estan a nombre su nombre: "<<endl;
+		cout<<endl;
+		this->getReservaUsuario()->imprimirReservas();
+		cout<<endl;
+		cout<<"Selecciona el numero de reserva que quierers modificar: ";
+		cin>>numReserva;
+
+		cout<<endl;
+
+		while(this->getReservaUsuario()->reservaExiste(numReserva)==0){
+			cout<<"por favor elija una reserva adecuada o una reserva de su propiedad"<<endl;
+			cin >> numReserva;
+		}
+		cout<<endl;
+		cout<<"Estos son los datos de su reserva: "<<endl;
+		this->getReservaUsuario()->getReserva(numReserva)->imprimirReserva();
+
+		cout<<endl;
+
+		cout<<"introduce el nuevo dia para la reserva: "<<endl;
+
+
+		cin >> nuevoDia;
+		while(nuevoDia<1||nuevoDia>31){
+			cout<<endl;
+			cout<<"por favor indique un dia adecuado"<<endl;
+			cin >> nuevoDia;
+		}
+
+		cout<<endl;
+		cout<<"introduce la nueva hora para la entrada del hotel: "<<endl;
+
+				cin >> nuevaHora;
+				while(nuevaHora<0||nuevaHora>24){
+					cout<<endl;
+					cout<<"por favor indique una hora adecuada"<<endl;
+					cin >> nuevaHora;
+				}
+				cout<<endl;
+				cout << "Ingrese el id de la nueva habitacion que desea reservar: "<<endl;
+				cout<<endl;
+
+				cout<<"Aqui tienes las habitaciones que tenemos disponibles"<<endl;
+				cout<<endl;
+
+				h->imprimirHabitaciones();
+
+				cin >> nuevaHabitacion;
+
+				//cout<<h->habitacionExiste(eleccionNHabitacion)<<endl;
+
+				while(h->habitacionExiste(nuevaHabitacion)==0){
+					cout<<endl;
+					cout<<"por favor habitacion que exista"<<endl;
+					cin >> nuevaHabitacion;
+				}
+
+				cout << endl;
+
+				this->getReservaUsuario()->getReserva(numReserva)->setDiaReserva(nuevoDia);
+				this->getReservaUsuario()->getReserva(numReserva)->setHoraReserva(nuevaHora);
+				this->getReservaUsuario()->getReserva(numReserva)->setHabitacionReservada(h->getHabitacion(nuevaHabitacion));
+
+				char sql[] = "UPDATE RESERVA SET dia_reserva ='";
+
+				char con[] = "'",con1[] = ",", con2[] = "hora_reserva='", con3[] = "id_habitacion='", con8[] = " WHERE id_reserva='", con9[] = ";";
+
+
+
+				string s = to_string(nuevoDia);
+				char const *pchar2 = s.c_str();  //use char const* as target type
+				char con11[5]; strcpy(con11, pchar2);
+				 s = to_string(nuevaHora);
+				char const *pchar3 = s.c_str();  //use char const* as target type
+				char con12[5]; strcpy(con12, pchar3);
+				 s = to_string(numReserva);
+				char const *pchar4 = s.c_str();  //use char const* as target type
+				char con13[5]; strcpy(con13, pchar4);
+				s = to_string(nuevaHabitacion);
+				char const *pchar5 = s.c_str();  //use char const* as target type
+				char con14[5]; strcpy(con14, pchar5);
+				strcat(sql, con11);
+				strcat(sql, con);
+				strcat(sql, con1);
+				strcat(sql, con2);
+				strcat(sql, con12);
+				strcat(sql, con);
+				strcat(sql, con1);
+				strcat(sql, con3);
+				strcat(sql, con14);//CONVERTIR INT A CHAR
+				strcat(sql, con);
+
+
+				strcat(sql, con8);
+				strcat(sql, con13);
+				strcat(sql, con);
+				strcat(sql, con9);
+				cout<<endl;
+
+				cout<<sql<<endl;
+
+				llamadaSQL(sql);
+
+
+	}
 
 
 

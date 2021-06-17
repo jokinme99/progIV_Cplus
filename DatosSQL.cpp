@@ -50,10 +50,10 @@ using namespace std;
 			fprintf(stderr, "SQL error: %s\n", zErrMsg);
 			sqlite3_free(zErrMsg);
 
-			cout<<"Reserva no realizada:"<<endl;
+			cout<<"Sentencia SQL insatisfactoria"<<endl;
 		} else {
-			cout<<"Reserva realizada:" <<endl;
-			fprintf(stdout, "Reserva realizada:\n");
+			cout<<"Sentencia SQL satisfactoria, actualizacion realizada" <<endl;
+			//fprintf(stdout, "Reserva realizada:\n");
 		}
 		sqlite3_close(db1);
 

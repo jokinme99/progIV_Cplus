@@ -559,15 +559,9 @@ void caso3Admin() {//CREAR HABITACION
 }
 void caso4Admin() {//ELIMINAR HABITACION
 	//AL ELIMINAR HABITACION SE DEBERIA QUITAR UNA FILA DE LA TABLA HOTEL_TIENE_HABITACIONES??
-	int idhab;
-	h.imprimirHabitaciones();
-	cout << "introduce el id de habitacion para eliminarlo" << endl;
 
-	cin >> idhab;
+	usuarioActual->eliminarHabitacion(&h);
 
-	h.quitarHabitacion(idhab);
-
-	h.getNumHabitaciones();
 	system("pause");
 	menuAdministrador();
 }

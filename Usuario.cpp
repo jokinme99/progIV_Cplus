@@ -487,3 +487,9 @@ using namespace std;
 	void Usuario::anyadirHabitacion(Habitaciones* h){
 				cout<<"no tienes permiso para esta accion"<<endl;
 			}
+
+	int Usuario::eliminarHabitacion(Habitaciones* h){
+		cout<<"no tienes permiso para esta accion"<<endl;
+
+	return 0;
+	}

@@ -285,6 +285,79 @@ void Administrador::editarHabitacion(Habitaciones *h) {
 
 }
 
+
+int Administrador::eliminarHabitacion(Habitaciones *h){
+
+		int numHabitacion;
+		char afirmacion[5];
+
+
+
+		cout<<"Estas son las habitaciones actuales "<<endl;
+		cout<<endl;
+		h->imprimirHabitaciones();
+		cout<<endl;
+		cout<<"Selecciona el numero de habitacion que quierers Eliminar: ";
+
+		cin>>numHabitacion;
+
+		cout<<endl;
+
+		while(h->habitacionExiste(numHabitacion)==0){
+			cout<<"por favor elija una habitacion adecuada"<<endl;
+			cin >> numHabitacion;
+		}
+		cout<<endl;
+
+		cout<<"Esta seguro que desea eliminar la siguiente trserva?(diga si o no)"<<endl;
+		cout<<endl;
+		h->getHabitacion(numHabitacion);
+		cout<<endl;
+		cout<<"Respuesta(diga si o no):  ";
+		cin>>afirmacion;
+		while(strcmp(afirmacion, "si")!=0&&strcmp(afirmacion, "no")!=0){
+			cout<<"por favor, elija una respuesta valida"<<endl;
+			cout<<endl;
+			cout<<"Respuesta(diga si o no):  ";
+			cin>>afirmacion;
+		}
+		if (strcmp(afirmacion, "no")==0) {
+
+			cout<<"Entonces no cancelamos"<<endl;
+			return 0;
+		}
+
+		h->quitarHabitacion(numHabitacion);
+
+		char sql[] = "DELETE FROM HABITACION WHERE id_habitacion ='";
+
+		char con[] = "'";
+
+		string s = to_string(numHabitacion);
+		char const *pchar2 = s.c_str();  //use char const* as target type
+		char con11[5]; strcpy(con11, pchar2);
+
+		char *retval = new char[strlen(sql)+strlen(con11)+strlen(con)];
+
+		*retval = '\0';
+		strcat(retval, sql);
+		strcat(retval, con11);
+		strcat(retval, con);
+
+		cout<<endl;
+
+		//cout<<sql<<endl;
+
+
+
+		llamadaSQL(retval);
+
+
+
+
+		return 0;
+	}
+
 void Administrador::editarTrabajador(Trabajadores *trabajadores) {
 
 	Usuario::editarTrabajador(trabajadores);

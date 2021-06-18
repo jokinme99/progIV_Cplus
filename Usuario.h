@@ -70,6 +70,7 @@ public:
 	virtual void editarHabitacion(Habitaciones*);
 	virtual void anyadirHabitacion(Habitaciones*);
 	virtual void editarTrabajador(Trabajadores*);
+	virtual void anyadirTrabajador(Trabajadores*);
 
 
 

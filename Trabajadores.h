@@ -23,6 +23,7 @@ public:
 	int getNumTrabajadores();
 	Trabajador* getTrabajador(int idTrabajador);
 	void editarTrabajador(int, float);
+	bool trabajadorExiste(int);
 };
 
 

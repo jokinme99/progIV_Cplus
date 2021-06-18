@@ -62,3 +62,17 @@ void Trabajadores::editarTrabajador(int id, float sueldo){
 }
 
 
+bool Trabajadores::trabajadorExiste(int numTrabjador){
+
+	int var = 0;
+	bool verdadero= false;
+	for (var = 0; var < this->numTrabajadores; ++var) {
+		if (this->t[var]->getIdTrabajador() == numTrabjador) {
+			verdadero = true;
+			break;
+		}
+
+	}
+	return verdadero;
+}
+

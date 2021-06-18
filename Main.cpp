@@ -665,33 +665,10 @@ void caso10Admin() {//EDITAR TRABAJADOR
 }
 void caso11Admin() {//CREAR TRABAJADOR
 
-	cout << "Crea un nuevo trabajador" << endl;
 
-	int idTrabajador;
-	char nombreTrabajador[100];
-	char dniTrabajador[9];
-	int telefonoTrabajador;
-	float sueldoTrabajador;
+	usuarioActual->anyadirTrabajador(&t);
 
-	cout << "Ingrese el id del trabajador que desea anyadir: ";
-	cin >> idTrabajador;
-	cout << endl;
-	cout << "Ingrese el nombre del trabajador que desea anyadir: ";
-	cin >> nombreTrabajador;
-	cout << endl;
-	cout << "Ingrese el DNI del trabajador que desea anyadir: ";
-	cin >> dniTrabajador;
-	cout << endl;
-	cout << "Ingrese el telefono del trabajador que desea anyadir: ";
-	cin >> telefonoTrabajador;
-	cout << endl;
-	cout << "Ingrese el sueldo del trabajador que desea anyadir: ";
-	cin >> sueldoTrabajador;
-	cout << endl;
 
-	Trabajador *tr = new Trabajador(idTrabajador, nombreTrabajador,
-			dniTrabajador, telefonoTrabajador, sueldoTrabajador);
-	t.anyadirTrabajador(tr);
 	system("pause");
 	menuAdministrador();
 

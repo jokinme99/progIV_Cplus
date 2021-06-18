@@ -42,6 +42,7 @@ public:
 	//virtual
 	//void imprimirUsuario();
 
+	virtual void anyadirTrabajador(Trabajadores*);
 	virtual void editarTrabajador(Trabajadores*);
 	virtual void anyadirHabitacion(Habitaciones*);
 	virtual int eliminarHabitacion(Habitaciones*);

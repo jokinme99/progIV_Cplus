@@ -674,15 +674,9 @@ void caso11Admin() {//CREAR TRABAJADOR
 
 }
 void caso12Admin() {//ELIMINAR TRABAJADOR
-	int idtr;
-	t.imprimirTrabajadores();
-	cout << "introduce el id del trabajador para eliminarlo" << endl;
 
-	cin >> idtr;
+	usuarioActual->eliminarTrabajador(&t);
 
-	t.quitarTrabajador(idtr);
-
-	t.getNumTrabajadores();
 	system("pause");
 	menuAdministrador();
 

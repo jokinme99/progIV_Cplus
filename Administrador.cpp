@@ -573,3 +573,73 @@ void Administrador::editarTrabajador(Trabajadores *trabajadores) {
 
 	llamadaSQL(retVal);
 }
+
+int Administrador::eliminarTrabajador(Trabajadores *t) {
+
+	int numTrabajador;
+	char afirmacion[5];
+
+	cout << "Estas son las habitaciones actuales " << endl;
+	cout << endl;
+	t->imprimirTrabajadores();
+	cout << endl;
+	cout << "Selecciona el numero de trabajador que quierers Eliminar: ";
+
+	cin >> numTrabajador;
+
+	cout << endl;
+
+	while (t->trabajadorExiste(numTrabajador) == 0) {
+		cout << "por favor elija un trabajador adecuado" << endl;
+		cin >> numTrabajador;
+	}
+	cout << endl;
+
+	cout << "Esta seguro que desea eliminar la siguiente trserva?(diga si o no)"
+			<< endl;
+	cout << endl;
+
+	cout << numTrabajador << endl;
+
+	t->getTrabajador(numTrabajador);
+	cout << endl;
+	cout << "Respuesta(diga si o no):  ";
+	cin >> afirmacion;
+	while (strcmp(afirmacion, "si") != 0 && strcmp(afirmacion, "no") != 0) {
+		cout << "por favor, elija una respuesta valida" << endl;
+		cout << endl;
+		cout << "Respuesta(diga si o no):  ";
+		cin >> afirmacion;
+	}
+	if (strcmp(afirmacion, "no") == 0) {
+
+		cout << "Entonces no cancelamos" << endl;
+		return 0;
+	}
+
+	t->quitarTrabajador(numTrabajador);
+
+	char sql[] = "DELETE FROM Trabajador WHERE id_trabajador ='";
+
+	char con[] = "'";
+
+	string s = to_string(numTrabajador);
+	char const *pchar2 = s.c_str();  //use char const* as target type
+	char con11[5];
+	strcpy(con11, pchar2);
+
+	char *retval = new char[strlen(sql) + strlen(con11) + strlen(con)];
+
+	*retval = '\0';
+	strcat(retval, sql);
+	strcat(retval, con11);
+	strcat(retval, con);
+
+	cout << endl;
+
+	//cout<<sql<<endl;
+
+	llamadaSQL(retval);
+
+	return 0;
+}

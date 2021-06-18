@@ -487,3 +487,8 @@ void Usuario::anyadirTrabajador(Trabajadores *t) {
 	cout << "no tienes permiso para esta accion" << endl;
 }
 
+int Usuario::eliminarTrabajador(Trabajadores *t) {
+	cout << "no tienes permiso para esta accion" << endl;
+
+	return 0;
+}

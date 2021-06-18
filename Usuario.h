@@ -72,6 +72,9 @@ public:
 	virtual void editarTrabajador(Trabajadores*);
 	virtual void anyadirTrabajador(Trabajadores*);
 
+	virtual int eliminarTrabajador(Trabajadores*);
+
+
 
 
 

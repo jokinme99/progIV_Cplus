@@ -46,6 +46,7 @@ public:
 	virtual void editarTrabajador(Trabajadores*);
 	virtual void anyadirHabitacion(Habitaciones*);
 	virtual int eliminarHabitacion(Habitaciones*);
+	virtual int eliminarTrabajador(Trabajadores*);
 
 };
 

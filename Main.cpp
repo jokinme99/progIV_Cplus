@@ -549,33 +549,10 @@ void caso2Admin() {//EDITAR HABITACION
 
 }
 void caso3Admin() {//CREAR HABITACION
-	cout << "Crea una nueva habitacion" << endl;
 
-	char tipo[100];
 
-	int num_hab;
-	int planta;
-	int id_hab;
-	int precio;
+	usuarioActual->anyadirHabitacion(&h);
 
-	cout << "Ingrese el id de la habitacion que desea anyadir: ";
-	cin >> id_hab;
-	cout << endl;
-	cout << "Ingrese el numero de la habitacion que desea anyadir: ";
-	cin >> num_hab;
-	cout << endl;
-	cout << "Ingrese la planta de la habitacion que desea anyadir: ";
-	cin >> planta;
-	cout << endl;
-	cout << "Ingrese el tipo de habitacion que desea anyadir: ";
-	cin >> tipo;
-	cout << endl;
-	cout << "Ingrese el precio de la habitacion: ";
-	cin >> precio;
-	cout << endl;
-
-	Habitacion *hab = new Habitacion(id_hab, num_hab, planta, tipo, precio);
-	h.anyadirhabitacion(hab);
 	system("pause");
 	menuAdministrador();
 

@@ -66,6 +66,7 @@ public:
 	void listarReservas();
 	int eliminarReserva(Reservas *re);
 	virtual void editarHabitacion(Habitaciones*);
+	virtual void anyadirHabitacion(Habitaciones*);
 	virtual void editarTrabajador(Trabajadores*);
 
 

@@ -43,6 +43,7 @@ public:
 	//void imprimirUsuario();
 
 	virtual void editarTrabajador(Trabajadores*);
+	virtual void anyadirHabitacion(Habitaciones*);
 
 };
 

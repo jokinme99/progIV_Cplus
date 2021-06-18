@@ -73,6 +73,7 @@ Habitacion* Habitaciones::getHabitacion(int idHabitacion) {
 	return this->h[var];
 }
 
+
 bool Habitaciones::habitacionExiste(int idHabitacion){
 	int var = 0;
 	bool verdadero= false;

@@ -154,6 +154,8 @@ using namespace std;
 		const char *c = s.c_str();
 	    return (char*) c;
 	}
+
+
 	void Usuario::anyadirReserva(Reservas* re,Habitaciones* h){/////////////////ESTABLECER EL TAMAÑO DE LOS ARRAYS DE CARACTERES A LA QUE SE LES TIENE PREDISPUESTO
 
 		int eleccionNHabitacion;
@@ -276,6 +278,7 @@ using namespace std;
 
 
 	}
+
 	void Usuario::modificarReserva(Habitaciones* h){
 		int numReserva, nuevoDia,nuevaHora, nuevaHabitacion;
 
@@ -480,3 +483,7 @@ using namespace std;
 	void Usuario::editarTrabajador(Trabajadores* t){
 			cout<<"no tienes permiso para esta accion"<<endl;
 		}
+
+	void Usuario::anyadirHabitacion(Habitaciones* h){
+				cout<<"no tienes permiso para esta accion"<<endl;
+			}

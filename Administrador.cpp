@@ -10,6 +10,8 @@
 #include "Trabajadores.h"
 #include <iostream>
 #include "DatosSQL.h"
+#include <string.h>
+
 using namespace std;
 
 Administrador::Administrador(int idUsuario, char *nombreUsuario,
@@ -62,6 +64,148 @@ char* Administrador::getTipoUsuario() {
 	Usuario::getTipoUsuario();
 	return "admin";
 }
+
+void Administrador::anyadirHabitacion(Habitaciones *habitaciones) { /////////////////ESTABLECER EL TAMAÑO DE LOS ARRAYS DE CARACTERES A LA QUE SE LES TIENE PREDISPUESTO
+
+	int idHabitacion;
+	int numHabitacion;
+	int plantaHabitacion;
+	char tipoHabitacion[20];
+	int precio;
+
+	//re->getOrdenReserva(re->getNumReservas())->getIdReserva();//AQUI TENEMOS EL ID DE LA NUEVA RESERVA
+	cout << endl;
+	cout << "Ingrese el identificador de la habitación: ";
+	cin >> idHabitacion;
+
+	cout << endl;
+	cout << "Ingrese el número de la habitación del 1 al 399: " << endl;
+
+	while (numHabitacion < 1 || numHabitacion > 399) {
+		cout << "Introduzca un número de habitación adecuado" << endl;
+		cin >> numHabitacion;
+	}
+
+	if(numHabitacion >= 1 && numHabitacion < 100){
+
+		plantaHabitacion = 1;
+	} else if(numHabitacion >= 100 && numHabitacion < 200){
+
+		plantaHabitacion = 2;
+	}else if(numHabitacion >= 200 && numHabitacion < 300){
+		plantaHabitacion = 3;
+	} else{
+		plantaHabitacion = 4;
+	}
+
+
+	cout << endl;
+	cout << "Ingrese el tipo de habitacion; Doble, Individual, Familiar, Suite:";
+
+	cin >> tipoHabitacion;
+
+	char doble[6];
+	char individual[10];
+	char familiar[8];
+	char suite[5];
+
+	strcpy(doble, tipoHabitacion);
+	strcpy(individual, tipoHabitacion);
+	strcpy(familiar, tipoHabitacion);
+	strcpy(suite, tipoHabitacion);
+
+
+	while(strcmp(tipoHabitacion, doble ) == 0 || strcmp(tipoHabitacion, individual ) == 0
+			||strcmp(tipoHabitacion, familiar ) == 0 ||strcmp(tipoHabitacion, suite ) == 0  ){
+
+		cout << endl;
+		cout << "Ingrese el tipo de habitacion correcto; Doble, Individual, Familiar, Suite:";
+
+		cin >> tipoHabitacion;
+
+
+	}
+
+
+	cout << endl;
+		cout << "Ingrese el precio de la habitación";
+
+		cin >> precio;
+
+	cout << endl;
+
+	Habitacion *h = new Habitacion(idHabitacion,numHabitacion, plantaHabitacion,
+			tipoHabitacion, precio);
+
+
+	habitaciones->anyadirhabitacion(h);
+
+	//ESTE METODO AÑADE UNA RESERVA
+
+	/* Create SQL statement */
+	char sql[] = "INSERT INTO HABITACIONES VALUES (";
+
+	char con[] = "'", con1[] = ",", con2[] = ",", con3[] = ",", con8[] = ")",
+			con9[] = "";
+
+	string s = to_string(idHabitacion);
+	char const *pchar = s.c_str();  //use char const* as target type
+	char con10[5];
+	strcpy(con10, pchar);
+	cout << pchar << endl;
+	cout << con10 << endl;
+	s = to_string(numHabitacion);
+	char const *pchar2 = s.c_str();  //use char const* as target type
+	char con11[5];
+	strcpy(con11, pchar2);
+	s = to_string(plantaHabitacion);
+	char const *pchar3 = s.c_str();  //use char const* as target type
+	char con12[5];
+	strcpy(con12, pchar3);
+	s = to_string(precio);
+	char const *pchar4 = s.c_str();  //use char const* as target type
+	char con13[5];
+	strcpy(con13, pchar4);
+
+
+	char *retval = new char[strlen(sql) + strlen(con) + strlen(con10)
+			+ strlen(con) + strlen(con1) + strlen(con11) + strlen(con)
+			+ strlen(con2) + strlen(con) + strlen(con12) + strlen(con)
+			+ strlen(con3) + strlen(con) + strlen(tipoHabitacion) + strlen(con)
+			+ strlen(con3) + strlen(con) + strlen(con13) + strlen(con)
+			+ strlen(con8) + strlen(con9)];
+
+	*retval = '\0';
+
+	strcat(retval, sql);
+	strcat(retval, con);
+	strcat(retval, con10);
+	strcat(retval, con);
+	strcat(retval, con1);
+	strcat(retval, con);
+	strcat(retval, con11);
+	strcat(retval, con);
+	strcat(retval, con2);
+	strcat(retval, con);
+	strcat(retval, con12);
+	strcat(retval, con);
+	strcat(retval, con3);
+	strcat(retval, con);
+	strcat(retval, tipoHabitacion);  //CONVERTIR INT A CHAR
+	strcat(retval, con);
+	strcat(retval, con3);
+	strcat(retval, con);
+	strcat(retval, con13);
+	strcat(retval, con);
+	strcat(retval, con8);
+	strcat(retval, con9);
+
+	cout << retval << endl;
+
+	llamadaSQL(retval);
+
+}
+
 void Administrador::editarHabitacion(Habitaciones *h) {
 
 	Usuario::editarHabitacion(h);

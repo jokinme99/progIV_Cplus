@@ -405,7 +405,7 @@ void Administrador::anyadirTrabajador(Trabajadores *trabajadores) { ////////////
 
 	trabajadores->anyadirTrabajador(tr);
 
-	int id_hotel = rand() % 5 + 1;
+	int id_hotel = rand() % 10 + 1;
 
 	//ESTE METODO AÑADE UNA RESERVA
 

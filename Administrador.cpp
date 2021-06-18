@@ -390,6 +390,8 @@ void Administrador::anyadirTrabajador(Trabajadores *trabajadores) { ////////////
 	cout << "Ingrese el telefono del trabajador que desea anyadir: ";
 	cin >> telefonoTrabajador;
 	cout << endl;
+
+	cout << telefonoTrabajador << endl;
 	cout << "Ingrese el sueldo del trabajador que desea anyadir: ";
 	cin >> sueldoTrabajador;
 	cout << endl;
@@ -423,7 +425,8 @@ void Administrador::anyadirTrabajador(Trabajadores *trabajadores) { ////////////
 	cout << con10 << endl;
 	s = to_string(telefonoTrabajador);
 	char const *pchar2 = s.c_str();  //use char const* as target type
-	char con11[100];
+	cout << pchar << endl;
+	char con11[200];
 	strcpy(con11, pchar2);
 	s = to_string(sueldoTrabajador);
 	char const *pchar3 = s.c_str();  //use char const* as target type

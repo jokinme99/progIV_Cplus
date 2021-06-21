@@ -169,8 +169,8 @@ void caso1Usuario() {//VER HOTELES
 void caso2Usuario() {//VER HABITACIONES
 	cout << "--HABITACIONES--" << endl;
 
-	h.imprimirHabitaciones();
-	//h.busquedaPersonalizada();
+
+	h.busquedaPersonalizada();
 
 	system("pause");
 	menuUsuario();
@@ -507,7 +507,7 @@ void menuAdministrador() {
 void caso1Admin() {//VER HABITACION
 	cout << "--HABITACIONES--" << endl;
 
-	h.imprimirHabitaciones();
+	h.busquedaPersonalizada();
 
 	system("pause");
 

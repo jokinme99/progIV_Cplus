@@ -114,6 +114,7 @@ using namespace std;
 		return this->u[i];
 	}
 
+
 	//Todo:arreglar
 	void Usuarios::editarUsuario(int id, char* nombre, char* correo, char* contrasenya, int edad /* ,Reservas* reserva */){
 		Usuario* usuario = getUsuario(id);

@@ -21,7 +21,12 @@
 #include "DatosSQL.h"
 #include "Trabajadores.h"
 #include "Trabajador.h"
+#include "Usuarios.h"
+
 using namespace std;
+
+Usuarios* us;
+
 
 Usuario::Usuario() {
 	this->idUsuario = 0;
@@ -128,6 +133,9 @@ void Usuario::listarHabitaciones() {
 void Usuario::listarReservas() {
 
 }
+
+
+
 
 void Usuario::imprimirUsuario() {
 	cout << "Usuario " << this->idUsuario << ": " << endl;
@@ -270,6 +278,7 @@ void Usuario::anyadirReserva(Reservas *re, Habitaciones *h) { /////////////////E
 
 void Usuario::modificarReserva(Habitaciones *h) {
 	int numReserva, nuevoDia, nuevaHora, nuevaHabitacion;
+
 
 	cout << "Estas son las reservas que estan a su nombre: " << endl;
 	cout << endl;

@@ -7,6 +7,7 @@
 
 #ifndef USUARIO_H_
 #define USUARIO_H_
+
 #include "Reserva.h"
 #include "sqlite/sqlite3.h"
 #include <stdlib.h>
@@ -37,7 +38,7 @@ public:
 	Usuario(const Usuario&);
 	~Usuario();
 
-	void anyadirReserva(Reservas* re,Habitaciones* h );
+	void anyadirReserva(Reservas* re,Habitaciones* h);
 	void modificarReserva(Habitaciones* h);
 	int getIdUsuario()const;
 	char* getNombreUsuario()const;
@@ -48,6 +49,8 @@ public:
 	void setContrasenyaUsuario(char*);
 	int getEdadUsuario()const;
 	void setEdadUsuario(int);
+
+	Usuario* getUsuario() const;
 	Reservas* getReservaUsuario()const;
 	void setReservaUsuario(Reservas* reservasUsuario);
 

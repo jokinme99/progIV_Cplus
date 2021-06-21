@@ -34,7 +34,7 @@ public:
 
 	 void anyadirUsuario(Usuarios*);
 	 int eliminarUsuario(Usuarios*);
-	 void editarUsuarios(Usuarios*);
+	void editarUsuarios(Usuarios*);
 
 };
 

@@ -279,7 +279,7 @@ void Habitaciones::busquedaPersonalizada() {
 		break;
 		case 4: {
 
-			cout << "hola" << endl;
+
 
 			for (int i = 0; i < this->numHabitaciones; ++i) {
 				this->h[i]->imprimir();

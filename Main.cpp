@@ -412,18 +412,17 @@ void menuAdministrador() {
 		cout << "3. Anyadir habitacion" << endl;
 		cout << "4. Eliminar habitacion" << endl;
 		cout << "5. Ver reservas" << endl;
-		cout << "6. Editar reserva" << endl;
-		cout << "7. Anyadir reserva" << endl;
-		cout << "8. Eliminar reserva" << endl;
-		cout << "9. Ver trabajadores" << endl;
-		cout << "10. Editar trabajador" << endl;
-		cout << "11. Crear trabajador" << endl;
-		cout << "12. Eliminar trabajador" << endl;
-		cout << "13. Ver usuarios" << endl;//QUITABA ESTA FUNCION USUARIOS PORQUE NOSOTROS FUNCIONAMOS CON FICHEROS
-		cout << "14. Editar usuario" << endl;
-		cout << "15. Crear Usuario" << endl;
-		cout << "16. Eliminar usuario" << endl;
-		cout << "17. Volver al menu principal" << endl;
+		cout << "6. Anyadir reserva" << endl;
+		cout << "7. Eliminar reserva" << endl;
+		cout << "8. Ver trabajadores" << endl;
+		cout << "9. Editar trabajador" << endl;
+		cout << "10. Crear trabajador" << endl;
+		cout << "11. Eliminar trabajador" << endl;
+		cout << "12. Ver usuarios" << endl;//QUITABA ESTA FUNCION USUARIOS PORQUE NOSOTROS FUNCIONAMOS CON FICHEROS
+		cout << "13. Editar usuario" << endl;
+		cout << "14. Crear Usuario" << endl;
+		cout << "15. Eliminar usuario" << endl;
+		cout << "16. Volver al menu principal" << endl;
 		cin >> opcion;
 	} while (opcion < 1 || opcion > 17);
 	/* ABRIMOS BASE DE DATOS */
@@ -489,11 +488,8 @@ void menuAdministrador() {
 		caso15Admin();
 	}
 		break;
+
 	case 16: {
-		caso16Admin();
-	}
-		break;
-	case 17: {
 		cout << "Cerrando sesion..." << endl;
 		iniciarSesion();
 		system("exit");
@@ -574,44 +570,8 @@ void caso5Admin() {//VER RESERVAS
 	system("pause");
 	menuAdministrador();
 }
-void caso6Admin() {//EDITAR RESERVA
 
-	int idR, dia, hora;
-	Habitacion *hab;
-	cout << "introduce el id de la reserva que quieres modificar" << endl;
-
-
-	cin >> idR;
-
-	cout << "introduce el dia que quieres modificar: " << endl;
-
-	cin >> dia;
-
-	cout << "Introduce la hora que quieres modificar: " << endl;
-
-	cin >> hora;
-	hab = re.getReserva(idR)->getHabitacionReservada();
-
-	char tipoHab[100];
-
-	cout << "introduce el nuevo tipo de Habitacion:" << endl;
-
-	cin >> tipoHab;
-
-	cout << "Introduce el nuevo precio de la Habitacion:" << endl;
-
-	int Prec;
-	cin >> Prec;
-
-	hab->setPrecioHabitacion(Prec);
-	hab->setTipoHabitacion(tipoHab);
-	re.editarReserva(idR, dia, hora, hab);
-
-	system("pause");
-
-	menuAdministrador();
-}
-void caso7Admin() {//CREAR RESERVA
+void caso6Admin() {//CREAR RESERVA
 	cout << "Crea una nueva reserva" << endl;
 
 	int idH;
@@ -638,7 +598,7 @@ void caso7Admin() {//CREAR RESERVA
 	menuAdministrador();
 
 }
-void caso8Admin() {//ELIMINAR RESERVA
+void caso7Admin() {//ELIMINAR RESERVA
 	int idR;
 	re.imprimirReservas();
 	cout << "introduce el id de la reserva a eliminar: " << endl;
@@ -649,7 +609,7 @@ void caso8Admin() {//ELIMINAR RESERVA
 	menuAdministrador();
 
 }
-void caso9Admin() {//VER TRABAJADORES
+void caso8Admin() {//VER TRABAJADORES
 
 	cout << "--TRABAJADORES--" << endl;
 
@@ -658,14 +618,14 @@ void caso9Admin() {//VER TRABAJADORES
 	menuAdministrador();
 
 }
-void caso10Admin() {//EDITAR TRABAJADOR
+void caso9Admin() {//EDITAR TRABAJADOR
 	usuarioActual->editarTrabajador(&t);
 
 	system("pause");
 
 	menuAdministrador();
 }
-void caso11Admin() {//CREAR TRABAJADOR
+void caso10Admin() {//CREAR TRABAJADOR
 
 
 	usuarioActual->anyadirTrabajador(&t);
@@ -675,7 +635,7 @@ void caso11Admin() {//CREAR TRABAJADOR
 	menuAdministrador();
 
 }
-void caso12Admin() {//ELIMINAR TRABAJADOR
+void caso11Admin() {//ELIMINAR TRABAJADOR
 
 	usuarioActual->eliminarTrabajador(&t);
 
@@ -683,28 +643,28 @@ void caso12Admin() {//ELIMINAR TRABAJADOR
 	menuAdministrador();
 
 }
-void caso13Admin() {//VER USUARIOS
+void caso12Admin() {//VER USUARIOS
 	cout << "--USUARIOS--" << endl;
 
 	u.imprimirUsuarios();
 	system("pause");
 	menuAdministrador();
 }
-void caso14Admin() {//EDITAR USUARIO
+void caso13Admin() {//EDITAR USUARIO
 
 
 	u.editarUsuarios(&u);
 
 		menuAdministrador();
 }
-void caso15Admin() {//CREAR USUARIO
+void caso14Admin() {//CREAR USUARIO
 	cout << "Crea un nuevo usuario: " << endl;
 
 	u.anyadirUsuario(&u);
 	system("pause");
 	menuAdministrador();
 }
-void caso16Admin() {//ELIMINAR USUARIO
+void caso15Admin() {//ELIMINAR USUARIO
 
 	u.eliminarUsuario(&u);
 

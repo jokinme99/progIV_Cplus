@@ -495,7 +495,7 @@ void menuAdministrador() {
 		break;
 	case 17: {
 		cout << "Cerrando sesion..." << endl;
-		//inicio();
+		iniciarSesion();
 		system("exit");
 	}
 		break;
@@ -782,7 +782,7 @@ void iniciarSesion(){
 				cout << "El usuario no existe!" << endl;	//AL SALIR VUELVE AQUI
 				cout << "Introduce un nombre de usuario valido" << endl;
 				cout<< endl;
-				//usuarioPrincipio();
+				iniciarSesion();
 				ifs.close();
 
 			}
@@ -792,7 +792,7 @@ void iniciarSesion(){
 				cout << "Introduce una contraseña valida" << endl;
 				cout<< endl;
 
-				//usuarioPrincipio();
+				iniciarSesion();
 				ifs.close();
 
 			}

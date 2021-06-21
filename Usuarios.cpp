@@ -288,7 +288,7 @@ using namespace std;
 		us->getUsuario(idUsuario)->setNombreUsuario(nombre);
 		us->getUsuario(idUsuario)->setCorreoUsuario(correo);
 
-		char sql[] = "UPDATE Usuario SET nombre_usuario ='";
+		char sql[] = "UPDATE USUARIO SET nombre_usuario ='";
 
 		char con[] = "'", con1[] = ",", con2[] = "correo_usuario='"
 				, con8[] = " WHERE id_usuario='", con9[] = ";";

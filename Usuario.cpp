@@ -274,6 +274,12 @@ void Usuario::modificarReserva(Habitaciones *h) {
 	cout << "Estas son las reservas que estan a su nombre: " << endl;
 	cout << endl;
 	this->getReservaUsuario()->imprimirReservas();
+
+	Reservas* usuarioR = this->getReservaUsuario();
+
+	if(usuarioR->getNumReservas() <= 0){
+
+	} else {
 	cout << endl;
 	cout << "Selecciona el numero de reserva que quierers modificar: ";
 	cin >> numReserva;
@@ -386,7 +392,7 @@ void Usuario::modificarReserva(Habitaciones *h) {
 	cout << retval << endl;
 
 	llamadaSQL(retval);
-
+	}
 }
 
 int Usuario::eliminarReserva(Reservas *re) {

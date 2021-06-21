@@ -59,7 +59,7 @@ public:
 
 
 	//virtual
-	void imprimirUsuario();//PORQUE OSTIAS NO ME RECONOCE ESTO
+	void imprimirUsuario();//PORQUE NO ME RECONOCE ESTO
 
 	void verhoteles();
 	void listarHabitaciones();
@@ -73,7 +73,6 @@ public:
 	virtual void anyadirTrabajador(Trabajadores*);
 
 	virtual int eliminarTrabajador(Trabajadores*);
-
 
 
 

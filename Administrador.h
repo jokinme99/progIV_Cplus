@@ -10,6 +10,7 @@
 #include "Usuario.h"
 #include "Habitaciones.h"
 #include "Trabajadores.h"
+#include "Usuarios.h"
 class Administrador: public Usuario{
 private:
 
@@ -39,6 +40,8 @@ public:
 	void listarUsuarios();
 	virtual char* getTipoUsuario();
 	virtual void editarHabitacion(Habitaciones*);
+
+	Usuario* getUsuario(char*, Usuarios*);
 	//virtual
 	//void imprimirUsuario();
 
@@ -47,6 +50,8 @@ public:
 	virtual void anyadirHabitacion(Habitaciones*);
 	virtual int eliminarHabitacion(Habitaciones*);
 	virtual int eliminarTrabajador(Trabajadores*);
+
+
 
 };
 

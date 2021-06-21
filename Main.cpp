@@ -55,6 +55,8 @@ Usuarios u;Habitaciones h;Trabajadores t;Reservas re;//variables glovales de los
 
 Usuario* usuarioActual;//Variable global que indica el usuario actual en el menu
 
+Administrador* admin;
+
 sqlite3 *db;char *zErrMsg = 0;int rc;char *sql;const char *data = "LLamada a Base de datos";//variables globales para la base de datos
 
 
@@ -689,69 +691,24 @@ void caso13Admin() {//VER USUARIOS
 	menuAdministrador();
 }
 void caso14Admin() {//EDITAR USUARIO
-	//Todo: hay que arreglar para poder modificar las reservas del usuario
-	char correo[100];char nombre[100];char contra[100];int edad;
 
-		cout << "introduce el id del usuario que quieres modificar" << endl;
-		int idR;
-		cin >> idR;
 
-		cout << "introduce el nombre del usuario que quieres modificar" << endl;
-		cin >> correo;
-
-		cout << "introduce el correo del usuario que quieres modificar" << endl;
-		cin >> nombre;
-
-		cout << "introduce el nombre del usuario que quieres modificar" << endl;
-		cin >> contra;
-
-		cout << "Introduce la nueva edad del usuario que quieres modificar" << endl;
-		cin >> edad;
-		system("pause");
+	u.editarUsuarios(&u);
 
 		menuAdministrador();
 }
 void caso15Admin() {//CREAR USUARIO
 	cout << "Crea un nuevo usuario: " << endl;
 
-	//AL crear un usuario nuevo no se le añaden reservas
-	int idUsuario;
-	char nombreUsuario[100];
-	char correoUsuario[100];
-	char contrasenyaUsuario[100];
-	int edadUsuario;
-
-	cout << "Ingrese el id del usuario : ";
-	cin >> idUsuario;
-	cout << endl;
-	cout << "Ingrese el nombre del usuario: ";
-	cin >> nombreUsuario;
-	cout << endl;
-	cout << "Ingrese el correo del usuario: ";
-	cin >> correoUsuario;
-	cout << endl;
-	cout << "Ingrese la contrasenya del usuario: ";
-	cin >> contrasenyaUsuario;
-	cout << endl;
-	cout << "Ingrese la edad del usuario: ";
-	cin >> edadUsuario;
-	cout << endl;
-
-	Usuario *us = new Usuario(idUsuario, nombreUsuario, correoUsuario, contrasenyaUsuario, edadUsuario);
-	u.anyadirUsuario(us);
+	u.anyadirUsuario(&u);
 	system("pause");
 	menuAdministrador();
 }
 void caso16Admin() {//ELIMINAR USUARIO
-	int idR;
-	u.imprimirUsuarios();
-	cout << "introduce el id del usuario para eliminarlo" << endl;
 
-	cin >> idR;
+	u.eliminarUsuario(&u);
 
-	u.quitarUsuario(idR);
 
-	u.getNumUsuarios();
 	system("pause");
 	menuAdministrador();
 }
@@ -797,7 +754,7 @@ void iniciarSesion(){
 						<< endl;
 				system("pause");
 				en = true;
-				usuarioActual=u.getUsuario(nomAu);
+				usuarioActual= u.getUsuario(nomAu);
 
 				//parte del usuario
 				system("cls");

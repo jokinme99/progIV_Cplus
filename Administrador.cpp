@@ -66,6 +66,8 @@ char* Administrador::getTipoUsuario() {
 	return "admin";
 }
 
+
+
 void Administrador::anyadirHabitacion(Habitaciones *habitaciones) { /////////////////ESTABLECER EL TAMAÑO DE LOS ARRAYS DE CARACTERES A LA QUE SE LES TIENE PREDISPUESTO
 
 	int idHabitacion;
@@ -643,3 +645,4 @@ int Administrador::eliminarTrabajador(Trabajadores *t) {
 
 	return 0;
 }
+

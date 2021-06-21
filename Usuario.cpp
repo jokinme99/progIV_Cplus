@@ -492,3 +492,4 @@ int Usuario::eliminarTrabajador(Trabajadores *t) {
 
 	return 0;
 }
+

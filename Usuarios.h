@@ -30,7 +30,11 @@ public:
 	Usuario* getUsuario(char *nombre);
 	//Usuario* getUsuario(char*);
 	void editarUsuario(int id, char*, char*, char*, int /* ,Reservas* */);
+	bool usuarioExiste(int);
 
+	 void anyadirUsuario(Usuarios*);
+	 int eliminarUsuario(Usuarios*);
+	 void editarUsuarios(Usuarios*);
 
 };
 

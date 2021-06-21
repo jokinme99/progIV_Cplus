@@ -572,38 +572,15 @@ void caso5Admin() {//VER RESERVAS
 }
 
 void caso6Admin() {//CREAR RESERVA
-	cout << "Crea una nueva reserva" << endl;
 
-	int idH;
-	int idR, diaR, horaR;
-
-	cout << "Ingrese el id de la reserva que desea anyadir: ";
-	cin >> idR;
-	cout << endl;
-	cout << "Ingrese el dia de la reserva que desea anyadir: ";
-	cin >> diaR;
-	cout << endl;
-	cout << "Ingrese la hora de la reserva que desea anyadir: ";
-	cin >> horaR;
-	cout << " En que habitacion desea hacer la reserva?" << endl;
-	h.imprimirHabitaciones();
-	cout << "Introduzca un id de las habitaciones descritas" << endl;
-	cin >> idH;
-	Reserva *rq = new Reserva(idR, diaR, horaR, h.getHabitacion(idH));
-
-	re.comprobarDisponibilidad(rq);
-
-	re.anyadirReserva(rq);
+	usuarioActual->eliminarReserva(&re);
 	system("pause");
 	menuAdministrador();
 
 }
 void caso7Admin() {//ELIMINAR RESERVA
-	int idR;
-	re.imprimirReservas();
-	cout << "introduce el id de la reserva a eliminar: " << endl;
-	cin >> idR;
-	re.quitarReserva(idR);
+
+	usuarioActual->eliminarReserva(&re);
 	re.getNumReservas();
 	system("pause");
 	menuAdministrador();

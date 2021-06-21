@@ -107,26 +107,21 @@ void Administrador::anyadirHabitacion(Habitaciones *habitaciones) { ////////////
 
 	cin >> tipoHabitacion;
 
-	char doble[6];
-	char individual[10];
-	char familiar[8];
-	char suite[5];
 
-	strcpy(doble, tipoHabitacion);
-	strcpy(individual, tipoHabitacion);
-	strcpy(familiar, tipoHabitacion);
-	strcpy(suite, tipoHabitacion);
+	char doble[] = "Doble";
+	char individual[] = "Individual";
+	char familiar[] = "Familiar";
+	char suite[] = "Suite";
 
-	while (strcmp(tipoHabitacion, doble) == 0
-			|| strcmp(tipoHabitacion, individual) == 0
-			|| strcmp(tipoHabitacion, familiar) == 0
-			|| strcmp(tipoHabitacion, suite) == 0) {
+	while (strcmp(tipoHabitacion, doble) != 0 &&  strcmp(tipoHabitacion, individual) != 0
+					&&  strcmp(tipoHabitacion, familiar) != 0 &&  strcmp(tipoHabitacion, suite) != 0) {
 
 		cout << endl;
 		cout
 				<< "Ingrese el tipo de habitacion correcto; Doble, Individual, Familiar, Suite:";
 
 		cin >> tipoHabitacion;
+
 
 	}
 

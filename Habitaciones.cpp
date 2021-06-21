@@ -66,17 +66,16 @@ Habitacion* Habitaciones::getHabitacion(int idHabitacion) {
 		if (this->h[var]->getIdHabitacion() == idHabitacion) {
 			break;
 		}
-		if(var==this->numHabitaciones){
+		if (var == this->numHabitaciones) {
 			return NULL;
 		}
 	}
 	return this->h[var];
 }
 
-
-bool Habitaciones::habitacionExiste(int idHabitacion){
+bool Habitaciones::habitacionExiste(int idHabitacion) {
 	int var = 0;
-	bool verdadero= false;
+	bool verdadero = false;
 	for (var = 0; var < this->numHabitaciones; ++var) {
 		if (this->h[var]->getIdHabitacion() == idHabitacion) {
 			verdadero = true;
@@ -87,8 +86,7 @@ bool Habitaciones::habitacionExiste(int idHabitacion){
 	return verdadero;
 }
 /////////////////////////////////////////////////////////////////////////////////////////
-void Habitaciones::editarHabitacion(int id, char *tipo, int precio) {//ELIMINAR ESTA FUNCION
-
+void Habitaciones::editarHabitacion(int id, char *tipo, int precio) { //ELIMINAR ESTA FUNCION
 
 	Habitacion *habitacion = this->getHabitacion(id);
 
@@ -97,16 +95,17 @@ void Habitaciones::editarHabitacion(int id, char *tipo, int precio) {//ELIMINAR 
 
 	char sql[] = "UPDATE HABITACION SET precio_habitacion ='";
 
-	char con[] = "'",con1[] = ",", con2[] = "tipo_habitacion='", con8[] = " WHERE id_habitacion='", con9[] = ";";
-
-
+	char con[] = "'", con1[] = ",", con2[] = "tipo_habitacion='", con8[] =
+			" WHERE id_habitacion='", con9[] = ";";
 
 	string s = to_string(precio);
 	char const *pchar2 = s.c_str();  //use char const* as target type
-	char con11[5]; strcpy(con11, pchar2);
-	 s = to_string(id);
+	char con11[5];
+	strcpy(con11, pchar2);
+	s = to_string(id);
 	char const *pchar4 = s.c_str();  //use char const* as target type
-	char con13[5]; strcpy(con13, pchar4);
+	char con13[5];
+	strcpy(con13, pchar4);
 
 	strcat(sql, con11);
 	strcat(sql, con);
@@ -119,7 +118,7 @@ void Habitaciones::editarHabitacion(int id, char *tipo, int precio) {//ELIMINAR 
 	strcat(sql, con13);
 	strcat(sql, con);
 	strcat(sql, con9);
-	cout<<endl;
+	cout << endl;
 
 	//cout<<sql<<endl;
 
@@ -127,9 +126,7 @@ void Habitaciones::editarHabitacion(int id, char *tipo, int precio) {//ELIMINAR 
 
 	delete habitacion;
 
-	cout<<"esto funciona"<<endl;
-
-
+	cout << "esto funciona" << endl;
 
 }
 //////////////////////////////////////////////////////////////////////////////////
@@ -173,12 +170,19 @@ void Habitaciones::busquedaPersonalizada() {
 
 				cin >> precio;
 
+				int contador = 0;
+
 				for (int var = 0; var < this->numHabitaciones; ++var) {
 
 					if (this->h[var]->getPrecioHabitacion() >= precio) {
-
 						this->h[var]->imprimir();
+						contador++;
 					}
+
+				}
+				if (contador == 0) {
+					cout << "No se han encontrado habitaciones" << endl;
+					busquedaPersonalizada();
 
 				}
 
@@ -193,12 +197,20 @@ void Habitaciones::busquedaPersonalizada() {
 
 				cin >> precio;
 
+				int contador = 0;
 				for (int var = 0; var < this->numHabitaciones; ++var) {
 
 					if (this->h[var]->getPrecioHabitacion() <= precio) {
 
 						this->h[var]->imprimir();
+						contador++;
 					}
+
+				}
+
+				if (contador == 0) {
+					cout << "No se han encontrado habitaciones" << endl;
+					busquedaPersonalizada();
 
 				}
 
@@ -214,18 +226,40 @@ void Habitaciones::busquedaPersonalizada() {
 
 			char tipo[100];
 
-			cout
-					<< "Introduce un tipo -> Doble, Individual, Suite Doble o Familiar"
+			cout << "Introduce un tipo -> Doble, Individual, Suite o Familiar"
 					<< endl;
 
 			cin >> tipo;
 
+			char doble[] = "Doble";
+			char individual[] = "Individual";
+			char familiar[] = "Familiar";
+			char suite[] = "Suite";
+
+			while (strcmp(tipo, doble) != 0 &&  strcmp(tipo, individual) != 0
+					&&  strcmp(tipo, familiar) != 0 &&  strcmp(tipo, suite) != 0) {
+
+				cout << endl;
+				cout
+						<< "Ingrese el tipo de habitacion correcto; Doble, Individual, Familiar, Suite:";
+
+				cin >> tipo;
+
+			}
+
+			int contador = 0;
 			for (int var = 0; var < this->numHabitaciones; ++var) {
 
 				if (strcmp(this->h[var]->getTipoHabitacion(), tipo) == 0) {
-
+					contador++;
 					this->h[var]->imprimir();
 				}
+
+			}
+
+			if (contador == 0) {
+				cout << "No se han encontrado habitaciones" << endl;
+				busquedaPersonalizada();
 
 			}
 
@@ -236,11 +270,26 @@ void Habitaciones::busquedaPersonalizada() {
 
 			char tipo[100];
 
-			cout
-					<< "Introduce un tipo -> Doble, Individual, Suite Doble o Familiar"
+			cout << "Introduce un tipo -> Doble, Individual, Suite o Familiar"
 					<< endl;
 
 			cin >> tipo;
+
+			char doble[] = "Doble";
+			char individual[] = "Individual";
+			char familiar[] = "Familiar";
+			char suite[] = "Suite";
+
+			while (strcmp(tipo, doble) != 0 &&  strcmp(tipo, individual) != 0
+							&&  strcmp(tipo, familiar) != 0 &&  strcmp(tipo, suite) != 0) {
+
+				cout << endl;
+				cout
+						<< "Ingrese el tipo de habitacion correcto; Doble, Individual, Familiar, Suite:";
+
+				cin >> tipo;
+
+			}
 
 			int precio;
 
@@ -253,33 +302,49 @@ void Habitaciones::busquedaPersonalizada() {
 
 			cin >> precio;
 
-			for (int var = 0; var < this->numHabitaciones; ++var) {
+			int contador = 0;
+			if (opcionPrec == 1) {
 
-				if (opcionPrec == 1) {
+				for (int var = 0; var < this->numHabitaciones; ++var) {
 
 					if (strcmp(this->h[var]->getTipoHabitacion(), tipo) == 0
 							&& this->h[var]->getPrecioHabitacion() >= precio) {
 
+						contador++;
 						this->h[var]->imprimir();
 					}
-				} else {
+
+				}
+
+				if (contador == 0) {
+					cout << "No se han encontrado habitaciones" << endl;
+					busquedaPersonalizada();
+
+				}
+
+			} else {
+
+				int contador = 0;
+				for (int var = 0; var < this->numHabitaciones; ++var) {
 
 					if (strcmp(this->h[var]->getTipoHabitacion(), tipo) == 0
 							&& this->h[var]->getPrecioHabitacion() <= precio) {
-
+						contador++;
 						this->h[var]->imprimir();
 					}
 				}
 
-			}
+				if (contador == 0) {
+					cout << "No se han encontrado habitaciones" << endl;
+					busquedaPersonalizada();
 
+				}
+			}
 
 		}
 
-		break;
+			break;
 		case 4: {
-
-
 
 			for (int i = 0; i < this->numHabitaciones; ++i) {
 				this->h[i]->imprimir();

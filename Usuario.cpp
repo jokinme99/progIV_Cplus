@@ -219,8 +219,7 @@ void Usuario::anyadirReserva(Reservas *re, Habitaciones *h) { /////////////////E
 	char const *pchar = s.c_str();  //use char const* as target type
 	char con10[5];
 	strcpy(con10, pchar);
-	cout << pchar << endl;
-	cout << con10 << endl;
+
 	s = to_string(dia);
 	char const *pchar2 = s.c_str();  //use char const* as target type
 	char con11[5];

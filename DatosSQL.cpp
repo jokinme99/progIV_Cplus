@@ -40,12 +40,9 @@ using namespace std;
 		int rc;
 		const char *data = "LLamada a Base de datos";
 
-		rc = sqlite3_open("hotelandia_final.s3db", &db1);
-
-		//cout<<rc<<endl;
+		rc = sqlite3_open("../progIV_Cplus/hotelandia_final.s3db", &db1);
 
 		rc = sqlite3_exec(db1, sentencia, callback, (void*) data, &zErrMsg);
-		//cout<<rc<<endl;
 		if (rc != SQLITE_OK) {
 			fprintf(stderr, "SQL error: %s\n", zErrMsg);
 			sqlite3_free(zErrMsg);

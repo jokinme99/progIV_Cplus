@@ -237,7 +237,7 @@ int modificarReserva(sqlite3 *db, char nombreUsuario[20]){
 		return rc;
 	}
 	sqlite3 *db2;
-	rc = sqlite3_open("hotelandia_final.s3db", &db2);	//abrir base de datos
+	rc = sqlite3_open("../progIV_Cplus/hotelandia_final.s3db", &db2);	//abrir base de datos
 	if (rc != SQLITE_OK) {
 		cout << "Error opening database" << endl;
 		return rc;
@@ -368,7 +368,7 @@ int eliminarReserva(sqlite3 *db, char nombreUsuario[20]){
 			return rc;
 		}
 		sqlite3 *db2;
-			rc = sqlite3_open("hotelandia_final.s3db", &db2);	//abrir base de datos
+			rc = sqlite3_open("../progIV_Cplus/hotelandia_final.s3db", &db2);	//abrir base de datos
 			if (rc != SQLITE_OK) {
 				cout << "Error opening database" << endl;
 				return rc;
@@ -413,7 +413,7 @@ int eliminarReserva(sqlite3 *db, char nombreUsuario[20]){
 						return rc;
 					}
 					sqlite3 *db3;
-					rc = sqlite3_open("hotelandia_final.s3db", &db3);	//abrir base de datos
+					rc = sqlite3_open("../progIV_Cplus/hotelandia_final.s3db", &db3);	//abrir base de datos
 					if (rc != SQLITE_OK) {
 						cout << "Error opening database" << endl;
 						return rc;

@@ -38,7 +38,7 @@ using namespace std;
 		sqlite3 *db;
 		const char *data = "LLamada a Base de datos";
 		char *zErrMsg = 0;
-		int rc = sqlite3_open("hotelandia_final.s3db", &db);
+		int rc = sqlite3_open("../progIV_Cplus/hotelandia_final.s3db", &db);
 
 		char sql[] = "SELECT * from USUARIO";
 

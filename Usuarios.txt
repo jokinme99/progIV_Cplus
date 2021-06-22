@@ -5,3 +5,5 @@ Id:4;NombreUsuario:julian;contrasenya:maroto;correo:correo;Edad:239;TipoUsuario:
 Id:5;NombreUsuario:f;contrasenya:f;correo:f;Edad:0;TipoUsuario:usuario;
 Id:6;NombreUsuario:se;contrasenya:d;correo:d;Edad:0;TipoUsuario:usuario;
 Id:7;NombreUsuario:suhar;contrasenya:suhar;correo:suhar;Edad:3;TipoUsuario:admin;
+Id:8;NombreUsuario:olaola;contrasenya:olaizola;correo:olaa;Edad:0;TipoUsuario:usuario
+Id:9;NombreUsuario:iker;contrasenya:pastor;correo:pastor;Edad:30;TipoUsuario:usuario

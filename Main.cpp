@@ -152,6 +152,9 @@ void menuUsuario() {
 }
 void caso1Usuario() {//VER HOTELES
 	/* Create SQL statement */
+
+	rc = sqlite3_open("hotelandia_final.s3db", &db);
+
 	char sql[] = "SELECT * from HOTEL";
 
 	/* Execute SQL statement */
@@ -159,6 +162,9 @@ void caso1Usuario() {//VER HOTELES
 	if (rc != SQLITE_OK) {
 		fprintf(stderr, "SQL error: %s\n", zErrMsg);
 		sqlite3_free(zErrMsg);
+
+
+
 	} else {
 		//fprintf(stdout, "Operation done successfully\n");
 	}
